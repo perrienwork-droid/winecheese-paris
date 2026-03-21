@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Montmartre Food Tour — Wine & Cheese Paris</title>
+<meta name="description" content="A 3h morning food walk from SoPi to Montmartre — 6 artisan stops, bread, cheese, charcuterie and wine. Small groups of 8. From €65.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.ft-hero-img { background-image: url('images/card-food.jpg'); background-position: center 35%; }
+
+.info-bar { background: var(--dark-wine); padding: 0 clamp(20px,5vw,60px); }
+.info-bar-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: stretch; }
+.info-item { display:flex;align-items:center;gap:10px;padding:20px 28px;border-right:1px solid rgba(250,246,241,0.1);flex:1; }
+.info-item:first-child { padding-left:0; }
+.info-item:last-child { border-right:none; }
+.info-icon { color:var(--gold);flex-shrink:0; }
+.info-label { font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(250,246,241,0.5);display:block; }
+.info-value { font-family:var(--ff-accent);font-size:20px;font-weight:600;color:var(--cream);display:block;line-height:1.2; }
+
+.product-layout { display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:start; }
+
+/* Route visual */
+.route-map { background: var(--light-gold); border-radius: var(--radius-xl); padding: 36px; margin: 40px 0; }
+.route-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:28px; }
+.route-title { font-family:var(--ff-display);font-size:20px;font-weight:600;color:var(--charcoal); }
+.route-distance { font-size:13px;color:var(--stone);display:flex;align-items:center;gap:6px; }
+.route-line { display:flex;flex-direction:column;gap:0; }
+.route-stop { display:flex;gap:16px;position:relative; }
+.route-stop:not(:last-child)::after { content:'';position:absolute;left:11px;top:28px;bottom:-8px;width:2px;background:linear-gradient(180deg,var(--wine),rgba(114,47,55,0.15)); }
+.route-dot { width:24px;height:24px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--cream);margin-top:2px; }
+.route-dot.start { background:var(--wine); }
+.route-dot.mid { background:var(--stone); }
+.route-dot.peak { background:var(--gold-text); }
+.route-dot.end { background:var(--dark-wine); }
+.route-stop-body { padding-bottom:24px;flex:1; }
+.route-stop-name { font-weight:600;font-size:14px;color:var(--charcoal);margin-bottom:2px; }
+.route-stop-sub { font-size:13px;color:var(--slate); }
+.route-stop-tag { display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:100px;margin-top:5px; }
+.tag-peak { background:rgba(122,99,64,0.15);color:var(--gold-text); }
+.tag-finale { background:rgba(74,26,32,0.12);color:var(--dark-wine); }
+
+/* What you eat section */
+.tastings-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0; }
+.tasting-card { background:var(--white);border-radius:var(--radius-lg);padding:24px;border:1px solid rgba(114,47,55,0.07);text-align:center; }
+.tasting-emoji { font-size:32px;margin-bottom:10px; }
+.tasting-name { font-family:var(--ff-display);font-size:16px;font-weight:600;color:var(--charcoal);margin-bottom:6px; }
+.tasting-desc { font-size:13px;color:var(--slate);line-height:1.5; }
+
+/* Peak callout */
+.peak-callout { background:var(--dark-wine);border-radius:var(--radius-xl);padding:36px;margin:40px 0;color:var(--cream); }
+.peak-callout-eyebrow { font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px; }
+.peak-callout-title { font-family:var(--ff-display);font-size:22px;font-weight:500;margin-bottom:14px; }
+.peak-callout-title em { font-style:italic;color:var(--gold); }
+.peak-callout-body { font-size:15px;line-height:1.75;color:rgba(250,246,241,0.8); }
+
+/* Booking card */
+.booking-card { background:var(--white);border-radius:var(--radius-xl);padding:32px;box-shadow:var(--shadow-hover);border:1px solid rgba(114,47,55,0.08);position:sticky;top:88px; }
+.booking-price-line { display:flex;align-items:baseline;gap:8px;margin-bottom:6px; }
+.booking-price { font-family:var(--ff-accent);font-size:42px;font-weight:600;color:var(--wine);line-height:1; }
+.booking-per { font-size:14px;color:var(--stone); }
+.booking-tagline { font-size:13px;color:var(--slate);margin-bottom:24px;line-height:1.5; }
+.booking-divider { height:1px;background:rgba(114,47,55,0.08);margin:20px 0; }
+.booking-includes { list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px; }
+.booking-includes li { display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--charcoal);line-height:1.5; }
+.check-icon { color:var(--gold-text);flex-shrink:0;margin-top:1px; }
+.btn-book-full { display:block;width:100%;text-align:center;background:var(--gold);color:var(--dark-wine);font-family:var(--ff-body);font-size:16px;font-weight:700;padding:16px;border-radius:var(--radius-sm);border:none;cursor:pointer;transition:background var(--transition),transform var(--transition);min-height:var(--touch-min);margin-bottom:12px; }
+.btn-book-full:hover { background:#b8924d;transform:translateY(-1px); }
+.booking-note { text-align:center;font-size:12px;color:var(--stone); }
+
+/* FAQ */
+.faq-list { display:flex;flex-direction:column;gap:2px; }
+.faq-item { border:1px solid rgba(114,47,55,0.1);border-radius:var(--radius-md);overflow:hidden; }
+.faq-question { width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 22px;background:var(--white);border:none;cursor:pointer;font-family:var(--ff-body);font-size:15px;font-weight:600;color:var(--charcoal);text-align:left;transition:background var(--transition);min-height:var(--touch-min); }
+.faq-question:hover { background:var(--light-gold); }
+.faq-question[aria-expanded="true"] { background:var(--light-gold);color:var(--wine); }
+.faq-chevron { color:var(--stone);flex-shrink:0;transition:transform var(--transition); }
+.faq-question[aria-expanded="true"] .faq-chevron { transform:rotate(180deg);color:var(--wine); }
+.faq-answer { max-height:0;overflow:hidden;transition:max-height 0.3s ease;background:var(--white); }
+.faq-answer.open { max-height:300px; }
+.faq-answer-inner { padding:0 22px 18px;font-size:15px;line-height:1.7;color:var(--slate); }
+
+.related-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:24px; }
+.related-card { border-radius:var(--radius-lg);overflow:hidden;background:var(--white);box-shadow:var(--shadow-card);transition:transform var(--transition),box-shadow var(--transition);display:flex;flex-direction:column; }
+.related-card:hover { transform:translateY(-4px);box-shadow:var(--shadow-hover); }
+.related-img { aspect-ratio:16/9;overflow:hidden; }
+.related-img img { width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease; }
+.related-card:hover .related-img img { transform:scale(1.05); }
+.related-body { padding:20px;flex:1; }
+.related-name { font-family:var(--ff-display);font-size:18px;font-weight:600;color:var(--charcoal);margin-bottom:6px; }
+.related-meta { font-size:13px;color:var(--stone);margin-bottom:12px; }
+.related-link { display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--wine); }
+.related-card:hover .related-link svg { transform:translateX(3px);transition:transform var(--transition); }
+
+@media (max-width:960px) { .product-layout { grid-template-columns:1fr; } .booking-card { position:static; } .info-bar-inner { flex-wrap:wrap; } .info-item { flex:1 1 45%;border-right:none;border-bottom:1px solid rgba(250,246,241,0.1);padding:16px; } }
+@media (max-width:640px) { .tastings-grid { grid-template-columns:repeat(2,1fr); } .related-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header solid" role="banner" id="site-header">
+  <a href="index.html" class="logo" aria-label="Wine & Cheese Paris — Home">
+    <span class="logo-main">Wine & Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span>
+  </a>
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="index.html#tours" class="nav-link">Our Tours</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="index.html#reviews" class="nav-link">Reviews</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <button class="lang-toggle" id="langToggle" aria-label="Switch to French">FR</button>
+    <button class="btn-book-nav">Book Now</button>
+    <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main-content">
+
+<div class="page-hero">
+  <div class="page-hero-image ft-hero-img" role="img" aria-label="Couple walking past an artisan boulangerie on a cobbled Montmartre street at golden hour"></div>
+  <div class="page-hero-overlay" aria-hidden="true"></div>
+  <div class="page-hero-content">
+    <nav class="page-hero-breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html" data-en="Home" data-fr="Accueil">Home</a>
+      <span aria-hidden="true">›</span>
+      <span data-en="Montmartre Food Tour" data-fr="Food Tour Montmartre">Montmartre Food Tour</span>
+    </nav>
+    <p class="page-hero-eyebrow" data-en="Walking food experience" data-fr="Expérience gastronomique ambulante">Walking food experience</p>
+    <h1 class="page-hero-title" data-en="Montmartre <em>Food Tour</em>" data-fr="Food Tour <em>Montmartre</em>">Montmartre <em>Food Tour</em></h1>
+    <p class="page-hero-sub" data-en="From SoPi to the Abbesses — six artisan stops, the best sourdough in the arrondissement, and a finale with wine in a hidden cellar." data-fr="De SoPi aux Abbesses — six arrêts artisanaux, le meilleur pain au levain de l'arrondissement, et une finale au vin dans une cave cachée.">From SoPi to the Abbesses — six artisan stops, the best sourdough in the arrondissement, and a finale with wine in a hidden cellar.</p>
+  </div>
+</div>
+
+<div class="info-bar" role="region" aria-label="Tour details">
+  <div class="info-bar-inner">
+    <div class="info-item"><svg class="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><div><span class="info-label">Duration</span><span class="info-value">3h</span></div></div>
+    <div class="info-item"><svg class="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><div><span class="info-label">Group size</span><span class="info-value">Max 8</span></div></div>
+    <div class="info-item"><svg class="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div><span class="info-label">Departs</span><span class="info-value">N-D-de-Lorette</span></div></div>
+    <div class="info-item"><svg class="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><div><span class="info-label">From</span><span class="info-value">€65</span></div></div>
+    <div class="info-item"><svg class="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div><span class="info-label">Cancellation</span><span class="info-value">Free 48h</span></div></div>
+  </div>
+</div>
+
+<section class="section" id="product-content">
+  <div class="section-inner">
+    <div class="product-layout">
+
+      <div class="product-narrative">
+
+        <!-- Intro -->
+        <div class="fade-in" style="margin-bottom:48px;">
+          <p class="section-eyebrow">The experience</p>
+          <h2 class="section-title" style="text-align:left;margin-bottom:20px;" data-en="The food tour that <em>real Parisians</em> take" data-fr="Le food tour que les <em>vrais Parisiens</em> font">The food tour that <em>real Parisians</em> take</h2>
+          <p style="font-size:16px;line-height:1.8;color:var(--slate);" data-en="Most food tours start at the top of Montmartre and work downhill. We do the opposite — because that's how the neighbourhood actually works. You start at Notre-Dame-de-Lorette, in the heart of South Pigalle, and climb through the Rue des Martyrs as the streets narrow, the buildings shrink, and the village feeling builds with every block." data-fr="La plupart des food tours commencent en haut de Montmartre et descendent. Nous faisons l'inverse — parce que c'est ainsi que le quartier fonctionne vraiment. Vous partez de Notre-Dame-de-Lorette, au cœur de South Pigalle, et remontez la Rue des Martyrs.">Most food tours start at the top of Montmartre and work downhill. We do the opposite — because that's how the neighbourhood actually works. You start at Notre-Dame-de-Lorette, in the heart of South Pigalle, and climb through the Rue des Martyrs as the streets narrow, the buildings shrink, and the village feeling builds with every block.</p>
+          <p style="font-size:16px;line-height:1.8;color:var(--slate);margin-top:14px;" data-en="By the end, you've tasted the neighbourhood the way a local does: not a highlights reel, but a layered story — bread before cheese, cheese before wine, all of it connected." data-fr="À la fin, vous avez goûté le quartier comme un local : pas une compilation de moments forts, mais une histoire en couches — pain avant fromage, fromage avant vin, tout est connecté.">By the end, you've tasted the neighbourhood the way a local does: not a highlights reel, but a layered story — bread before cheese, cheese before wine, all of it connected.</p>
+        </div>
+
+        <!-- Route -->
+        <div class="route-map fade-in" role="region" aria-label="Tour route">
+          <div class="route-header">
+            <h3 class="route-title" data-en="The route: SoPi → Abbesses" data-fr="L'itinéraire : SoPi → Abbesses">The route: SoPi → Abbesses</h3>
+            <p class="route-distance"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 3h · ~1.8km</p>
+          </div>
+          <div class="route-line">
+            <div class="route-stop">
+              <div class="route-dot start" aria-hidden="true">M</div>
+              <div class="route-stop-body">
+                <p class="route-stop-name" data-en="Métro Notre-Dame-de-Lorette" data-fr="Métro Notre-Dame-de-Lorette">Métro Notre-Dame-de-Lorette</p>
+                <p class="route-stop-sub" data-en="Meeting point · Intro to SoPi + carnet de route" data-fr="Point de RDV · Intro SoPi + carnet de route">Meeting point · Intro to SoPi + carnet de route</p>
+              </div>
+            </div>
+            <div class="route-stop">
+              <div class="route-dot mid" aria-hidden="true">1</div>
+              <div class="route-stop-body">
+                <p class="route-stop-name" data-en="Boulangerie Artisanale" data-fr="Boulangerie Artisanale">Boulangerie Artisanale</p>
+                <p class="route-stop-sub" data-en="Pain au levain + baguette tradition · Story of French bread law" data-fr="Pain au levain + baguette tradition · Histoire du décret pain">Pain au levain + baguette tradition · Story of French bread law</p>
+              </div>
+            </div>
+            <div class="route-stop">
+              <div class="route-dot mid" aria-hidden="true">2</div>
+              <div class="route-stop-body">
+                <p class="route-stop-name" data-en="Pâtisserie ou Chocolatier" data-fr="Pâtisserie ou Chocolatier">Pâtisserie ou Chocolatier</p>
+                <p class="route-stop-sub" data-en="Macaron, chouquette or seasonal tasting · The MOF story" data-fr="Macaron, chouquette ou dégustation saisonnière · L'histoire du MOF">Macaron, chouquette or seasonal tasting · The MOF story</p>
+              </div>
+            </div>
+            <div class="route-stop">
+              <div class="route-dot mid" aria-hidden="true">3</div>
+              <div class="route-stop-body">
+                <p class="route-stop-name" data-en="Charcutier Artisanal" data-fr="Charcutier Artisanal">Charcutier Artisanal</p>
+                <p class="route-stop-sub" data-en="Jambon sec, rillettes or terrine · Regional charcuterie traditions" data-fr="Jambon sec, rillettes ou terrine · Traditions charcutières régionales">Jambon sec, rillettes or terrine · Regional charcuterie traditions</p>
+              </div>
+            </div>
+            <div class="route-stop">
+              <div class="route-dot peak" aria-hidden="true">★</div>
+              <div class="route-stop-body">
+                <p class="route-stop-name" data-en="Fromagerie — The Peak Moment" data-fr="Fromagerie — Le Moment Fort">Fromagerie — The Peak Moment</p>
+                <p class="route-stop-sub" data-en="3 cheeses · Affineur demo · Access to the cave d'affinage" data-fr="3 fromages · Démo d'affinage · Accès à la cave d'affinage">3 cheeses · Affineur demo · Access to the cave d'affinage</p>
+                <span class="route-stop-tag tag-peak" data-en="Peak moment" data-fr="Moment fort">Peak moment</span>
+              </div>
+            </div>
+            <div class="route-stop">
+              <div class="route-dot mid" aria-hidden="true">5</div>
+              <div class="route-stop-body">
+                <p class="route-stop-name" data-en="Épicier Fin" data-fr="Épicier Fin">Épicier Fin</p>
+                <p class="route-stop-sub" data-en="Artisan honey, fig jam, condiments · The art of accompaniment" data-fr="Miel artisanal, confiture de figue, condiments · L'art de l'accompagnement">Artisan honey, fig jam, condiments · The art of accompaniment</p>
+              </div>
+            </div>
+            <div class="route-stop">
+              <div class="route-dot end" aria-hidden="true">⬤</div>
+              <div class="route-stop-body">
+                <p class="route-stop-name" data-en="Finale — Wine at the Abbesses" data-fr="Finale — Vin aux Abbesses">Finale — Wine at the Abbesses</p>
+                <p class="route-stop-sub" data-en="1 white + 1 red · Tasting board assembled from the tour · Toast &amp; closing" data-fr="1 blanc + 1 rouge · Planche du tour · Toast final">1 white + 1 red · Tasting board assembled from the tour · Toast &amp; closing</p>
+                <span class="route-stop-tag tag-finale" data-en="Finale assise" data-fr="Finale assise">Finale assise</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- What you taste -->
+        <div class="fade-in" style="margin-bottom:48px;">
+          <h2 class="section-title" style="text-align:left;margin-bottom:24px;" data-en="What you'll taste" data-fr="Ce que vous allez goûter">What you'll taste</h2>
+          <div class="tastings-grid">
+            <div class="tasting-card"><p class="tasting-emoji">🥖</p><p class="tasting-name" data-en="Sourdough & Baguette" data-fr="Levain & Baguette">Sourdough & Baguette</p><p class="tasting-desc" data-en="Two breads, one story — the backbone of every French meal." data-fr="Deux pains, une histoire.">Two breads, one story.</p></div>
+            <div class="tasting-card"><p class="tasting-emoji">🧁</p><p class="tasting-name" data-en="Pâtisserie" data-fr="Pâtisserie">Pâtisserie</p><p class="tasting-desc" data-en="Seasonal selection — macaron, mille-feuille or chouquette." data-fr="Sélection saisonnière.">Seasonal selection.</p></div>
+            <div class="tasting-card"><p class="tasting-emoji">🥩</p><p class="tasting-name" data-en="Charcuterie" data-fr="Charcuterie">Charcuterie</p><p class="tasting-desc" data-en="Aged ham, rillettes, or artisan terrine from the région." data-fr="Jambon, rillettes ou terrine artisanale.">Aged ham or rillettes.</p></div>
+            <div class="tasting-card"><p class="tasting-emoji">🧀</p><p class="tasting-name" data-en="3 Artisan Cheeses" data-fr="3 Fromages Artisanaux">3 Artisan Cheeses</p><p class="tasting-desc" data-en="Chèvre, pâte pressée, pâte molle — with the affineur's commentary." data-fr="Chèvre, pâte pressée, pâte molle — avec le commentaire de l'affineur.">Three textures, three stories.</p></div>
+            <div class="tasting-card"><p class="tasting-emoji">🍯</p><p class="tasting-name" data-en="Condiments" data-fr="Condiments">Condiments</p><p class="tasting-desc" data-en="Wild fig jam, walnut honey, and seasonal accompaniments." data-fr="Confiture de figue, miel de noix.">Jams, honey, and more.</p></div>
+            <div class="tasting-card"><p class="tasting-emoji">🍷</p><p class="tasting-name" data-en="Wine (finale)" data-fr="Vin (finale)">Wine (finale)</p><p class="tasting-desc" data-en="1 white + 1 red, selected for the neighbourhood — served with the tasting board." data-fr="1 blanc + 1 rouge, servis avec la planche.">1 white + 1 red.</p></div>
+          </div>
+        </div>
+
+        <!-- Peak moment -->
+        <div class="peak-callout fade-in">
+          <p class="peak-callout-eyebrow" data-en="The peak moment — at 2/3 of the tour" data-fr="Le moment fort — aux 2/3 du parcours">The peak moment — at 2/3 of the tour</p>
+          <h3 class="peak-callout-title" data-en="Inside the <em>cave d'affinage</em>" data-fr="Dans la <em>cave d'affinage</em>">Inside the <em>cave d'affinage</em></h3>
+          <p class="peak-callout-body" data-en="Every great tour has a moment you don't expect. Ours is the fromagerie cave — the aging cellar beneath the cheese shop, where wheels of Comté sit in darkness for 24 months. The affineur opens it just for us. You see, you smell, you taste. Then Thomas says: 'Those crystals under your teeth? That's tyrosine — it's the signature of excellence.' It's a sentence you remember." data-fr="Chaque grande visite a un moment inattendu. Le nôtre est la cave d'affinage — la cave de vieillissement sous la fromagerie, où les meules de Comté reposent dans l'obscurité pendant 24 mois. L'affineur l'ouvre rien que pour nous. Vous voyez, vous sentez, vous goûtez.">Every great tour has a moment you don't expect. Ours is the fromagerie cave — the aging cellar beneath the cheese shop, where wheels of Comté sit in darkness for 24 months. The affineur opens it just for us. You see, you smell, you taste. Then Thomas says: <em style="color:var(--gold)">"Those crystals under your teeth? That's tyrosine — it's the signature of excellence."</em></p>
+        </div>
+
+        <!-- FAQ -->
+        <div class="fade-in" style="margin-top:56px;">
+          <h2 class="section-title" style="text-align:left;margin-bottom:28px;" data-en="Frequently asked questions" data-fr="Questions fréquentes">Frequently asked questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false"><span data-en="Is this tour suitable for children?" data-fr="Cette visite est-elle adaptée aux enfants ?">Is this tour suitable for children?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="faq-answer"><div class="faq-answer-inner"><p data-en="Yes, children are welcome on the food tour. The wine finale is optional and non-alcoholic alternatives are available on request. Note that the tour involves ~1.8km of walking, including some cobbled uphill sections." data-fr="Oui, les enfants sont les bienvenus. La finale vin est optionnelle et des alternatives sans alcool sont disponibles sur demande.">Yes, children are welcome on the food tour. The wine finale is optional and non-alcoholic alternatives are available on request.</p></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false"><span data-en="Will I be full at the end?" data-fr="Serai-je rassasié à la fin ?">Will I be full at the end?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="faq-answer"><div class="faq-answer-inner"><p data-en="Yes. The food cost per person is deliberately set at 28–30€ to ensure real, generous portions at each stop — not nibbles. The tour is designed to be a late breakfast or early lunch, not a snack walk." data-fr="Oui. Le food cost par personne est intentionnellement fixé à 28–30 € pour garantir des portions généreuses à chaque arrêt — pas des amuse-bouches. La visite est conçue comme un brunch ou un déjeuner anticipé.">Yes. The food cost per person is set to ensure generous portions at each stop. The tour is designed to be a late breakfast or early lunch, not a snack walk.</p></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false"><span data-en="What time does the tour run?" data-fr="À quelle heure a lieu la visite ?">What time does the tour run?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="faq-answer"><div class="faq-answer-inner"><p data-en="English tours start at 10:30 AM on Saturdays and Sundays. French tours run Sunday mornings at 10:30 AM. EN and FR sessions are always separate — never simultaneous bilingual." data-fr="Les visites EN commencent à 10h30 le samedi et le dimanche. Les visites FR le dimanche matin à 10h30. Les sessions EN et FR sont toujours séparées.">English tours start at 10:30 AM on Saturdays and Sundays. French tours run Sunday mornings at 10:30 AM. EN and FR sessions are always separate.</p></div></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false"><span data-en="What if it rains?" data-fr="Et s'il pleut ?">What if it rains?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="faq-answer"><div class="faq-answer-inner"><p data-en="The tour runs in light rain — the cobbled streets of Montmartre are beautiful in any weather, and most stops are indoors. In the case of heavy rain or severe weather, the tour is rescheduled at no charge." data-fr="La visite se déroule par pluie légère — les rues pavées de Montmartre sont belles par tous les temps, et la plupart des arrêts sont en intérieur. En cas de pluie forte, la visite est reprogrammée gratuitement.">The tour runs in light rain — most stops are indoors. In case of severe weather, the tour is rescheduled at no charge.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking sidebar -->
+      <aside aria-label="Booking" class="fade-in">
+        <div class="booking-card">
+          <div class="booking-price-line"><span class="booking-price">€65</span><span class="booking-per">/ person</span></div>
+          <p class="booking-tagline" data-en="English from €65 · French from €55. Free cancellation 48h before." data-fr="Anglais à partir de 65 € · Français à partir de 55 €. Annulation gratuite 48h avant.">English from €65 · French from €55. Free cancellation 48h before.</p>
+          <div class="booking-divider"></div>
+          <ul class="booking-includes">
+            <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="6 artisan tastings" data-fr="6 dégustations artisanales">6 artisan tastings</span></li>
+            <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="2 wines at the finale" data-fr="2 vins à la finale">2 wines at the finale</span></li>
+            <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="Tasting board at final stop" data-fr="Planche de dégustation au dernier arrêt">Tasting board at final stop</span></li>
+            <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="A5 carnet de route" data-fr="Carnet de route A5">A5 carnet de route</span></li>
+            <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="Access to the affineur's cave" data-fr="Accès à la cave d'affinage">Access to the affineur's cave</span></li>
+            <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="Allergen sheet provided" data-fr="Fiche allergènes fournie">Allergen sheet provided</span></li>
+          </ul>
+          <button class="btn-book-full" data-en="Reserve your spot" data-fr="Réserver ma place">Reserve your spot</button>
+          <p class="booking-note" data-en="Secure checkout · No hidden fees" data-fr="Paiement sécurisé · Sans frais cachés">Secure checkout · No hidden fees</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- Related -->
+<section class="section" style="background:var(--light-gold);">
+  <div class="section-inner">
+    <header class="section-header"><p class="section-eyebrow">You might also like</p><h2 class="section-title">More ways to <em>taste Paris</em></h2><div class="divider"></div></header>
+    <div class="related-grid">
+      <a href="wine-cheese-walk.html" class="related-card fade-in">
+        <div class="related-img"><img src="images/card-wine.jpg" alt="Wine & Cheese Walk" loading="lazy"></div>
+        <div class="related-body"><h3 class="related-name">Wine &amp; Cheese Walk</h3><p class="related-meta">2h30 · Max 8 · From €75</p><span class="related-link">Discover the tour <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+      <a href="contact.html" class="related-card fade-in">
+        <div class="related-img"><img src="images/card-rooftop.jpg" alt="Private rooftop tasting" loading="lazy"></div>
+        <div class="related-body"><h3 class="related-name">Private Rooftop Tasting</h3><p class="related-meta">2h · 2–12 guests · From €120</p><span class="related-link">Request a quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><a href="index.html" class="logo"><span class="logo-main">Wine &amp; Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span></a><p class="footer-tagline">Authentic wine &amp; food experiences in Paris's most beloved neighbourhood.</p><div class="footer-social"><a href="https://instagram.com" class="social-link" aria-label="Instagram" rel="noopener noreferrer"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div></div>
+      <div><p class="footer-col-title">Our Tours</p><ul class="footer-links"><li><a href="wine-cheese-walk.html">Wine &amp; Cheese Walk</a></li><li><a href="food-tour.html">Montmartre Food Tour</a></li><li><a href="contact.html">Private Tastings</a></li></ul></div>
+      <div><p class="footer-col-title">Information</p><ul class="footer-links"><li><a href="about.html">About Thomas</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><p class="footer-col-title">Contact</p><ul class="footer-links"><li><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">&copy; 2026 Wine &amp; Cheese Paris.</p><nav class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Mentions légales</a></nav></div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script>document.querySelectorAll('.faq-question').forEach(function(btn){btn.addEventListener('click',function(){var a=this.nextElementSibling,e=this.getAttribute('aria-expanded')==='true';document.querySelectorAll('.faq-question').forEach(function(b){b.setAttribute('aria-expanded','false');b.nextElementSibling.classList.remove('open');});if(!e){this.setAttribute('aria-expanded','true');a.classList.add('open');}});});</script>
+</body>
+</html>

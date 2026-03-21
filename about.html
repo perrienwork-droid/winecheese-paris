@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Thomas — Wine & Cheese Paris</title>
+<meta name="description" content="Thomas is a Paris-born, WSET Level 3 certified guide who has lived in Montmartre for 10 years. He leads intimate wine & cheese tours in the 9th and 18th arrondissements.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.about-hero-img { background-image: url('images/rue-martyrs.jpg'); background-position: center 40%; }
+
+/* Intro bio layout */
+.bio-grid { display: grid; grid-template-columns: 420px 1fr; gap: clamp(40px,6vw,80px); align-items: start; }
+.bio-portrait { position: relative; border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 3/4; box-shadow: 20px 20px 0 var(--gold); }
+.bio-portrait img { width:100%;height:100%;object-fit:cover; }
+.bio-portrait-badge { position:absolute;bottom:-10px;right:-10px;background:var(--wine);color:var(--cream);border-radius:var(--radius-lg);padding:14px 18px;box-shadow:0 8px 24px rgba(114,47,55,0.3); }
+.bio-portrait-badge-title { font-family:var(--ff-display);font-size:15px;font-weight:600;line-height:1.2; }
+.bio-portrait-badge-sub { font-family:var(--ff-body);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.75;margin-top:3px; }
+.bio-text .section-eyebrow { display:block;text-align:left; }
+.bio-text .section-title { text-align:left; }
+.bio-body { font-size:16px;line-height:1.85;color:var(--slate);margin-top:20px; }
+.bio-body p + p { margin-top:16px; }
+.bio-pullquote { font-family:var(--ff-accent);font-size:22px;font-style:italic;color:var(--wine);line-height:1.5;padding:28px 0;border-top:2px solid var(--light-gold);border-bottom:2px solid var(--light-gold);margin:32px 0; }
+
+/* Credentials section */
+.credentials { background: var(--dark-wine); }
+.credentials .section-eyebrow { color: var(--gold); }
+.credentials .section-title { color: var(--cream); }
+.creds-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.cred-card { background: rgba(250,246,241,0.06); border: 1px solid rgba(250,246,241,0.1); border-radius: var(--radius-lg); padding: 32px 28px; transition: background var(--transition), transform var(--transition); }
+.cred-card:hover { background: rgba(250,246,241,0.1); transform: translateY(-3px); }
+.cred-icon { color: var(--gold); margin-bottom: 16px; }
+.cred-title { font-family: var(--ff-display); font-size: 18px; font-weight: 600; color: var(--cream); margin-bottom: 8px; }
+.cred-desc { font-size: 14px; line-height: 1.7; color: rgba(250,246,241,0.65); }
+
+/* Philosophy */
+.philosophy { background: var(--light-gold); }
+.philosophy-grid { display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center; }
+.philosophy-image { border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow-hover); }
+.philosophy-image img { width:100%;height:100%;object-fit:cover; }
+.philosophy-text .section-title { text-align:left; }
+.philosophy-text .section-eyebrow { text-align:left;display:block; }
+.philosophy-body { font-size:16px;line-height:1.8;color:var(--slate);margin-top:20px; }
+.philosophy-body p + p { margin-top:14px; }
+
+/* Principles */
+.principles { display:flex;flex-direction:column;gap:16px;margin-top:28px; }
+.principle { display:flex;align-items:flex-start;gap:14px; }
+.principle-num { font-family:var(--ff-accent);font-size:28px;font-weight:600;color:var(--gold-text);line-height:1;flex-shrink:0;width:32px; }
+.principle-body h4 { font-weight:600;font-size:15px;color:var(--charcoal);margin-bottom:4px; }
+.principle-body p { font-size:14px;color:var(--slate);line-height:1.6; }
+
+/* Stats row */
+.stats-row { background: var(--wine); padding: 48px clamp(20px,5vw,60px); }
+.stats-inner { max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px; }
+.stat { text-align:center; }
+.stat-num { font-family:var(--ff-accent);font-size:52px;font-weight:600;color:var(--gold);line-height:1;display:block; }
+.stat-label { font-size:13px;font-weight:500;color:rgba(250,246,241,0.75);margin-top:6px;letter-spacing:0.05em; }
+
+/* Partners section */
+.partners { background: var(--cream); }
+.partners-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px; }
+.partner-card { background:var(--white);border-radius:var(--radius-lg);padding:28px;border:1px solid rgba(114,47,55,0.07); }
+.partner-type { font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:8px; }
+.partner-name { font-family:var(--ff-display);font-size:18px;font-weight:600;color:var(--charcoal);margin-bottom:8px; }
+.partner-desc { font-size:13px;line-height:1.6;color:var(--slate); }
+
+/* CTA */
+.about-cta { background:linear-gradient(135deg,var(--dark-wine) 0%,var(--wine) 100%);text-align:center;padding:clamp(56px,8vw,100px) clamp(20px,5vw,60px);position:relative;overflow:hidden; }
+.about-cta::before { content:'';position:absolute;top:-40%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,0.1) 0%,transparent 70%);border-radius:50%; }
+.about-cta-inner { position:relative;z-index:2;max-width:600px;margin:0 auto; }
+.about-cta-eyebrow { font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block; }
+.about-cta-title { font-family:var(--ff-display);font-size:clamp(28px,4vw,44px);font-weight:500;color:var(--cream);line-height:1.15;margin-bottom:18px; }
+.about-cta-title em { font-style:italic;color:var(--gold); }
+.about-cta-desc { font-size:16px;color:rgba(250,246,241,0.75);margin-bottom:36px;line-height:1.6; }
+.cta-buttons { display:flex;gap:14px;justify-content:center;flex-wrap:wrap; }
+
+@media (max-width:960px) { .bio-grid,.philosophy-grid { grid-template-columns:1fr; } .bio-portrait { max-width:380px;margin:0 auto; } .creds-grid,.partners-grid { grid-template-columns:1fr 1fr; } .stats-inner { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:640px) { .creds-grid,.partners-grid { grid-template-columns:1fr; } .stats-inner { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header solid" role="banner" id="site-header">
+  <a href="index.html" class="logo" aria-label="Wine & Cheese Paris — Home"><span class="logo-main">Wine & Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span></a>
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="index.html#tours" class="nav-link">Our Tours</a>
+    <a href="about.html" class="nav-link active">About</a>
+    <a href="index.html#reviews" class="nav-link">Reviews</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <button class="lang-toggle" id="langToggle" aria-label="Switch to French">FR</button>
+    <button class="btn-book-nav">Book Now</button>
+    <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main-content">
+
+<div class="page-hero">
+  <div class="page-hero-image about-hero-img" role="img" aria-label="Rue des Martyrs on a Saturday morning with Sacré-Cœur at the end of the street"></div>
+  <div class="page-hero-overlay" aria-hidden="true"></div>
+  <div class="page-hero-content">
+    <nav class="page-hero-breadcrumb" aria-label="Breadcrumb"><a href="index.html" data-en="Home" data-fr="Accueil">Home</a><span aria-hidden="true">›</span><span data-en="About" data-fr="À Propos">About</span></nav>
+    <p class="page-hero-eyebrow" data-en="The guide behind the tours" data-fr="Le guide derrière les visites">The guide behind the tours</p>
+    <h1 class="page-hero-title" data-en="Bonjour, <em>je suis Thomas</em>" data-fr="Bonjour, <em>je suis Thomas</em>">Bonjour, <em>je suis Thomas</em></h1>
+    <p class="page-hero-sub" data-en="Paris-born, WSET-certified, and obsessively curious about the artisans who keep this neighbourhood's food culture alive." data-fr="Né à Paris, certifié WSET, et passionné par les artisans qui maintiennent en vie la culture culinaire de ce quartier.">Paris-born, WSET-certified, and obsessively curious about the artisans who keep this neighbourhood's food culture alive.</p>
+  </div>
+</div>
+
+<!-- BIO -->
+<section class="section" id="bio">
+  <div class="section-inner">
+    <div class="bio-grid">
+      <div class="bio-portrait fade-in">
+        <img src="images/portrait-guide.jpg" alt="Thomas, guide and founder of Wine & Cheese Paris, on a Paris street holding a glass of red wine" loading="lazy">
+        <div class="bio-portrait-badge" aria-label="WSET Level 3 certified">
+          <p class="bio-portrait-badge-title">WSET Level 3</p>
+          <p class="bio-portrait-badge-sub">Award in Wines</p>
+        </div>
+      </div>
+      <div class="bio-text fade-in">
+        <p class="section-eyebrow" data-en="My story" data-fr="Mon histoire">My story</p>
+        <h2 class="section-title" data-en="A Parisian who never stopped being <em>hungry</em>" data-fr="Un Parisien qui n'a jamais cessé d'avoir <em>faim</em>">A Parisian who never stopped being <em>hungry</em></h2>
+        <div class="bio-body">
+          <p data-en="I grew up in the 9th arrondissement, which meant growing up on the Rue des Martyrs. My mother bought Comté at the corner fromagerie every Thursday — the same block where our tasting tours now stop. My father argued about Burgundy versus Bordeaux over every Sunday dinner. I absorbed it all without knowing what to call it." data-fr="J'ai grandi dans le 9e, ce qui signifiait grandir rue des Martyrs. Ma mère achetait du Comté à la fromagerie du coin tous les jeudis — le même pâté de maisons où nos visites de dégustation s'arrêtent maintenant. Mon père débattait de Bourgogne contre Bordeaux à chaque dîner du dimanche.">I grew up in the 9th arrondissement, which meant growing up on the Rue des Martyrs. My mother bought Comté at the corner fromagerie every Thursday — the same block where our tasting tours now stop. My father argued about Burgundy versus Bordeaux over every Sunday dinner. I absorbed it all without knowing what to call it.</p>
+          <p data-en="After years working in hospitality and hotels — where I learned how to read a room, build an experience, and turn a stranger into a regular — I enrolled in the WSET program. The Level 3 was the click: it gave me the vocabulary for what I'd been feeling in glasses for 20 years." data-fr="Après des années dans l'hôtellerie — où j'ai appris à lire une salle, construire une expérience, et transformer un inconnu en habitué — je me suis inscrit au programme WSET. Le Niveau 3 a été le déclic : il m'a donné le vocabulaire pour ce que je ressentais dans les verres depuis 20 ans.">After years working in hospitality — where I learned how to read a room, build an experience, and turn a stranger into a regular — I enrolled in the WSET program. The Level 3 was the click: it gave me the vocabulary for what I'd been feeling in glasses for 20 years.</p>
+          <p data-en="I launched Wine & Cheese Paris because I kept meeting travellers who wanted to understand Paris, not just Instagram it. They wanted a local's explanation, not a tour script. They wanted to taste the Comté, not just see it. The tours I run now are the ones I always wished existed." data-fr="J'ai lancé Wine & Cheese Paris parce que je rencontrais sans cesse des voyageurs qui voulaient comprendre Paris, pas seulement l'Instagrammer. Ils voulaient l'explication d'un local, pas un script de visite. Les visites que je guide maintenant sont celles que j'ai toujours souhaité qui existent.">I launched Wine & Cheese Paris because I kept meeting travellers who wanted to understand Paris, not just Instagram it. They wanted a local's explanation, not a tour script. The tours I run now are the ones I always wished existed.</p>
+        </div>
+        <blockquote class="bio-pullquote" data-en='"The best thing about guiding is the moment someone tastes something for the first time and immediately wants to understand why it tastes that way."' data-fr='"Ce que j'aime le plus dans le métier de guide, c'est le moment où quelqu'un goûte quelque chose pour la première fois et veut immédiatement comprendre pourquoi ça goûte ainsi."'>"The best thing about guiding is the moment someone tastes something for the first time and immediately wants to understand why it tastes that way."</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-row" role="region" aria-label="Key facts about Thomas">
+  <div class="stats-inner">
+    <div class="stat fade-in"><span class="stat-num">10</span><p class="stat-label" data-en="Years living in Montmartre" data-fr="Ans à Montmartre">Years living in Montmartre</p></div>
+    <div class="stat fade-in"><span class="stat-num">124</span><p class="stat-label" data-en="Verified 5-star reviews" data-fr="Avis 5 étoiles vérifiés">Verified 5-star reviews</p></div>
+    <div class="stat fade-in"><span class="stat-num">12</span><p class="stat-label" data-en="Artisan partner producers" data-fr="Producteurs artisans partenaires">Artisan partner producers</p></div>
+    <div class="stat fade-in"><span class="stat-num">4.9</span><p class="stat-label" data-en="Average rating (TripAdvisor)" data-fr="Note moyenne (TripAdvisor)">Average rating (TripAdvisor)</p></div>
+  </div>
+</div>
+
+<!-- CREDENTIALS -->
+<section class="section credentials" aria-labelledby="creds-heading">
+  <div class="section-inner">
+    <header class="section-header">
+      <p class="section-eyebrow" data-en="Qualifications" data-fr="Qualifications">Qualifications</p>
+      <h2 class="section-title" style="color:var(--cream);" id="creds-heading" data-en="The expertise behind <em>every glass</em>" data-fr="L'expertise derrière <em>chaque verre</em>">The expertise behind <em>every glass</em></h2>
+      <div class="divider"></div>
+    </header>
+    <div class="creds-grid">
+      <div class="cred-card fade-in">
+        <svg class="cred-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        <h3 class="cred-title" data-en="WSET Level 3 Award in Wines" data-fr="WSET Niveau 3 Award in Wines">WSET Level 3 Award in Wines</h3>
+        <p class="cred-desc" data-en="The Wine & Spirit Education Trust Level 3 is the international benchmark for wine expertise. It covers systematic tasting methodology, global wine regions, and grape-to-glass quality factors. Thomas is the only WSET-certified independent guide in Montmartre." data-fr="Le WSET Niveau 3 est la référence internationale en expertise du vin. Il couvre la méthodologie de dégustation systématique, les régions viticoles mondiales, et les facteurs de qualité. Thomas est le seul guide indépendant certifié WSET à Montmartre.">The Wine & Spirit Education Trust Level 3 is the international benchmark for wine expertise. It covers systematic tasting methodology, global regions, and quality factors. The only WSET-certified independent guide in Montmartre.</p>
+      </div>
+      <div class="cred-card fade-in">
+        <svg class="cred-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <h3 class="cred-title" data-en="Carnet Professionnel de Guide" data-fr="Carnet Professionnel de Guide">Carnet Professionnel de Guide</h3>
+        <p class="cred-desc" data-en="Registered as a professional guide in France. All tours comply with French tourism law — CERFA declaration filed, micro-enterprise registered with code APE 79.90.20. Your experience is legal, professional, and insured." data-fr="Enregistré comme guide professionnel en France. Toutes les visites respectent la législation du tourisme français — déclaration CERFA déposée, micro-entreprise immatriculée avec le code APE 79.90.20.">Registered as a professional guide in France. All tours comply with French tourism law. CERFA declaration filed, micro-enterprise registered. Your experience is legal, professional, and insured.</p>
+      </div>
+      <div class="cred-card fade-in">
+        <svg class="cred-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <h3 class="cred-title" data-en="10 Years in Montmartre" data-fr="10 Ans à Montmartre">10 Years in Montmartre</h3>
+        <p class="cred-desc" data-en="I've lived in Pigalle since 2014. I know every shop by name, every opening hour by heart, every back alley that tourists walk past. The tours I run aren't a script — they're the result of a decade of daily curiosity." data-fr="Je vis à Pigalle depuis 2014. Je connais chaque boutique par son nom, chaque heure d'ouverture par cœur, chaque ruelle que les touristes ignorent. Les visites que je guide ne sont pas un script — elles sont le résultat d'une décennie de curiosité quotidienne.">I've lived in Pigalle since 2014. Every shop by name, every opening hour by heart, every back alley tourists miss. The tours I run aren't a script — they're the result of a decade of daily curiosity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="section philosophy" aria-labelledby="philosophy-heading">
+  <div class="section-inner">
+    <div class="philosophy-grid">
+      <div class="philosophy-image fade-in">
+        <img src="images/cheese-expertise.jpg" alt="Artisan cutting an aged cheese wheel in a Montmartre fromagerie" loading="lazy">
+      </div>
+      <div class="philosophy-text fade-in">
+        <p class="section-eyebrow" data-en="My philosophy" data-fr="Ma philosophie">My philosophy</p>
+        <h2 class="section-title" id="philosophy-heading" data-en="Food is the best <em>conversation starter</em>" data-fr="La nourriture est le meilleur <em>brise-glace</em>">Food is the best <em>conversation starter</em></h2>
+        <div class="philosophy-body">
+          <p data-en="I designed these tours around a simple idea: you understand a place best through its food. Not through its monuments. Not through its history books. Through the way its people eat." data-fr="J'ai conçu ces visites autour d'une idée simple : on comprend mieux un endroit à travers sa nourriture. Pas à travers ses monuments. Pas à travers ses livres d'histoire. À travers la façon dont ses habitants mangent.">I designed these tours around a simple idea: you understand a place best through its food. Not through its monuments. Through the way its people eat.</p>
+          <p data-en="Every tour I lead is different — because every group is different. I adapt the narrative to what makes you curious. Some groups want the history. Some want the chemistry. Some just want to eat. All of that is fine." data-fr="Chaque visite que je guide est différente — parce que chaque groupe est différent. J'adapte le récit à ce qui vous rend curieux. Certains groupes veulent l'histoire. D'autres veulent la chimie. D'autres veulent juste manger.">Every tour I lead is different — because every group is different. I adapt the narrative to what makes you curious. Some groups want the history. Some want the chemistry. Some just want to eat. All of that is fine.</p>
+        </div>
+        <div class="principles" aria-label="Tour principles">
+          <div class="principle">
+            <span class="principle-num" aria-hidden="true">01</span>
+            <div class="principle-body"><h4 data-en="No scripts" data-fr="Pas de scripts">No scripts</h4><p data-en="Every tour is live. I read the group and adjust. If someone is a sommelier, we go deeper. If someone is a first-timer, we start from zero." data-fr="Chaque visite est vivante. Je lis le groupe et m'adapte.">Every tour is live. I read the group and adjust. If someone is a sommelier, we go deeper. If someone is a first-timer, we start from zero.</p></div>
+          </div>
+          <div class="principle">
+            <span class="principle-num" aria-hidden="true">02</span>
+            <div class="principle-body"><h4 data-en="No tourist traps" data-fr="Pas de pièges à touristes">No tourist traps</h4><p data-en="Every stop is a place I actually shop at, or a producer I have a real relationship with. No kickbacks. No recommended shops with commissions." data-fr="Chaque arrêt est un endroit où je fais vraiment mes courses. Pas de commissions. Pas de boutiques recommandées avec intéressement.">Every stop is a place I actually shop at, or a producer I have a real relationship with. No kickbacks, no commissions.</p></div>
+          </div>
+          <div class="principle">
+            <span class="principle-num" aria-hidden="true">03</span>
+            <div class="principle-body"><h4 data-en="Abundance over profit" data-fr="Abondance avant profit">Abundance over profit</h4><p data-en="The food cost per person is deliberately high. A small group that leaves full and happy is worth far more than a large group that leaves disappointed." data-fr="Le food cost par personne est délibérément élevé. Un petit groupe qui repart rassasié vaut bien plus qu'un grand groupe déçu.">The food cost per person is deliberately high. A small group that leaves full and happy is worth far more than a large group that leaves disappointed.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="section partners" aria-labelledby="partners-heading">
+  <div class="section-inner">
+    <header class="section-header">
+      <p class="section-eyebrow" data-en="Artisan partners" data-fr="Partenaires artisans">Artisan partners</p>
+      <h2 class="section-title" id="partners-heading" data-en="The people who make the <em>tours possible</em>" data-fr="Les personnes qui rendent les <em>visites possibles</em>">The people who make the <em>tours possible</em></h2>
+      <div class="divider"></div>
+      <p class="section-desc" data-en="Every stop on every tour is a producer I've built a real relationship with. They know our groups are small, curious, and genuinely interested — not just passing through." data-fr="Chaque arrêt de chaque visite est un producteur avec qui j'ai bâti une vraie relation. Ils savent que nos groupes sont petits, curieux, et sincèrement intéressés.">Every stop on every tour is a producer I've built a real relationship with. They know our groups are small, curious, and genuinely interested.</p>
+    </header>
+    <div class="partners-grid">
+      <div class="partner-card fade-in">
+        <p class="partner-type" data-en="Boulangerie" data-fr="Boulangerie">Boulangerie</p>
+        <h3 class="partner-name" data-en="Rue des Martyrs Baker" data-fr="Boulanger de la Rue des Martyrs">Rue des Martyrs Baker</h3>
+        <p class="partner-desc" data-en="A family bakery using 72-hour cold-fermented sourdough and stone-milled flour. The baker demonstrates the process to every group — it's not a scripted stop, it's a conversation." data-fr="Une boulangerie familiale utilisant un levain à fermentation froide de 72h et de la farine moulue sur pierre. Le boulanger fait une démonstration à chaque groupe.">A family bakery using 72-hour cold-fermented sourdough and stone-milled flour. The baker demonstrates the process to every group.</p>
+      </div>
+      <div class="partner-card fade-in">
+        <p class="partner-type" data-en="Fromagerie" data-fr="Fromagerie">Fromagerie</p>
+        <h3 class="partner-name" data-en="Fromagerie du Martyr" data-fr="Fromagerie du Martyr">Fromagerie du Martyr</h3>
+        <p class="partner-desc" data-en="Family-run since 1962. The current affineur trained in Comté country and now ages wheels in the cellar beneath the shop. He opens that cellar for our groups — and it's the most memorable moment of the tour." data-fr="Tenue en famille depuis 1962. L'affineur actuel a été formé en pays de Comté et fait vieillir des meules dans la cave sous la boutique. Il ouvre cette cave pour nos groupes.">Family-run since 1962. The affineur opens his aging cellar for our groups — the most memorable moment of the tour.</p>
+      </div>
+      <div class="partner-card fade-in">
+        <p class="partner-type" data-en="Cave à Vin" data-fr="Cave à Vin">Cave à Vin</p>
+        <h3 class="partner-name" data-en="Cave de la Fontaine" data-fr="Cave de la Fontaine">Cave de la Fontaine</h3>
+        <p class="partner-desc" data-en="A stone-vaulted cave on the Rue des Martyrs, stocked with natural wines and small-producer bottles. The owner lets us use the back room for the Wine & Cheese Walk finale — candlelit, intimate, and exactly right." data-fr="Une cave voûtée en pierre rue des Martyrs, approvisionnée en vins naturels et en bouteilles de petits producteurs. Le propriétaire nous prête l'arrière-salle pour la finale du Wine & Cheese Walk.">A stone-vaulted cave on the Rue des Martyrs. The owner opens the back room for our tasting finales — candlelit, intimate, exactly right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="about-cta" aria-label="Book a tour with Thomas">
+  <div class="about-cta-inner">
+    <span class="about-cta-eyebrow" data-en="Ready to taste Montmartre?" data-fr="Prêt à goûter Montmartre ?">Ready to taste Montmartre?</span>
+    <h2 class="about-cta-title" data-en="Let's walk the <em>neighbourhood together</em>" data-fr="Marchons dans le <em>quartier ensemble</em>">Let's walk the <em>neighbourhood together</em></h2>
+    <p class="about-cta-desc" data-en="Small groups, real producers, no scripts. Choose your experience below, or get in touch if you have questions about what's right for you." data-fr="Petits groupes, vrais producteurs, pas de scripts. Choisissez votre expérience ci-dessous, ou contactez-moi si vous avez des questions.">Small groups, real producers, no scripts. Choose your experience below, or get in touch if you have questions about what's right for you.</p>
+    <div class="cta-buttons">
+      <a href="wine-cheese-walk.html" class="btn-primary" style="display:inline-flex;align-items:center;justify-content:center;" data-en="Wine & Cheese Walk" data-fr="Balade Vin & Fromage">Wine & Cheese Walk</a>
+      <a href="food-tour.html" class="btn-cta-outline" style="display:inline-flex;align-items:center;justify-content:center;background:transparent;color:var(--cream);border:2px solid rgba(250,246,241,0.4);padding:0 32px;height:54px;border-radius:var(--radius-sm);font-family:var(--ff-body);font-size:15px;font-weight:600;min-height:var(--touch-min);transition:border-color var(--transition),background var(--transition);" data-en="Montmartre Food Tour" data-fr="Food Tour Montmartre">Montmartre Food Tour</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><a href="index.html" class="logo"><span class="logo-main">Wine &amp; Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span></a><p class="footer-tagline">Authentic wine &amp; food experiences in Paris's most beloved neighbourhood.</p><div class="footer-social"><a href="https://instagram.com" class="social-link" aria-label="Instagram" rel="noopener noreferrer"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div></div>
+      <div><p class="footer-col-title">Our Tours</p><ul class="footer-links"><li><a href="wine-cheese-walk.html">Wine &amp; Cheese Walk</a></li><li><a href="food-tour.html">Montmartre Food Tour</a></li><li><a href="contact.html">Private Tastings</a></li></ul></div>
+      <div><p class="footer-col-title">Information</p><ul class="footer-links"><li><a href="about.html">About Thomas</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><p class="footer-col-title">Contact</p><ul class="footer-links"><li><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">&copy; 2026 Wine &amp; Cheese Paris.</p><nav class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Mentions légales</a></nav></div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wine & Cheese Walk — Wine & Cheese Paris</title>
+<meta name="description" content="A 2h30 walking tour through Montmartre's finest caves and fromageries, ending with a seated WSET-guided tasting of 5 wine & cheese pairings. From €75.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ─── PAGE-SPECIFIC ─────────────────────────────────────────── */
+.wc-hero-img { background-image: url('images/card-wine.jpg'); background-position: center 30%; }
+
+/* Quick info bar */
+.info-bar { background: var(--dark-wine); padding: 0 clamp(20px,5vw,60px); }
+.info-bar-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: stretch; gap: 0; }
+.info-item { display: flex; align-items: center; gap: 10px; padding: 20px 28px; border-right: 1px solid rgba(250,246,241,0.1); flex: 1; }
+.info-item:first-child { padding-left: 0; }
+.info-item:last-child { border-right: none; }
+.info-icon { color: var(--gold); flex-shrink: 0; }
+.info-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,246,241,0.5); display: block; }
+.info-value { font-family: var(--ff-accent); font-size: 20px; font-weight: 600; color: var(--cream); display: block; line-height: 1.2; }
+
+/* Two-col layout */
+.product-layout { display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start; }
+
+/* Narrative */
+.act-block { margin-bottom: 56px; }
+.act-label { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 16px; }
+.act-label::after { content:''; display:block; width:32px; height:1px; background:var(--gold); opacity:0.5; }
+.act-title { font-family: var(--ff-display); font-size: clamp(22px,3vw,32px); font-weight: 500; color: var(--charcoal); margin-bottom: 18px; }
+.act-title em { font-style: italic; color: var(--wine); }
+.act-body { font-size: 16px; line-height: 1.8; color: var(--slate); }
+.act-body p + p { margin-top: 14px; }
+
+/* Stops timeline */
+.stops-timeline { margin: 40px 0; }
+.stop { display: flex; gap: 20px; margin-bottom: 32px; position: relative; }
+.stop::before { content: ''; position: absolute; left: 20px; top: 44px; bottom: -16px; width: 1px; background: linear-gradient(180deg, var(--gold) 0%, rgba(201,169,110,0.1) 100%); }
+.stop:last-child::before { display: none; }
+.stop-number { width: 40px; height: 40px; border-radius: 50%; background: var(--wine); color: var(--cream); font-family: var(--ff-accent); font-size: 16px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.stop-content { flex: 1; }
+.stop-title { font-family: var(--ff-display); font-size: 17px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
+.stop-desc { font-size: 14px; line-height: 1.7; color: var(--slate); }
+.stop-duration { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--stone); margin-top: 6px; }
+
+/* Peak moment callout */
+.peak-callout { background: var(--light-gold); border-left: 4px solid var(--gold); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 28px 32px; margin: 36px 0; }
+.peak-callout-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 10px; }
+.peak-callout-title { font-family: var(--ff-display); font-size: 22px; font-weight: 600; color: var(--charcoal); margin-bottom: 10px; }
+.peak-callout-body { font-size: 15px; line-height: 1.7; color: var(--slate); }
+
+/* Pairings table */
+.pairings-section { background: var(--dark-wine); border-radius: var(--radius-xl); padding: 40px; margin: 40px 0; }
+.pairings-title { font-family: var(--ff-display); font-size: 22px; font-weight: 500; color: var(--cream); margin-bottom: 28px; }
+.pairing-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(250,246,241,0.1); }
+.pairing-row:last-child { border-bottom: none; }
+.pairing-cheese { font-family: var(--ff-accent); font-size: 17px; font-style: italic; color: var(--cream); }
+.pairing-wine { font-size: 14px; color: rgba(250,246,241,0.75); }
+.pairing-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(201,169,110,0.15); color: var(--gold); padding: 4px 10px; border-radius: 100px; white-space: nowrap; }
+.pairing-note { font-size: 13px; color: rgba(250,246,241,0.5); margin-top: 3px; }
+.pairing-surprise { grid-column: 1 / -1; text-align: center; padding: 16px 0 0; font-family: var(--ff-accent); font-size: 16px; font-style: italic; color: var(--gold); }
+
+/* Sidebar booking card */
+.booking-card { background: var(--white); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-hover); border: 1px solid rgba(114,47,55,0.08); position: sticky; top: 88px; }
+.booking-price-line { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.booking-price { font-family: var(--ff-accent); font-size: 42px; font-weight: 600; color: var(--wine); line-height: 1; }
+.booking-per { font-size: 14px; color: var(--stone); }
+.booking-tagline { font-size: 13px; color: var(--slate); margin-bottom: 24px; line-height: 1.5; }
+.booking-divider { height: 1px; background: rgba(114,47,55,0.08); margin: 20px 0; }
+.booking-includes { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.booking-includes li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--charcoal); line-height: 1.5; }
+.check-icon { color: var(--gold-text); flex-shrink: 0; margin-top: 1px; }
+.btn-book-full { display: block; width: 100%; text-align: center; background: var(--gold); color: var(--dark-wine); font-family: var(--ff-body); font-size: 16px; font-weight: 700; padding: 16px; border-radius: var(--radius-sm); border: none; cursor: pointer; transition: background var(--transition), transform var(--transition); min-height: var(--touch-min); margin-bottom: 12px; }
+.btn-book-full:hover { background: #b8924d; transform: translateY(-1px); }
+.booking-note { text-align: center; font-size: 12px; color: var(--stone); }
+.booking-badge { background: var(--light-gold); border-radius: var(--radius-md); padding: 12px 16px; margin-top: 20px; display: flex; align-items: center; gap: 10px; }
+.booking-badge-text { font-size: 13px; color: var(--gold-text); font-weight: 500; }
+
+/* Includes grid */
+.includes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.include-card { background: var(--white); border: 1px solid rgba(114,47,55,0.08); border-radius: var(--radius-lg); padding: 20px; }
+.include-icon { color: var(--gold-text); margin-bottom: 10px; }
+.include-title { font-weight: 600; font-size: 14px; color: var(--charcoal); margin-bottom: 4px; }
+.include-desc { font-size: 13px; color: var(--slate); line-height: 1.5; }
+
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 2px; }
+.faq-item { border: 1px solid rgba(114,47,55,0.1); border-radius: var(--radius-md); overflow: hidden; }
+.faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; background: var(--white); border: none; cursor: pointer; font-family: var(--ff-body); font-size: 15px; font-weight: 600; color: var(--charcoal); text-align: left; transition: background var(--transition); min-height: var(--touch-min); }
+.faq-question:hover { background: var(--light-gold); }
+.faq-question[aria-expanded="true"] { background: var(--light-gold); color: var(--wine); }
+.faq-chevron { color: var(--stone); flex-shrink: 0; transition: transform var(--transition); }
+.faq-question[aria-expanded="true"] .faq-chevron { transform: rotate(180deg); color: var(--wine); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; background: var(--white); }
+.faq-answer.open { max-height: 300px; }
+.faq-answer-inner { padding: 0 22px 18px; font-size: 15px; line-height: 1.7; color: var(--slate); }
+
+/* Related tours */
+.related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.related-card { border-radius: var(--radius-lg); overflow: hidden; background: var(--white); box-shadow: var(--shadow-card); transition: transform var(--transition), box-shadow var(--transition); display: flex; flex-direction: column; }
+.related-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.related-img { aspect-ratio: 16/9; overflow: hidden; }
+.related-img img { width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease; }
+.related-card:hover .related-img img { transform: scale(1.05); }
+.related-body { padding: 20px; flex: 1; }
+.related-name { font-family: var(--ff-display); font-size: 18px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
+.related-meta { font-size: 13px; color: var(--stone); margin-bottom: 12px; }
+.related-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--wine); }
+.related-link svg { transition: transform var(--transition); }
+.related-card:hover .related-link svg { transform: translateX(3px); }
+
+@media (max-width: 960px) {
+  .product-layout { grid-template-columns: 1fr; }
+  .booking-card { position: static; }
+  .info-bar-inner { flex-wrap: wrap; }
+  .info-item { flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(250,246,241,0.1); padding: 16px; }
+  .pairing-row { grid-template-columns: 1fr 1fr; }
+  .pairing-tag { display: none; }
+}
+@media (max-width: 640px) {
+  .includes-grid { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+  .pairing-row { grid-template-columns: 1fr; gap: 4px; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- HEADER -->
+<header class="site-header solid" role="banner" id="site-header">
+  <a href="index.html" class="logo" aria-label="Wine & Cheese Paris — Home">
+    <span class="logo-main">Wine & Cheese Paris</span>
+    <span class="logo-sub">Montmartre · SoPi</span>
+  </a>
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="index.html#tours" class="nav-link">Our Tours</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="index.html#reviews" class="nav-link">Reviews</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <button class="lang-toggle" id="langToggle" aria-label="Switch to French">FR</button>
+    <button class="btn-book-nav">Book Now</button>
+    <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main-content">
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-image wc-hero-img" role="img" aria-label="Red wine poured in a candlelit stone wine cellar with a cheese and fig board"></div>
+  <div class="page-hero-overlay" aria-hidden="true"></div>
+  <div class="page-hero-content">
+    <nav class="page-hero-breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html" data-en="Home" data-fr="Accueil">Home</a>
+      <span aria-hidden="true">›</span>
+      <span data-en="Wine & Cheese Walk" data-fr="Balade Vin & Fromage">Wine & Cheese Walk</span>
+    </nav>
+    <p class="page-hero-eyebrow" data-en="Our signature experience" data-fr="Notre expérience signature">Our signature experience</p>
+    <h1 class="page-hero-title" data-en="Wine &amp; Cheese <em>Walk</em>" data-fr="Balade Vin &amp; <em>Fromage</em>">Wine &amp; Cheese <em>Walk</em></h1>
+    <p class="page-hero-sub" data-en="Three neighbourhood stops, five world-class pairings, one candlelit cellar — guided by a WSET-certified expert." data-fr="Trois arrêts de quartier, cinq accords d'exception, une cave à la bougie — guidé par un expert certifié WSET.">Three neighbourhood stops, five world-class pairings, one candlelit cellar — guided by a WSET-certified expert.</p>
+  </div>
+</div>
+
+<!-- INFO BAR -->
+<div class="info-bar" role="region" aria-label="Tour details at a glance">
+  <div class="info-bar-inner">
+    <div class="info-item">
+      <svg class="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <div>
+        <span class="info-label" data-en="Duration" data-fr="Durée">Duration</span>
+        <span class="info-value">2h30</span>
+      </div>
+    </div>
+    <div class="info-item">
+      <svg class="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div>
+        <span class="info-label" data-en="Group size" data-fr="Groupe">Group size</span>
+        <span class="info-value" data-en="Max 8" data-fr="Max 8">Max 8</span>
+      </div>
+    </div>
+    <div class="info-item">
+      <svg class="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <div>
+        <span class="info-label" data-en="Meeting point" data-fr="RDV">Meeting point</span>
+        <span class="info-value" data-en="Notre-Dame-de-Lorette" data-fr="N-D-de-Lorette">Notre-Dame-de-Lorette</span>
+      </div>
+    </div>
+    <div class="info-item">
+      <svg class="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      <div>
+        <span class="info-label" data-en="From" data-fr="À partir de">From</span>
+        <span class="info-value">€75</span>
+      </div>
+    </div>
+    <div class="info-item">
+      <svg class="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div>
+        <span class="info-label" data-en="Cancellation" data-fr="Annulation">Cancellation</span>
+        <span class="info-value" data-en="Free 48h" data-fr="Gratuite 48h">Free 48h</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN PRODUCT CONTENT -->
+<section class="section" id="product-content">
+  <div class="section-inner">
+    <div class="product-layout">
+
+      <!-- LEFT: Narrative -->
+      <div class="product-narrative">
+
+        <div class="act-block fade-in">
+          <p class="act-label" data-en="Act I · 1h30" data-fr="Acte I · 1h30">Act I · 1h30</p>
+          <h2 class="act-title" data-en="Walking the <em>artisan trail</em>" data-fr="Sur la <em>trace des artisans</em>">Walking the <em>artisan trail</em></h2>
+          <div class="act-body">
+            <p data-en="We meet at the foot of Rue des Martyrs — the neighbourhood's beating heart — and walk north, stopping at the artisans who make this street unlike any other in Paris. Your guide, Thomas, sets the scene: the history of this unlikely food corridor, the gentrification story, the hidden courtyards." data-fr="Nous nous retrouvons au bas de la Rue des Martyrs — le cœur battant du quartier — et remontons vers le nord, en faisant étape chez les artisans qui rendent cette rue si unique à Paris.">We meet at the foot of Rue des Martyrs — the neighbourhood's beating heart — and walk north, stopping at the artisans who make this street unlike any other in Paris. Your guide, Thomas, sets the scene: the history of this unlikely food corridor, the gentrification story, the hidden courtyards.</p>
+            <p data-en="Each stop plants a seed for the finale: the baker's sourdough will reappear on the tasting board; the fromager's Comté will find its mirror in a Vin Jaune you haven't tasted yet." data-fr="Chaque arrêt plante une graine pour la finale : le pain au levain du boulanger réapparaîtra sur la planche de dégustation ; le Comté du fromager trouvera son miroir dans un Vin Jaune.">Each stop plants a seed for the finale: the baker's sourdough will reappear on the tasting board; the fromager's Comté will find its mirror in a Vin Jaune you haven't tasted yet.</p>
+          </div>
+
+          <div class="stops-timeline" role="list" aria-label="Tour stops">
+            <div class="stop fade-in" role="listitem">
+              <div class="stop-number" aria-hidden="true">1</div>
+              <div class="stop-content">
+                <h3 class="stop-title" data-en="Boulangerie Artisanale" data-fr="Boulangerie Artisanale">Boulangerie Artisanale</h3>
+                <p class="stop-desc" data-en="The baker opens his ovens and shares the story of the sourdough. You taste a slice of levain — and understand why this bread, with four ingredients, is the foundation of French food culture." data-fr="Le boulanger ouvre ses fours et raconte l'histoire du levain. Vous goûtez une tranche de pain — et comprenez pourquoi ce pain à quatre ingrédients est la base de la culture culinaire française.">The baker opens his ovens and shares the story of the sourdough. You taste a slice of levain — and understand why this bread, with four ingredients, is the foundation of French food culture.</p>
+                <span class="stop-duration"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 10 min</span>
+              </div>
+            </div>
+            <div class="stop fade-in" role="listitem">
+              <div class="stop-number" aria-hidden="true">2</div>
+              <div class="stop-content">
+                <h3 class="stop-title" data-en="Fromagerie — Cave d'Affinage" data-fr="Fromagerie — Cave d'Affinage">Fromagerie — Cave d'Affinage</h3>
+                <p class="stop-desc" data-en="The cheese master opens a wheel, explains the caves below the shop, and selects three cheeses for tasting. Thomas bridges the tasting to terroir: Loire, Jura, Burgundy — what these regions mean on the palate." data-fr="Le fromager ouvre une meule, explique les caves sous la boutique, et sélectionne trois fromages. Thomas fait le lien entre dégustation et terroir : Loire, Jura, Bourgogne.">The cheese master opens a wheel, explains the caves below the shop, and selects three cheeses for tasting. Thomas bridges the tasting to terroir: Loire, Jura, Burgundy — what these regions mean on the palate.</p>
+                <span class="stop-duration"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 20 min</span>
+              </div>
+            </div>
+            <div class="stop fade-in" role="listitem">
+              <div class="stop-number" aria-hidden="true">3</div>
+              <div class="stop-content">
+                <h3 class="stop-title" data-en="Épicier Fin — The Accompaniments" data-fr="Épicier Fin — Les Accompagnements">Épicier Fin — The Accompaniments</h3>
+                <p class="stop-desc" data-en="Wild fig jam, Burgundy walnut honey, duck rillettes — the condiments that will frame the tasting ahead. A brief stop; a rich conversation about how the best food is always about layers." data-fr="Confiture de figue sauvage, miel de noix de Bourgogne, rillettes de canard — les condiments qui encadreront la dégustation finale. Un arrêt bref ; une conversation riche sur la notion de saveurs en couches.">Wild fig jam, Burgundy walnut honey, duck rillettes — the condiments that will frame the tasting ahead. A brief stop; a rich conversation about how the best food is always about layers.</p>
+                <span class="stop-duration"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 10 min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="act-block fade-in">
+          <p class="act-label" data-en="Act II · 45–60 min" data-fr="Acte II · 45–60 min">Act II · 45–60 min</p>
+          <h2 class="act-title" data-en="The <em>masterclass</em> — seated, candlelit, unforgettable" data-fr="La <em>masterclass</em> — assis, à la bougie, inoubliable">The <em>masterclass</em> — seated, candlelit, unforgettable</h2>
+          <div class="act-body">
+            <p data-en="The final stop is the heart of the experience. We descend into our partner cave — a stone-vaulted cellar that has held bottles since the 19th century. The board is already set: bread, cheese, charcuterie, condiments, five glasses of wine. No more walking. Just tasting, talking, and learning." data-fr="Le dernier arrêt est le cœur de l'expérience. Nous descendons dans notre cave partenaire — une cave voûtée en pierre qui conserve des bouteilles depuis le XIXe siècle. La planche est déjà dressée : pain, fromage, charcuterie, condiments, cinq verres de vin.">The final stop is the heart of the experience. We descend into our partner cave — a stone-vaulted cellar that has held bottles since the 19th century. The board is already set: bread, cheese, charcuterie, condiments, five glasses of wine. No more walking. Just tasting, talking, and learning.</p>
+          </div>
+
+          <div class="peak-callout fade-in" role="note">
+            <p class="peak-callout-label" data-en="The WSET difference" data-fr="La différence WSET">The WSET difference</p>
+            <p class="peak-callout-title" data-en="Why these pairings work — and why others don't" data-fr="Pourquoi ces accords fonctionnent — et pourquoi d'autres non">Why these pairings work — and why others don't</p>
+            <p class="peak-callout-body" data-en="Most food tours pour wine. Thomas teaches it. Each of the five pairings is narrated with precision: the chemistry behind acid-on-acid harmony, the terroir mirror of Comté and Vin Jaune, the deliberate contrast of Époisses and Gewurztraminer. You leave with a framework you'll use for the rest of your life." data-fr="La plupart des food tours servent du vin. Thomas l'enseigne. Chacun des cinq accords est narré avec précision : la chimie derrière l'harmonie acide sur acide, le miroir terroir du Comté et du Vin Jaune, le contraste délibéré de l'Époisses et du Gewurztraminer.">Most food tours pour wine. Thomas teaches it. Each of the five pairings is narrated with precision: the chemistry behind acid-on-acid harmony, the terroir mirror of Comté and Vin Jaune, the deliberate contrast of Époisses and Gewurztraminer. You leave with a framework you'll use for the rest of your life.</p>
+          </div>
+
+          <div class="pairings-section fade-in" role="table" aria-label="The 5 wine and cheese pairings">
+            <h3 class="pairings-title" data-en="The 5 pairings" data-fr="Les 5 accords">The 5 pairings</h3>
+            <div role="rowgroup">
+              <div class="pairing-row" role="row">
+                <div role="cell">
+                  <p class="pairing-cheese">Sainte-Maure de Touraine</p>
+                  <p class="pairing-note" data-en="Fresh goat, Loire Valley" data-fr="Chèvre frais, Val de Loire">Fresh goat, Loire Valley</p>
+                </div>
+                <div role="cell">
+                  <p class="pairing-wine">Sancerre Blanc</p>
+                  <p class="pairing-note" data-en="Acid × acid, silex minerality" data-fr="Acidité × acidité, minéralité silex">Acid × acid, silex minerality</p>
+                </div>
+                <div role="cell"><span class="pairing-tag">Loire</span></div>
+              </div>
+              <div class="pairing-row" role="row">
+                <div role="cell">
+                  <p class="pairing-cheese">Comté 24 Mois</p>
+                  <p class="pairing-note" data-en="Aged pressed, Jura" data-fr="Pâte pressée, Jura">Aged pressed, Jura</p>
+                </div>
+                <div role="cell">
+                  <p class="pairing-wine">Vin Jaune du Jura</p>
+                  <p class="pairing-note" data-en="Terroir mirror, walnut &amp; Maillard" data-fr="Miroir terroir, noix &amp; Maillard">Terroir mirror, walnut &amp; Maillard</p>
+                </div>
+                <div role="cell"><span class="pairing-tag">Jura</span></div>
+              </div>
+              <div class="pairing-row" role="row">
+                <div role="cell">
+                  <p class="pairing-cheese">Époisses de Bourgogne</p>
+                  <p class="pairing-note" data-en="Washed rind, Burgundy" data-fr="Croûte lavée, Bourgogne">Washed rind, Burgundy</p>
+                </div>
+                <div role="cell">
+                  <p class="pairing-wine">Gewurztraminer</p>
+                  <p class="pairing-note" data-en="Aromatic power × pungency" data-fr="Puissance aromatique × caractère fort">Aromatic power × pungency</p>
+                </div>
+                <div role="cell"><span class="pairing-tag">Alsace</span></div>
+              </div>
+              <div class="pairing-row" role="row">
+                <div role="cell">
+                  <p class="pairing-cheese">Roquefort</p>
+                  <p class="pairing-note" data-en="Blue, Pénicillium roqueforti" data-fr="Bleu, Pénicillium roqueforti">Blue, Pénicillium roqueforti</p>
+                </div>
+                <div role="cell">
+                  <p class="pairing-wine">Sauternes</p>
+                  <p class="pairing-note" data-en="Sweet × salty, botrytis cinerea" data-fr="Sucré × salé, botrytis cinerea">Sweet × salty, botrytis cinerea</p>
+                </div>
+                <div role="cell"><span class="pairing-tag">Bordeaux</span></div>
+              </div>
+              <div class="pairing-surprise" role="row">✦ &nbsp;<span data-en="Surprise pairing — a rare local cheese + natural wine from a small producer. Different every week." data-fr="Accord surprise — un fromage local rare + vin nature d'un petit producteur. Différent chaque semaine.">Surprise pairing — a rare local cheese + natural wine from a small producer. Different every week.</span>&nbsp; ✦</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- What's included -->
+        <div class="fade-in">
+          <h2 class="section-title" style="text-align:left;margin-bottom:28px;" data-en="What's included" data-fr="Ce qui est inclus">What's included</h2>
+          <div class="includes-grid">
+            <div class="include-card">
+              <svg class="include-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+              <p class="include-title" data-en="5 wines (full pours)" data-fr="5 vins (verres complets)">5 wines (full pours)</p>
+              <p class="include-desc" data-en="Sancerre, Vin Jaune, Gewurztraminer, Sauternes + surprise — selected by Thomas for the pairings." data-fr="Sancerre, Vin Jaune, Gewurztraminer, Sauternes + surprise — sélectionnés par Thomas.">Sancerre, Vin Jaune, Gewurztraminer, Sauternes + surprise — selected by Thomas for the pairings.</p>
+            </div>
+            <div class="include-card">
+              <svg class="include-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 2l1.5 1.5L6 2l1.5 1.5L9 2l1.5 1.5L12 2l1.5 1.5L15 2l1.5 1.5L18 2l1.5 1.5L21 2v20l-1.5-1.5L18 22l-1.5-1.5L15 22l-1.5-1.5L12 22l-1.5-1.5L9 22l-1.5-1.5L6 22l-1.5-1.5L3 22V2z"/></svg>
+              <p class="include-title" data-en="4–5 artisan cheeses" data-fr="4–5 fromages artisanaux">4–5 artisan cheeses</p>
+              <p class="include-desc" data-en="A curated board assembled from the fromagerie you visited — bread, condiments, charcuterie included." data-fr="Une planche constituée chez le fromager visité — pain, condiments, charcuterie inclus.">A curated board assembled from the fromagerie you visited — bread, condiments, charcuterie included.</p>
+            </div>
+            <div class="include-card">
+              <svg class="include-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              <p class="include-title" data-en="Handwritten tasting notes" data-fr="Carnet de dégustation">Handwritten tasting notes</p>
+              <p class="include-desc" data-en="Your A5 carnet de route with the 5 pairings, the terroir maps, and Thomas's personal wine shop recommendations." data-fr="Votre carnet A5 avec les 5 accords, les cartes des terroirs, et les recommandations personnelles de Thomas.">Your A5 carnet de route with the 5 pairings, the terroir maps, and Thomas's personal wine shop recommendations.</p>
+            </div>
+            <div class="include-card">
+              <svg class="include-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              <p class="include-title" data-en="3 artisan stops" data-fr="3 arrêts artisans">3 artisan stops</p>
+              <p class="include-desc" data-en="Boulangerie, fromagerie and épicier fine — tastings at each, with the producers telling their own stories." data-fr="Boulangerie, fromagerie et épicerie fine — dégustations chez chacun, avec les producteurs qui racontent leur histoire.">Boulangerie, fromagerie and épicier fine — tastings at each, with the producers telling their own stories.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="fade-in" style="margin-top:56px;">
+          <h2 class="section-title" style="text-align:left;margin-bottom:28px;" data-en="Frequently asked questions" data-fr="Questions fréquentes">Frequently asked questions</h2>
+          <div class="faq-list" role="list">
+            <div class="faq-item" role="listitem">
+              <button class="faq-question" aria-expanded="false">
+                <span data-en="Do I need to know about wine to enjoy this tour?" data-fr="Faut-il s'y connaître en vin pour profiter de cette visite ?">Do I need to know about wine to enjoy this tour?</span>
+                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer"><div class="faq-answer-inner"><p data-en="Not at all. The tour is designed for curious beginners and seasoned enthusiasts alike. Thomas starts from first principles — smell, texture, origin — and builds from there. No prior knowledge required, just an appetite." data-fr="Pas du tout. La visite est conçue pour les débutants curieux comme pour les amateurs confirmés. Thomas part des bases — odeur, texture, origine — et construit à partir de là.">Not at all. The tour is designed for curious beginners and seasoned enthusiasts alike. Thomas starts from first principles — smell, texture, origin — and builds from there. No prior knowledge required, just an appetite.</p></div></div>
+            </div>
+            <div class="faq-item" role="listitem">
+              <button class="faq-question" aria-expanded="false">
+                <span data-en="What if I have dietary restrictions or allergies?" data-fr="Que faire si j'ai des restrictions alimentaires ou des allergies ?">What if I have dietary restrictions or allergies?</span>
+                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer"><div class="faq-answer-inner"><p data-en="A written allergens sheet is presented before the first tasting. Please mention any restrictions when booking — Thomas will adapt the board. Note that this tour is dairy-heavy (it is a cheese tour), and not suitable for vegans or those with severe dairy allergies." data-fr="Une fiche allergènes écrite est présentée avant la première dégustation. Merci de mentionner toute restriction à la réservation — Thomas adaptera la planche. Cette visite est riche en produits laitiers.">A written allergens sheet is presented before the first tasting. Please mention any restrictions when booking — Thomas will adapt the board. Note that this tour is dairy-heavy (it is a cheese tour), and not suitable for vegans or those with severe dairy allergies.</p></div></div>
+            </div>
+            <div class="faq-item" role="listitem">
+              <button class="faq-question" aria-expanded="false">
+                <span data-en="What are the available time slots?" data-fr="Quels sont les créneaux disponibles ?">What are the available time slots?</span>
+                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer"><div class="faq-answer-inner"><p data-en="English tours run Saturday at 4:00 PM and Sunday at 11:00 AM. French tours run Sunday at 4:00 PM. Tours in EN and FR are always separate sessions — never simultaneous bilingual. Check availability on the booking widget for exact dates." data-fr="Les visites en anglais ont lieu le samedi à 16h et le dimanche à 11h. Les visites en français le dimanche à 16h. Les créneaux EN et FR sont toujours séparés — jamais bilingues simultanés.">English tours run Saturday at 4:00 PM and Sunday at 11:00 AM. French tours run Sunday at 4:00 PM. Tours in EN and FR are always separate sessions — never simultaneous bilingual. Check availability on the booking widget for exact dates.</p></div></div>
+            </div>
+            <div class="faq-item" role="listitem">
+              <button class="faq-question" aria-expanded="false">
+                <span data-en="Can I book this as a private group?" data-fr="Puis-je réserver en groupe privé ?">Can I book this as a private group?</span>
+                <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer"><div class="faq-answer-inner"><p data-en="Yes. Private bookings for groups of 2–8 are available at the same per-person rate — you simply book all the spots. For larger groups or corporate events, contact Thomas directly for a tailored offer." data-fr="Oui. Les réservations privées pour des groupes de 2 à 8 personnes sont disponibles au même tarif par personne. Pour des groupes plus importants ou des événements corporate, contactez Thomas directement.">Yes. Private bookings for groups of 2–8 are available at the same per-person rate — you simply book all the spots. For larger groups or corporate events, contact Thomas directly for a tailored offer.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Booking card -->
+      <aside aria-label="Booking" class="fade-in">
+        <div class="booking-card">
+          <div class="booking-price-line">
+            <span class="booking-price">€75</span>
+            <span class="booking-per" data-en="/ person (EN)" data-fr="/ pers. (FR)">/ person (EN)</span>
+          </div>
+          <p class="booking-tagline" data-en="English tours from €75. French tours from €75. Free cancellation 48h before." data-fr="Visites EN à partir de 75 €. Visites FR à partir de 75 €. Annulation gratuite 48h avant.">English tours from €75. French tours from €75. Free cancellation 48h before.</p>
+
+          <div class="booking-divider"></div>
+
+          <ul class="booking-includes" aria-label="Included in the price">
+            <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="5 full pours of wine" data-fr="5 verres de vin">5 full pours of wine</span></li>
+            <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="4–5 artisan cheeses + board" data-fr="4–5 fromages artisanaux + planche">4–5 artisan cheeses + board</span></li>
+            <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="3 artisan stop tastings" data-fr="3 dégustations chez les artisans">3 artisan stop tastings</span></li>
+            <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="A5 tasting notebook" data-fr="Carnet de dégustation A5">A5 tasting notebook</span></li>
+            <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="WSET-guided pairings masterclass" data-fr="Masterclass accords WSET">WSET-guided pairings masterclass</span></li>
+          </ul>
+
+          <button class="btn-book-full" data-en="Reserve your spot" data-fr="Réserver ma place">Reserve your spot</button>
+          <p class="booking-note" data-en="Secure checkout via Bókun · No fees" data-fr="Paiement sécurisé · Sans frais">Secure checkout via Bókun · No fees</p>
+
+          <div class="booking-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" color="#7A6340"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <p class="booking-badge-text" data-en="WSET Level 3 certified guide · Official carnet professionnel" data-fr="Guide certifié WSET Niveau 3 · Carnet professionnel officiel">WSET Level 3 certified guide · Official carnet professionnel</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED TOURS -->
+<section class="section" style="background:var(--light-gold);">
+  <div class="section-inner">
+    <header class="section-header">
+      <p class="section-eyebrow" data-en="You might also like" data-fr="Vous aimerez peut-être">You might also like</p>
+      <h2 class="section-title" data-en="More ways to <em>taste Paris</em>" data-fr="D'autres façons de <em>goûter Paris</em>">More ways to <em>taste Paris</em></h2>
+      <div class="divider"></div>
+    </header>
+    <div class="related-grid">
+      <a href="food-tour.html" class="related-card fade-in">
+        <div class="related-img"><img src="images/card-food.jpg" alt="Artisan boulangerie Montmartre" loading="lazy"></div>
+        <div class="related-body">
+          <h3 class="related-name" data-en="Montmartre Food Tour" data-fr="Food Tour Montmartre">Montmartre Food Tour</h3>
+          <p class="related-meta" data-en="3h · Max 8 · From €65" data-fr="3h · Max 8 · À partir de 65 €">3h · Max 8 · From €65</p>
+          <span class="related-link" data-en="Discover the tour" data-fr="Découvrir la visite">Discover the tour <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </a>
+      <a href="contact.html" class="related-card fade-in">
+        <div class="related-img"><img src="images/card-rooftop.jpg" alt="Private rooftop tasting Paris" loading="lazy"></div>
+        <div class="related-body">
+          <h3 class="related-name" data-en="Private Rooftop Tasting" data-fr="Dégustation Privée Rooftop">Private Rooftop Tasting</h3>
+          <p class="related-meta" data-en="2h · 2–12 guests · From €120" data-fr="2h · 2–12 pers. · À partir de 120 €">2h · 2–12 guests · From €120</p>
+          <span class="related-link" data-en="Request a quote" data-fr="Demander un devis">Request a quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><span class="logo-main">Wine &amp; Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span></a>
+        <p class="footer-tagline">Authentic wine &amp; food experiences in Paris's most beloved neighbourhood.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" class="social-link" aria-label="Instagram" rel="noopener noreferrer"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+      <div><p class="footer-col-title">Our Tours</p><ul class="footer-links"><li><a href="wine-cheese-walk.html">Wine &amp; Cheese Walk</a></li><li><a href="food-tour.html">Montmartre Food Tour</a></li><li><a href="contact.html">Private Tastings</a></li></ul></div>
+      <div><p class="footer-col-title">Information</p><ul class="footer-links"><li><a href="about.html">About Thomas</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">FAQs</a></li></ul></div>
+      <div><p class="footer-col-title">Contact</p><ul class="footer-links"><li><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Wine &amp; Cheese Paris.</p>
+      <nav class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Mentions légales</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script>
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var answer = this.nextElementSibling;
+    var expanded = this.getAttribute('aria-expanded') === 'true';
+    // Close all
+    document.querySelectorAll('.faq-question').forEach(function(b) {
+      b.setAttribute('aria-expanded','false');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!expanded) {
+      this.setAttribute('aria-expanded','true');
+      answer.classList.add('open');
+    }
+  });
+});
+</script>
+</body>
+</html>
