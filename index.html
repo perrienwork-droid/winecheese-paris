@@ -67,7 +67,7 @@ a { color: inherit; text-decoration: none; }
   backdrop-filter: blur(12px);
 }
 .logo {
-  display: flex; flex-direction: column; gap: 0;
+  display: flex; flex-direction: column; gap: 5px;
   text-decoration: none;
 }
 .logo-main {
@@ -157,10 +157,7 @@ a { color: inherit; text-decoration: none; }
 .hero-image {
   position: absolute; inset: 0;
   background: url('images/hero.jpg') center center / cover no-repeat;
-  transform: scale(1.04);
-  transition: transform 8s ease-out;
 }
-.hero-image.loaded { transform: scale(1); }
 .hero-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(
@@ -650,7 +647,7 @@ a { color: inherit; text-decoration: none; }
     <h1 class="hero-title" id="heroTitle">
       <em>Taste</em> the Paris<br>the tourists miss
     </h1>
-    <p class="hero-sub" id="heroSub">Intimate wine &amp; cheese walks in the neighbourhood's finest caves, fromageries and hidden cellars — guided by a WSET-certified local.</p>
+    <p class="hero-sub" id="heroSub">Intimate wine &amp; cheese walks in the neighbourhood's finest caves, fromageries and hidden cellars, guided by a WSET-certified local.</p>
     <div class="hero-ctas">
       <button class="btn-primary" id="heroCta1">Explore our tours</button>
       <button class="btn-outline" id="heroCta2">How it works</button>
@@ -694,7 +691,7 @@ a { color: inherit; text-decoration: none; }
       <p class="section-eyebrow" id="toursEyebrow">Curated experiences</p>
       <h2 class="section-title" id="toursHeading">Three ways to taste <em>Montmartre</em></h2>
       <div class="divider"></div>
-      <p class="section-desc" id="toursDesc">From a strolling cave-to-cave walk to private sunset tastings — each tour is designed for curious food lovers, not passive tourists.</p>
+      <p class="section-desc" id="toursDesc">From a strolling cave-to-cave walk to private sunset tastings: each tour is designed for curious food lovers, not passive tourists.</p>
     </header>
 
     <div class="tours-grid">
@@ -706,7 +703,7 @@ a { color: inherit; text-decoration: none; }
         </div>
         <div class="tour-card-body">
           <h3 class="tour-name" id="tourName1">Wine &amp; Cheese Walk</h3>
-          <p class="tour-desc" id="tourDesc1">Three neighbourhood caves, three artisan cheese stops. Walk the cobbled streets of SoPi while discovering 6 wines and 5 cheeses — each pairing narrated with stories of the region and the terroir.</p>
+          <p class="tour-desc" id="tourDesc1">Three neighbourhood caves, three artisan cheese stops. Walk the cobbled streets of SoPi while discovering 6 wines and 5 cheeses, each pairing narrated with stories of the region and the terroir.</p>
           <div class="tour-meta">
             <div class="tour-meta-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -730,7 +727,7 @@ a { color: inherit; text-decoration: none; }
         </div>
         <div class="tour-card-body">
           <h3 class="tour-name" id="tourName2">Montmartre Food Tour</h3>
-          <p class="tour-desc" id="tourDesc2">Boulangerie, marché, épicerie fine — a morning walk through the Rue des Martyrs and Abbesses market, tasting the best of the neighbourhood's culinary scene with a local's eye.</p>
+          <p class="tour-desc" id="tourDesc2">Boulangerie, marché, épicerie fine: a morning walk through the Rue des Martyrs and Abbesses street, tasting the best of the neighbourhood's culinary scene with a local's eye.</p>
           <div class="tour-meta">
             <div class="tour-meta-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -754,7 +751,7 @@ a { color: inherit; text-decoration: none; }
         </div>
         <div class="tour-card-body">
           <h3 class="tour-name" id="tourName3">Private Tasting</h3>
-          <p class="tour-desc" id="tourDesc3">An exclusive sunset tasting on a Montmartre rooftop — curated wine and cheese selection for your group. Perfect for celebrations, corporate events, or a memorable Parisian evening.</p>
+          <p class="tour-desc" id="tourDesc3">An exclusive sunset tasting on a Montmartre rooftop, with a curated wine and cheese selection for your group. Perfect for celebrations, corporate events, or a memorable Parisian evening.</p>
           <div class="tour-meta">
             <div class="tour-meta-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -787,16 +784,16 @@ a { color: inherit; text-decoration: none; }
         <p class="section-eyebrow" id="expertiseEyebrow">Your guide</p>
         <h2 class="section-title" id="expertise-heading">Tasting Paris is an <em>art</em></h2>
         <p class="expertise-body" id="expertiseBody">
-          I'm Thomas — Paris-born, WSET Level 3 certified, and fanatically curious about the artisans who keep neighbourhood food culture alive. I designed these tours after years of guiding travellers who wanted more than a glass of wine and a photo with the Eiffel Tower.
+          I'm Thomas, a Real Parisian, WSET Certified, and fanatically curious about the artisans who keep neighbourhood food culture alive. I designed these tours after years of animating wine tastings for friends and corporate events, and carrying wine trips across Europe and the world.
         </p>
         <ul class="credential-list" role="list" aria-label="Credentials">
           <li class="credential-item">
             <svg class="credential-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            <span id="cred1">WSET Level 3 Award in Wines</span>
+            <span id="cred1">WSET Certified</span>
           </li>
           <li class="credential-item">
             <svg class="credential-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            <span id="cred2">Carte professionnelle de guide-conférencier</span>
+            <span id="cred2">Registered Tour Operator, France (APE 79.90.20)</span>
           </li>
           <li class="credential-item">
             <svg class="credential-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -821,7 +818,7 @@ a { color: inherit; text-decoration: none; }
   <div class="section-inner reviews-inner">
     <header class="section-header">
       <p class="section-eyebrow" id="reviewsEyebrow">Guest stories</p>
-      <h2 class="section-title" id="reviews-heading">What travellers are <em>saying</em></h2>
+      <h2 class="section-title" id="reviews-heading">What travellers are <em style="color:var(--gold);">saying</em></h2>
       <div class="divider"></div>
     </header>
     <div style="border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:16/6;margin-bottom:40px;" class="fade-in"><img src="images/tasting-notes-table.jpg" alt="Tasting table set from above with handwritten notes, wine and cheese" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:0.85;"></div>
@@ -909,11 +906,11 @@ a { color: inherit; text-decoration: none; }
           Montmartre and South Pigalle (SoPi) are two of the last Parisian neighbourhoods where artisans, bakers, and vignerons still work the way their grandparents did. This is where we walk, taste, and linger.
         </p>
         <ul class="stops-list" role="list" aria-label="Key stops on the tour">
-          <li class="stop-item"><span class="stop-dot" aria-hidden="true"></span><span id="stop1">Rue des Martyrs — the city's best food street</span></li>
-          <li class="stop-item"><span class="stop-dot" aria-hidden="true"></span><span id="stop2">Cave de la Fontaine — 200-year-old wine cellar</span></li>
-          <li class="stop-item"><span class="stop-dot" aria-hidden="true"></span><span id="stop3">Fromagerie du Martyr — artisan cheeses since 1962</span></li>
-          <li class="stop-item"><span class="stop-dot" aria-hidden="true"></span><span id="stop4">Vignes de Montmartre — the last Paris vineyard</span></li>
-          <li class="stop-item"><span class="stop-dot" aria-hidden="true"></span><span id="stop5">Boulangerie du Soleil — secret croissant spot</span></li>
+          <li class="stop-item"><span class="stop-dot" aria-hidden="true"></span><span id="stop1">Rue des Martyrs: the city's best food street</span></li>
+          <li class="stop-item"><span class="stop-dot" aria-hidden="true"></span><span id="stop2">Cave de la Fontaine: 200-year-old wine cellar</span></li>
+          <li class="stop-item"><span class="stop-dot" aria-hidden="true"></span><span id="stop3">Fromagerie du Martyr: artisan cheeses since 1962</span></li>
+          <li class="stop-item"><span class="stop-dot" aria-hidden="true"></span><span id="stop4">Vignes de Montmartre: the last Paris vineyard</span></li>
+          <li class="stop-item"><span class="stop-dot" aria-hidden="true"></span><span id="stop5">Boulangerie du Soleil: secret croissant spot</span></li>
         </ul>
       </div>
       <div class="neighbourhood-image">
@@ -928,7 +925,7 @@ a { color: inherit; text-decoration: none; }
   <div class="cta-inner">
     <p class="cta-eyebrow" id="ctaEyebrow">Small groups · Max 8 people</p>
     <h2 class="cta-title" id="ctaTitle">Your <em>Paris story</em> starts here</h2>
-    <p class="cta-desc" id="ctaDesc">Spots fill quickly in peak season. Book early to secure your preferred date — free cancellation up to 48 hours before.</p>
+    <p class="cta-desc" id="ctaDesc">Spots fill quickly in peak season. Book early to secure your preferred date (free cancellation up to 48 hours before).</p>
     <div class="cta-buttons">
       <button class="btn-cta-primary" id="ctaPrimary">Book a tour</button>
       <button class="btn-cta-outline" id="ctaSecondary">Contact us first</button>
@@ -941,19 +938,19 @@ a { color: inherit; text-decoration: none; }
   <div class="section-inner">
     <div class="about-grid">
       <div class="about-portrait">
-        <img src="images/portrait-guide.jpg" alt="Thomas, guide and founder of Wine & Cheese Paris, leaning against a stone wall on a Parisian street holding a glass of red wine" loading="lazy">
+        <img src="images/ThomasPerrienWineCheese.png" alt="Thomas, guide and founder of Wine & Cheese Paris" loading="lazy">
       </div>
       <div class="about-text">
         <p class="section-eyebrow" id="aboutEyebrow">About Thomas</p>
         <h2 class="section-title" id="about-heading">A Parisian who believes food is the best <em>conversation starter</em></h2>
         <div class="about-body" id="aboutBody">
-          <p>I grew up in the 9th, eating Comté at the corner fromagerie and arguing about Burgundy vs Bordeaux with my father. After years working in hospitality and earning my WSET certification, I decided to turn that obsession into something people could share.</p>
-          <p>Every tour I lead is different — because every group is different. I adapt the narrative to what makes you curious. No scripts, no rushed stops, no tourist traps.</p>
+          <p>I've been living in Pigalle for many, many years. Wine and cheese were part of my life long before I could name what I was tasting, arguing about Burgundy versus Bordeaux with my father over Sunday dinners.</p>
+          <p>After years animating wine tastings for friends and corporate events, and carrying wine trips across Europe and the world, I turned that obsession into something people could share. Every tour I lead is different, because every group is different.</p>
         </div>
         <div class="credential-chips" role="list" aria-label="Certifications">
-          <span class="chip" role="listitem">WSET Level 3</span>
-          <span class="chip" role="listitem">Guide-Conférencier</span>
-          <span class="chip" role="listitem">Native Parisien</span>
+          <span class="chip" role="listitem">WSET Certified</span>
+          <span class="chip" role="listitem">Real Parisian</span>
+          <span class="chip" role="listitem">Small groups, big flavors</span>
           <span class="chip" role="listitem">EN · FR</span>
         </div>
       </div>
@@ -965,7 +962,7 @@ a { color: inherit; text-decoration: none; }
 <section class="section newsletter" aria-label="Newsletter signup">
   <div class="section-inner">
     <h2 class="newsletter-title" id="newsletterTitle">Local tips, seasonal tastings &amp; early access</h2>
-    <p class="newsletter-desc" id="newsletterDesc">Join 800+ food lovers who get our monthly guide to the best of Montmartre.</p>
+    <p class="newsletter-desc" id="newsletterDesc">Join 200+ food lovers who get our monthly guide to the best of Montmartre.</p>
     <form class="newsletter-form" action="#" method="post" novalidate>
       <label for="newsletter-email" class="sr-only">Email address</label>
       <input type="email" id="newsletter-email" name="email" class="newsletter-input" placeholder="your@email.com" autocomplete="email" required aria-required="true">
@@ -1019,8 +1016,7 @@ a { color: inherit; text-decoration: none; }
         <p class="footer-col-title" id="footColContact">Contact</p>
         <ul class="footer-links">
           <li><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></li>
-          <li><a href="tel:+33600000000">+33 6 00 00 00 00</a></li>
-          <li style="margin-top:8px;font-size:13px;opacity:0.6;cursor:default;">9e &amp; 18e arrondissements<br>Paris, France</li>
+          <li style="margin-top:8px;font-size:13px;opacity:0.6;cursor:default;">Pigalle &amp; Montmartre<br>Paris, France</li>
         </ul>
       </div>
     </div>
@@ -1042,18 +1038,9 @@ a { color: inherit; text-decoration: none; }
 <script>
 // ─── HEADER SCROLL ─────────────────────────────────────────────
 const header = document.getElementById('site-header');
-const heroImg = document.getElementById('heroImage');
 
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
-
-// Hero parallax + load animation
-heroImg.addEventListener('load', () => heroImg.classList.add('loaded'), { once: true });
-setTimeout(() => heroImg.classList.add('loaded'), 100);
-
-window.addEventListener('scroll', () => {
-  heroImg.style.transform = `scale(1) translateY(${window.scrollY * 0.25}px)`;
 }, { passive: true });
 
 // ─── LANGUAGE TOGGLE ───────────────────────────────────────────
@@ -1065,17 +1052,17 @@ const translations = {
     fr: '<em>Goûtez</em> le Paris<br>que les touristes ratent'
   },
   heroSub: {
-    en: 'Intimate wine & cheese walks in the neighbourhood\'s finest caves, fromageries and hidden cellars — guided by a WSET-certified local.',
-    fr: 'Des promenades intime de cave en fromagerie dans les meilleurs adresses du quartier — avec un guide certifié WSET.'
+    en: 'Intimate wine & cheese walks in the neighbourhood\'s finest caves, fromageries and hidden cellars, guided by a WSET-certified local.',
+    fr: 'Des promenades intimes de cave en fromagerie dans les meilleures adresses du quartier, avec un guide certifié WSET.'
   },
   heroCta1: { en: 'Explore our tours', fr: 'Nos visites' },
   heroCta2: { en: 'How it works', fr: 'Comment ça marche' },
   toursEyebrow: { en: 'Curated experiences', fr: 'Expériences sur mesure' },
   toursHeading: { en: 'Three ways to taste <em>Montmartre</em>', fr: 'Trois façons de goûter <em>Montmartre</em>' },
-  toursDesc: { en: 'From a strolling cave-to-cave walk to private sunset tastings — each tour is designed for curious food lovers, not passive tourists.', fr: 'De la promenade de cave en cave à la dégustation privée au coucher de soleil — chaque visite est conçue pour les curieux du goût, pas les touristes passifs.' },
+  toursDesc: { en: 'From a strolling cave-to-cave walk to private sunset tastings: each tour is designed for curious food lovers, not passive tourists.', fr: 'De la promenade de cave en cave à la dégustation privée au coucher de soleil: chaque visite est conçue pour les curieux du goût, pas les touristes passifs.' },
   tag1: { en: 'Bestseller', fr: 'Coup de cœur' },
   tourName1: { en: 'Wine & Cheese Walk', fr: 'Balade Vin & Fromage' },
-  tourDesc1: { en: 'Three neighbourhood caves, three artisan cheese stops. Walk the cobbled streets of SoPi while discovering 6 wines and 5 cheeses — each pairing narrated with stories of the region and the terroir.', fr: 'Trois caves de quartier, trois arrêts chez des artisans fromagers. Découvrez 6 vins et 5 fromages en parcourant les pavés de SoPi, chaque accord raconté avec les histoires du terroir.' },
+  tourDesc1: { en: 'Three neighbourhood caves, three artisan cheese stops. Walk the cobbled streets of SoPi while discovering 6 wines and 5 cheeses, each pairing narrated with stories of the region and the terroir.', fr: 'Trois caves de quartier, trois arrêts chez des artisans fromagers. Découvrez 6 vins et 5 fromages en parcourant les pavés de SoPi, chaque accord raconté avec les histoires du terroir.' },
   tourDur1: { en: '2h30', fr: '2h30' },
   tourGroup1: { en: '2–8 pers.', fr: '2–8 pers.' },
   tourPrice1: { en: '€75', fr: '75 €' },
@@ -1083,7 +1070,7 @@ const translations = {
   tourCta1: { en: 'Reserve a spot', fr: 'Réserver une place' },
   tag2: { en: 'New', fr: 'Nouveau' },
   tourName2: { en: 'Montmartre Food Tour', fr: 'Food Tour Montmartre' },
-  tourDesc2: { en: 'Boulangerie, marché, épicerie fine — a morning walk through the Rue des Martyrs and Abbesses market, tasting the best of the neighbourhood\'s culinary scene with a local\'s eye.', fr: 'Boulangerie, marché, épicerie fine — une matinée Rue des Martyrs et au marché des Abbesses, pour goûter le meilleur du quartier avec un regard de local.' },
+  tourDesc2: { en: 'Boulangerie, marché, épicerie fine: a morning walk through the Rue des Martyrs and Abbesses street, tasting the best of the neighbourhood\'s culinary scene with a local\'s eye.', fr: 'Boulangerie, marché, épicerie fine: une matinée Rue des Martyrs et dans la rue des Abbesses, pour goûter le meilleur du quartier avec un regard de local.' },
   tourDur2: { en: '3h', fr: '3h' },
   tourGroup2: { en: '2–6 pers.', fr: '2–6 pers.' },
   tourPrice2: { en: '€65', fr: '65 €' },
@@ -1091,16 +1078,16 @@ const translations = {
   tourCta2: { en: 'Reserve a spot', fr: 'Réserver une place' },
   tag3: { en: 'Private', fr: 'Privé' },
   tourName3: { en: 'Private Tasting', fr: 'Dégustation Privée' },
-  tourDesc3: { en: 'An exclusive sunset tasting on a Montmartre rooftop — curated wine and cheese selection for your group. Perfect for celebrations, corporate events, or a memorable Parisian evening.', fr: 'Une dégustation exclusive sur un rooftop de Montmartre — sélection de vins et fromages pour votre groupe. Parfait pour fêter une occasion ou une soirée parisienne mémorable.' },
+  tourDesc3: { en: 'An exclusive sunset tasting on a Montmartre rooftop, with a curated wine and cheese selection for your group. Perfect for celebrations, corporate events, or a memorable Parisian evening.', fr: 'Une dégustation exclusive sur un rooftop de Montmartre, avec une sélection de vins et fromages pour votre groupe. Parfait pour fêter une occasion ou une soirée parisienne mémorable.' },
   tourDur3: { en: '2h', fr: '2h' },
   tourGroup3: { en: '2–12 pers.', fr: '2–12 pers.' },
   tourPrice3: { en: '€120', fr: '120 €' },
   pricePer3: { en: '/ person', fr: '/ pers.' },
   tourCta3: { en: 'Request a quote', fr: 'Demander un devis' },
   expertiseEyebrow: { en: 'Your guide', fr: 'Votre guide' },
-  expertiseBody: { en: 'I\'m Thomas — Paris-born, WSET Level 3 certified, and fanatically curious about the artisans who keep neighbourhood food culture alive. I designed these tours after years of guiding travellers who wanted more than a glass of wine and a photo with the Eiffel Tower.', fr: 'Je suis Thomas — né à Paris, certifié WSET Niveau 3, et passionné par les artisans qui font vivre la culture culinaire de quartier. J\'ai conçu ces visites après des années à guider des voyageurs qui voulaient plus qu\'un verre de vin et une photo de la Tour Eiffel.' },
-  cred1: { en: 'WSET Level 3 Award in Wines', fr: 'WSET Niveau 3 Award in Wines' },
-  cred2: { en: 'Carte professionnelle de guide-conférencier', fr: 'Carte professionnelle de guide-conférencier' },
+  expertiseBody: { en: 'I\'m Thomas, a Real Parisian, WSET Certified, and fanatically curious about the artisans who keep neighbourhood food culture alive. I designed these tours after years of animating wine tastings for friends and corporate events, and carrying wine trips across Europe and the world.', fr: 'Je suis Thomas, un vrai Parisien, certifié WSET, et passionné par les artisans qui font vivre la culture culinaire de quartier. J\'ai conçu ces visites après des années à animer des dégustations pour des amis et des événements corporate.' },
+  cred1: { en: 'WSET Certified', fr: 'WSET Certifié' },
+  cred2: { en: 'Registered Tour Operator, France (APE 79.90.20)', fr: 'Opérateur de visites enregistré, France (APE 79.90.20)' },
   cred3: { en: '10 years living & eating in Montmartre', fr: '10 ans à vivre et manger à Montmartre' },
   cred4: { en: 'Partnerships with 12 artisan producers', fr: 'Partenariats avec 12 producteurs artisans' },
   expertiseCta: { en: 'Meet your guide', fr: 'Rencontrer le guide' },
@@ -1108,18 +1095,18 @@ const translations = {
   ratingLabel: { en: 'Based on 124 verified reviews', fr: 'Basé sur 124 avis vérifiés' },
   neighEyebrow: { en: 'The neighbourhood', fr: 'Le quartier' },
   neighBody: { en: 'Montmartre and South Pigalle (SoPi) are two of the last Parisian neighbourhoods where artisans, bakers, and vignerons still work the way their grandparents did. This is where we walk, taste, and linger.', fr: 'Montmartre et South Pigalle (SoPi) font partie des derniers quartiers parisiens où artisans, boulangers et vignerons travaillent comme leurs grands-parents. C\'est là que nous nous promenons, goûtons et flânons.' },
-  stop1: { en: 'Rue des Martyrs — the city\'s best food street', fr: 'Rue des Martyrs — la meilleure rue commerçante de Paris' },
-  stop2: { en: 'Cave de la Fontaine — 200-year-old wine cellar', fr: 'Cave de la Fontaine — cave à vin vieille de 200 ans' },
-  stop3: { en: 'Fromagerie du Martyr — artisan cheeses since 1962', fr: 'Fromagerie du Martyr — fromages artisanaux depuis 1962' },
-  stop4: { en: 'Vignes de Montmartre — the last Paris vineyard', fr: 'Vignes de Montmartre — le dernier vignoble de Paris' },
-  stop5: { en: 'Boulangerie du Soleil — secret croissant spot', fr: 'Boulangerie du Soleil — l\'adresse secrète des croissants' },
+  stop1: { en: 'Rue des Martyrs: the city\'s best food street', fr: 'Rue des Martyrs: la meilleure rue commerçante de Paris' },
+  stop2: { en: 'Cave de la Fontaine: 200-year-old wine cellar', fr: 'Cave de la Fontaine: cave à vin vieille de 200 ans' },
+  stop3: { en: 'Fromagerie du Martyr: artisan cheeses since 1962', fr: 'Fromagerie du Martyr: fromages artisanaux depuis 1962' },
+  stop4: { en: 'Vignes de Montmartre: the last Paris vineyard', fr: 'Vignes de Montmartre: le dernier vignoble de Paris' },
+  stop5: { en: 'Boulangerie du Soleil: secret croissant spot', fr: 'Boulangerie du Soleil: l\'adresse secrète des croissants' },
   ctaEyebrow: { en: 'Small groups · Max 8 people', fr: 'Petits groupes · Max 8 personnes' },
   ctaTitle: { en: 'Your <em>Paris story</em> starts here', fr: 'Votre <em>histoire parisienne</em> commence ici' },
-  ctaDesc: { en: 'Spots fill quickly in peak season. Book early to secure your preferred date — free cancellation up to 48 hours before.', fr: 'Les places partent vite en haute saison. Réservez tôt pour votre date préférée — annulation gratuite jusqu\'à 48h avant.' },
+  ctaDesc: { en: 'Spots fill quickly in peak season. Book early to secure your preferred date (free cancellation up to 48 hours before).', fr: 'Les places partent vite en haute saison. Réservez tôt pour votre date préférée (annulation gratuite jusqu\'à 48h avant).' },
   ctaPrimary: { en: 'Book a tour', fr: 'Réserver une visite' },
   ctaSecondary: { en: 'Contact us first', fr: 'Nous contacter d\'abord' },
   aboutEyebrow: { en: 'About Thomas', fr: 'À propos de Thomas' },
-  aboutBody: { en: '<p>I grew up in the 9th, eating Comté at the corner fromagerie and arguing about Burgundy vs Bordeaux with my father. After years working in hospitality and earning my WSET certification, I decided to turn that obsession into something people could share.</p><p>Every tour I lead is different — because every group is different. I adapt the narrative to what makes you curious. No scripts, no rushed stops, no tourist traps.</p>', fr: '<p>J\'ai grandi dans le 9e, à manger du Comté à la fromagerie du coin et à débattre de Bourgogne vs Bordeaux avec mon père. Après des années dans l\'hôtellerie et l\'obtention de ma certification WSET, j\'ai décidé de transformer cette obsession en quelque chose à partager.</p><p>Chaque visite que je guide est différente — parce que chaque groupe est différent. J\'adapte le récit à ce qui vous rend curieux. Pas de script, pas d\'étapes à la va-vite, pas de pièges à touristes.</p>' },
+  aboutBody: { en: '<p>I\'ve been living in Pigalle for many, many years. Wine and cheese were part of my life long before I could name what I was tasting, arguing about Burgundy versus Bordeaux with my father over Sunday dinners.</p><p>After years animating wine tastings for friends and corporate events, and carrying wine trips across Europe and the world, I turned that obsession into something people could share. Every tour I lead is different, because every group is different.</p>', fr: '<p>Je vis à Pigalle depuis de très nombreuses années. Le vin et le fromage faisaient partie de ma vie bien avant de pouvoir nommer ce que je goûtais, à débattre de Bourgogne versus Bordeaux avec mon père le dimanche.</p><p>Après des années à animer des dégustations pour des amis et des événements corporate, et à mener de nombreux voyages vinicoles à travers l\'Europe et le monde, j\'ai transformé cette obsession en quelque chose à partager.</p>' },
   newsletterTitle: { en: 'Local tips, seasonal tastings & early access', fr: 'Conseils locaux, dégustations saisonnières & accès prioritaire' },
   newsletterDesc: { en: 'Join 800+ food lovers who get our monthly guide to the best of Montmartre.', fr: 'Rejoignez 800+ amateurs de gastronomie qui reçoivent notre guide mensuel du meilleur de Montmartre.' },
   newsletterCta: { en: 'Subscribe', fr: 'S\'abonner' },
