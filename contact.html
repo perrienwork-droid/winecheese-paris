@@ -333,11 +333,32 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   var btn = document.getElementById('submitBtn');
   btn.textContent = '…';
   btn.disabled = true;
-  // Simulate async submit
-  setTimeout(function() {
-    document.getElementById('contactFormWrap').style.display = 'none';
-    document.getElementById('formSuccess').classList.add('visible');
-  }, 900);
+  var payload = {
+    firstName:     document.getElementById('firstName').value.trim(),
+    lastName:      document.getElementById('lastName').value.trim(),
+    email:         document.getElementById('email').value.trim(),
+    enquiryType:   document.getElementById('enquiryType').value,
+    groupSize:     document.getElementById('groupSize').value,
+    preferredDate: document.getElementById('preferredDate').value,
+    message:       document.getElementById('message').value.trim()
+  };
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.success) {
+      document.getElementById('contactFormWrap').style.display = 'none';
+      document.getElementById('formSuccess').classList.add('visible');
+    } else { throw new Error(); }
+  })
+  .catch(function() {
+    btn.textContent = 'Send message';
+    btn.disabled = false;
+    alert('Something went wrong. Email hello@winecheese.paris directly.');
+  });
 });
 </script>
 </body>
