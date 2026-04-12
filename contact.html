@@ -350,6 +350,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   .then(function(r) { return r.json(); })
   .then(function(data) {
     if (data.success) {
+      plausible('Contact Form');
       document.getElementById('contactFormWrap').style.display = 'none';
       document.getElementById('formSuccess').classList.add('visible');
     } else { throw new Error(); }
