@@ -4,7 +4,16 @@
       "Bash(gh auth:*)",
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "mcp__mcp-registry__list_connectors",
+      "mcp__mcp-registry__search_mcp_registry",
+      "Bash(git status *)",
+      "Bash(git check-ignore *)",
+      "Bash(echo \"exit code: $?\")",
+      "Bash(git rev-parse *)",
+      "Bash(git ls-tree *)",
+      "Bash(git ls-remote *)",
+      "Bash(rm .git/index.lock *)"
     ]
   }
 }
