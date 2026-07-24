@@ -27,7 +27,7 @@
 .credentials { background: var(--dark-wine); }
 .credentials .section-eyebrow { color: var(--gold); }
 .credentials .section-title { color: var(--cream); }
-.creds-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.creds-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; max-width: 760px; margin: 0 auto; }
 .cred-card { background: rgba(250,246,241,0.06); border: 1px solid rgba(250,246,241,0.1); border-radius: var(--radius-lg); padding: 32px 28px; transition: background var(--transition), transform var(--transition); }
 .cred-card:hover { background: rgba(250,246,241,0.1); transform: translateY(-3px); }
 .cred-icon { color: var(--gold); margin-bottom: 16px; }
@@ -85,11 +85,11 @@
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header class="site-header solid" role="banner" id="site-header">
-  <a href="index.html" class="logo" aria-label="Wine & Cheese Paris, Home"><span class="logo-main">Wine & Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span></a>
+  <a href="/" class="logo" aria-label="Wine & Cheese Paris, Home"><span class="logo-main">Wine & Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span></a>
   <nav class="main-nav" aria-label="Main navigation">
-    <a href="index.html#tours" class="nav-link">Our Tours</a>
+    <a href="/#tours" class="nav-link">Our Tours</a>
     <a href="about.html" class="nav-link active">About</a>
-    <a href="index.html#reviews" class="nav-link">Reviews</a>
+    <a href="/#reviews" class="nav-link">Reviews</a>
     <a href="contact.html" class="nav-link">Contact</a>
   </nav>
   <div class="nav-right">
@@ -139,7 +139,7 @@
 <!-- STATS -->
 <div class="stats-row" role="region" aria-label="Key facts about Thomas">
   <div class="stats-inner">
-    <div class="stat fade-in"><span class="stat-num">10+</span><p class="stat-label" data-en="Years living in Pigalle" data-fr="Ans à Pigalle">Years living in Pigalle</p></div>
+    <div class="stat fade-in"><span class="stat-num">3</span><p class="stat-label" data-en="Years living in Pigalle" data-fr="Ans à Pigalle">Years living in Pigalle</p></div>
     <div class="stat fade-in"><span class="stat-num">124</span><p class="stat-label" data-en="Verified 5-star reviews" data-fr="Avis 5 étoiles vérifiés">Verified 5-star reviews</p></div>
     <div class="stat fade-in"><span class="stat-num">12</span><p class="stat-label" data-en="Artisan partner producers" data-fr="Producteurs artisans partenaires">Artisan partner producers</p></div>
     <div class="stat fade-in"><span class="stat-num">4.9</span><p class="stat-label" data-en="Average rating (TripAdvisor)" data-fr="Note moyenne (TripAdvisor)">Average rating (TripAdvisor)</p></div>
@@ -162,15 +162,10 @@
         <p class="cred-desc" data-en="The Wine & Spirit Education Trust Level 3 is the international benchmark for wine expertise. It covers systematic tasting methodology, global wine regions, and grape-to-glass quality factors. Thomas is the only WSET-certified independent guide in Montmartre." data-fr="Le WSET Niveau 3 est la référence internationale en expertise du vin. Il couvre la méthodologie de dégustation systématique, les régions viticoles mondiales, et les facteurs de qualité. Thomas est le seul guide indépendant certifié WSET à Montmartre.">The Wine & Spirit Education Trust Level 3 is the international benchmark for wine expertise. It covers systematic tasting methodology, global regions, and quality factors. The only WSET-certified independent guide in Montmartre.</p>
       </div>
       <div class="cred-card fade-in">
-        <svg class="cred-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        <h3 class="cred-title" data-en="Professional Tour Operator, France" data-fr="Opérateur de visites professionnel, France">Professional Tour Operator, France</h3>
-        <p class="cred-desc" data-en="All tours comply with French tourism law. CERFA declaration filed, micro-enterprise registered with code APE 79.90.20. Your experience is legal, professional, and insured." data-fr="Toutes les visites respectent la législation du tourisme français. Déclaration CERFA déposée, micro-entreprise immatriculée avec le code APE 79.90.20. Votre expérience est légale, professionnelle et assurée.">All tours comply with French tourism law. CERFA declaration filed, micro-enterprise registered with code APE 79.90.20. Your experience is legal, professional, and insured.</p>
-      </div>
-      <div class="cred-card fade-in">
         <svg class="cred-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         <div style="margin:-32px -28px 18px;aspect-ratio:16/8;overflow:hidden;border-radius:var(--radius-lg) var(--radius-lg) 0 0;"><img src="images/rue-martyrs.jpg" alt="Busy Rue des Martyrs on a Saturday morning with Sacré-Cœur visible at the end of the street" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;"></div>
-        <h3 class="cred-title" data-en="10+ Years in Pigalle" data-fr="10+ Ans à Pigalle">10+ Years in Pigalle</h3>
-        <p class="cred-desc" data-en="I've been living in Pigalle for many years. Every shop by name, every opening hour by heart, every back alley tourists walk past. The tours I run aren't a script: they're the result of years of daily curiosity." data-fr="Je vis à Pigalle depuis de nombreuses années. Chaque boutique par son nom, chaque heure d'ouverture par cœur, chaque ruelle que les touristes ignorent. Les visites que je guide ne sont pas un script: elles sont le résultat d'années de curiosité quotidienne.">I've been living in Pigalle for many years. Every shop by name, every opening hour by heart, every back alley tourists walk past. The tours I run aren't a script: they're the result of years of daily curiosity.</p>
+        <h3 class="cred-title" data-en="3 Years in Pigalle" data-fr="3 Ans à Pigalle">3 Years in Pigalle</h3>
+        <p class="cred-desc" data-en="I've called Pigalle home for the past three years. Every shop by name, every opening hour by heart, every back alley tourists walk past. The tours I run aren't a script: they're the result of daily curiosity." data-fr="Je vis à Pigalle depuis trois ans. Chaque boutique par son nom, chaque heure d'ouverture par cœur, chaque ruelle que les touristes ignorent. Les visites que je guide ne sont pas un script: elles sont le résultat d'une curiosité quotidienne.">I've called Pigalle home for the past three years. Every shop by name, every opening hour by heart, every back alley tourists walk past. The tours I run aren't a script: they're the result of daily curiosity.</p>
       </div>
     </div>
   </div>
@@ -249,7 +244,6 @@
     <p class="about-cta-desc" data-en="Small groups, real producers, no scripts. Choose your experience below, or get in touch if you have questions about what's right for you." data-fr="Petits groupes, vrais producteurs, pas de scripts. Choisissez votre expérience ci-dessous, ou contactez-moi si vous avez des questions.">Small groups, real producers, no scripts. Choose your experience below, or get in touch if you have questions about what's right for you.</p>
     <div class="cta-buttons">
       <a href="wine-cheese-walk.html" class="btn-primary" style="display:inline-flex;align-items:center;justify-content:center;" data-en="Wine & Cheese Walk" data-fr="Balade Vin & Fromage">Wine & Cheese Walk</a>
-      <a href="food-tour.html" class="btn-cta-outline" style="display:inline-flex;align-items:center;justify-content:center;background:transparent;color:var(--cream);border:2px solid rgba(250,246,241,0.4);padding:0 32px;height:54px;border-radius:var(--radius-sm);font-family:var(--ff-body);font-size:15px;font-weight:600;min-height:var(--touch-min);transition:border-color var(--transition),background var(--transition);" data-en="Montmartre Food Tour" data-fr="Food Tour Montmartre">Montmartre Food Tour</a>
       <a href="contact.html" class="btn-cta-outline" style="display:inline-flex;align-items:center;justify-content:center;background:transparent;color:var(--gold);border:2px solid rgba(201,169,110,0.5);padding:0 32px;height:54px;border-radius:var(--radius-sm);font-family:var(--ff-body);font-size:15px;font-weight:600;min-height:var(--touch-min);transition:border-color var(--transition),background var(--transition);" data-en="Private Tasting" data-fr="Dégustation Privée">Private Tasting</a>
     </div>
   </div>
@@ -259,8 +253,8 @@
 <footer class="site-footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand"><a href="index.html" class="logo"><span class="logo-main">Wine &amp; Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span></a><p class="footer-tagline">Authentic wine &amp; food experiences in Paris's most beloved neighbourhood.</p><div class="footer-social"><a href="https://instagram.com" class="social-link" aria-label="Instagram" rel="noopener noreferrer"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div></div>
-      <div><p class="footer-col-title">Our Tours</p><ul class="footer-links"><li><a href="wine-cheese-walk.html">Wine &amp; Cheese Walk</a></li><li><a href="food-tour.html">Montmartre Food Tour</a></li><li><a href="contact.html">Private Tastings</a></li></ul></div>
+      <div class="footer-brand"><a href="/" class="logo"><span class="logo-main">Wine &amp; Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span></a><p class="footer-tagline">Authentic wine &amp; food experiences in Paris's most beloved neighbourhood.</p><div class="footer-social"><a href="https://instagram.com" class="social-link" aria-label="Instagram" rel="noopener noreferrer"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div></div>
+      <div><p class="footer-col-title">Our Tours</p><ul class="footer-links"><li><a href="wine-cheese-walk.html">Wine &amp; Cheese Walk</a></li><li><a href="contact.html">Private Tastings</a></li></ul></div>
       <div><p class="footer-col-title">Information</p><ul class="footer-links"><li><a href="about.html">About Thomas</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div><p class="footer-col-title">Contact</p><ul class="footer-links"><li><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></li></ul></div>
     </div>

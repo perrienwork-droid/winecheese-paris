@@ -210,6 +210,7 @@ a { color: inherit; text-decoration: none; }
 }
 .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
   background: var(--gold); color: var(--dark-wine);
   font-family: var(--ff-body); font-size: 15px; font-weight: 700;
   padding: 0 36px; height: 54px; border-radius: var(--radius-sm);
@@ -219,6 +220,7 @@ a { color: inherit; text-decoration: none; }
 }
 .btn-primary:hover { background: #b8924d; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,169,110,0.45); }
 .btn-outline {
+  display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
   background: transparent; color: var(--cream);
   font-family: var(--ff-body); font-size: 15px; font-weight: 600;
   padding: 0 32px; height: 54px; border-radius: var(--radius-sm);
@@ -337,10 +339,20 @@ a { color: inherit; text-decoration: none; }
 }
 .tour-meta-item svg { color: var(--gold-text); flex-shrink: 0; }
 .tour-price {
-  font-family: var(--ff-accent); font-size: 26px; font-weight: 600;
-  color: var(--wine); margin-left: auto;
+  display: flex; flex-direction: column; align-items: flex-end;
+  margin-left: auto;
 }
-.tour-price span { font-size: 14px; font-weight: 400; color: var(--stone); margin-left: 2px; }
+.price-from {
+  font-family: var(--ff-body); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--stone); line-height: 1.4;
+}
+.price-main { display: flex; align-items: baseline; gap: 4px; }
+.price-amount {
+  font-family: var(--ff-accent); font-size: 26px; font-weight: 600;
+  color: var(--wine); line-height: 1;
+}
+.price-per { font-size: 13px; font-weight: 400; color: var(--stone); }
 .btn-tour {
   display: block; width: 100%; text-align: center;
   background: transparent; color: var(--wine);
@@ -387,6 +399,7 @@ a { color: inherit; text-decoration: none; }
 .credential-icon { color: var(--gold-text); margin-top: 2px; flex-shrink: 0; }
 .expertise-cta { margin-top: 36px; }
 .btn-secondary {
+  display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
   background: var(--wine); color: var(--cream);
   font-family: var(--ff-body); font-size: 15px; font-weight: 600;
   padding: 0 36px; height: 52px; border-radius: var(--radius-sm);
@@ -497,6 +510,7 @@ a { color: inherit; text-decoration: none; }
 }
 .btn-cta-primary:hover { background: #b8924d; transform: translateY(-2px); }
 .btn-cta-outline {
+  display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
   background: transparent; color: var(--cream);
   font-family: var(--ff-body); font-size: 16px; font-weight: 600;
   padding: 0 36px; height: 56px; border-radius: var(--radius-sm);
@@ -623,9 +637,9 @@ a { color: inherit; text-decoration: none; }
   </a>
 
   <nav class="main-nav" aria-label="Main navigation">
-    <a href="index.html#tours" class="nav-link" data-en="Our Tours" data-fr="Nos Visites">Our Tours</a>
+    <a href="#tours" class="nav-link" data-en="Our Tours" data-fr="Nos Visites">Our Tours</a>
     <a href="about.html" class="nav-link" data-en="About" data-fr="À Propos">About</a>
-    <a href="index.html#reviews" class="nav-link" data-en="Reviews" data-fr="Avis">Reviews</a>
+    <a href="#reviews" class="nav-link" data-en="Reviews" data-fr="Avis">Reviews</a>
     <a href="contact.html" class="nav-link" data-en="Contact" data-fr="Contact">Contact</a>
   </nav>
 
@@ -650,8 +664,8 @@ a { color: inherit; text-decoration: none; }
     </h1>
     <p class="hero-sub" id="heroSub">Intimate wine &amp; cheese walks in the neighbourhood's finest caves, fromageries and hidden cellars, guided by a WSET-certified local.</p>
     <div class="hero-ctas">
-      <button class="btn-primary" id="heroCta1">Explore our tours</button>
-      <button class="btn-outline" id="heroCta2">How it works</button>
+      <a href="#tours" class="btn-primary" id="heroCta1">Explore our tours</a>
+      <a href="#expertise" class="btn-outline" id="heroCta2">How it works</a>
     </div>
   </div>
   <div class="hero-scroll" aria-hidden="true">
@@ -681,7 +695,7 @@ a { color: inherit; text-decoration: none; }
   </div>
   <div class="trust-item">
     <svg class="trust-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-    <span>Free cancellation <strong>24h</strong></span>
+    <span>Free cancellation <strong>48h</strong></span>
   </div>
 </div>
 
@@ -704,7 +718,7 @@ a { color: inherit; text-decoration: none; }
         </div>
         <div class="tour-card-body">
           <h3 class="tour-name" id="tourName1">Wine &amp; Cheese Walk</h3>
-          <p class="tour-desc" id="tourDesc1">One wine cave and one MOF-awarded fromagerie, plus stops at a boulanger, a pâtissier and a charcutier: five real Montmartre artisans in all. Walk the cobbled streets of SoPi while discovering five wine and cheese pairings, each one narrated with stories of the region and the terroir.</p>
+          <p class="tour-desc" id="tourDesc1">One wine cave and one MOF-awarded fromagerie, plus stops at a boulanger, a pâtissier and a charcutier: five real Pigalle & Montmartre artisans in all. Walk the cobbled streets of SoPi while discovering five wine and cheese pairings, each one narrated with stories of the region and the terroir. Hosted in English.</p>
           <div class="tour-meta">
             <div class="tour-meta-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -714,45 +728,21 @@ a { color: inherit; text-decoration: none; }
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
               <span id="tourGroup1">2–8 pers.</span>
             </div>
-            <div class="tour-price"><span id="tourPrice1">From €75</span> <span id="pricePer1">/ person</span></div>
+            <div class="tour-price"><span class="price-from" id="pricePrefix1">From</span><span class="price-main"><span class="price-amount" id="tourPriceAmount1">€75</span><span class="price-per" id="pricePer1">/ person</span></span></div>
           </div>
           <a href="wine-cheese-walk.html" class="btn-tour bokunButton" id="tourCta1" data-src="https://widgets.bokun.io/online-sales/d246541f-715c-40a7-9232-ebe31c9f5fab/experience/1194880">Reserve a spot</a>
         </div>
       </article>
 
-      <!-- Card 2: Food Tour -->
-      <article class="tour-card" aria-label="Montmartre Food Tour">
-        <div class="tour-card-image">
-          <img src="images/card-food.jpg" alt="Couple walking past a golden-lit artisan boulangerie on a cobbled Montmartre street" loading="lazy">
-          <span class="tour-tag" id="tag2">New</span>
-        </div>
-        <div class="tour-card-body">
-          <h3 class="tour-name" id="tourName2">Montmartre Food Tour</h3>
-          <p class="tour-desc" id="tourDesc2">Boulangerie, fromagerie, charcuterie: a morning walk through the Rue des Martyrs and Abbesses street, tasting the best of the neighbourhood's culinary scene with a local's eye.</p>
-          <div class="tour-meta">
-            <div class="tour-meta-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-              <span id="tourDur2">2h</span>
-            </div>
-            <div class="tour-meta-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-              <span id="tourGroup2">2–6 pers.</span>
-            </div>
-            <div class="tour-price"><span id="tourPrice2">From €65</span> <span id="pricePer2">/ person</span></div>
-          </div>
-          <a href="food-tour.html" class="btn-tour" id="tourCta2">Reserve a spot</a>
-        </div>
-      </article>
-
-      <!-- Card 3: Private Tasting -->
-      <article class="tour-card" aria-label="Private Rooftop Tasting">
+      <!-- Card 2: Private Tasting -->
+      <article class="tour-card" aria-label="Private Wine & Cheese Tasting">
         <div class="tour-card-image">
           <img src="images/card-rooftop.jpg" alt="Elegant group toasting with wine glasses on a Paris rooftop with the Eiffel Tower at sunset" loading="lazy">
           <span class="tour-tag" id="tag3">Private</span>
         </div>
         <div class="tour-card-body">
           <h3 class="tour-name" id="tourName3">Private Tasting</h3>
-          <p class="tour-desc" id="tourDesc3">An exclusive sunset tasting on a Montmartre rooftop, with a curated wine and cheese selection for your group. Perfect for celebrations, corporate events, or a memorable Parisian evening.</p>
+          <p class="tour-desc" id="tourDesc3">A fully private wine and cheese tasting in Montmartre, in an intimate wine cellar or on a rooftop with a view. Tailored to your occasion: celebrations, proposals, corporate events, or a memorable Parisian evening.</p>
           <div class="tour-meta">
             <div class="tour-meta-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -762,9 +752,9 @@ a { color: inherit; text-decoration: none; }
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
               <span id="tourGroup3">2–12 pers.</span>
             </div>
-            <div class="tour-price"><span id="tourPrice3">From €120</span> <span id="pricePer3">/ person</span></div>
+            <div class="tour-price"><span class="price-from" id="pricePrefix3">From</span><span class="price-main"><span class="price-amount" id="tourPriceAmount3">€120</span><span class="price-per" id="pricePer3">/ person</span></span></div>
           </div>
-          <a href="contact.html" class="btn-tour" id="tourCta3">Request a quote</a>
+          <a href="contact.html" class="btn-tour bokunButton" id="tourCta3" data-src="https://widgets.bokun.io/online-sales/d246541f-715c-40a7-9232-ebe31c9f5fab/experience/1257408">Request a quote</a>
         </div>
       </article>
     </div>
@@ -794,11 +784,7 @@ a { color: inherit; text-decoration: none; }
           </li>
           <li class="credential-item">
             <svg class="credential-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            <span id="cred2">Registered Tour Operator, France (APE 79.90.20)</span>
-          </li>
-          <li class="credential-item">
-            <svg class="credential-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            <span id="cred3">10 years living & eating in Montmartre</span>
+            <span id="cred3">Real Parisian, deep roots in Montmartre</span>
           </li>
           <li class="credential-item">
             <svg class="credential-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -806,7 +792,7 @@ a { color: inherit; text-decoration: none; }
           </li>
         </ul>
         <div class="expertise-cta">
-          <button class="btn-secondary" id="expertiseCta">Meet your guide</button>
+          <a href="about.html" class="btn-secondary" id="expertiseCta">Meet your guide</a>
         </div>
       </div>
     </div>
@@ -926,10 +912,10 @@ a { color: inherit; text-decoration: none; }
   <div class="cta-inner">
     <p class="cta-eyebrow" id="ctaEyebrow">Small groups · Max 8 people</p>
     <h2 class="cta-title" id="ctaTitle">Your <em>Paris story</em> starts here</h2>
-    <p class="cta-desc" id="ctaDesc">Spots fill quickly in peak season. Book early to secure your preferred date (free cancellation up to 24 hours before).</p>
+    <p class="cta-desc" id="ctaDesc">Spots fill quickly in peak season. Book early to secure your preferred date (free cancellation up to 48 hours before).</p>
     <div class="cta-buttons">
       <button class="btn-cta-primary bokunButton" id="ctaPrimary" data-src="https://widgets.bokun.io/online-sales/d246541f-715c-40a7-9232-ebe31c9f5fab/experience/1194880">Book a tour</button>
-      <button class="btn-cta-outline" id="ctaSecondary">Contact us first</button>
+      <a href="contact.html" class="btn-cta-outline" id="ctaSecondary">Get in Touch</a>
     </div>
   </div>
 </section>
@@ -996,9 +982,8 @@ a { color: inherit; text-decoration: none; }
       <div>
         <p class="footer-col-title" id="footColTours">Our Tours</p>
         <ul class="footer-links">
-          <li><a href="#" id="footLink1">Wine &amp; Cheese Walk</a></li>
-          <li><a href="#" id="footLink2">Montmartre Food Tour</a></li>
-          <li><a href="#" id="footLink3">Private Tastings</a></li>
+          <li><a href="wine-cheese-walk.html" id="footLink1">Wine &amp; Cheese Walk</a></li>
+          <li><a href="contact.html" id="footLink3">Private Tastings</a></li>
           <li><a href="#" id="footLink4">Gift Vouchers</a></li>
         </ul>
       </div>
@@ -1063,33 +1048,26 @@ const translations = {
   toursDesc: { en: 'From a strolling cave-to-cave walk to private sunset tastings: each tour is designed for curious food lovers, not passive tourists.', fr: 'De la promenade de cave en cave à la dégustation privée au coucher de soleil: chaque visite est conçue pour les curieux du goût, pas les touristes passifs.' },
   tag1: { en: 'Bestseller', fr: 'Coup de cœur' },
   tourName1: { en: 'Wine & Cheese Walk', fr: 'Balade Vin & Fromage' },
-  tourDesc1: { en: 'One wine cave and one MOF-awarded fromagerie, plus stops at a boulanger, a pâtissier and a charcutier: five real Montmartre artisans in all. Walk the cobbled streets of SoPi while discovering five wine and cheese pairings, each one narrated with stories of the region and the terroir.', fr: 'Une cave à vin et une fromagerie MOF, avec des arrêts chez un boulanger, un pâtissier et un charcutier : cinq vrais artisans de Montmartre au total. Découvrez cinq accords vin et fromage en parcourant les pavés de SoPi, chaque accord raconté avec les histoires du terroir.' },
+  tourDesc1: { en: 'One wine cave and one MOF-awarded fromagerie, plus stops at a boulanger, a pâtissier and a charcutier: five real Pigalle & Montmartre artisans in all. Walk the cobbled streets of SoPi while discovering five wine and cheese pairings, each one narrated with stories of the region and the terroir.', fr: 'Une cave à vin et une fromagerie MOF, avec des arrêts chez un boulanger, un pâtissier et un charcutier : cinq vrais artisans de Pigalle & Montmartre au total. Découvrez cinq accords vin et fromage en parcourant les pavés de SoPi, chaque accord raconté avec les histoires du terroir. Visite en anglais.' },
   tourDur1: { en: '2h30', fr: '2h30' },
   tourGroup1: { en: '2–8 pers.', fr: '2–8 pers.' },
-  tourPrice1: { en: 'From €75', fr: 'À partir de 75 €' },
+  pricePrefix1: { en: 'From', fr: 'À partir de' },
+  tourPriceAmount1: { en: '€75', fr: '75 €' },
   pricePer1: { en: '/ person', fr: '/ pers.' },
   tourCta1: { en: 'Reserve a spot', fr: 'Réserver une place' },
-  tag2: { en: 'New', fr: 'Nouveau' },
-  tourName2: { en: 'Montmartre Food Tour', fr: 'Food Tour Montmartre' },
-  tourDesc2: { en: 'Boulangerie, fromagerie, charcuterie: a morning walk through the Rue des Martyrs and Abbesses street, tasting the best of the neighbourhood\'s culinary scene with a local\'s eye.', fr: 'Boulangerie, fromagerie, charcuterie: une matinée Rue des Martyrs et dans la rue des Abbesses, pour goûter le meilleur du quartier avec un regard de local.' },
-  tourDur2: { en: '2h', fr: '2h' },
-  tourGroup2: { en: '2–6 pers.', fr: '2–6 pers.' },
-  tourPrice2: { en: 'From €65', fr: 'À partir de 65 €' },
-  pricePer2: { en: '/ person', fr: '/ pers.' },
-  tourCta2: { en: 'Reserve a spot', fr: 'Réserver une place' },
   tag3: { en: 'Private', fr: 'Privé' },
   tourName3: { en: 'Private Tasting', fr: 'Dégustation Privée' },
-  tourDesc3: { en: 'An exclusive sunset tasting on a Montmartre rooftop, with a curated wine and cheese selection for your group. Perfect for celebrations, corporate events, or a memorable Parisian evening.', fr: 'Une dégustation exclusive sur un rooftop de Montmartre, avec une sélection de vins et fromages pour votre groupe. Parfait pour fêter une occasion ou une soirée parisienne mémorable.' },
+  tourDesc3: { en: 'A fully private wine and cheese tasting in Montmartre, in an intimate wine cellar or on a rooftop with a view. Tailored to your occasion: celebrations, proposals, corporate events, or a memorable Parisian evening.', fr: 'Une dégustation vin et fromage entièrement privée à Montmartre, dans une cave intimiste ou sur un rooftop avec vue. Sur mesure selon votre occasion : célébrations, demandes en mariage, événements corporate, ou une soirée parisienne mémorable.' },
   tourDur3: { en: '2h', fr: '2h' },
   tourGroup3: { en: '2–12 pers.', fr: '2–12 pers.' },
-  tourPrice3: { en: 'From €120', fr: 'À partir de 120 €' },
+  pricePrefix3: { en: 'From', fr: 'À partir de' },
+  tourPriceAmount3: { en: '€120', fr: '120 €' },
   pricePer3: { en: '/ person', fr: '/ pers.' },
   tourCta3: { en: 'Request a quote', fr: 'Demander un devis' },
   expertiseEyebrow: { en: 'Your guide', fr: 'Votre guide' },
   expertiseBody: { en: 'I\'m Thomas, a Real Parisian, WSET Certified, and fanatically curious about the artisans who keep neighbourhood food culture alive. I designed these tours after years of animating wine tastings for friends and corporate events, and carrying wine trips across Europe and the world.', fr: 'Je suis Thomas, un vrai Parisien, certifié WSET, et passionné par les artisans qui font vivre la culture culinaire de quartier. J\'ai conçu ces visites après des années à animer des dégustations pour des amis et des événements corporate.' },
   cred1: { en: 'WSET Certified', fr: 'WSET Certifié' },
-  cred2: { en: 'Registered Tour Operator, France (APE 79.90.20)', fr: 'Opérateur de visites enregistré, France (APE 79.90.20)' },
-  cred3: { en: '10 years living & eating in Montmartre', fr: '10 ans à vivre et manger à Montmartre' },
+  cred3: { en: 'Real Parisian, deep roots in Montmartre', fr: 'Parisien authentique, profondément ancré à Montmartre' },
   cred4: { en: 'Partnerships with 12 artisan producers', fr: 'Partenariats avec 12 producteurs artisans' },
   expertiseCta: { en: 'Meet your guide', fr: 'Rencontrer le guide' },
   reviewsEyebrow: { en: 'Guest stories', fr: 'Témoignages' },
@@ -1103,9 +1081,9 @@ const translations = {
   stop5: { en: 'Le Pain Retrouvé: the unmarked bakery everyone still finds', fr: 'Le Pain Retrouvé: la boulangerie sans enseigne que tout le monde trouve' },
   ctaEyebrow: { en: 'Small groups · Max 8 people', fr: 'Petits groupes · Max 8 personnes' },
   ctaTitle: { en: 'Your <em>Paris story</em> starts here', fr: 'Votre <em>histoire parisienne</em> commence ici' },
-  ctaDesc: { en: 'Spots fill quickly in peak season. Book early to secure your preferred date (free cancellation up to 24 hours before).', fr: 'Les places partent vite en haute saison. Réservez tôt pour votre date préférée (annulation gratuite jusqu\'à 24h avant).' },
+  ctaDesc: { en: 'Spots fill quickly in peak season. Book early to secure your preferred date (free cancellation up to 48 hours before).', fr: 'Les places partent vite en haute saison. Réservez tôt pour votre date préférée (annulation gratuite jusqu\'à 48h avant).' },
   ctaPrimary: { en: 'Book a tour', fr: 'Réserver une visite' },
-  ctaSecondary: { en: 'Contact us first', fr: 'Nous contacter d\'abord' },
+  ctaSecondary: { en: 'Get in Touch', fr: 'Nous contacter' },
   aboutEyebrow: { en: 'About Thomas', fr: 'À propos de Thomas' },
   aboutBody: { en: '<p>I\'ve been living in Pigalle for many years. Wine and cheese were part of my life long before I could name what I was tasting, arguing about Burgundy versus Bordeaux with my father over Sunday dinners.</p><p>After years animating wine tastings for friends and corporate events, and carrying wine trips across Europe and the world, I turned that obsession into something people could share. Every tour I lead is different, because every group is different.</p>', fr: '<p>Je vis à Pigalle depuis de nombreuses années. Le vin et le fromage faisaient partie de ma vie bien avant de pouvoir nommer ce que je goûtais, à débattre de Bourgogne versus Bordeaux avec mon père le dimanche.</p><p>Après des années à animer des dégustations pour des amis et des événements corporate, et à mener de nombreux voyages vinicoles à travers l\'Europe et le monde, j\'ai transformé cette obsession en quelque chose à partager.</p>' },
   newsletterTitle: { en: 'Local tips, seasonal tastings & early access', fr: 'Conseils locaux, dégustations saisonnières & accès prioritaire' },
@@ -1114,7 +1092,6 @@ const translations = {
   footerTagline: { en: 'Authentic wine & food experiences in Paris\'s most beloved neighbourhood. Small groups. Big flavours.', fr: 'Expériences authentiques vin & gastronomie dans le quartier le plus aimé de Paris. Petits groupes. Grandes saveurs.' },
   footColTours: { en: 'Our Tours', fr: 'Nos Visites' },
   footLink1: { en: 'Wine & Cheese Walk', fr: 'Balade Vin & Fromage' },
-  footLink2: { en: 'Montmartre Food Tour', fr: 'Food Tour Montmartre' },
   footLink3: { en: 'Private Tastings', fr: 'Dégustations Privées' },
   footLink4: { en: 'Gift Vouchers', fr: 'Chèques Cadeaux' },
   footColInfo: { en: 'Information', fr: 'Informations' },
