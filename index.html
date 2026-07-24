@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wine & Cheese Paris, Montmartre Food & Wine Tours</title>
 <meta name="description" content="Authentic wine & cheese experiences in Montmartre. Small-group tours, food walks, and private tastings led by a WSET-certified guide. Book your Paris food tour.">
@@ -293,8 +298,10 @@ a { color: inherit; text-decoration: none; }
 .tours { background: var(--cream); }
 .tours-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 28px;
+  max-width: 780px;
+  margin: 0 auto;
 }
 .tour-card {
   background: var(--white);
@@ -602,15 +609,12 @@ a { color: inherit; text-decoration: none; }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .tours-grid { grid-template-columns: repeat(2, 1fr); }
-  .tour-card:last-child { grid-column: 1 / -1; max-width: 520px; margin: 0 auto; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
 @media (max-width: 768px) {
   .main-nav { display: none; }
   .nav-hamburger { display: flex; }
-  .tours-grid { grid-template-columns: 1fr; }
-  .tour-card:last-child { grid-column: auto; max-width: none; }
+  .tours-grid { grid-template-columns: 1fr; max-width: 420px; }
   .expertise-grid, .neighbourhood-grid, .about-grid { grid-template-columns: 1fr; }
   .about-grid { grid-template-columns: 1fr; }
   .about-portrait { max-width: 340px; margin: 0 auto; }
