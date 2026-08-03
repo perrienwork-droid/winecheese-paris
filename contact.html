@@ -90,6 +90,7 @@
 window.plausible = window.plausible || function() {
   (window.plausible.q = window.plausible.q || []).push(arguments) }
 </script>
+<script defer src="analytics.js"></script>
 <script defer data-domain="winecheese.paris" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
@@ -353,22 +354,97 @@ document.querySelectorAll('.faq-question').forEach(function(btn) {
   });
 });
 
+// Tracking : jamais d'exception, jamais bloquant. analytics.js est charge en
+// defer dans le head, donc peut ne pas encore exister quand ce script (non
+// differe, en bas de page) s'execute ; safeTrack() tolere son absence, y
+// compris si un bloqueur de pub retire analytics.js ou plausible.js.
+function safeTrack(name, props, opts) {
+  try {
+    if (window.WCAnalytics && typeof window.WCAnalytics.track === 'function') {
+      window.WCAnalytics.track(name, props, opts);
+    }
+  } catch (e) {}
+}
+
+// Entonnoir de la demande (Enquiry: ...)
+(function () {
+  var form = document.getElementById('contactForm');
+  var started = false;
+  var submitted = false;
+  var lastField = null;
+
+  if ('IntersectionObserver' in window) {
+    var viewObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          safeTrack('Enquiry: Form Viewed', null, { once: true });
+          viewObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    viewObserver.observe(form);
+  }
+
+  form.addEventListener('focusin', function (e) {
+    if (!e.target || !e.target.id) return;
+    lastField = e.target.id;
+    if (!started) {
+      started = true;
+      safeTrack('Enquiry: Form Started', null, { once: true });
+    }
+  });
+
+  document.getElementById('enquiryType').addEventListener('change', function () {
+    if (this.value) safeTrack('Enquiry: Type Selected', { type: this.value });
+  });
+
+  document.getElementById('groupSize').addEventListener('change', function () {
+    safeTrack('Enquiry: Group Size Selected', { size: this.value || '1-2' });
+  });
+
+  // Abandon : survit au dechargement de la page (pagehide couvre aussi le
+  // bfcache), perte partielle acceptee plutot que de bloquer la navigation.
+  function maybeTrackAbandon() {
+    if (started && !submitted) {
+      safeTrack('Enquiry: Abandoned', { lastField: lastField || 'unknown' }, { once: true });
+    }
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') maybeTrackAbandon();
+  });
+  window.addEventListener('pagehide', maybeTrackAbandon);
+
+  form.addEventListener('submit', function () { submitted = true; });
+})();
+
 // Form
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
   var btn = document.getElementById('submitBtn');
   btn.textContent = '…';
   btn.disabled = true;
+
+  var enquiryType = document.getElementById('enquiryType').value;
+  var groupSize = document.getElementById('groupSize').value || '1-2';
+
+  safeTrack('Enquiry: Submit Attempted');
+
   var payload = {
     firstName:     document.getElementById('firstName').value.trim(),
     lastName:      document.getElementById('lastName').value.trim(),
     email:         document.getElementById('email').value.trim(),
     phone:         document.getElementById('phone').value.trim(),
-    enquiryType:   document.getElementById('enquiryType').value,
-    groupSize:     document.getElementById('groupSize').value,
+    enquiryType:   enquiryType,
+    groupSize:     groupSize,
     preferredDate: document.getElementById('preferredDate').value,
     message:       document.getElementById('message').value.trim()
   };
+
+  function resetSubmitButton() {
+    btn.textContent = 'Send message';
+    btn.disabled = false;
+  }
+
   fetch('/api/contact', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -376,22 +452,21 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   })
   .then(function(r) { return r.json(); })
   .then(function(data) {
+    // Le succes s'affiche des que le serveur confirme, independamment du
+    // tracking : un echec de plausible() ici ne doit jamais empecher ce bloc.
     if (data && data.success) {
-      // Le succes s'affiche des que le serveur confirme, independamment du
-      // tracking : un echec ou une absence de plausible() ne doit jamais
-      // empecher ce bloc ni relancer l'alerte d'erreur.
       document.getElementById('contactFormWrap').style.display = 'none';
       document.getElementById('formSuccess').classList.add('visible');
-      try { if (typeof window.plausible === 'function') window.plausible('Contact Form'); } catch (err) {}
+      safeTrack('Enquiry: Submitted', { type: enquiryType, size: groupSize });
     } else {
-      btn.textContent = 'Send message';
-      btn.disabled = false;
+      resetSubmitButton();
+      safeTrack('Enquiry: Failed', { reason: (data && data.error === 'validation') ? 'validation' : 'server' });
       alert('Something went wrong. Email hello@winecheese.paris directly.');
     }
   })
   .catch(function() {
-    btn.textContent = 'Send message';
-    btn.disabled = false;
+    resetSubmitButton();
+    safeTrack('Enquiry: Failed', { reason: 'network' });
     alert('Something went wrong. Email hello@winecheese.paris directly.');
   });
 });
