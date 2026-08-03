@@ -86,6 +86,10 @@
 @media (max-width: 960px) { .contact-layout { grid-template-columns: 1fr; } .form-card { position: static; } }
 @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } .form-card { padding: 28px 20px; } }
 </style>
+<script>
+window.plausible = window.plausible || function() {
+  (window.plausible.q = window.plausible.q || []).push(arguments) }
+</script>
 <script defer data-domain="winecheese.paris" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
@@ -258,7 +262,7 @@
                 <div class="form-group">
                   <label class="form-label" for="groupSize" data-en="Group size" data-fr="Taille du groupe">Group size</label>
                   <select id="groupSize" name="groupSize" class="form-select">
-                    <option value="">1–2</option>
+                    <option value="1-2">1–2</option>
                     <option value="3-4">3–4</option>
                     <option value="5-8">5–8</option>
                     <option value="9-12">9–12</option>
@@ -372,11 +376,18 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   })
   .then(function(r) { return r.json(); })
   .then(function(data) {
-    if (data.success) {
-      plausible('Contact Form');
+    if (data && data.success) {
+      // Le succes s'affiche des que le serveur confirme, independamment du
+      // tracking : un echec ou une absence de plausible() ne doit jamais
+      // empecher ce bloc ni relancer l'alerte d'erreur.
       document.getElementById('contactFormWrap').style.display = 'none';
       document.getElementById('formSuccess').classList.add('visible');
-    } else { throw new Error(); }
+      try { if (typeof window.plausible === 'function') window.plausible('Contact Form'); } catch (err) {}
+    } else {
+      btn.textContent = 'Send message';
+      btn.disabled = false;
+      alert('Something went wrong. Email hello@winecheese.paris directly.');
+    }
   })
   .catch(function() {
     btn.textContent = 'Send message';
