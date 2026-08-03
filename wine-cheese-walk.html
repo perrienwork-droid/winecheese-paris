@@ -148,7 +148,7 @@
   </nav>
   <div class="nav-right">
     <button class="lang-toggle" id="langToggle" aria-label="Switch to French">FR</button>
-    <button class="btn-book-nav bokunButton" data-src="https://widgets.bokun.io/online-sales/d246541f-715c-40a7-9232-ebe31c9f5fab/experience/1194880">Book Now</button>
+    <button class="btn-book-nav" data-book="walk">Book Now</button>
     <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -414,8 +414,8 @@
             <li><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-en="WSET-guided pairings masterclass" data-fr="Masterclass accords WSET">WSET-guided pairings masterclass</span></li>
           </ul>
 
-          <button class="btn-book-full bokunButton" data-src="https://widgets.bokun.io/online-sales/d246541f-715c-40a7-9232-ebe31c9f5fab/experience/1194880" data-en="Reserve your spot" data-fr="Réserver ma place">Reserve your spot</button>
-          <p class="booking-note" data-en="Secure checkout via Bókun · No fees" data-fr="Paiement sécurisé · Sans frais">Secure checkout via Bókun · No fees</p>
+          <button class="btn-book-full" data-book="walk" data-en="Reserve your spot" data-fr="Réserver ma place">Reserve your spot</button>
+          <p class="booking-note" data-en="Secure checkout · No fees" data-fr="Paiement sécurisé · Sans frais">Secure checkout · No fees</p>
 
           <div style="border-radius:var(--radius-md);overflow:hidden;aspect-ratio:16/7;margin-bottom:16px;"><img src="images/wine-glass-wset.jpg" alt="Expert hands holding a red wine glass up to the light in a wine cellar" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;"></div>
           <div class="booking-badge">
@@ -437,7 +437,7 @@
       <div class="divider"></div>
     </header>
     <div class="related-grid">
-      <a href="contact.html" class="related-card fade-in bokunButton" data-src="https://widgets.bokun.io/online-sales/d246541f-715c-40a7-9232-ebe31c9f5fab/experience/1257408">
+      <a href="contact.html" class="related-card fade-in" data-book="private">
         <div class="related-img"><img src="images/card-rooftop.jpg" alt="Private wine and cheese tasting in Paris" loading="lazy"></div>
         <div class="related-body">
           <h3 class="related-name" data-en="Private Wine &amp; Cheese Tasting" data-fr="Dégustation Privée Vin &amp; Fromage">Private Wine &amp; Cheese Tasting</h3>
@@ -492,7 +492,7 @@ document.querySelectorAll('.faq-question').forEach(function(btn) {
   });
 });
 </script>
-<!-- Bokun booking widget loader -->
-<script type="text/javascript" src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=d246541f-715c-40a7-9232-ebe31c9f5fab" async></script>
+<script src="booking.js"></script>
+<script src="https://widget.ticketinghub.com/embedding/latest.js"></script>
 </body>
 </html>

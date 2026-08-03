@@ -101,7 +101,7 @@
   </nav>
   <div class="nav-right">
     <button class="lang-toggle" id="langToggle" aria-label="Switch to French">FR</button>
-    <button class="btn-book-nav">Book Now</button>
+    <button class="btn-book-nav" data-book="walk" data-en="Book Now" data-fr="Réserver">Book Now</button>
     <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -337,6 +337,8 @@
 </footer>
 
 <script src="nav.js"></script>
+<script src="booking.js"></script>
+<script src="https://widget.ticketinghub.com/embedding/latest.js"></script>
 <script>
 // FAQ
 document.querySelectorAll('.faq-question').forEach(function(btn) {

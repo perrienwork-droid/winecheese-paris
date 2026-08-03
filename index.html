@@ -649,7 +649,7 @@ a { color: inherit; text-decoration: none; }
 
   <div class="nav-right">
     <button class="lang-toggle" id="langToggle" aria-label="Switch language to French">FR</button>
-    <button class="btn-book-nav bokunButton" data-src="https://widgets.bokun.io/online-sales/d246541f-715c-40a7-9232-ebe31c9f5fab/experience/1194880" data-en="Book Now" data-fr="Réserver">Book Now</button>
+    <button class="btn-book-nav" data-book="walk" data-en="Book Now" data-fr="Réserver">Book Now</button>
     <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -734,7 +734,7 @@ a { color: inherit; text-decoration: none; }
             </div>
             <div class="tour-price"><span class="price-from" id="pricePrefix1">From</span><span class="price-main"><span class="price-amount" id="tourPriceAmount1">€75</span><span class="price-per" id="pricePer1">/ person</span></span></div>
           </div>
-          <a href="wine-cheese-walk.html" class="btn-tour bokunButton" id="tourCta1" data-src="https://widgets.bokun.io/online-sales/d246541f-715c-40a7-9232-ebe31c9f5fab/experience/1194880">Reserve a spot</a>
+          <a href="wine-cheese-walk.html" class="btn-tour" id="tourCta1" data-book="walk">Reserve a spot</a>
         </div>
       </article>
 
@@ -758,7 +758,7 @@ a { color: inherit; text-decoration: none; }
             </div>
             <div class="tour-price"><span class="price-from" id="pricePrefix3">From</span><span class="price-main"><span class="price-amount" id="tourPriceAmount3">€120</span><span class="price-per" id="pricePer3">/ person</span></span></div>
           </div>
-          <a href="contact.html" class="btn-tour bokunButton" id="tourCta3" data-src="https://widgets.bokun.io/online-sales/d246541f-715c-40a7-9232-ebe31c9f5fab/experience/1257408">Request a quote</a>
+          <a href="contact.html" class="btn-tour" id="tourCta3" data-book="private">Request a quote</a>
         </div>
       </article>
     </div>
@@ -918,7 +918,7 @@ a { color: inherit; text-decoration: none; }
     <h2 class="cta-title" id="ctaTitle">Your <em>Paris story</em> starts here</h2>
     <p class="cta-desc" id="ctaDesc">Spots fill quickly in peak season. Book early to secure your preferred date (free cancellation up to 48 hours before).</p>
     <div class="cta-buttons">
-      <button class="btn-cta-primary bokunButton" id="ctaPrimary" data-src="https://widgets.bokun.io/online-sales/d246541f-715c-40a7-9232-ebe31c9f5fab/experience/1194880">Book a tour</button>
+      <button class="btn-cta-primary" id="ctaPrimary" data-book="walk">Book a tour</button>
       <a href="contact.html" class="btn-cta-outline" id="ctaSecondary">Get in Touch</a>
     </div>
   </div>
@@ -1153,7 +1153,7 @@ document.querySelectorAll('.tour-card, .review-card, .expertise-grid, .neighbour
   observer.observe(el);
 });
 </script>
-<!-- Bokun booking widget loader -->
-<script type="text/javascript" src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=d246541f-715c-40a7-9232-ebe31c9f5fab" async></script>
+<script src="booking.js"></script>
+<script src="https://widget.ticketinghub.com/embedding/latest.js"></script>
 </body>
 </html>
