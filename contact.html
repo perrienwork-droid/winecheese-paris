@@ -76,6 +76,13 @@
 .faq-answer.open { max-height: 300px; }
 .faq-answer-inner { padding: 0 22px 18px; font-size: 15px; line-height: 1.7; color: var(--slate); }
 
+/* Field validation */
+.form-input.has-error, .form-select.has-error, .form-textarea.has-error { border-color: var(--wine); box-shadow: 0 0 0 3px rgba(114,47,55,0.08); }
+.field-error { display: none; font-size: 12px; color: var(--wine); margin-top: 6px; line-height: 1.4; }
+.field-error.visible { display: block; }
+.form-error-banner { display: none; background: var(--light-gold); border: 1px solid rgba(114,47,55,0.18); border-radius: var(--radius-sm); padding: 14px 16px; font-size: 14px; color: var(--dark-wine); margin-bottom: 18px; line-height: 1.5; }
+.form-error-banner.visible { display: block; }
+
 /* Success message */
 .form-success { display: none; text-align: center; padding: 32px 0; }
 .form-success.visible { display: block; }
@@ -86,12 +93,12 @@
 @media (max-width: 960px) { .contact-layout { grid-template-columns: 1fr; } .form-card { position: static; } }
 @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } .form-card { padding: 28px 20px; } }
 </style>
+<script async src="https://analytics.winecheese.paris/js/pa-krMVZUVywC4sob83U_ji3.js"></script>
 <script>
-window.plausible = window.plausible || function() {
-  (window.plausible.q = window.plausible.q || []).push(arguments) }
+window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+plausible.init()
 </script>
 <script defer src="analytics.js"></script>
-<script defer data-domain="winecheese.paris" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -224,26 +231,32 @@ window.plausible = window.plausible || function() {
             <h2 class="form-title" data-en="Send a message" data-fr="Envoyer un message">Send a message</h2>
             <p class="form-subtitle" data-en="For private bookings, group enquiries, or any questions, fill in this form and Thomas will get back to you within 24 hours." data-fr="Pour les réservations privées, les demandes de groupe, ou toute question, remplissez ce formulaire et Thomas vous répondra dans les 24 heures.">For private bookings, group enquiries, or any questions: fill in this form and Thomas will get back to you within 24 hours.</p>
 
+            <div class="form-error-banner" id="formErrorBanner" role="alert" data-en="Something went wrong. Email hello@winecheese.paris directly." data-fr="Un problème est survenu. Écrivez directement à hello@winecheese.paris.">Something went wrong. Email hello@winecheese.paris directly.</div>
+
             <form id="contactForm" novalidate aria-label="Contact form">
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="firstName">First name <span class="required" aria-hidden="true">*</span></label>
                   <input type="text" id="firstName" name="firstName" class="form-input" autocomplete="given-name" required aria-required="true">
+                  <p class="field-error" id="firstNameError" data-en="Please enter your first name." data-fr="Merci d'indiquer votre prénom.">Please enter your first name.</p>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="lastName">Last name <span class="required" aria-hidden="true">*</span></label>
                   <input type="text" id="lastName" name="lastName" class="form-input" autocomplete="family-name" required aria-required="true">
+                  <p class="field-error" id="lastNameError" data-en="Please enter your last name." data-fr="Merci d'indiquer votre nom.">Please enter your last name.</p>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="email">Email <span class="required" aria-hidden="true">*</span></label>
                 <input type="email" id="email" name="email" class="form-input" autocomplete="email" required aria-required="true">
+                <p class="field-error" id="emailError" data-en="Please enter a valid email address." data-fr="Merci d'indiquer une adresse email valide.">Please enter a valid email address.</p>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="phone" data-en="Phone (with country code)" data-fr="Téléphone (avec indicatif pays)">Phone (with country code)</label>
                 <input type="tel" id="phone" name="phone" class="form-input" autocomplete="tel" placeholder="+33 6 12 34 56 78" pattern="^\+[0-9 ]{6,20}$">
+                <p class="field-error" id="phoneError" data-en="Phone number must start with + and include the country code." data-fr="Le numéro de téléphone doit commencer par + et inclure l'indicatif du pays.">Phone number must start with + and include the country code.</p>
               </div>
 
               <div class="form-group">
@@ -257,6 +270,7 @@ window.plausible = window.plausible || function() {
                   <option value="public-tour" data-en="Question about a public tour" data-fr="Question sur une visite publique">Question about a public tour</option>
                   <option value="other" data-en="Other" data-fr="Autre">Other</option>
                 </select>
+                <p class="field-error" id="enquiryTypeError" data-en="Please select a type of enquiry." data-fr="Merci de sélectionner un type de demande.">Please select a type of enquiry.</p>
               </div>
 
               <div class="form-row">
@@ -279,6 +293,7 @@ window.plausible = window.plausible || function() {
               <div class="form-group">
                 <label class="form-label" for="message" data-en="Your message" data-fr="Votre message">Your message <span class="required" aria-hidden="true">*</span></label>
                 <textarea id="message" name="message" class="form-textarea" required aria-required="true" placeholder="Tell Thomas about the occasion, any dietary requirements, or what you're looking for…"></textarea>
+                <p class="field-error" id="messageError" data-en="Please tell us about your enquiry." data-fr="Merci de nous parler de votre demande.">Please tell us about your enquiry.</p>
               </div>
 
               <button type="submit" class="btn-submit" id="submitBtn" data-en="Send message" data-fr="Envoyer le message">Send message</button>
@@ -414,12 +429,83 @@ function safeTrack(name, props, opts) {
   });
   window.addEventListener('pagehide', maybeTrackAbandon);
 
-  form.addEventListener('submit', function () { submitted = true; });
+  // Ne marque "submitted" que lorsque la validation a laisse passer l'envoi
+  // (evenement custom declenche juste avant le fetch), pas sur chaque clic
+  // "Send message" : sinon une tentative bloquee par la validation masquerait
+  // un abandon reel qui suit.
+  form.addEventListener('wc:submitted', function () { submitted = true; });
 })();
+
+// Validation
+var REQUIRED_FIELD_ORDER = ['firstName', 'lastName', 'email', 'phone', 'enquiryType', 'message'];
+
+function isValidEmail(v) {
+  var at = v.indexOf('@');
+  if (at < 1) return false;
+  var dot = v.indexOf('.', at + 1);
+  return dot > at + 1 && dot < v.length - 1;
+}
+
+function clearFieldError(id) {
+  var input = document.getElementById(id);
+  var error = document.getElementById(id + 'Error');
+  if (input) {
+    input.classList.remove('has-error');
+    input.removeAttribute('aria-invalid');
+    input.removeAttribute('aria-describedby');
+  }
+  if (error) error.classList.remove('visible');
+}
+
+function showFieldError(id) {
+  var input = document.getElementById(id);
+  var error = document.getElementById(id + 'Error');
+  if (input) {
+    input.classList.add('has-error');
+    input.setAttribute('aria-invalid', 'true');
+    input.setAttribute('aria-describedby', id + 'Error');
+    input.focus();
+  }
+  if (error) error.classList.add('visible');
+}
+
+function clearAllErrors() {
+  REQUIRED_FIELD_ORDER.forEach(clearFieldError);
+  document.getElementById('formErrorBanner').classList.remove('visible');
+}
+
+// Retourne l'id du premier champ en faute, ou null si le formulaire est valide.
+function validateForm() {
+  var firstName = document.getElementById('firstName').value.trim();
+  var lastName = document.getElementById('lastName').value.trim();
+  var email = document.getElementById('email').value.trim();
+  var phone = document.getElementById('phone').value.trim();
+  var enquiryType = document.getElementById('enquiryType').value;
+  var message = document.getElementById('message').value.trim();
+
+  if (!firstName) return 'firstName';
+  if (!lastName) return 'lastName';
+  if (!email || !isValidEmail(email)) return 'email';
+  if (phone && phone.charAt(0) !== '+') return 'phone';
+  if (!enquiryType) return 'enquiryType';
+  if (!message) return 'message';
+  return null;
+}
 
 // Form
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
+  clearAllErrors();
+
+  var invalidField = validateForm();
+  if (invalidField) {
+    showFieldError(invalidField);
+    safeTrack('Enquiry: Blocked', { field: invalidField });
+    return;
+  }
+
+  e.target.dispatchEvent(new Event('wc:submitted'));
+
   var btn = document.getElementById('submitBtn');
   btn.textContent = '…';
   btn.disabled = true;
@@ -461,13 +547,13 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     } else {
       resetSubmitButton();
       safeTrack('Enquiry: Failed', { reason: (data && data.error === 'validation') ? 'validation' : 'server' });
-      alert('Something went wrong. Email hello@winecheese.paris directly.');
+      document.getElementById('formErrorBanner').classList.add('visible');
     }
   })
   .catch(function() {
     resetSubmitButton();
     safeTrack('Enquiry: Failed', { reason: 'network' });
-    alert('Something went wrong. Email hello@winecheese.paris directly.');
+    document.getElementById('formErrorBanner').classList.add('visible');
   });
 });
 </script>

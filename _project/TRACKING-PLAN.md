@@ -44,7 +44,8 @@ spécifiquement dans `contact.html`, car il a besoin du DOM du formulaire.
 | `Enquiry: Form Started` | Premier focus sur un champ du formulaire, une fois par page | — | contact.html | Combien commencent à remplir ? |
 | `Enquiry: Type Selected` | Changement du select "Type of enquiry" | `type` (valeur du select, ex. `private-couples`) | contact.html | Quels types de demande sont les plus fréquents ? |
 | `Enquiry: Group Size Selected` | Changement du select "Group size" | `size` (valeur du select, ex. `3-4`) | contact.html | Quelles tailles de groupe demandent une dégustation privée ? |
-| `Enquiry: Submit Attempted` | Clic sur "Send message", avant l'appel réseau | — | contact.html | Combien de personnes vont jusqu'au clic d'envoi ? |
+| `Enquiry: Blocked` | Soumission refusée par la validation JavaScript (champ requis manquant, email ou téléphone au format invalide) | `field` (id du premier champ en faute) | contact.html | La validation bloque-t-elle beaucoup de tentatives, et sur quel champ ? |
+| `Enquiry: Submit Attempted` | Clic sur "Send message", validation réussie, avant l'appel réseau | — | contact.html | Combien de personnes vont jusqu'au clic d'envoi ? |
 | `Enquiry: Submitted` | Le serveur confirme le succès | `type`, `size` | contact.html | Combien de demandes aboutissent, et de quel profil ? |
 | `Enquiry: Failed` | Échec de l'envoi | `reason` : `network` \| `server` \| `validation` | contact.html | Le formulaire échoue-t-il techniquement, et pour quelle raison ? |
 | `Enquiry: Abandoned` | `pagehide` ou passage en `hidden`, si le formulaire a été démarré mais pas envoyé | `lastField` (id du dernier champ touché) | contact.html | À quel champ les gens abandonnent-ils le plus souvent ? |
@@ -88,16 +89,17 @@ l'entonnoir, pour lire les compteurs de haut en bas comme des paliers) :
 2. `Enquiry: Form Started`
 3. `Enquiry: Type Selected`
 4. `Enquiry: Group Size Selected`
-5. `Enquiry: Submit Attempted`
-6. `Enquiry: Submitted`
-7. `Enquiry: Failed`
-8. `Enquiry: Abandoned`
-9. `CTA: Book Now`
-10. `CTA: Contact`
-11. `Outbound: Mailto`
-12. `Outbound: Phone`
-13. `Outbound: Booking`
-14. `FAQ: Opened`
+5. `Enquiry: Blocked`
+6. `Enquiry: Submit Attempted`
+7. `Enquiry: Submitted`
+8. `Enquiry: Failed`
+9. `Enquiry: Abandoned`
+10. `CTA: Book Now`
+11. `CTA: Contact`
+12. `Outbound: Mailto`
+13. `Outbound: Phone`
+14. `Outbound: Booking`
+15. `FAQ: Opened`
 
 Sur le plan gratuit, l'entonnoir se reconstruit manuellement en comparant
 les compteurs de conversion de chaque objectif sur la même période : par
@@ -150,13 +152,31 @@ compteurs s'incrémentent en général en quelques secondes.
 1. Recharger `contact.html`, ouvrir les DevTools, onglet Réseau, passer en
    mode **Offline**.
 2. Remplir le formulaire et cliquer "Send message".
-3. Vérifier que l'alerte "Something went wrong. Email hello@winecheese.paris
-   directly." s'affiche, et que le bouton reprend son état normal
+3. Vérifier que le bandeau inline "Something went wrong. Email
+   hello@winecheese.paris directly." s'affiche dans la carte du formulaire
+   (plus d'`alert()` bloquant), et que le bouton reprend son état normal
    ("Send message", cliquable).
 4. Repasser en ligne. Le passage offline empêche aussi l'appel Plausible
    de partir au moment précis de l'échec (perte partielle acceptée par
    design, cf. section 5) : ce test valide surtout le comportement visible
    du formulaire, pas la remontée de l'événement.
+
+### Test G, validation côté client
+
+1. Recharger `contact.html`, faire défiler jusqu'au formulaire, cliquer
+   "Send message" sans rien remplir.
+2. Vérifier : le focus se pose sur "First name", un message d'erreur
+   s'affiche sous le champ, `aria-invalid="true"` et `aria-describedby`
+   sont posés sur le champ, aucune requête réseau ne part.
+   → `Enquiry: Blocked` +1, avec `field` = `firstName`
+3. Remplir "First name", cliquer à nouveau : le focus doit maintenant se
+   poser sur "Last name", puis ainsi de suite jusqu'à "Your message".
+4. Saisir un email sans `@` ou sans point après le `@` : bloqué sur
+   `email`. Saisir un téléphone ne commençant pas par `+` : bloqué sur
+   `phone` (uniquement si le champ n'est pas vide, il reste optionnel).
+5. Remplir tous les champs obligatoires correctement et soumettre :
+   la validation doit laisser passer, `Enquiry: Submit Attempted` doit
+   partir.
 
 ### Test D, bloqueur de publicité actif (test prioritaire, le bug corrigé)
 
@@ -224,7 +244,9 @@ compteurs s'incrémentent en général en quelques secondes.
 - [`analytics.js`](../analytics.js) : nouveau module partagé
 - [`contact.html`](../contact.html) : stub Plausible, chargement
   d'analytics.js, correctif du bug de tracking, câblage de l'entonnoir
-  `Enquiry: *`, correctif de l'option "1-2"
+  `Enquiry: *`, correctif de l'option "1-2", validation JavaScript des
+  champs obligatoires (`Enquiry: Blocked`) et remplacement de l'`alert()`
+  d'échec par un bandeau inline dans la carte du formulaire
 - [`index.html`](../index.html), [`about.html`](../about.html),
   [`wine-cheese-walk.html`](../wine-cheese-walk.html),
   [`food-tour.html`](../food-tour.html) : stub Plausible et chargement
