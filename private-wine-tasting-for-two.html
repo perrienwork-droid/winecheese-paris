@@ -271,6 +271,37 @@
 .priv-price-includes { font-size: 15px; line-height: 1.75; color: var(--slate); margin-bottom: 16px; }
 .priv-price-note { font-size: 14px; color: var(--stone); }
 .priv-citable { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(114,47,55,0.08); font-size: 13px; line-height: 1.7; color: var(--stone); }
+.priv-payment-note { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-size: 13px; color: var(--stone); }
+.priv-payment-note svg { color: var(--gold-text); flex-shrink: 0; }
+
+/* Info bar under hero */
+.priv-info-bar { background: var(--dark-wine); }
+.priv-info-bar-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: stretch; gap: 0; padding: 0 clamp(20px,5vw,60px); }
+.priv-info-item { display: flex; align-items: center; gap: 10px; padding: 20px 28px; border-right: 1px solid rgba(250,246,241,0.1); flex: 1; }
+.priv-info-item:first-child { padding-left: 0; }
+.priv-info-item:last-child { border-right: none; }
+.priv-info-icon { color: var(--gold); flex-shrink: 0; }
+.priv-info-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,246,241,0.5); display: block; }
+.priv-info-value { font-family: var(--ff-accent); font-size: 19px; font-weight: 600; color: var(--cream); display: block; line-height: 1.2; }
+
+/* Timeline for "what happens" */
+.priv-timeline { display: flex; flex-direction: column; gap: 0; margin-top: 8px; }
+.priv-step { display: flex; gap: 18px; padding-bottom: 24px; position: relative; }
+.priv-step::before { content: ''; position: absolute; left: 15px; top: 34px; bottom: 2px; width: 1px; background: linear-gradient(180deg, var(--gold) 0%, rgba(201,169,110,0.1) 100%); }
+.priv-step:last-child::before { display: none; }
+.priv-step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--wine); color: var(--cream); font-family: var(--ff-accent); font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.priv-step-body { font-size: 15px; line-height: 1.75; color: var(--slate); padding-top: 4px; }
+.priv-step-body strong { color: var(--charcoal); font-weight: 600; }
+
+/* Inline supporting photos */
+.priv-inline-img { border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 16/9; margin: 0 0 56px; box-shadow: var(--shadow-card); }
+.priv-inline-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.priv-host-photo { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+.priv-host-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+
+.priv-slots-more-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--wine); margin-top: 10px; border-bottom: 1px solid rgba(114,47,55,0.3); }
+.priv-slots-more-link:hover { color: var(--dark-wine); border-color: var(--dark-wine); }
 
 .priv-slots-intro { font-size: 15px; line-height: 1.7; color: var(--slate); margin-bottom: 28px; }
 .slots-grid { display: flex; flex-direction: column; gap: 16px; }
@@ -303,6 +334,8 @@
   .btn-book-slot { width: 100%; }
   .priv-price-card { padding: 28px 24px; }
   .priv-host { flex-direction: column; }
+  .priv-info-bar-inner { flex-wrap: wrap; }
+  .priv-info-item { flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(250,246,241,0.1); padding: 16px; }
 }
 </style>
 <script async src="https://analytics.winecheese.paris/js/pa-krMVZUVywC4sob83U_ji3.js"></script>
@@ -347,6 +380,47 @@ plausible.init()
   </div>
 </div>
 
+<!-- INFO BAR -->
+<div class="priv-info-bar" role="region" aria-label="Tasting details at a glance">
+  <div class="priv-info-bar-inner">
+    <div class="priv-info-item">
+      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <div>
+        <span class="priv-info-label">Duration</span>
+        <span class="priv-info-value">2 hours</span>
+      </div>
+    </div>
+    <div class="priv-info-item">
+      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div>
+        <span class="priv-info-label">Guests</span>
+        <span class="priv-info-value">2, private</span>
+      </div>
+    </div>
+    <div class="priv-info-item">
+      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <div>
+        <span class="priv-info-label">Where</span>
+        <span class="priv-info-value">Cave Les Piqueurs</span>
+      </div>
+    </div>
+    <div class="priv-info-item">
+      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      <div>
+        <span class="priv-info-label">Total price</span>
+        <span class="priv-info-value">€390</span>
+      </div>
+    </div>
+    <div class="priv-info-item">
+      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div>
+        <span class="priv-info-label">Cancellation</span>
+        <span class="priv-info-value">Free 48h</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section class="section" id="story-content">
   <div class="section-inner priv-layout">
 
@@ -362,19 +436,21 @@ plausible.init()
       </div>
     </div>
 
+    <div class="priv-inline-img fade-in"><img src="images/caviste-cave.jpg" alt="A caviste pouring red wine into two glasses at a stone-walled wine cellar bar" loading="lazy"></div>
+
     <!-- WHAT HAPPENS IN THE TWO HOURS -->
     <div class="priv-block fade-in">
       <p class="priv-eyebrow">What happens in the two hours</p>
-      <ul class="priv-moments">
-        <li><strong>The first ten minutes.</strong> We sit down and I pour a glass. Before anything else, I show you how to taste: look at it, smell it, drink it, then breathe out through your nose. That last part is where the flavour actually lives, and almost nobody is taught it.</li>
-        <li><strong>Then five times in a row, the same move.</strong> Taste the wine on its own. Taste the cheese on its own. Then keep a little cheese in your mouth, add a sip of wine, chew them together, and breathe out. That is the moment a pairing either works or falls apart, and you feel it happen yourself instead of taking my word for it.</li>
-        <li><strong>Two ages of the same cheese, side by side.</strong> Comté at 18 months and at 36 months, in front of you at the same time. It is the point in the evening where the two of you usually disagree, and that is the useful part.</li>
-        <li><strong>Around the one hour mark, we go back to the first wine.</strong> It has been open since you sat down. You taste it again. It is not the same wine. Nothing I say about aeration lands the way that does.</li>
-        <li><strong>The last pairing is sweet against salt.</strong> A fortified Muscat on a blue cheese. The one people arrive certain they will not like.</li>
-        <li><strong>Questions, whenever they turn up.</strong> How a cheese is actually made, why a grape tastes of one place and not another, how to serve wine at home, what to buy when you get back. This is a conversation with a structure, not a lecture. I start wherever you are, including from zero.</li>
-        <li><strong>On the table throughout:</strong> bread, walnuts, raisins, and a carafe of water, still and sparkling.</li>
-        <li><strong>The next morning,</strong> a tasting card lands in your inbox as a PDF. Every wine and every cheese in the order it was poured, with the producer, the grape, the appellation and the village, so you can find these bottles again at home.</li>
-      </ul>
+      <div class="priv-timeline">
+        <div class="priv-step"><span class="priv-step-num">1</span><p class="priv-step-body"><strong>The first ten minutes.</strong> We sit down and I pour a glass. Before anything else, I show you how to taste: look at it, smell it, drink it, then breathe out through your nose. That last part is where the flavour actually lives, and almost nobody is taught it.</p></div>
+        <div class="priv-step"><span class="priv-step-num">2</span><p class="priv-step-body"><strong>Then five times in a row, the same move.</strong> Taste the wine on its own. Taste the cheese on its own. Then keep a little cheese in your mouth, add a sip of wine, chew them together, and breathe out. That is the moment a pairing either works or falls apart, and you feel it happen yourself instead of taking my word for it.</p></div>
+        <div class="priv-step"><span class="priv-step-num">3</span><p class="priv-step-body"><strong>Two ages of the same cheese, side by side.</strong> Comté at 18 months and at 36 months, in front of you at the same time. It is the point in the evening where the two of you usually disagree, and that is the useful part.</p></div>
+        <div class="priv-step"><span class="priv-step-num">4</span><p class="priv-step-body"><strong>Around the one hour mark, we go back to the first wine.</strong> It has been open since you sat down. You taste it again. It is not the same wine. Nothing I say about aeration lands the way that does.</p></div>
+        <div class="priv-step"><span class="priv-step-num">5</span><p class="priv-step-body"><strong>The last pairing is sweet against salt.</strong> A fortified Muscat on a blue cheese. The one people arrive certain they will not like.</p></div>
+        <div class="priv-step"><span class="priv-step-num">6</span><p class="priv-step-body"><strong>Questions, whenever they turn up.</strong> How a cheese is actually made, why a grape tastes of one place and not another, how to serve wine at home, what to buy when you get back. This is a conversation with a structure, not a lecture. I start wherever you are, including from zero.</p></div>
+        <div class="priv-step"><span class="priv-step-num">7</span><p class="priv-step-body"><strong>On the table throughout:</strong> bread, walnuts, raisins, and a carafe of water, still and sparkling.</p></div>
+        <div class="priv-step"><span class="priv-step-num">8</span><p class="priv-step-body"><strong>The next morning,</strong> a tasting card lands in your inbox as a PDF. Every wine and every cheese in the order it was poured, with the producer, the grape, the appellation and the village, so you can find these bottles again at home.</p></div>
+      </div>
 
       <div class="priv-sequence">
         <p class="priv-sequence-title">The sequence is rebuilt for every tasting, around the cheeses that are genuinely good that week. One recent evening ran like this:</p>
@@ -392,10 +468,12 @@ plausible.init()
     <div class="priv-block fade-in">
       <p class="priv-eyebrow">Your host</p>
       <div class="priv-host">
-        <div class="priv-host-icon" aria-hidden="true">T</div>
+        <div class="priv-host-photo"><img src="images/ThomasPerrienWineCheese.png" alt="Thomas Perrien, your host, holding a glass of white wine" loading="lazy"></div>
         <p class="priv-host-body">I am Thomas. I am French, I am WSET Certified, and I have lived in Pigalle for years. Before this I worked in fintech in London. I host every tasting myself, in English, and I have never sent a stand-in. I am not a guide reading a script about a neighbourhood I commute to. I buy my cheese on this street.</p>
       </div>
     </div>
+
+    <div class="priv-inline-img fade-in"><img src="images/tasting-table.jpg" alt="Top-down view of wine glasses and a wedge of blue cheese on a wooden table, bread crumbs and a cork scattered around" loading="lazy"></div>
 
     <!-- PRICE -->
     <div class="priv-block fade-in">
@@ -403,6 +481,7 @@ plausible.init()
         <p class="priv-price-headline">€390 for the two of you. Everything included.</p>
         <p class="priv-price-includes">Five wines, the cheese board, bread, walnuts, raisins, still and sparkling water, two hours of the cellar with nobody else in it, and your tasting card by email afterwards.</p>
         <p class="priv-price-note">No service charge added at the end. No tipping expected. That is the whole number.</p>
+        <p class="priv-payment-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Pay securely by card, Apple Pay, Klarna or Link.</p>
         <p class="priv-citable">A private wine and cheese tasting for two at Wine &amp; Cheese Paris costs €390 in total, lasts two hours, includes five wines and five pairings, and takes place in an underground cellar at 6 rue Tardieu in Montmartre, Paris 18e, hosted in English by Thomas Perrien, a WSET-certified guide who lives in the neighbourhood.</p>
       </div>
     </div>
@@ -439,7 +518,8 @@ plausible.init()
       <!-- SLOTS:END -->
 
       <p class="priv-slots-footnote">You pay now, by card. You get the exact address and my phone number straight away. Booking closes at midday on the day itself, and yes, people book this the night before.</p>
-      <p class="priv-slots-more">Also open: Saturday 15, Saturday 22 and Saturday 29 August.</p>
+      <p class="priv-slots-more">Also open: Saturday 15, Saturday 22 and Saturday 29 August.<br>
+      <a href="contact.html" class="priv-slots-more-link" id="laterDateLink">Ask about one of these dates <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></p>
 
       <!-- SECONDARY PATH -->
       <div class="priv-secondary">
@@ -559,6 +639,13 @@ document.querySelectorAll('[data-slot]').forEach(function(btn) {
 var askThomasLink = document.getElementById('askThomasLink');
 if (askThomasLink) {
   askThomasLink.addEventListener('click', function() {
+    safeTrack('Enquiry: Custom Quote');
+  });
+}
+
+var laterDateLink = document.getElementById('laterDateLink');
+if (laterDateLink) {
+  laterDateLink.addEventListener('click', function() {
     safeTrack('Enquiry: Custom Quote');
   });
 }
