@@ -30,14 +30,22 @@
 .offer-meta { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
 .offer-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--gold-text); }
 
-/* Encoche : le module de demande mord le bas du hero (desktop uniquement) */
+/* Encoche : le module de demande mord le bas du hero (desktop uniquement).
+   Les deux colonnes vivent dans la meme rangee de grille, seule la colonne du
+   formulaire remonte : la colonne de contenu, bien plus haute, dicte la hauteur
+   de la rangee, donc aucun vide ne se cree a gauche du formulaire. */
 .page-hero { min-height: 580px; }
-.notch-holder { position: relative; z-index: 40; display: flex; justify-content: flex-end; max-width: 1160px; margin: -260px auto 0; padding: 0 clamp(20px,5vw,60px); }
-.after-notch { padding-top: 40px; }
+/* Le texte du hero ne doit jamais passer sous la carte du formulaire : on borne
+   sa largeur en fonction de la place que laisse la colonne de 400px a droite. */
+.page-hero-content { max-width: min(680px, calc(100vw - 640px)); }
+.contact-main-section { position: relative; z-index: 40; }
+.contact-main { max-width: 1160px; margin: 0 auto; padding: 0 clamp(20px,5vw,60px) clamp(56px,8vw,100px); display: grid; grid-template-columns: minmax(0,1fr) 400px; gap: 64px; align-items: start; }
+.contact-form-col { grid-column: 2; grid-row: 1; margin-top: -260px; display: flex; flex-direction: column; gap: 36px; }
+.contact-form-col .response-badge { margin-bottom: 0; }
+.contact-content-col { grid-column: 1; grid-row: 1; padding-top: clamp(40px,5vw,64px); }
 
 /* Contact form */
 .form-card { background: var(--white); border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow-hover); border: 1px solid rgba(114,47,55,0.08); }
-.notch-holder > .fade-in { width: 420px; max-width: 100%; }
 .form-title { font-family: var(--ff-display); font-size: 24px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
 .form-subtitle { font-size: 14px; color: var(--slate); margin-bottom: 28px; line-height: 1.5; }
 .form-group { margin-bottom: 18px; }
@@ -93,13 +101,15 @@
 .form-success-title { font-family: var(--ff-display); font-size: 22px; font-weight: 600; color: var(--charcoal); margin-bottom: 8px; }
 .form-success-desc { font-size: 15px; color: var(--slate); }
 
-/* Sous 900px : aucune superposition, hero reduit (deja regle par shared.css a
-   768px), module en flux normal pleine largeur sous le hero. */
-@media (max-width: 900px) {
+/* Sous 960px : aucune superposition, hero reduit (deja regle par shared.css a
+   768px), formulaire en flux normal pleine largeur sous le hero, contenu
+   ensuite. L'ordre visuel mobile suit l'ordre du DOM : formulaire d'abord. */
+@media (max-width: 1040px) {
   .page-hero { min-height: auto; }
-  .notch-holder { display: block; margin-top: 0; }
-  .notch-holder > .fade-in { width: 100%; }
-  .after-notch { padding-top: 0; }
+  .page-hero-content { max-width: 680px; }
+  .contact-main { grid-template-columns: 1fr; gap: 48px; padding-top: 48px; }
+  .contact-form-col { grid-column: 1; grid-row: 1; margin-top: 0; }
+  .contact-content-col { grid-column: 1; grid-row: 2; padding-top: 0; }
 }
 @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } .form-card { padding: 28px 20px; } }
 </style>
@@ -140,10 +150,12 @@ plausible.init()
   </div>
 </div>
 
-<div class="notch-holder">
-      <!-- RIGHT: Contact form -->
-      <div class="fade-in">
-        <div class="form-card">
+<section class="contact-main-section">
+  <div class="contact-main">
+
+    <!-- Contact form, en encoche sur le hero (desktop) -->
+    <div class="contact-form-col">
+        <div class="form-card fade-in">
           <!-- Form -->
           <div id="contactFormWrap">
             <h2 class="form-title" data-en="Send a message" data-fr="Envoyer un message">Send a message</h2>
@@ -227,14 +239,41 @@ plausible.init()
             <a href="wine-cheese-walk.html" class="btn-secondary" style="display:inline-block;margin-top:20px;text-align:center;" data-en="Explore the tours" data-fr="Explorer les visites">Explore the tours</a>
           </div>
         </div>
-      </div>
-</div>
 
-<section class="section after-notch">
-  <div class="section-inner">
+        <!-- Response time -->
+        <div class="response-badge fade-in">
+          <svg class="response-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div class="response-badge-text">
+            <h4 data-en="Thomas typically replies within 4 hours" data-fr="Thomas répond généralement sous 4 heures">Thomas typically replies within 4 hours</h4>
+            <p data-en="All enquiries are personal, you'll hear from Thomas directly, not from a booking assistant." data-fr="Toutes les demandes sont personnelles, vous recevrez une réponse de Thomas directement, pas d'un assistant de réservation.">All enquiries are personal: you'll hear from Thomas directly, not from a booking assistant.</p>
+          </div>
+        </div>
+
+        <!-- Contact methods -->
+        <div class="fade-in">
+          <h3 style="font-family:var(--ff-display);font-size:20px;font-weight:600;color:var(--charcoal);margin-bottom:20px;" data-en="Other ways to reach us" data-fr="D'autres façons de nous contacter">Other ways to reach us</h3>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <div><span class="contact-method-label" data-en="Email" data-fr="Email">Email</span><p class="contact-method-value"><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></p></div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+              <div><span class="contact-method-label">Instagram</span><p class="contact-method-value"><a href="https://instagram.com/winecheeseparis" rel="noopener noreferrer" target="_blank">@winecheeseparis</a></p></div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <div><span class="contact-method-label" data-en="Meeting point" data-fr="Point de RDV">Meeting point</span><p class="contact-method-value" data-en="Métro Notre-Dame-de-Lorette, 9e arr." data-fr="Métro Notre-Dame-de-Lorette, 9e arr.">Métro Notre-Dame-de-Lorette, 9e arr.</p></div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Offres, delai de reponse, autres moyens de contact -->
+    <div class="contact-content-col">
 
         <!-- Private offers -->
-        <div class="fade-in" style="margin-bottom:48px;">
+        <div class="fade-in">
           <p class="section-eyebrow" data-en="Private experiences" data-fr="Expériences privées">Private experiences</p>
           <h2 class="section-title" style="text-align:left;margin-bottom:12px;" data-en="Beyond the public tours" data-fr="Au-delà des visites publiques">Beyond the public tours</h2>
           <p style="font-size:15px;line-height:1.7;color:var(--slate);margin-bottom:28px;" data-en="Thomas brings the tasting to you, anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office." data-fr="Thomas vous apporte la dégustation partout à Paris : votre appartement, un bateau privatisé sur la Seine, une suite d'hôtel, ou vos bureaux.">Thomas brings the tasting to you, anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office.</p>
@@ -290,33 +329,7 @@ plausible.init()
           </div>
         </div>
 
-        <!-- Response time -->
-        <div class="response-badge fade-in">
-          <svg class="response-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <div class="response-badge-text">
-            <h4 data-en="Thomas typically replies within 4 hours" data-fr="Thomas répond généralement sous 4 heures">Thomas typically replies within 4 hours</h4>
-            <p data-en="All enquiries are personal, you'll hear from Thomas directly, not from a booking assistant." data-fr="Toutes les demandes sont personnelles, vous recevrez une réponse de Thomas directement, pas d'un assistant de réservation.">All enquiries are personal: you'll hear from Thomas directly, not from a booking assistant.</p>
-          </div>
-        </div>
-
-        <!-- Contact methods -->
-        <div class="fade-in">
-          <h3 style="font-family:var(--ff-display);font-size:20px;font-weight:600;color:var(--charcoal);margin-bottom:20px;" data-en="Other ways to reach us" data-fr="D'autres façons de nous contacter">Other ways to reach us</h3>
-          <div class="contact-methods">
-            <div class="contact-method">
-              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-              <div><span class="contact-method-label" data-en="Email" data-fr="Email">Email</span><p class="contact-method-value"><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></p></div>
-            </div>
-            <div class="contact-method">
-              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-              <div><span class="contact-method-label">Instagram</span><p class="contact-method-value"><a href="https://instagram.com/winecheeseparis" rel="noopener noreferrer" target="_blank">@winecheeseparis</a></p></div>
-            </div>
-            <div class="contact-method">
-              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-              <div><span class="contact-method-label" data-en="Meeting point" data-fr="Point de RDV">Meeting point</span><p class="contact-method-value" data-en="Métro Notre-Dame-de-Lorette, 9e arr." data-fr="Métro Notre-Dame-de-Lorette, 9e arr.">Métro Notre-Dame-de-Lorette, 9e arr.</p></div>
-            </div>
-          </div>
-        </div>
+    </div>
 
   </div>
 </section>
