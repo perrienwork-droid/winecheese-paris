@@ -16,9 +16,6 @@
 .contact-hero-img { background-image: url('images/private-table-eiffel.jpg'); background-position: center 50%; }
 /* card-rooftop stays for rooftop private events, fits perfectly */
 
-/* Main contact layout */
-.contact-layout { display: grid; grid-template-columns: 1fr 400px; gap: 64px; align-items: start; }
-
 /* Private offer cards */
 .private-offers { display: flex; flex-direction: column; gap: 24px; margin-bottom: 56px; }
 .offer-card { background: var(--white); border-radius: var(--radius-lg); padding: 28px; border: 1px solid rgba(114,47,55,0.08); transition: box-shadow var(--transition), transform var(--transition); overflow: hidden; }
@@ -33,8 +30,14 @@
 .offer-meta { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
 .offer-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--gold-text); }
 
+/* Encoche : le module de demande mord le bas du hero (desktop uniquement) */
+.page-hero { min-height: 580px; }
+.notch-holder { position: relative; z-index: 40; display: flex; justify-content: flex-end; max-width: 1160px; margin: -260px auto 0; padding: 0 clamp(20px,5vw,60px); }
+.after-notch { padding-top: 40px; }
+
 /* Contact form */
-.form-card { background: var(--white); border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow-hover); border: 1px solid rgba(114,47,55,0.08); position: sticky; top: 88px; }
+.form-card { background: var(--white); border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow-hover); border: 1px solid rgba(114,47,55,0.08); }
+.notch-holder > .fade-in { width: 420px; max-width: 100%; }
 .form-title { font-family: var(--ff-display); font-size: 24px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
 .form-subtitle { font-size: 14px; color: var(--slate); margin-bottom: 28px; line-height: 1.5; }
 .form-group { margin-bottom: 18px; }
@@ -90,7 +93,14 @@
 .form-success-title { font-family: var(--ff-display); font-size: 22px; font-weight: 600; color: var(--charcoal); margin-bottom: 8px; }
 .form-success-desc { font-size: 15px; color: var(--slate); }
 
-@media (max-width: 960px) { .contact-layout { grid-template-columns: 1fr; } .form-card { position: static; } }
+/* Sous 900px : aucune superposition, hero reduit (deja regle par shared.css a
+   768px), module en flux normal pleine largeur sous le hero. */
+@media (max-width: 900px) {
+  .page-hero { min-height: auto; }
+  .notch-holder { display: block; margin-top: 0; }
+  .notch-holder > .fade-in { width: 100%; }
+  .after-notch { padding-top: 0; }
+}
 @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } .form-card { padding: 28px 20px; } }
 </style>
 <script async src="https://analytics.winecheese.paris/js/pa-krMVZUVywC4sob83U_ji3.js"></script>
@@ -130,99 +140,7 @@ plausible.init()
   </div>
 </div>
 
-<section class="section">
-  <div class="section-inner">
-    <div class="contact-layout">
-
-      <!-- LEFT: Offers + contact info -->
-      <div>
-
-        <!-- Private offers -->
-        <div class="fade-in" style="margin-bottom:48px;">
-          <p class="section-eyebrow" data-en="Private experiences" data-fr="Expériences privées">Private experiences</p>
-          <h2 class="section-title" style="text-align:left;margin-bottom:12px;" data-en="Beyond the public tours" data-fr="Au-delà des visites publiques">Beyond the public tours</h2>
-          <p style="font-size:15px;line-height:1.7;color:var(--slate);margin-bottom:28px;" data-en="Thomas brings the tasting to you, anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office." data-fr="Thomas vous apporte la dégustation partout à Paris : votre appartement, un bateau privatisé sur la Seine, une suite d'hôtel, ou vos bureaux.">Thomas brings the tasting to you, anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office.</p>
-          <div class="private-offers">
-            <div class="offer-card">
-              <div class="offer-image"><img src="images/evjf-rooftop.jpg" alt="Group of women celebrating on a Paris rooftop with wine, Eiffel Tower at sunset" loading="lazy"></div>
-              <div class="offer-row">
-                <div class="offer-icon-wrap">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                </div>
-                <div class="offer-body">
-                  <h3 class="offer-title" data-en="Anniversary & Celebrations" data-fr="Anniversaires & Célébrations">Anniversary & Celebrations</h3>
-                  <p class="offer-desc" data-en="A private Wine & Cheese Walk or rooftop tasting for two (or more). Thomas selects wines around the occasion, prepares the board personally, and designs the experience around your evening. Popular for birthdays, proposals, and wedding anniversaries." data-fr="Une balade privée Vin & Fromage ou une dégustation sur le rooftop pour deux, ou plus. Thomas sélectionne les vins en fonction de l'occasion, prépare la planche personnellement, et conçoit l'expérience autour de votre soirée.">A private Wine & Cheese Walk or rooftop tasting for two (or more). Thomas selects wines around the occasion and designs the experience around your evening. Popular for birthdays, proposals, and anniversaries.</p>
-                  <div class="offer-meta">
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> <span data-en="2–8 guests" data-fr="2–8 personnes">2–8 guests</span></span>
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> <span data-en="From €120/person" data-fr="À partir de 120 €/pers.">From €120/person</span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="offer-card">
-              <div class="offer-image"><img src="images/private-table-eiffel.jpg" alt="Private dinner table set with wine and cheese, Eiffel Tower at sunset through open French windows" loading="lazy"></div>
-              <div class="offer-row">
-                <div class="offer-icon-wrap">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                </div>
-                <div class="offer-body">
-                  <h3 class="offer-title" data-en="Corporate & Team Events" data-fr="Événements Corporate & Team Building">Corporate & Team Events</h3>
-                  <p class="offer-desc" data-en="A wine & cheese masterclass for your team, in a cave, on a rooftop, or at your office. Thomas facilitates the tasting as a group activity: structured, informative, and genuinely fun. Available weekday evenings (18:30). Pro invoice provided." data-fr="Une masterclass vin & fromage pour votre équipe, dans une cave, sur un rooftop, ou dans vos locaux. Thomas anime la dégustation comme une activité de groupe : structurée, informative, et vraiment fun. Disponible en soirée en semaine.">A wine & cheese masterclass for your team: in a cave, on a rooftop, or at your office. Weekday evenings available. Pro invoice provided.</p>
-                  <div class="offer-meta">
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> <span data-en="8–20 guests" data-fr="8–20 personnes">8–20 guests</span></span>
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> <span data-en="Tue–Thu evenings" data-fr="Mar–Jeu soirées">Tue–Thu evenings</span></span>
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> <span data-en="From €95/person" data-fr="À partir de 95 €/pers.">From €95/person</span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="offer-card">
-              <div class="offer-image"><img src="images/hotel-concierge.jpg" alt="Hotel concierge handing a tasting itinerary card to two guests at a marble counter, wine bottles and a Montmartre map behind" loading="lazy"></div>
-              <div class="offer-row">
-                <div class="offer-icon-wrap">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                </div>
-                <div class="offer-body">
-                  <h3 class="offer-title" data-en="Hotel Concierge & Groups" data-fr="Conciergerie Hôtelière & Groupes">Hotel Concierge & Groups</h3>
-                  <p class="offer-desc" data-en="Thomas works with hotel concierges across Montmartre and the 9th to provide premium experiences for their guests. If you're a hotel looking to expand your experiences offer, or a concierge wanting to refer guests, get in touch." data-fr="Thomas travaille avec les conciergeries des hôtels de Montmartre et du 9e pour proposer des expériences premium à leurs clients. Si vous êtes un hôtel ou une conciergerie souhaitant recommander nos visites, contactez-nous.">Thomas works with hotel concierges to provide premium experiences for their guests. If you're a hotel or concierge wanting to refer guests, get in touch.</p>
-                  <div class="offer-meta">
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> <span data-en="Commission-based" data-fr="Sur commission">Commission-based</span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Response time -->
-        <div class="response-badge fade-in">
-          <svg class="response-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <div class="response-badge-text">
-            <h4 data-en="Thomas typically replies within 4 hours" data-fr="Thomas répond généralement sous 4 heures">Thomas typically replies within 4 hours</h4>
-            <p data-en="All enquiries are personal, you'll hear from Thomas directly, not from a booking assistant." data-fr="Toutes les demandes sont personnelles, vous recevrez une réponse de Thomas directement, pas d'un assistant de réservation.">All enquiries are personal: you'll hear from Thomas directly, not from a booking assistant.</p>
-          </div>
-        </div>
-
-        <!-- Contact methods -->
-        <div class="fade-in">
-          <h3 style="font-family:var(--ff-display);font-size:20px;font-weight:600;color:var(--charcoal);margin-bottom:20px;" data-en="Other ways to reach us" data-fr="D'autres façons de nous contacter">Other ways to reach us</h3>
-          <div class="contact-methods">
-            <div class="contact-method">
-              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-              <div><span class="contact-method-label" data-en="Email" data-fr="Email">Email</span><p class="contact-method-value"><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></p></div>
-            </div>
-            <div class="contact-method">
-              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-              <div><span class="contact-method-label">Instagram</span><p class="contact-method-value"><a href="https://instagram.com/winecheeseparis" rel="noopener noreferrer" target="_blank">@winecheeseparis</a></p></div>
-            </div>
-            <div class="contact-method">
-              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-              <div><span class="contact-method-label" data-en="Meeting point" data-fr="Point de RDV">Meeting point</span><p class="contact-method-value" data-en="Métro Notre-Dame-de-Lorette, 9e arr." data-fr="Métro Notre-Dame-de-Lorette, 9e arr.">Métro Notre-Dame-de-Lorette, 9e arr.</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+<div class="notch-holder">
       <!-- RIGHT: Contact form -->
       <div class="fade-in">
         <div class="form-card">
@@ -310,7 +228,96 @@ plausible.init()
           </div>
         </div>
       </div>
-    </div>
+</div>
+
+<section class="section after-notch">
+  <div class="section-inner">
+
+        <!-- Private offers -->
+        <div class="fade-in" style="margin-bottom:48px;">
+          <p class="section-eyebrow" data-en="Private experiences" data-fr="Expériences privées">Private experiences</p>
+          <h2 class="section-title" style="text-align:left;margin-bottom:12px;" data-en="Beyond the public tours" data-fr="Au-delà des visites publiques">Beyond the public tours</h2>
+          <p style="font-size:15px;line-height:1.7;color:var(--slate);margin-bottom:28px;" data-en="Thomas brings the tasting to you, anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office." data-fr="Thomas vous apporte la dégustation partout à Paris : votre appartement, un bateau privatisé sur la Seine, une suite d'hôtel, ou vos bureaux.">Thomas brings the tasting to you, anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office.</p>
+          <div class="private-offers">
+            <div class="offer-card">
+              <div class="offer-image"><img src="images/evjf-rooftop.jpg" alt="Group of women celebrating on a Paris rooftop with wine, Eiffel Tower at sunset" loading="lazy"></div>
+              <div class="offer-row">
+                <div class="offer-icon-wrap">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </div>
+                <div class="offer-body">
+                  <h3 class="offer-title" data-en="Anniversary & Celebrations" data-fr="Anniversaires & Célébrations">Anniversary & Celebrations</h3>
+                  <p class="offer-desc" data-en="A private Wine & Cheese Walk or rooftop tasting for two (or more). Thomas selects wines around the occasion, prepares the board personally, and designs the experience around your evening. Popular for birthdays, proposals, and wedding anniversaries." data-fr="Une balade privée Vin & Fromage ou une dégustation sur le rooftop pour deux, ou plus. Thomas sélectionne les vins en fonction de l'occasion, prépare la planche personnellement, et conçoit l'expérience autour de votre soirée.">A private Wine & Cheese Walk or rooftop tasting for two (or more). Thomas selects wines around the occasion and designs the experience around your evening. Popular for birthdays, proposals, and anniversaries.</p>
+                  <div class="offer-meta">
+                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> <span data-en="2–8 guests" data-fr="2–8 personnes">2–8 guests</span></span>
+                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> <span data-en="From €120/person" data-fr="À partir de 120 €/pers.">From €120/person</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="offer-card">
+              <div class="offer-image"><img src="images/private-table-eiffel.jpg" alt="Private dinner table set with wine and cheese, Eiffel Tower at sunset through open French windows" loading="lazy"></div>
+              <div class="offer-row">
+                <div class="offer-icon-wrap">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                </div>
+                <div class="offer-body">
+                  <h3 class="offer-title" data-en="Corporate & Team Events" data-fr="Événements Corporate & Team Building">Corporate & Team Events</h3>
+                  <p class="offer-desc" data-en="A wine & cheese masterclass for your team, in a cave, on a rooftop, or at your office. Thomas facilitates the tasting as a group activity: structured, informative, and genuinely fun. Available weekday evenings (18:30). Pro invoice provided." data-fr="Une masterclass vin & fromage pour votre équipe, dans une cave, sur un rooftop, ou dans vos locaux. Thomas anime la dégustation comme une activité de groupe : structurée, informative, et vraiment fun. Disponible en soirée en semaine.">A wine & cheese masterclass for your team: in a cave, on a rooftop, or at your office. Weekday evenings available. Pro invoice provided.</p>
+                  <div class="offer-meta">
+                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> <span data-en="8–20 guests" data-fr="8–20 personnes">8–20 guests</span></span>
+                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> <span data-en="Tue–Thu evenings" data-fr="Mar–Jeu soirées">Tue–Thu evenings</span></span>
+                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> <span data-en="From €95/person" data-fr="À partir de 95 €/pers.">From €95/person</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="offer-card">
+              <div class="offer-image"><img src="images/hotel-concierge.jpg" alt="Hotel concierge handing a tasting itinerary card to two guests at a marble counter, wine bottles and a Montmartre map behind" loading="lazy"></div>
+              <div class="offer-row">
+                <div class="offer-icon-wrap">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <div class="offer-body">
+                  <h3 class="offer-title" data-en="Hotel Concierge & Groups" data-fr="Conciergerie Hôtelière & Groupes">Hotel Concierge & Groups</h3>
+                  <p class="offer-desc" data-en="Thomas works with hotel concierges across Montmartre and the 9th to provide premium experiences for their guests. If you're a hotel looking to expand your experiences offer, or a concierge wanting to refer guests, get in touch." data-fr="Thomas travaille avec les conciergeries des hôtels de Montmartre et du 9e pour proposer des expériences premium à leurs clients. Si vous êtes un hôtel ou une conciergerie souhaitant recommander nos visites, contactez-nous.">Thomas works with hotel concierges to provide premium experiences for their guests. If you're a hotel or concierge wanting to refer guests, get in touch.</p>
+                  <div class="offer-meta">
+                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> <span data-en="Commission-based" data-fr="Sur commission">Commission-based</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Response time -->
+        <div class="response-badge fade-in">
+          <svg class="response-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div class="response-badge-text">
+            <h4 data-en="Thomas typically replies within 4 hours" data-fr="Thomas répond généralement sous 4 heures">Thomas typically replies within 4 hours</h4>
+            <p data-en="All enquiries are personal, you'll hear from Thomas directly, not from a booking assistant." data-fr="Toutes les demandes sont personnelles, vous recevrez une réponse de Thomas directement, pas d'un assistant de réservation.">All enquiries are personal: you'll hear from Thomas directly, not from a booking assistant.</p>
+          </div>
+        </div>
+
+        <!-- Contact methods -->
+        <div class="fade-in">
+          <h3 style="font-family:var(--ff-display);font-size:20px;font-weight:600;color:var(--charcoal);margin-bottom:20px;" data-en="Other ways to reach us" data-fr="D'autres façons de nous contacter">Other ways to reach us</h3>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <div><span class="contact-method-label" data-en="Email" data-fr="Email">Email</span><p class="contact-method-value"><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></p></div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+              <div><span class="contact-method-label">Instagram</span><p class="contact-method-value"><a href="https://instagram.com/winecheeseparis" rel="noopener noreferrer" target="_blank">@winecheeseparis</a></p></div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <div><span class="contact-method-label" data-en="Meeting point" data-fr="Point de RDV">Meeting point</span><p class="contact-method-value" data-en="Métro Notre-Dame-de-Lorette, 9e arr." data-fr="Métro Notre-Dame-de-Lorette, 9e arr.">Métro Notre-Dame-de-Lorette, 9e arr.</p></div>
+            </div>
+          </div>
+        </div>
+
   </div>
 </section>
 
