@@ -13,7 +13,9 @@
       "Bash(git rev-parse *)",
       "Bash(git ls-tree *)",
       "Bash(git ls-remote *)",
-      "Bash(rm .git/index.lock *)"
+      "Bash(rm .git/index.lock *)",
+      "Bash(scp /Users/thomas/Dev/thomas-os/workstreams/wine-and-cheese/_project/contact-api/server.js cyrano-vps:/home/debian/apps/contact-api/server.js)",
+      "Bash(ssh cyrano-vps *)"
     ]
   }
 }
