@@ -240,43 +240,30 @@
 ]
 </script>
 <style>
-/* ─── PAGE-SPECIFIC ─────────────────────────────────────────── */
+/* ─── PAGE-SPECIFIC : private tasting for two ───────────────── */
+
+/* Hero */
 .priv-hero-img { background-image: url('images/pairings-lineup.jpg'); background-position: center 45%; }
+.hero-price { font-family: var(--ff-display); font-style: normal; font-weight: 600; font-size: 1.16em; color: var(--gold); }
 
-.priv-layout { max-width: 760px; margin: 0 auto; }
+/* ─── RAILS : trois largeurs + full bleed ───────────────────── */
+.priv-sec { padding: clamp(52px,7vw,96px) clamp(20px,5vw,60px); }
+.priv-sec--flush-top { padding-top: 0; }
+.rail-wide  { max-width: 1040px; margin: 0 auto; }
+.rail-mid   { max-width: 780px;  margin: 0 auto; }
+.rail-prose { max-width: 560px; }
 
-.priv-block { margin-bottom: 56px; }
-.priv-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 16px; }
-.priv-eyebrow::after { content:''; display:block; width:32px; height:1px; background:var(--gold); opacity:0.5; }
-.priv-title { font-family: var(--ff-display); font-size: clamp(22px,3vw,32px); font-weight: 500; color: var(--charcoal); margin-bottom: 18px; }
-.priv-body { font-size: 16px; line-height: 1.8; color: var(--slate); }
-.priv-body p + p { margin-top: 14px; }
+/* ─── ÉCHELLE TYPO : de 11 à 150 ────────────────────────────── */
+.priv-h2    { font-family: var(--ff-display); font-weight: 500; font-size: clamp(30px,4.4vw,48px); line-height: 1.12; letter-spacing: -0.01em; color: var(--charcoal); }
+.priv-h2-sm { font-family: var(--ff-display); font-weight: 600; font-size: clamp(20px,2.4vw,26px); line-height: 1.2; color: var(--charcoal); margin-bottom: 20px; }
+.priv-lede  { font-family: var(--ff-accent); font-style: italic; font-size: clamp(21px,2.6vw,27px); line-height: 1.45; color: var(--wine); }
+.priv-prose p { font-size: 17px; line-height: 1.8; color: var(--slate); }
+.priv-prose p + p { margin-top: 16px; }
+.priv-prose .priv-lede + p { margin-top: 22px; }
 
-.priv-moments { list-style: none; display: flex; flex-direction: column; gap: 22px; margin-top: 8px; }
-.priv-moments li { font-size: 15px; line-height: 1.75; color: var(--slate); padding-left: 22px; position: relative; }
-.priv-moments li::before { content: ''; position: absolute; left: 0; top: 9px; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
-.priv-moments strong { color: var(--charcoal); font-weight: 600; }
-
-.priv-sequence { margin-top: 20px; background: var(--dark-wine); border-radius: var(--radius-lg); padding: 28px 32px; }
-.priv-sequence-title { font-family: var(--ff-accent); font-size: 15px; font-style: italic; color: var(--gold); margin-bottom: 14px; }
-.priv-sequence ol { list-style: decimal; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; }
-.priv-sequence li { font-size: 14px; line-height: 1.6; color: rgba(250,246,241,0.88); }
-
-.priv-host { display: flex; gap: 20px; align-items: flex-start; background: var(--light-gold); border-radius: var(--radius-lg); padding: 28px 32px; }
-.priv-host-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--wine); color: var(--cream); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--ff-display); font-size: 18px; font-weight: 600; }
-.priv-host-body { font-size: 15px; line-height: 1.75; color: var(--slate); }
-
-.priv-price-card { background: var(--white); border: 1px solid rgba(114,47,55,0.1); border-radius: var(--radius-xl); padding: 36px 40px; box-shadow: var(--shadow-card); }
-.priv-price-headline { font-family: var(--ff-display); font-size: clamp(24px,3.4vw,34px); font-weight: 600; color: var(--wine); margin-bottom: 16px; }
-.priv-price-includes { font-size: 15px; line-height: 1.75; color: var(--slate); margin-bottom: 16px; }
-.priv-price-note { font-size: 14px; color: var(--stone); }
-.priv-citable { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(114,47,55,0.08); font-size: 13px; line-height: 1.7; color: var(--stone); }
-.priv-payment-note { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-size: 13px; color: var(--stone); }
-.priv-payment-note svg { color: var(--gold-text); flex-shrink: 0; }
-
-/* Info bar under hero */
+/* ─── INFO BAR (4 items, le prix n'y est plus) ──────────────── */
 .priv-info-bar { background: var(--dark-wine); }
-.priv-info-bar-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: stretch; gap: 0; padding: 0 clamp(20px,5vw,60px); }
+.priv-info-bar-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: stretch; padding: 0 clamp(20px,5vw,60px); }
 .priv-info-item { display: flex; align-items: center; gap: 10px; padding: 20px 28px; border-right: 1px solid rgba(250,246,241,0.1); flex: 1; }
 .priv-info-item:first-child { padding-left: 0; }
 .priv-info-item:last-child { border-right: none; }
@@ -284,58 +271,121 @@
 .priv-info-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,246,241,0.5); display: block; }
 .priv-info-value { font-family: var(--ff-accent); font-size: 19px; font-weight: 600; color: var(--cream); display: block; line-height: 1.2; }
 
-/* Timeline for "what happens" */
-.priv-timeline { display: flex; flex-direction: column; gap: 0; margin-top: 8px; }
-.priv-step { display: flex; gap: 18px; padding-bottom: 24px; position: relative; }
-.priv-step::before { content: ''; position: absolute; left: 15px; top: 34px; bottom: 2px; width: 1px; background: linear-gradient(180deg, var(--gold) 0%, rgba(201,169,110,0.1) 100%); }
-.priv-step:last-child::before { display: none; }
-.priv-step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--wine); color: var(--cream); font-family: var(--ff-accent); font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.priv-step-body { font-size: 15px; line-height: 1.75; color: var(--slate); padding-top: 4px; }
-.priv-step-body strong { color: var(--charcoal); font-weight: 600; }
+/* ─── PULL QUOTE (déportée à droite) ────────────────────────── */
+.priv-pull { max-width: 700px; margin-left: auto; padding-left: clamp(18px,2.6vw,34px); border-left: 2px solid var(--gold); }
+.priv-pull-line { font-family: var(--ff-display); font-style: italic; font-weight: 500; font-size: clamp(25px,3.7vw,42px); line-height: 1.22; color: var(--wine); }
+.priv-pull-tail { margin-top: 16px; font-family: var(--ff-accent); font-style: italic; font-size: clamp(16px,1.9vw,20px); line-height: 1.5; color: var(--slate); }
 
-/* Inline supporting photos */
-.priv-inline-img { border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 16/9; margin: 0 0 56px; box-shadow: var(--shadow-card); }
-.priv-inline-img img { width: 100%; height: 100%; object-fit: cover; }
+/* ─── IMAGE FULL BLEED ──────────────────────────────────────── */
+.priv-bleed { margin: 0; }
+.priv-bleed img { width: 100%; height: clamp(260px,54vh,600px); object-fit: cover; }
 
-.priv-host-photo { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
-.priv-host-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+/* ─── LES GESTES (+ gros chiffre) ───────────────────────────── */
+.priv-gestures { display: grid; grid-template-columns: minmax(0,0.85fr) minmax(0,1.15fr); gap: clamp(28px,4vw,56px); margin-top: clamp(40px,5vw,68px); }
+.priv-gesture-k { font-family: var(--ff-display); font-size: 19px; font-weight: 600; line-height: 1.3; color: var(--charcoal); margin-bottom: 10px; }
+.priv-gesture-t { font-size: 16px; line-height: 1.8; color: var(--slate); }
+.priv-gesture--five { display: grid; grid-template-columns: auto minmax(0,1fr); column-gap: clamp(14px,1.7vw,24px); align-items: start; }
+.priv-numeral { display: block; margin-top: -10px; font-family: var(--ff-display); font-weight: 500; font-size: clamp(84px,8.5vw,124px); line-height: 0.78; color: var(--gold); pointer-events: none; user-select: none; }
 
-.priv-slots-more-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--wine); margin-top: 10px; border-bottom: 1px solid rgba(114,47,55,0.3); }
-.priv-slots-more-link:hover { color: var(--dark-wine); border-color: var(--dark-wine); }
+/* ─── LE MOMENT FORT (bande pleine largeur) ─────────────────── */
+.priv-moment { background: var(--charcoal); padding: clamp(64px,9vw,116px) clamp(20px,5vw,60px); border-top: 1px solid rgba(201,169,110,0.25); border-bottom: 1px solid rgba(201,169,110,0.25); }
+.priv-moment-inner { max-width: 900px; margin: 0 auto; }
+.priv-moment-k { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; line-height: 1.7; }
+.priv-moment-line { font-family: var(--ff-display); font-weight: 500; font-size: clamp(26px,3.6vw,40px); line-height: 1.28; color: var(--cream); }
+.priv-moment-tail { margin-top: 20px; font-family: var(--ff-accent); font-style: italic; font-size: clamp(17px,2vw,21px); line-height: 1.5; color: rgba(250,246,241,0.68); max-width: 560px; }
 
+/* ─── L'INTENDANCE (grille dense) ───────────────────────────── */
+.priv-details { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(26px,3.2vw,40px) clamp(28px,4vw,52px); }
+.priv-detail-k { font-family: var(--ff-display); font-size: 15px; font-weight: 600; line-height: 1.3; color: var(--charcoal); margin-bottom: 8px; }
+.priv-detail-t { font-size: 14px; line-height: 1.65; color: var(--slate); }
+
+/* ─── LA CARTE DES 5 VINS (chevauchement) ───────────────────── */
+.priv-menu-wrap { position: relative; display: flex; align-items: center; }
+.priv-menu-photo { width: 58%; aspect-ratio: 4/5; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); }
+.priv-menu-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 46% 68%; }
+.priv-menu { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 54%; background: var(--dark-wine); border-radius: var(--radius-lg); padding: clamp(26px,3vw,38px) clamp(24px,3vw,36px); box-shadow: var(--shadow-hover); }
+.priv-menu-intro { font-family: var(--ff-accent); font-style: italic; font-size: 16px; line-height: 1.5; color: var(--gold); margin-bottom: 22px; }
+.priv-menu-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+.priv-menu-list li { display: grid; grid-template-columns: 30px minmax(0,1fr); column-gap: 10px; row-gap: 3px; }
+.priv-menu-num { grid-row: 1 / 3; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: var(--gold); padding-top: 5px; }
+.priv-menu-wine { font-family: var(--ff-display); font-size: 15px; font-weight: 500; line-height: 1.35; color: var(--cream); }
+.priv-menu-pair { font-family: var(--ff-accent); font-style: italic; font-size: 15px; line-height: 1.35; color: rgba(250,246,241,0.62); }
+
+/* ─── L'HÔTE (portrait ancré au bord gauche) ────────────────── */
+.priv-sec--host { padding-left: 0; padding-right: 0; }
+.priv-sec--host { padding-top: clamp(28px,3.4vw,52px); }
+.priv-host-grid { display: grid; grid-template-columns: minmax(0,420px) minmax(0,440px); gap: clamp(28px,5vw,76px); align-items: center; }
+.priv-host-portrait { aspect-ratio: 3/4; border-radius: 0 var(--radius-xl) var(--radius-xl) 0; overflow: hidden; box-shadow: var(--shadow-card); }
+.priv-host-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 16%; }
+.priv-host-text p { font-size: 17px; line-height: 1.8; color: var(--slate); }
+.priv-host-text p.priv-host-sign { margin-top: 22px; font-family: var(--ff-accent); font-style: italic; font-size: 32px; line-height: 1; color: var(--wine); }
+
+/* ─── LE PRIX (bande pleine largeur, point focal n°1) ───────── */
+.priv-price-band { background: var(--dark-wine); padding: clamp(56px,7.5vw,96px) clamp(20px,5vw,60px); }
+.priv-price-grid { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(32px,5vw,64px); align-items: start; }
+.priv-price-h2 { display: block; }
+.priv-price-amount { display: block; font-family: var(--ff-display); font-weight: 500; font-size: clamp(84px,11vw,150px); line-height: 0.88; letter-spacing: -0.02em; color: var(--gold); }
+.priv-price-caption { display: block; margin-top: 20px; max-width: 250px; font-family: var(--ff-body); font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1.75; color: rgba(250,246,241,0.62); }
+.priv-price-list { list-style: none; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 24px; }
+.priv-price-list li { position: relative; padding-left: 16px; font-size: 14px; line-height: 1.5; color: rgba(250,246,241,0.9); }
+.priv-price-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+.priv-price-note { margin-top: 26px; font-family: var(--ff-accent); font-style: italic; font-size: 19px; line-height: 1.5; color: var(--cream); }
+.priv-payment-note { display: flex; align-items: center; gap: 10px; margin-top: 18px; font-size: 13px; color: rgba(250,246,241,0.6); }
+.priv-payment-note svg { color: var(--gold); flex-shrink: 0; }
+.priv-citable { grid-column: 1 / -1; margin-top: 6px; padding-top: 24px; border-top: 1px solid rgba(201,169,110,0.22); max-width: 780px; font-size: 12px; line-height: 1.75; color: rgba(250,246,241,0.62); }
+
+/* ─── CRÉNEAUX (allégés) ────────────────────────────────────── */
 .priv-slots-intro { font-size: 15px; line-height: 1.7; color: var(--slate); margin-bottom: 28px; }
-.slots-grid { display: flex; flex-direction: column; gap: 16px; }
-.slot-card { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; background: var(--white); border: 1px solid rgba(114,47,55,0.12); border-radius: var(--radius-lg); padding: 22px 28px; box-shadow: var(--shadow-card); }
+.slots-grid { display: flex; flex-direction: column; gap: 14px; }
+.slot-card { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; background: var(--white); border: 1px solid rgba(114,47,55,0.14); border-radius: var(--radius-lg); padding: 20px 26px; }
+.slot-card:last-child { border-left: 3px solid var(--gold); }
 .slot-label { font-family: var(--ff-display); font-size: 17px; font-weight: 600; color: var(--charcoal); }
 .slot-sub { font-size: 13px; color: var(--gold-text); font-weight: 500; margin-top: 4px; }
 .btn-book-slot { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; background: var(--gold); color: var(--dark-wine); font-family: var(--ff-body); font-size: 15px; font-weight: 700; padding: 0 28px; height: 52px; border-radius: var(--radius-sm); border: none; cursor: pointer; transition: background var(--transition), transform var(--transition); min-height: var(--touch-min); }
 .btn-book-slot:hover { background: #b8924d; transform: translateY(-1px); }
 .priv-slots-footnote { font-size: 14px; line-height: 1.7; color: var(--slate); margin-top: 24px; }
 .priv-slots-more { font-size: 13px; color: var(--stone); margin-top: 10px; }
-
+.priv-slots-more-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--wine); margin-top: 10px; border-bottom: 1px solid rgba(114,47,55,0.3); }
+.priv-slots-more-link:hover { color: var(--dark-wine); border-color: var(--dark-wine); }
 .priv-secondary { margin-top: 40px; background: var(--cream); border: 1px dashed rgba(114,47,55,0.25); border-radius: var(--radius-lg); padding: 22px 26px; }
 .priv-secondary-title { font-family: var(--ff-display); font-size: 16px; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
 .priv-secondary-body { font-size: 14px; line-height: 1.65; color: var(--slate); margin-bottom: 12px; }
 .priv-secondary-link { display: inline-block; font-size: 14px; font-weight: 600; color: var(--wine); border-bottom: 1px solid var(--wine); }
 .priv-secondary-link:hover { color: var(--dark-wine); border-color: var(--dark-wine); }
 
-.faq-list { display: flex; flex-direction: column; gap: 2px; }
-.faq-item { border: 1px solid rgba(114,47,55,0.1); border-radius: var(--radius-md); overflow: hidden; }
-.faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; background: var(--white); border: none; cursor: pointer; font-family: var(--ff-body); font-size: 15px; font-weight: 600; color: var(--charcoal); text-align: left; transition: background var(--transition); min-height: var(--touch-min); }
-.faq-question:hover, .faq-question[aria-expanded="true"] { background: var(--light-gold); color: var(--wine); }
+/* ─── FAQ (2 colonnes, filets simples) ──────────────────────── */
+.faq-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 clamp(24px,3.4vw,48px); align-items: start; }
+.faq-item { border-bottom: 1px solid rgba(114,47,55,0.14); }
+.faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 2px; background: transparent; border: none; cursor: pointer; font-family: var(--ff-body); font-size: 15px; font-weight: 600; color: var(--charcoal); text-align: left; transition: color var(--transition); min-height: var(--touch-min); }
+.faq-question:hover, .faq-question[aria-expanded="true"] { color: var(--wine); }
 .faq-chevron { color: var(--stone); flex-shrink: 0; transition: transform var(--transition); }
 .faq-question[aria-expanded="true"] .faq-chevron { transform: rotate(180deg); color: var(--wine); }
-.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: var(--white); }
-.faq-answer.open { max-height: 400px; }
-.faq-answer-inner { padding: 0 22px 18px; font-size: 15px; line-height: 1.7; color: var(--slate); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-answer.open { max-height: 700px; }
+.faq-answer-inner { padding: 0 2px 20px; font-size: 15px; line-height: 1.7; color: var(--slate); }
 
+/* ─── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .priv-gestures { grid-template-columns: 1fr; gap: 40px; }
+  .priv-numeral { font-size: 88px; margin-top: -6px; }
+  .priv-details { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .priv-menu-wrap { display: block; }
+  .priv-menu-photo { width: 100%; aspect-ratio: 16/10; }
+  .priv-menu { position: static; transform: none; width: 92%; margin: -44px auto 0; }
+  .priv-sec--host { padding: clamp(52px,7vw,96px) clamp(20px,5vw,60px); }
+  .priv-host-grid { grid-template-columns: 1fr; gap: 28px; }
+  .priv-host-portrait { max-width: 320px; border-radius: var(--radius-xl); }
+  .priv-price-grid { grid-template-columns: 1fr; gap: 36px; }
+  .faq-list { grid-template-columns: 1fr; }
+}
 @media (max-width: 640px) {
-  .slot-card { flex-direction: column; align-items: flex-start; }
-  .btn-book-slot { width: 100%; }
-  .priv-price-card { padding: 28px 24px; }
-  .priv-host { flex-direction: column; }
   .priv-info-bar-inner { flex-wrap: wrap; }
   .priv-info-item { flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(250,246,241,0.1); padding: 16px; }
+  .priv-details { grid-template-columns: 1fr; }
+  .priv-price-list { grid-template-columns: 1fr; }
+  .priv-pull { padding-left: 16px; }
+  .slot-card { flex-direction: column; align-items: flex-start; }
+  .btn-book-slot { width: 100%; }
 }
 </style>
 <script async src="https://analytics.winecheese.paris/js/pa-krMVZUVywC4sob83U_ji3.js"></script>
@@ -350,8 +400,8 @@ plausible.init()
 
 <!-- HEADER -->
 <header class="site-header solid" role="banner" id="site-header">
-  <a href="/" class="logo" aria-label="Wine & Cheese Paris, Home">
-    <span class="logo-main">Wine & Cheese Paris</span>
+  <a href="/" class="logo" aria-label="Wine &amp; Cheese Paris, Home">
+    <span class="logo-main">Wine &amp; Cheese Paris</span>
     <span class="logo-sub">Montmartre · SoPi</span>
   </a>
   <nav class="main-nav" aria-label="Main navigation">
@@ -376,43 +426,36 @@ plausible.init()
   <div class="page-hero-content">
     <p class="page-hero-eyebrow">Private &middot; Two Guests Only</p>
     <h1 class="page-hero-title">A Private Wine and Cheese Tasting for Two, in a Montmartre Cellar</h1>
-    <p class="page-hero-sub">Five wines, five pairings, two hours underground at the foot of Montmartre. Just the two of you and me. &euro;390 for the two of you, everything included.</p>
+    <p class="page-hero-sub">Five wines, five pairings, two hours underground at the foot of Montmartre. Just the two of you and me. <span class="hero-price">&euro;390</span> for the two of you, everything included.</p>
   </div>
 </div>
 
-<!-- INFO BAR -->
+<!-- INFO BAR : 4 items, le prix vit dans sa propre bande -->
 <div class="priv-info-bar" role="region" aria-label="Tasting details at a glance">
   <div class="priv-info-bar-inner">
     <div class="priv-info-item">
-      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
       <div>
         <span class="priv-info-label">Duration</span>
         <span class="priv-info-value">2 hours</span>
       </div>
     </div>
     <div class="priv-info-item">
-      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       <div>
         <span class="priv-info-label">Guests</span>
         <span class="priv-info-value">2, private</span>
       </div>
     </div>
     <div class="priv-info-item">
-      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
       <div>
         <span class="priv-info-label">Where</span>
         <span class="priv-info-value">Cave Les Piqueurs</span>
       </div>
     </div>
     <div class="priv-info-item">
-      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      <div>
-        <span class="priv-info-label">Total price</span>
-        <span class="priv-info-value">€390</span>
-      </div>
-    </div>
-    <div class="priv-info-item">
-      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <svg class="priv-info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       <div>
         <span class="priv-info-label">Cancellation</span>
         <span class="priv-info-value">Free 48h</span>
@@ -421,177 +464,255 @@ plausible.init()
   </div>
 </div>
 
-<section class="section" id="story-content">
-  <div class="section-inner priv-layout">
-
-    <!-- THE STORY -->
-    <div class="priv-block fade-in">
-      <p class="priv-eyebrow">The story</p>
-      <div class="priv-body">
-        <p>I live five minutes from here, in Pigalle.</p>
-        <p>Rue Tardieu is the last flat street before the hill starts. The funicular, the crowd walking up to Sacré-Cœur, the noise of all of it. You come into the shop, you go down about twenty steps, and the noise stops.</p>
-        <p>A cellar holds the same temperature all year, so in August it is cold down there and in January it is not. Stone walls, a low vault, one table, glasses lined up on a sheet of white paper so you can actually see the colour of what you are drinking.</p>
-        <p>Nobody else comes down. It is you two, me, and whoever brings the plates.</p>
-        <p>I pour, we taste, you tell me what you smell. You are allowed to be wrong, there is nobody down here to hear it. That is most of the reason I do this in a cellar with the door shut rather than in a bar.</p>
-      </div>
+<!-- 1. THE STORY : rail prose 560, calé à gauche -->
+<section class="priv-sec" id="story-content">
+  <div class="rail-wide">
+    <h2 class="sr-only">The story</h2>
+    <div class="priv-prose rail-prose fade-in">
+      <p class="priv-lede">I live five minutes from here, in Pigalle.</p>
+      <p>Rue Tardieu is the last flat street before the hill starts. The funicular, the crowd walking up to Sacré-Cœur, the noise of all of it. You come into the shop, you go down about twenty steps, and the noise stops.</p>
+      <p>A cellar holds the same temperature all year, so in August it is cold down there and in January it is not. Stone walls, a low vault, one table, glasses lined up on a sheet of white paper so you can actually see the colour of what you are drinking.</p>
+      <p>Nobody else comes down. It is you two, me, and whoever brings the plates.</p>
+      <p>I pour, we taste, you tell me what you smell.</p>
     </div>
+  </div>
+</section>
 
-    <div class="priv-inline-img fade-in"><img src="images/caviste-cave.jpg" alt="A caviste pouring red wine into two glasses at a stone-walled wine cellar bar" loading="lazy"></div>
+<!-- 2. PULL QUOTE : mêmes mots, déplacés, déportés à droite -->
+<section class="priv-sec priv-sec--flush-top">
+  <div class="rail-wide">
+    <blockquote class="priv-pull fade-in">
+      <p class="priv-pull-line">You are allowed to be wrong, there is nobody down here to hear it.</p>
+      <p class="priv-pull-tail">That is most of the reason I do this in a cellar with the door shut rather than in a bar.</p>
+    </blockquote>
+  </div>
+</section>
 
-    <!-- WHAT HAPPENS IN THE TWO HOURS -->
-    <div class="priv-block fade-in">
-      <p class="priv-eyebrow">What happens in the two hours</p>
-      <div class="priv-timeline">
-        <div class="priv-step"><span class="priv-step-num">1</span><p class="priv-step-body"><strong>The first ten minutes.</strong> We sit down and I pour a glass. Before anything else, I show you how to taste: look at it, smell it, drink it, then breathe out through your nose. That last part is where the flavour actually lives, and almost nobody is taught it.</p></div>
-        <div class="priv-step"><span class="priv-step-num">2</span><p class="priv-step-body"><strong>Then five times in a row, the same move.</strong> Taste the wine on its own. Taste the cheese on its own. Then keep a little cheese in your mouth, add a sip of wine, chew them together, and breathe out. That is the moment a pairing either works or falls apart, and you feel it happen yourself instead of taking my word for it.</p></div>
-        <div class="priv-step"><span class="priv-step-num">3</span><p class="priv-step-body"><strong>Two ages of the same cheese, side by side.</strong> Comté at 18 months and at 36 months, in front of you at the same time. It is the point in the evening where the two of you usually disagree, and that is the useful part.</p></div>
-        <div class="priv-step"><span class="priv-step-num">4</span><p class="priv-step-body"><strong>Around the one hour mark, we go back to the first wine.</strong> It has been open since you sat down. You taste it again. It is not the same wine. Nothing I say about aeration lands the way that does.</p></div>
-        <div class="priv-step"><span class="priv-step-num">5</span><p class="priv-step-body"><strong>The last pairing is sweet against salt.</strong> A fortified Muscat on a blue cheese. The one people arrive certain they will not like.</p></div>
-        <div class="priv-step"><span class="priv-step-num">6</span><p class="priv-step-body"><strong>Questions, whenever they turn up.</strong> How a cheese is actually made, why a grape tastes of one place and not another, how to serve wine at home, what to buy when you get back. This is a conversation with a structure, not a lecture. I start wherever you are, including from zero.</p></div>
-        <div class="priv-step"><span class="priv-step-num">7</span><p class="priv-step-body"><strong>On the table throughout:</strong> bread, walnuts, raisins, and a carafe of water, still and sparkling.</p></div>
-        <div class="priv-step"><span class="priv-step-num">8</span><p class="priv-step-body"><strong>The next morning,</strong> a tasting card lands in your inbox as a PDF. Every wine and every cheese in the order it was poured, with the producer, the grape, the appellation and the village, so you can find these bottles again at home.</p></div>
+<!-- 3. RESPIRATION : image pleine largeur, sans radius ni ombre -->
+<figure class="priv-bleed">
+  <img src="images/caviste-cave.jpg" alt="A caviste pouring red wine into two glasses at a stone-walled wine cellar bar" loading="lazy">
+</figure>
+
+<!-- 4. WHAT HAPPENS : les gestes + le gros chiffre -->
+<section class="priv-sec">
+  <div class="rail-wide">
+    <h2 class="priv-h2 fade-in">What happens in the two hours</h2>
+    <div class="priv-gestures fade-in">
+      <div class="priv-gesture">
+        <p class="priv-gesture-k">The first ten minutes.</p>
+        <p class="priv-gesture-t">We sit down and I pour a glass. Before anything else, I show you how to taste: look at it, smell it, drink it, then breathe out through your nose. That last part is where the flavour actually lives, and almost nobody is taught it.</p>
       </div>
-
-      <div class="priv-sequence">
-        <p class="priv-sequence-title">The sequence is rebuilt for every tasting, around the cheeses that are genuinely good that week. One recent evening ran like this:</p>
-        <ol>
-          <li>Grower Champagne, blanc de blancs, zero dosage (Olivier Belin, Essomes-sur-Marne), with warm gougères</li>
-          <li>Touraine Sauvignon Blanc 2024 (Domaine Delobel, Oisly), with a fresh goat log</li>
-          <li>Coteaux du Vendômois "Intuition" 2022, Pineau d'Aunis (Domaine Colin), with Morbier</li>
-          <li>Savagnin 2023 grown fifteen kilometres from the table (Les Coteaux du Montguichet, Chelles), with Comté at 18 and 36 months</li>
-          <li>Muscat de Beaumes de Venise (Domaine de Durban), with Fourme d'Ambert</li>
-        </ol>
-      </div>
-    </div>
-
-    <!-- YOUR HOST -->
-    <div class="priv-block fade-in">
-      <p class="priv-eyebrow">Your host</p>
-      <div class="priv-host">
-        <div class="priv-host-photo"><img src="images/ThomasPerrienWineCheese.png" alt="Thomas Perrien, your host, holding a glass of white wine" loading="lazy"></div>
-        <p class="priv-host-body">I am Thomas. I am French, I am WSET Certified, and I have lived in Pigalle for years. Before this I worked in fintech in London. I host every tasting myself, in English, and I have never sent a stand-in. I am not a guide reading a script about a neighbourhood I commute to. I buy my cheese on this street.</p>
-      </div>
-    </div>
-
-    <div class="priv-inline-img fade-in"><img src="images/tasting-table.jpg" alt="Top-down view of wine glasses and a wedge of blue cheese on a wooden table, bread crumbs and a cork scattered around" loading="lazy"></div>
-
-    <!-- PRICE -->
-    <div class="priv-block fade-in">
-      <div class="priv-price-card">
-        <p class="priv-price-headline">€390 for the two of you. Everything included.</p>
-        <p class="priv-price-includes">Five wines, the cheese board, bread, walnuts, raisins, still and sparkling water, two hours of the cellar with nobody else in it, and your tasting card by email afterwards.</p>
-        <p class="priv-price-note">No service charge added at the end. No tipping expected. That is the whole number.</p>
-        <p class="priv-payment-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Pay securely by card, Apple Pay, Klarna or Link.</p>
-        <p class="priv-citable">A private wine and cheese tasting for two at Wine &amp; Cheese Paris costs €390 in total, lasts two hours, includes five wines and five pairings, and takes place in an underground cellar at 6 rue Tardieu in Montmartre, Paris 18e, hosted in English by Thomas Perrien, a WSET-certified guide who lives in the neighbourhood.</p>
-      </div>
-    </div>
-
-    <!-- DATES / SLOTS -->
-    <div class="priv-block fade-in">
-      <p class="priv-eyebrow">Next available</p>
-      <p class="priv-slots-intro">Cave Les Piqueurs, 6 rue Tardieu, 75018 Paris. Two hours. Two guests. In English.</p>
-
-      <!-- SLOTS:START -->
-      <div class="slots-grid">
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">Saturday 8 August 2026, 11:00am to 1:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sat-2026-08-08-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-08-1100">Book this slot, €390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">Saturday 8 August 2026, 4:00pm to 6:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sat-2026-08-08-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-08-1600">Book this slot, €390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">Saturday 8 August 2026, 7:00pm to 9:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sat-2026-08-08-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-08-1900">Book this slot, €390</a>
-        </div>
-      </div>
-      <!-- SLOTS:END -->
-
-      <p class="priv-slots-footnote">You pay now, by card. You get the exact address and my phone number straight away. Booking closes at midday on the day itself, and yes, people book this the night before.</p>
-      <p class="priv-slots-more">Also open: Saturday 15, Saturday 22 and Saturday 29 August.<br>
-      <a href="contact.html" class="priv-slots-more-link" id="laterDateLink">Ask about one of these dates <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></p>
-
-      <!-- SECONDARY PATH -->
-      <div class="priv-secondary">
-        <p class="priv-secondary-title">Something other than this?</p>
-        <p class="priv-secondary-body">A different date, four of you instead of two, or somewhere else entirely: a private apartment, your hotel, a boat on the Seine. Tell me what you have in mind and I will send you a quote. Reply usually within four hours.</p>
-        <a href="contact.html" class="priv-secondary-link" id="askThomasLink">Ask Thomas</a>
-      </div>
-    </div>
-
-    <!-- FAQ -->
-    <div class="priv-block fade-in">
-      <p class="priv-eyebrow">FAQ</p>
-      <div class="faq-list" role="list">
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span>How much is it, all in, for the two of us?</span>
-            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner"><p>€390 for the two of you. That covers the five wines, the cheese board, bread, walnuts, raisins, water, the two hours of private use of the cellar and the tasting card sent to you afterwards. Nothing is added at the end and no tip is expected in France.</p></div></div>
-        </div>
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span>Is it really private, or do we get put with strangers?</span>
-            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner"><p>Really private. The cellar is booked for the two of you for the full two hours. Nobody else comes down except the person bringing the plates. The shop upstairs stays open to the public, the cellar does not.</p></div></div>
-        </div>
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span>What do we actually drink and eat?</span>
-            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner"><p>Five wines, poured by me, each one matched to something from the cheese board, plus bread, walnuts, raisins and a carafe of water. The line-up changes with what is good that week, but it always spans several French regions and several different families of cheese: fresh and lactic, pressed and uncooked, pressed and cooked, blue. A charcuterie board or a dessert pairing can be added if you tell me when you book.</p></div></div>
-        </div>
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span>Is it enough food to count as dinner?</span>
-            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner"><p>For most people, yes. Five cheeses, bread and nuts across two hours is a real meal, which is why the 7:00pm slot works as your evening rather than something you squeeze in before it. If you have big appetites, eat something small first or ask me to add the charcuterie.</p></div></div>
-        </div>
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span>Do we need to know anything about wine?</span>
-            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner"><p>No. Most people arrive knowing they like some wines and not others and unable to say why. That is the ideal starting point. If one of you is well ahead of the other, that is fine too, I run the table at both levels at once. You leave with a method you can use in a shop, not a list of names to memorise.</p></div></div>
-        </div>
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span>Where is it, and how do we get there?</span>
-            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner"><p>Cave Les Piqueurs, 6 rue Tardieu, 75018 Paris, at the foot of Montmartre. Métro Anvers, line 2, is two minutes away. Abbesses, line 12, is about five. The tasting is hosted in English throughout. Note that the cellar is downstairs, roughly twenty steps, with no lift and no step-free route.</p></div></div>
-        </div>
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span>One of us is pregnant, does not drink, or cannot have dairy. Does that work?</span>
-            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner"><p>Vegetarians are completely fine, no cheese here contains meat. But I will be straight with you: if one of you is pregnant, does not drink alcohol, or is lactose intolerant, this particular tasting is not the right thing to book. It is five glasses of wine and a cheese board over two hours, and there is no honest way to make that work around it. Write to me and I will build you something else rather than sell you this.</p></div></div>
-        </div>
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span>What if our plans change?</span>
-            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer"><div class="faq-answer-inner"><p>Cancel or move your booking free of charge up to 48 hours before the start time and you get all €390 back. Inside 48 hours, a €100 deposit is kept and €290 is refunded to your card, because the wine and the cheese have already been bought for you by then. Moving to another date inside 48 hours is free if I can fill the slot, so ask me before you cancel.</p></div></div>
+      <div class="priv-gesture priv-gesture--five">
+        <span class="priv-numeral" aria-hidden="true">5</span>
+        <div class="priv-gesture-inner">
+          <p class="priv-gesture-k">Then five times in a row, the same move.</p>
+          <p class="priv-gesture-t">Taste the wine on its own. Taste the cheese on its own. Then keep a little cheese in your mouth, add a sip of wine, chew them together, and breathe out. That is the moment a pairing either works or falls apart, and you feel it happen yourself instead of taking my word for it.</p>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
+<!-- 5. LE MOMENT FORT : bande sombre pleine largeur -->
+<div class="priv-moment">
+  <div class="priv-moment-inner fade-in">
+    <p class="priv-moment-k">Around the one hour mark, we go back to the first wine.</p>
+    <p class="priv-moment-line">It has been open since you sat down. You taste it again. It is not the same wine.</p>
+    <p class="priv-moment-tail">Nothing I say about aeration lands the way that does.</p>
+  </div>
+</div>
+
+<!-- 6. L'INTENDANCE : grille dense, 14px, poids visuel bas -->
+<section class="priv-sec">
+  <div class="rail-wide priv-details fade-in">
+    <div class="priv-detail">
+      <p class="priv-detail-k">Two ages of the same cheese, side by side.</p>
+      <p class="priv-detail-t">Comté at 18 months and at 36 months, in front of you at the same time. It is the point in the evening where the two of you usually disagree, and that is the useful part.</p>
+    </div>
+    <div class="priv-detail">
+      <p class="priv-detail-k">The last pairing is sweet against salt.</p>
+      <p class="priv-detail-t">A fortified Muscat on a blue cheese. The one people arrive certain they will not like.</p>
+    </div>
+    <div class="priv-detail">
+      <p class="priv-detail-k">Questions, whenever they turn up.</p>
+      <p class="priv-detail-t">How a cheese is actually made, why a grape tastes of one place and not another, how to serve wine at home, what to buy when you get back. This is a conversation with a structure, not a lecture. I start wherever you are, including from zero.</p>
+    </div>
+    <div class="priv-detail">
+      <p class="priv-detail-k">On the table throughout:</p>
+      <p class="priv-detail-t">bread, walnuts, raisins, and a carafe of water, still and sparkling.</p>
+    </div>
+    <div class="priv-detail">
+      <p class="priv-detail-k">The next morning,</p>
+      <p class="priv-detail-t">a tasting card lands in your inbox as a PDF. Every wine and every cheese in the order it was poured, with the producer, the grape, the appellation and the village, so you can find these bottles again at home.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. LA CARTE DES 5 VINS : chevauchement léger sur la photo -->
+<section class="priv-sec priv-sec--flush-top">
+  <h2 class="sr-only">The sequence</h2>
+  <div class="rail-wide priv-menu-wrap fade-in">
+    <div class="priv-menu-photo">
+      <img src="images/tasting-table.jpg" alt="Top-down view of wine glasses and a wedge of blue cheese on a wooden table, bread crumbs and a cork scattered around" loading="lazy">
+    </div>
+    <div class="priv-menu">
+      <p class="priv-menu-intro">The sequence is rebuilt for every tasting, around the cheeses that are genuinely good that week. One recent evening ran like this:</p>
+      <ol class="priv-menu-list">
+        <li><span class="priv-menu-num">01</span><span class="priv-menu-wine">Grower Champagne, blanc de blancs, zero dosage (Olivier Belin, Essomes-sur-Marne)</span><span class="priv-menu-pair">with warm gougères</span></li>
+        <li><span class="priv-menu-num">02</span><span class="priv-menu-wine">Touraine Sauvignon Blanc 2024 (Domaine Delobel, Oisly)</span><span class="priv-menu-pair">with a fresh goat log</span></li>
+        <li><span class="priv-menu-num">03</span><span class="priv-menu-wine">Coteaux du Vendômois "Intuition" 2022, Pineau d'Aunis (Domaine Colin)</span><span class="priv-menu-pair">with Morbier</span></li>
+        <li><span class="priv-menu-num">04</span><span class="priv-menu-wine">Savagnin 2023 grown fifteen kilometres from the table (Les Coteaux du Montguichet, Chelles)</span><span class="priv-menu-pair">with Comté at 18 and 36 months</span></li>
+        <li><span class="priv-menu-num">05</span><span class="priv-menu-wine">Muscat de Beaumes de Venise (Domaine de Durban)</span><span class="priv-menu-pair">with Fourme d'Ambert</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 8. YOUR HOST : portrait grand format ancré au bord gauche -->
+<section class="priv-sec priv-sec--host">
+  <h2 class="sr-only">Your host</h2>
+  <div class="priv-host-grid fade-in">
+    <div class="priv-host-portrait">
+      <img src="images/ThomasPerrienWineCheese.png" alt="Thomas Perrien, your host, holding a glass of white wine with the Sacré-Cœur behind him" loading="lazy">
+    </div>
+    <div class="priv-host-text">
+      <p>I am Thomas. I am French, I am WSET Certified, and I have lived in Pigalle for years. Before this I worked in fintech in London. I host every tasting myself, in English, and I have never sent a stand-in. I am not a guide reading a script about a neighbourhood I commute to. I buy my cheese on this street.</p>
+      <p class="priv-host-sign">Thomas</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9. LE PRIX : bande pleine largeur, €390 en 150px -->
+<div class="priv-price-band">
+  <div class="priv-price-grid fade-in">
+    <div>
+      <h2 class="priv-price-h2">
+        <span class="priv-price-amount">&euro;390</span>
+        <span class="priv-price-caption">for the two of you. Everything included.</span>
+      </h2>
+    </div>
+    <div>
+      <ul class="priv-price-list">
+        <li>Five wines</li>
+        <li>The cheese board</li>
+        <li>Bread, walnuts, raisins</li>
+        <li>Still and sparkling water</li>
+        <li>Two hours of the cellar with nobody else in it</li>
+        <li>Your tasting card by email afterwards</li>
+      </ul>
+      <p class="priv-price-note">No service charge added at the end. No tipping expected. That is the whole number.</p>
+      <p class="priv-payment-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Pay securely by card, Apple Pay, Klarna or Link.</p>
+    </div>
+    <p class="priv-citable">A private wine and cheese tasting for two at Wine &amp; Cheese Paris costs €390 in total, lasts two hours, includes five wines and five pairings, and takes place in an underground cellar at 6 rue Tardieu in Montmartre, Paris 18e, hosted in English by Thomas Perrien, a WSET-certified guide who lives in the neighbourhood.</p>
+  </div>
+</div>
+
+<!-- 10. CRÉNEAUX -->
+<section class="priv-sec">
+  <div class="rail-mid fade-in">
+    <h2 class="priv-h2-sm">Next available</h2>
+    <p class="priv-slots-intro">Cave Les Piqueurs, 6 rue Tardieu, 75018 Paris. Two hours. Two guests. In English.</p>
+
+    <!-- SLOTS:START -->
+    <div class="slots-grid">
+      <div class="slot-card">
+        <div>
+          <p class="slot-label">Saturday 8 August 2026, 11:00am to 1:00pm</p>
+          <p class="slot-sub">Private, just the two of you</p>
+        </div>
+        <a class="btn-book-slot" data-slot="sat-2026-08-08-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-08-1100">Book this slot, €390</a>
+      </div>
+      <div class="slot-card">
+        <div>
+          <p class="slot-label">Saturday 8 August 2026, 4:00pm to 6:00pm</p>
+          <p class="slot-sub">Private, just the two of you</p>
+        </div>
+        <a class="btn-book-slot" data-slot="sat-2026-08-08-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-08-1600">Book this slot, €390</a>
+      </div>
+      <div class="slot-card">
+        <div>
+          <p class="slot-label">Saturday 8 August 2026, 7:00pm to 9:00pm</p>
+          <p class="slot-sub">Private, just the two of you</p>
+        </div>
+        <a class="btn-book-slot" data-slot="sat-2026-08-08-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-08-1900">Book this slot, €390</a>
+      </div>
+    </div>
+    <!-- SLOTS:END -->
+
+    <p class="priv-slots-footnote">You pay now, by card. You get the exact address and my phone number straight away. Booking closes at midday on the day itself, and yes, people book this the night before.</p>
+    <p class="priv-slots-more">Also open: Saturday 15, Saturday 22 and Saturday 29 August.<br>
+    <a href="contact.html" class="priv-slots-more-link" id="laterDateLink">Ask about one of these dates <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></p>
+
+    <div class="priv-secondary">
+      <p class="priv-secondary-title">Something other than this?</p>
+      <p class="priv-secondary-body">A different date, four of you instead of two, or somewhere else entirely: a private apartment, your hotel, a boat on the Seine. Tell me what you have in mind and I will send you a quote. Reply usually within four hours.</p>
+      <a href="contact.html" class="priv-secondary-link" id="askThomasLink">Ask Thomas</a>
+    </div>
+  </div>
+</section>
+
+<!-- 11. FAQ : 2 colonnes -->
+<section class="priv-sec priv-sec--flush-top">
+  <div class="rail-wide fade-in">
+    <h2 class="priv-h2-sm">FAQ</h2>
+    <div class="faq-list" role="list">
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>How much is it, all in, for the two of us?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>€390 for the two of you. That covers the five wines, the cheese board, bread, walnuts, raisins, water, the two hours of private use of the cellar and the tasting card sent to you afterwards. Nothing is added at the end and no tip is expected in France.</p></div></div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Is it really private, or do we get put with strangers?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Really private. The cellar is booked for the two of you for the full two hours. Nobody else comes down except the person bringing the plates. The shop upstairs stays open to the public, the cellar does not.</p></div></div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>What do we actually drink and eat?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Five wines, poured by me, each one matched to something from the cheese board, plus bread, walnuts, raisins and a carafe of water. The line-up changes with what is good that week, but it always spans several French regions and several different families of cheese: fresh and lactic, pressed and uncooked, pressed and cooked, blue. A charcuterie board or a dessert pairing can be added if you tell me when you book.</p></div></div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Is it enough food to count as dinner?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>For most people, yes. Five cheeses, bread and nuts across two hours is a real meal, which is why the 7:00pm slot works as your evening rather than something you squeeze in before it. If you have big appetites, eat something small first or ask me to add the charcuterie.</p></div></div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do we need to know anything about wine?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>No. Most people arrive knowing they like some wines and not others and unable to say why. That is the ideal starting point. If one of you is well ahead of the other, that is fine too, I run the table at both levels at once. You leave with a method you can use in a shop, not a list of names to memorise.</p></div></div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Where is it, and how do we get there?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Cave Les Piqueurs, 6 rue Tardieu, 75018 Paris, at the foot of Montmartre. Métro Anvers, line 2, is two minutes away. Abbesses, line 12, is about five. The tasting is hosted in English throughout. Note that the cellar is downstairs, roughly twenty steps, with no lift and no step-free route.</p></div></div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>One of us is pregnant, does not drink, or cannot have dairy. Does that work?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Vegetarians are completely fine, no cheese here contains meat. But I will be straight with you: if one of you is pregnant, does not drink alcohol, or is lactose intolerant, this particular tasting is not the right thing to book. It is five glasses of wine and a cheese board over two hours, and there is no honest way to make that work around it. Write to me and I will build you something else rather than sell you this.</p></div></div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>What if our plans change?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Cancel or move your booking free of charge up to 48 hours before the start time and you get all €390 back. Inside 48 hours, a €100 deposit is kept and €290 is refunded to your card, because the wine and the cheese have already been bought for you by then. Moving to another date inside 48 hours is free if I can fill the slot, so ask me before you cancel.</p></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
