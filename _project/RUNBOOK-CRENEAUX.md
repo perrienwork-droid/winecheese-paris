@@ -5,34 +5,72 @@ toute la page : `https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01`.
 
 ## 1. Faire tourner les dates chaque semaine
 
+**Depuis le chaînage (6 août 2026), les créneaux s'ouvrent par bloc de deux
+jours consécutifs, jamais un seul jour isolé.** Les bouteilles ouvertes le
+premier jour, sous pompe à vide, servent encore le lendemain, donc le site
+propose systématiquement une paire de jours qui se suivent sur le calendrier
+(samedi + dimanche, ou n'importe quelle autre paire consécutive) sur la même
+série de vins.
+
 Dans le fichier, cherche le commentaire `<!-- SLOTS:START -->` et remplace
-tout le bloc jusqu'à `<!-- SLOTS:END -->` par un bloc à jour. Copie-colle cet
-exemple et change seulement les trois dates, les trois horaires et les trois
+tout le bloc jusqu'à `<!-- SLOTS:END -->` par un bloc à jour : deux
+`<div class="slots-day-group">`, chacun avec son `<p class="slots-day-label">`
+(le jour, sans l'horaire) et sa `<div class="slots-grid">` de créneaux.
+Copie-colle cet exemple et change les deux dates, les horaires et les six
 identifiants :
 
 ```html
 <!-- SLOTS:START -->
-<div class="slots-grid">
-  <div class="slot-card">
-    <div>
-      <p class="slot-label">Saturday 15 August 2026, 11:00am to 1:00pm</p>
-      <p class="slot-sub">Private, just the two of you</p>
+<div class="slots-day-group">
+  <p class="slots-day-label">Saturday 15 August 2026</p>
+  <div class="slots-grid">
+    <div class="slot-card">
+      <div>
+        <p class="slot-label">11:00am to 1:00pm</p>
+        <p class="slot-sub">Private, just the two of you</p>
+      </div>
+      <a class="btn-book-slot" data-slot="sat-2026-08-15-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1100">Book this slot, €390</a>
     </div>
-    <a class="btn-book-slot" data-slot="sat-2026-08-15-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1100">Book this slot, €390</a>
+    <div class="slot-card">
+      <div>
+        <p class="slot-label">4:00pm to 6:00pm</p>
+        <p class="slot-sub">Private, just the two of you</p>
+      </div>
+      <a class="btn-book-slot" data-slot="sat-2026-08-15-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1600">Book this slot, €390</a>
+    </div>
+    <div class="slot-card">
+      <div>
+        <p class="slot-label">7:00pm to 9:00pm</p>
+        <p class="slot-sub">Private, just the two of you</p>
+      </div>
+      <a class="btn-book-slot" data-slot="sat-2026-08-15-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1900">Book this slot, €390</a>
+    </div>
   </div>
-  <div class="slot-card">
-    <div>
-      <p class="slot-label">Saturday 15 August 2026, 4:00pm to 6:00pm</p>
-      <p class="slot-sub">Private, just the two of you</p>
+</div>
+<div class="slots-day-group">
+  <p class="slots-day-label">Sunday 16 August 2026</p>
+  <div class="slots-grid">
+    <div class="slot-card">
+      <div>
+        <p class="slot-label">11:00am to 1:00pm</p>
+        <p class="slot-sub">Private, just the two of you</p>
+      </div>
+      <a class="btn-book-slot" data-slot="sun-2026-08-16-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-08-16-1100">Book this slot, €390</a>
     </div>
-    <a class="btn-book-slot" data-slot="sat-2026-08-15-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1600">Book this slot, €390</a>
-  </div>
-  <div class="slot-card">
-    <div>
-      <p class="slot-label">Saturday 15 August 2026, 7:00pm to 9:00pm</p>
-      <p class="slot-sub">Private, just the two of you</p>
+    <div class="slot-card">
+      <div>
+        <p class="slot-label">4:00pm to 6:00pm</p>
+        <p class="slot-sub">Private, just the two of you</p>
+      </div>
+      <a class="btn-book-slot" data-slot="sun-2026-08-16-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-08-16-1600">Book this slot, €390</a>
     </div>
-    <a class="btn-book-slot" data-slot="sat-2026-08-15-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1900">Book this slot, €390</a>
+    <div class="slot-card">
+      <div>
+        <p class="slot-label">7:00pm to 9:00pm</p>
+        <p class="slot-sub">Private, just the two of you</p>
+      </div>
+      <a class="btn-book-slot" data-slot="sun-2026-08-16-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-08-16-1900">Book this slot, €390</a>
+    </div>
   </div>
 </div>
 <!-- SLOTS:END -->
@@ -40,14 +78,23 @@ identifiants :
 
 Format de l'identifiant (`data-slot` et `client_reference_id`, toujours les
 mêmes) : `jour-annee-mois-jour-heure`, en minuscules, sans accent. Exemple
-`sat-2026-08-15-1100` pour samedi 15 août 2026 à 11h. Ne touche à rien
+`sun-2026-08-16-1100` pour dimanche 16 août 2026 à 11h. Ne touche à rien
 d'autre dans le fichier, ni au prix, ni au texte au-dessus ou en dessous du
-bloc.
+bloc, ni à `.priv-slots-chain-note` juste au-dessus (le paragraphe qui
+explique le chaînage au visiteur).
 
-**Contrainte de la cave à respecter à chaque rotation** : du jeudi au
-dimanche, le premier créneau peut être à 11h. Les autres jours (lundi à
-mercredi), rien avant 16h, donc il ne reste que deux créneaux possibles ce
-jour-là (16h et 19h) au lieu de trois.
+**Contrainte de la cave à respecter à chaque rotation, jour par jour à
+l'intérieur de la paire** : du jeudi au dimanche, le premier créneau peut être
+à 11h. Les autres jours (lundi à mercredi), rien avant 16h, donc il ne reste
+que deux créneaux possibles ce jour-là (16h et 19h) au lieu de trois. Une
+paire qui chevauche la frontière dimanche/lundi (par exemple dimanche +
+lundi) a donc trois créneaux le dimanche et deux seulement le lundi, c'est
+normal, ne pas essayer d'aligner les deux jours.
+
+**Les deux jours doivent être réellement consécutifs sur le calendrier.**
+C'est ce qui rend la phrase du `.priv-slots-chain-note` vraie : la même série
+de bouteilles sert les deux jours. Un jour isolé, ou deux jours qui ne se
+suivent pas, casse la promesse faite au visiteur, ne le fais jamais.
 
 Une fois le fichier modifié, commit et push sur `main` : le déploiement
 Dokploy se fait automatiquement.
@@ -55,9 +102,11 @@ Dokploy se fait automatiquement.
 ## 2. Quand un créneau est vendu
 
 Retire sa carte (le bloc `<div class="slot-card">...</div>` correspondant) du
-fichier, puis commit et push. Il n'y a pas de système de réservation
-automatique, donc la seule protection contre le double-booking est de retirer
-le créneau vendu de la page dès que le paiement est confirmé.
+fichier, puis commit et push. Si un `slots-day-group` se retrouve sans aucune
+carte à l'intérieur, retire le groupe entier (son `<p class="slots-day-label">`
+compris), ne laisse jamais un jour vide affiché. Il n'y a pas de système de
+réservation automatique, donc la seule protection contre le double-booking est
+de retirer le créneau vendu de la page dès que le paiement est confirmé.
 
 ## 3. Retrouver quel créneau a été acheté
 
