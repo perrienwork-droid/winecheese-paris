@@ -39,6 +39,11 @@
   --ff-display: 'Playfair Display', Georgia, serif;
   --ff-body:    'DM Sans', 'Helvetica Neue', sans-serif;
   --ff-accent:  'Cormorant Garamond', Garamond, serif;
+  --ff-serif:   'Lora', Georgia, serif;   /* corps de texte narratif long. Lora est dessinee pour
+                                              la lecture a l'ecran, pas pour l'affiche : contraste
+                                              modere, italique reelle. Cormorant Garamond reste un
+                                              serif de display, trop delicat en paragraphe courant.
+                                              Ajoutee le 7 aout 2026, DECISION en attente. */
 
   /* ─── ECHELLE TYPOGRAPHIQUE, TAILLES FIXES ────────────────────────
      Sept pas. Remplace vingt et une tailles fixes distinctes.
