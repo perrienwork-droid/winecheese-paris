@@ -1,0 +1,160 @@
+/* ════════════════════════════════════════════════════════════════════
+   tokens.css · le socle du systeme de design Wine & Cheese Paris
+   ────────────────────────────────────────────────────────────────────
+   Un seul endroit ou vivent les valeurs. Toute page charge ce fichier
+   avant shared.css. Aucune valeur de ce fichier ne se redefinit ailleurs.
+
+   Regle : une couleur, une taille de texte ou un espacement ecrit en dur
+   dans une page est un bug, pas un choix. Les seules exceptions admises
+   sont documentees en fin de fichier.
+
+   Pose le 7 aout 2026, sprint 1, pole design.
+   Les echelles ne sont pas inventees : elles sont derivees de l'inventaire
+   des valeurs reellement employees sur les six pages. Voir
+   07-design/systeme/INVENTAIRE-AVANT.md
+   ════════════════════════════════════════════════════════════════════ */
+
+:root {
+
+  /* ─── COULEURS ────────────────────────────────────────────────────
+     Actif de marque. Tout changement ici remonte en DECISION.        */
+
+  --wine:        #722F37;
+  --wine-rgb:    114,47,55;
+  --dark-wine:   #4A1A20;
+  --gold:        #C9A96E;
+  --gold-hover:  #B8924D;   /* etat survol de --gold. Etait en dur 8 fois */
+  --gold-text:   #7A6340;   /* --gold assombri pour atteindre AA sur --cream */
+  --light-gold:  #F5ECD7;
+  --cream:       #FAF6F1;
+  --charcoal:    #2C2C2C;
+  --slate:       #4A4A4A;
+  --stone:       #A69586;
+  --white:       #FFFFFF;
+
+  /* ─── FAMILLES TYPOGRAPHIQUES ─────────────────────────────────────
+     Actif de marque. Tout changement ici remonte en DECISION.        */
+
+  --ff-display: 'Playfair Display', Georgia, serif;
+  --ff-body:    'DM Sans', 'Helvetica Neue', sans-serif;
+  --ff-accent:  'Cormorant Garamond', Garamond, serif;
+
+  /* ─── ECHELLE TYPOGRAPHIQUE, TAILLES FIXES ────────────────────────
+     Sept pas. Remplace vingt et une tailles fixes distinctes.
+     Le header du site passait de 18, 14, 13, 12, 11 et 10 px a trois pas. */
+
+  --text-2xs:  11px;   /* surtitres et etiquettes en capitales */
+  --text-xs:   12px;   /* mentions legales, fil d'Ariane */
+  --text-sm:   14px;   /* navigation, liens de pied de page, meta */
+  --text-md:   16px;   /* corps de texte */
+  --text-base: 15px;   /* libelles de boutons, volontairement entre sm et md */
+  --text-lg:   18px;   /* chapo court, logo principal */
+  --text-xl:   20px;   /* intertitre de bloc */
+  --text-2xl:  24px;   /* titre de carte */
+
+  /* ─── ECHELLE TYPOGRAPHIQUE, TAILLES FLUIDES ──────────────────────
+     Huit rampes nommees par role, pas par niveau de titre : le meme mot
+     n'a pas la meme taille selon qu'il ouvre une page ou une carte.
+     Remplace dix-neuf clamp() distincts, dont quatre visuellement
+     indiscernables (26/3.5/42, 25/3.7/42, 26/3.6/40, 26/3.5/38).     */
+
+  --text-hero-xl:    clamp(84px, 10vw, 140px); /* mot ou chiffre geant */
+  --text-hero:       clamp(40px, 7vw, 80px);   /* titre de heros d'accueil */
+  --text-page-title: clamp(30px, 5vw, 56px);   /* titre de heros de page interieure */
+  --text-section:    clamp(28px, 4vw, 46px);   /* titre de section */
+  --text-block:      clamp(22px, 3vw, 32px);   /* titre de bloc */
+  --text-card:       clamp(20px, 2.4vw, 26px); /* titre de carte */
+  --text-lead:       clamp(17px, 2vw, 21px);   /* chapo */
+  --text-lead-sm:    clamp(15px, 1.8vw, 19px); /* chapo secondaire, accent italique */
+
+  /* ─── GRAISSES ────────────────────────────────────────────────────  */
+
+  --weight-normal:   400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* ─── INTERLIGNES ─────────────────────────────────────────────────  */
+
+  --leading-none:    1;
+  --leading-tight:   1.1;    /* titres de heros */
+  --leading-snug:    1.2;    /* titres de section */
+  --leading-normal:  1.5;    /* chapo */
+  --leading-relaxed: 1.6;    /* corps */
+  --leading-loose:   1.75;   /* corps long, paragraphes de description */
+
+  /* ─── APPROCHES ───────────────────────────────────────────────────  */
+
+  --tracking-tight:   -0.01em;  /* grands titres */
+  --tracking-normal:  0;
+  --tracking-wide:    0.02em;   /* libelles de boutons */
+  --tracking-caps:    0.16em;   /* petites capitales */
+  --tracking-caps-lg: 0.2em;    /* surtitres, capitales tres espacees */
+
+  /* ─── ECHELLE D'ESPACEMENT ────────────────────────────────────────
+     Grille de 4 px jusqu'a 32, puis pas de 8, puis pas de 16.
+     Quatorze pas, cales sur les valeurs les plus employees du site :
+     20 px (69 emplois), 28 px (50), 16 px (43), 24 px (28), 12 px (24).
+     C'est une echelle qui epouse le design existant, pas qui le refait. */
+
+  --space-4xs:   4px;
+  --space-3xs:   8px;
+  --space-2xs:  12px;
+  --space-xs:   16px;
+  --space-sm:   20px;
+  --space-md:   24px;
+  --space-lg:   28px;
+  --space-xl:   32px;
+  --space-2xl:  40px;
+  --space-3xl:  48px;
+  --space-4xl:  64px;
+  --space-5xl:  80px;
+  --space-6xl:  96px;
+  --space-7xl: 120px;
+
+  /* ─── ESPACEMENTS FLUIDES ─────────────────────────────────────────
+     Quatre rampes nommees. Remplace vingt-sept clamp() d'espacement
+     distincts, dont clamp(20px,5vw,60px) ecrit de deux facons
+     differentes et employe dix-neuf fois : c'est la gouttiere de page. */
+
+  --gutter:       clamp(20px, 5vw, 60px);     /* marge laterale de page */
+  --space-section: clamp(64px, 10vw, 120px);  /* respiration verticale de section */
+  --space-block:  clamp(40px, 6vw, 72px);     /* entre un en-tete et son contenu */
+  --space-group:  clamp(24px, 3.4vw, 48px);   /* entre deux blocs d'un meme groupe */
+
+  /* ─── FORMES, OMBRES, MOUVEMENT ───────────────────────────────────  */
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow-card:  0 4px 24px rgba(44,28,20,0.10);
+  --shadow-hover: 0 12px 40px rgba(44,28,20,0.18);
+  --shadow-gold-sm: 0 4px 16px rgba(201,169,110,0.40);
+  --shadow-gold-md: 0 8px 28px rgba(201,169,110,0.45);
+
+  --transition: 220ms ease;
+
+  /* ─── ACCESSIBILITE ───────────────────────────────────────────────  */
+
+  --touch-min: 48px;   /* cible tactile minimale, WCAG 2.1 AA. Ne pas baisser. */
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   HORS ECHELLE, ET ASSUME
+   ────────────────────────────────────────────────────────────────────
+   Trois familles de valeurs restent ecrites en dur, par choix :
+
+   1. Les epaisseurs de trait (1px, 2px, 3px) : ce sont des bordures et
+      des filets, pas des espacements. Les mettre sur l'echelle
+      d'espacement melangerait deux choses qui n'ont rien a voir.
+   2. Les micro-ecarts intra-composant sous 12 px (5px, 6px, 10px) :
+      ecart entre une icone et son libelle, entre deux barres d'un menu
+      hamburger. Les caler sur la grille casserait des alignements
+      optiques sans rien apporter au rythme vertical de la page.
+   3. Les valeurs en unites relatives (1rem, %, vw, vh) : elles repondent
+      au conteneur, pas a l'echelle.
+
+   Tout le reste passe par un token. Un px en dur ailleurs se corrige.
+   ════════════════════════════════════════════════════════════════════ */
