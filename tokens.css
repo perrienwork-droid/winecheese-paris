@@ -121,6 +121,7 @@
   --space-section: clamp(64px, 10vw, 120px);  /* respiration verticale de section */
   --space-block:  clamp(40px, 6vw, 72px);     /* entre un en-tete et son contenu */
   --space-group:  clamp(24px, 3.4vw, 48px);   /* entre deux blocs d'un meme groupe */
+  --space-tight:  clamp(16px, 2vw, 28px);     /* respiration interne d'un composant */
 
   /* ─── FORMES, OMBRES, MOUVEMENT ───────────────────────────────────  */
 

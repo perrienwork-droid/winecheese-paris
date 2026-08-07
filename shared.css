@@ -97,6 +97,13 @@ a { color: inherit; text-decoration: none; }
 .btn-secondary:hover { background:var(--dark-wine);transform:translateY(-2px); }
 .btn-outline-wine { display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:transparent;color:var(--wine);font-family:var(--ff-body);font-size:var(--text-base);font-weight:var(--weight-semibold);padding:0 var(--space-xl);height:52px;border-radius:var(--radius-sm);border:2px solid var(--wine);cursor:pointer;transition:all var(--transition);min-height:var(--touch-min); }
 .btn-outline-wine:hover { background:var(--wine);color:var(--cream); }
+/* Bouton fantome pose sur un aplat sombre. Vivait dans index.html, et
+   about.html le reimplementait entierement en attribut style= faute de
+   pouvoir le voir. Une seule definition desormais, deux variantes.     */
+.btn-cta-outline { display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:transparent;color:var(--cream);font-family:var(--ff-body);font-size:var(--text-md);font-weight:var(--weight-semibold);padding:0 var(--space-2xl);height:56px;border-radius:var(--radius-sm);border:2px solid rgba(250,246,241,0.4);cursor:pointer;transition:border-color var(--transition),background var(--transition);min-height:var(--touch-min); }
+.btn-cta-outline:hover { border-color:var(--cream);background:rgba(250,246,241,0.08); }
+.btn-cta-outline--gold { color:var(--gold);border-color:rgba(201,169,110,0.5);font-size:var(--text-base);height:54px;padding:0 var(--space-xl); }
+.btn-cta-outline--gold:hover { border-color:var(--gold);background:rgba(201,169,110,0.10); }
 
 /* ─── PIED DE PAGE ────────────────────────────────────────────────── */
 .site-footer { background:var(--charcoal);color:rgba(250,246,241,0.7);padding:var(--space-block) var(--gutter) var(--space-xl); }
