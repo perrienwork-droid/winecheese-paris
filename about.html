@@ -11,75 +11,76 @@
 <title>About Thomas, Wine & Cheese Paris</title>
 <meta name="description" content="Thomas is a Real Parisian, WSET Certified guide who has been living in Pigalle for many years. He leads intimate wine & cheese tours in Montmartre and SoPi.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="shared.css">
 <style>
-.about-hero-img { background-image: url('images/rue-martyrs.jpg'); background-position: center 40%; }
+.about-hero-img { background-image:url('images/rue-martyrs.jpg'); background-position:center 40%; }
 
 /* Intro bio layout */
-.bio-grid { display: grid; grid-template-columns: 420px 1fr; gap: clamp(40px,6vw,80px); align-items: start; }
-.bio-portrait { position: relative; border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 3/4; box-shadow: 20px 20px 0 var(--gold); }
+.bio-grid { display:grid; grid-template-columns:420px 1fr; gap:var(--space-block); align-items:start; }
+.bio-portrait { position:relative; border-radius:var(--radius-xl); overflow:hidden; aspect-ratio:3/4; box-shadow:20px 20px 0 var(--gold); }
 .bio-portrait img { width:100%;height:100%;object-fit:cover; }
-.bio-portrait-badge { position:absolute;bottom:-10px;right:-10px;background:var(--wine);color:var(--cream);border-radius:var(--radius-lg);padding:14px 18px;box-shadow:0 8px 24px rgba(114,47,55,0.3); }
-.bio-portrait-badge-title { font-family:var(--ff-display);font-size:15px;font-weight:600;line-height:1.2; }
-.bio-portrait-badge-sub { font-family:var(--ff-body);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.75;margin-top:3px; }
+.bio-portrait-badge { position:absolute;bottom:-10px;right:-10px;background:var(--wine);color:var(--cream);border-radius:var(--radius-lg);padding:var(--space-xs) var(--space-sm);box-shadow:0 8px 24px rgba(114,47,55,0.3); }
+.bio-portrait-badge-title { font-family:var(--ff-display);font-size:var(--text-base);font-weight:var(--weight-semibold);line-height:var(--leading-snug); }
+.bio-portrait-badge-sub { font-family:var(--ff-body);font-size:var(--text-2xs);letter-spacing:0.1em;text-transform:uppercase;opacity:0.75;margin-top:3px; }
 .bio-text .section-eyebrow { display:block;text-align:left; }
 .bio-text .section-title { text-align:left; }
-.bio-body { font-size:16px;line-height:1.85;color:var(--slate);margin-top:20px; }
-.bio-body p + p { margin-top:16px; }
-.bio-pullquote { font-family:var(--ff-accent);font-size:22px;font-style:italic;color:var(--wine);line-height:1.5;padding:28px 0;border-top:2px solid var(--light-gold);border-bottom:2px solid var(--light-gold);margin:32px 0; }
+.bio-body { font-size:var(--text-md);line-height:1.85;color:var(--slate);margin-top:var(--space-sm); }
+.bio-body p + p { margin-top:var(--space-xs); }
+.bio-pullquote { font-family:var(--ff-accent);font-size:var(--text-2xl);font-style:italic;color:var(--wine);line-height:var(--leading-normal);padding:var(--space-lg) 0;border-top:2px solid var(--light-gold);border-bottom:2px solid var(--light-gold);margin:var(--space-xl) 0; }
 
 /* Credentials section */
-.credentials { background: var(--dark-wine); }
-.credentials .section-eyebrow { color: var(--gold); }
-.credentials .section-title { color: var(--cream); }
-.creds-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; max-width: 760px; margin: 0 auto; }
-.cred-card { background: rgba(250,246,241,0.06); border: 1px solid rgba(250,246,241,0.1); border-radius: var(--radius-lg); padding: 32px 28px; transition: background var(--transition), transform var(--transition); }
-.cred-card:hover { background: rgba(250,246,241,0.1); transform: translateY(-3px); }
-.cred-icon { color: var(--gold); margin-bottom: 16px; }
-.cred-title { font-family: var(--ff-display); font-size: 18px; font-weight: 600; color: var(--cream); margin-bottom: 8px; }
-.cred-desc { font-size: 14px; line-height: 1.7; color: rgba(250,246,241,0.65); }
+.credentials { background:var(--dark-wine); }
+.credentials .section-eyebrow { color:var(--gold); }
+.credentials .section-title { color:var(--cream); }
+.creds-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-md); max-width:760px; margin:0 auto; }
+.cred-card { background:rgba(250,246,241,0.06); border:1px solid rgba(250,246,241,0.1); border-radius:var(--radius-lg); padding:var(--space-xl) var(--space-lg); transition:background var(--transition), transform var(--transition); }
+.cred-card:hover { background:rgba(250,246,241,0.1); transform:translateY(-3px); }
+.cred-icon { color:var(--gold); margin-bottom:var(--space-xs); }
+.cred-title { font-family:var(--ff-display); font-size:var(--text-lg); font-weight:var(--weight-semibold); color:var(--cream); margin-bottom:var(--space-3xs); }
+.cred-desc { font-size:var(--text-sm); line-height:var(--leading-loose); color:rgba(250,246,241,0.65); }
 
 /* Philosophy */
-.philosophy { background: var(--light-gold); }
-.philosophy-grid { display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center; }
+.philosophy { background:var(--light-gold); }
+.philosophy-grid { display:grid;grid-template-columns:1fr 1fr;gap:var(--space-block);align-items:center; }
 .philosophy-image { border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow-hover); }
 .philosophy-image img { width:100%;height:100%;object-fit:cover; }
 .philosophy-text .section-title { text-align:left; }
 .philosophy-text .section-eyebrow { text-align:left;display:block; }
-.philosophy-body { font-size:16px;line-height:1.8;color:var(--slate);margin-top:20px; }
-.philosophy-body p + p { margin-top:14px; }
+.philosophy-body { font-size:var(--text-md);line-height:var(--leading-loose);color:var(--slate);margin-top:var(--space-sm); }
+.philosophy-body p + p { margin-top:var(--space-xs); }
 
 /* Principles */
-.principles { display:flex;flex-direction:column;gap:16px;margin-top:28px; }
-.principle { display:flex;align-items:flex-start;gap:14px; }
-.principle-num { font-family:var(--ff-accent);font-size:28px;font-weight:600;color:var(--gold-text);line-height:1;flex-shrink:0;width:32px; }
-.principle-body h4 { font-weight:600;font-size:15px;color:var(--charcoal);margin-bottom:4px; }
-.principle-body p { font-size:14px;color:var(--slate);line-height:1.6; }
+.principles { display:flex;flex-direction:column;gap:var(--space-xs);margin-top:var(--space-lg); }
+.principle { display:flex;align-items:flex-start;gap:var(--space-xs); }
+.principle-num { font-family:var(--ff-accent);font-size:28px;font-weight:var(--weight-semibold);color:var(--gold-text);line-height:var(--leading-none);flex-shrink:0;width:32px; }
+.principle-body h4 { font-weight:var(--weight-semibold);font-size:var(--text-base);color:var(--charcoal);margin-bottom:var(--space-4xs); }
+.principle-body p { font-size:var(--text-sm);color:var(--slate);line-height:var(--leading-relaxed); }
 
 /* Stats row */
-.stats-row { background: var(--wine); padding: 48px clamp(20px,5vw,60px); }
-.stats-inner { max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px; }
+.stats-row { background:var(--wine); padding:48px var(--gutter); }
+.stats-inner { max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md); }
 .stat { text-align:center; }
-.stat-num { font-family:var(--ff-accent);font-size:52px;font-weight:600;color:var(--gold);line-height:1;display:block; }
-.stat-label { font-size:13px;font-weight:500;color:rgba(250,246,241,0.75);margin-top:6px;letter-spacing:0.05em; }
+.stat-num { font-family:var(--ff-accent);font-size:52px;font-weight:var(--weight-semibold);color:var(--gold);line-height:var(--leading-none);display:block; }
+.stat-label { font-size:var(--text-sm);font-weight:var(--weight-medium);color:rgba(250,246,241,0.75);margin-top:6px;letter-spacing:0.05em; }
 
 /* Partners section */
-.partners { background: var(--cream); }
-.partners-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px; }
-.partner-card { background:var(--white);border-radius:var(--radius-lg);padding:28px;border:1px solid rgba(114,47,55,0.07); }
-.partner-type { font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:8px; }
-.partner-name { font-family:var(--ff-display);font-size:18px;font-weight:600;color:var(--charcoal);margin-bottom:8px; }
-.partner-desc { font-size:13px;line-height:1.6;color:var(--slate); }
+.partners { background:var(--cream); }
+.partners-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md); }
+.partner-card { background:var(--white);border-radius:var(--radius-lg);padding:var(--space-lg);border:1px solid rgba(114,47,55,0.07); }
+.partner-type { font-size:var(--text-2xs);font-weight:var(--weight-bold);letter-spacing:var(--tracking-caps-lg);text-transform:uppercase;color:var(--gold-text);margin-bottom:var(--space-3xs); }
+.partner-name { font-family:var(--ff-display);font-size:var(--text-lg);font-weight:var(--weight-semibold);color:var(--charcoal);margin-bottom:var(--space-3xs); }
+.partner-desc { font-size:var(--text-sm);line-height:var(--leading-relaxed);color:var(--slate); }
 
 /* CTA */
-.about-cta { background:linear-gradient(135deg,var(--dark-wine) 0%,var(--wine) 100%);text-align:center;padding:clamp(56px,8vw,100px) clamp(20px,5vw,60px);position:relative;overflow:hidden; }
+.about-cta { background:linear-gradient(135deg,var(--dark-wine) 0%,var(--wine) 100%);text-align:center;padding:var(--space-section) var(--gutter);position:relative;overflow:hidden; }
 .about-cta::before { content:'';position:absolute;top:-40%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,0.1) 0%,transparent 70%);border-radius:50%; }
 .about-cta-inner { position:relative;z-index:2;max-width:600px;margin:0 auto; }
-.about-cta-eyebrow { font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block; }
-.about-cta-title { font-family:var(--ff-display);font-size:clamp(28px,4vw,44px);font-weight:500;color:var(--cream);line-height:1.15;margin-bottom:18px; }
+.about-cta-eyebrow { font-size:var(--text-2xs);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-caps-lg);text-transform:uppercase;color:var(--gold);margin-bottom:var(--space-xs);display:block; }
+.about-cta-title { font-family:var(--ff-display);font-size:var(--text-section);font-weight:var(--weight-medium);color:var(--cream);line-height:var(--leading-tight);margin-bottom:var(--space-sm); }
 .about-cta-title em { font-style:italic;color:var(--gold); }
-.about-cta-desc { font-size:16px;color:rgba(250,246,241,0.75);margin-bottom:36px;line-height:1.6; }
-.cta-buttons { display:flex;gap:14px;justify-content:center;flex-wrap:wrap; }
+.about-cta-desc { font-size:var(--text-md);color:rgba(250,246,241,0.75);margin-bottom:var(--space-2xl);line-height:var(--leading-relaxed); }
+.cta-buttons { display:flex;gap:var(--space-xs);justify-content:center;flex-wrap:wrap; }
 
 @media (max-width:960px) { .bio-grid,.philosophy-grid { grid-template-columns:1fr; } .bio-portrait { max-width:380px;margin:0 auto; } .creds-grid,.partners-grid { grid-template-columns:1fr 1fr; } .stats-inner { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:640px) { .creds-grid,.partners-grid { grid-template-columns:1fr; } .stats-inner { grid-template-columns:1fr 1fr; } }
@@ -253,8 +254,8 @@ plausible.init()
     <h2 class="about-cta-title" data-en="Let's walk the <em>neighbourhood together</em>" data-fr="Marchons dans le <em>quartier ensemble</em>">Let's walk the <em>neighbourhood together</em></h2>
     <p class="about-cta-desc" data-en="Small groups, real producers, no scripts. Choose your experience below, or get in touch if you have questions about what's right for you." data-fr="Petits groupes, vrais producteurs, pas de scripts. Choisissez votre expérience ci-dessous, ou contactez-moi si vous avez des questions.">Small groups, real producers, no scripts. Choose your experience below, or get in touch if you have questions about what's right for you.</p>
     <div class="cta-buttons">
-      <a href="wine-cheese-walk.html" class="btn-primary" style="display:inline-flex;align-items:center;justify-content:center;" data-en="Wine & Cheese Walk" data-fr="Balade Vin & Fromage">Wine & Cheese Walk</a>
-      <a href="contact.html" class="btn-cta-outline" style="display:inline-flex;align-items:center;justify-content:center;background:transparent;color:var(--gold);border:2px solid rgba(201,169,110,0.5);padding:0 32px;height:54px;border-radius:var(--radius-sm);font-family:var(--ff-body);font-size:15px;font-weight:600;min-height:var(--touch-min);transition:border-color var(--transition),background var(--transition);" data-en="Private Tasting" data-fr="Dégustation Privée">Private Tasting</a>
+      <a href="wine-cheese-walk.html" class="btn-primary" data-en="Wine & Cheese Walk" data-fr="Balade Vin & Fromage">Wine & Cheese Walk</a>
+      <a href="contact.html" class="btn-cta-outline btn-cta-outline--gold" data-en="Private Tasting" data-fr="Dégustation Privée">Private Tasting</a>
     </div>
   </div>
 </section>
