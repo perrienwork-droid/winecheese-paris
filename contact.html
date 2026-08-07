@@ -51,13 +51,13 @@
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-xs); }
 .btn-submit { display:block; width:100%; background:var(--wine); color:var(--cream); font-family:var(--ff-body); font-size:var(--text-md); font-weight:var(--weight-bold); padding:var(--space-xs); border-radius:var(--radius-sm); border:none; cursor:pointer; transition:background var(--transition), transform var(--transition); min-height:var(--touch-min); margin-top:6px; }
 .btn-submit:hover { background:var(--dark-wine); transform:translateY(-1px); }
-.form-note { text-align:center; font-size:var(--text-xs); color:var(--stone); margin-top:10px; }
+.form-note { text-align:center; font-size:var(--text-xs); color:var(--stone-text); margin-top:10px; }
 
 /* Contact methods */
 .contact-methods { display:flex; flex-direction:column; gap:var(--space-xs); margin-bottom:var(--space-3xl); }
 .contact-method { display:flex; align-items:center; gap:var(--space-xs); }
 .contact-method-icon { width:48px; height:48px; border-radius:var(--radius-md); background:var(--light-gold); display:flex; align-items:center; justify-content:center; color:var(--gold-text); flex-shrink:0; }
-.contact-method-label { font-size:var(--text-xs); font-weight:var(--weight-medium); letter-spacing:0.1em; text-transform:uppercase; color:var(--stone); display:block; }
+.contact-method-label { font-size:var(--text-xs); font-weight:var(--weight-medium); letter-spacing:0.1em; text-transform:uppercase; color:var(--stone-text); display:block; }
 .contact-method-value { font-size:var(--text-base); font-weight:var(--weight-semibold); color:var(--charcoal); }
 .contact-method-value a { color:var(--wine); }
 .contact-method-value a:hover { text-decoration:underline; }
@@ -74,7 +74,7 @@
 .faq-item { border:1px solid rgba(114,47,55,0.1); border-radius:var(--radius-md); overflow:hidden; }
 .faq-question { width:100%; display:flex; align-items:center; justify-content:space-between; padding:var(--space-sm) var(--space-md); background:var(--white); border:none; cursor:pointer; font-family:var(--ff-body); font-size:var(--text-base); font-weight:var(--weight-semibold); color:var(--charcoal); text-align:left; transition:background var(--transition); min-height:var(--touch-min); }
 .faq-question:hover, .faq-question[aria-expanded="true"] { background:var(--light-gold); color:var(--wine); }
-.faq-chevron { color:var(--stone); flex-shrink:0; transition:transform var(--transition); }
+.faq-chevron { color:var(--stone-text); flex-shrink:0; transition:transform var(--transition); }
 .faq-question[aria-expanded="true"] .faq-chevron { transform:rotate(180deg); color:var(--wine); }
 .faq-answer { max-height:0; overflow:hidden; transition:max-height 0.3s ease; background:var(--white); }
 .faq-answer.open { max-height:300px; }

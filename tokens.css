@@ -29,7 +29,8 @@
   --cream:       #FAF6F1;
   --charcoal:    #2C2C2C;
   --slate:       #4A4A4A;
-  --stone:       #A69586;
+  --stone:       #A69586;   /* BORDURES ET FONDS. 2,69 en texte, echoue AA */
+  --stone-text:  #7C6F64;   /* --stone assombri pour atteindre AA. 4,52 sur --cream */
   --white:       #FFFFFF;
 
   /* ─── FAMILLES TYPOGRAPHIQUES ─────────────────────────────────────

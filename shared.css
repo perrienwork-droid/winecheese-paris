@@ -49,7 +49,7 @@ a { color: inherit; text-decoration: none; }
 .nav-right { display:flex;align-items:center;gap:var(--space-3xs); }
 .lang-toggle { font-family:var(--ff-body);font-size:var(--text-sm);font-weight:var(--weight-semibold);color:rgba(250,246,241,0.7);background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);padding:var(--space-3xs) var(--space-xs);border-radius:var(--radius-sm);cursor:pointer;transition:all var(--transition);min-height:var(--touch-min);min-width:var(--touch-min); }
 .lang-toggle:hover { background:rgba(255,255,255,0.22);color:var(--cream); }
-.site-header.scrolled .lang-toggle, .site-header.solid .lang-toggle { color:var(--slate);background:transparent;border-color:var(--stone); }
+.site-header.scrolled .lang-toggle, .site-header.solid .lang-toggle { color:var(--slate);background:transparent;border-color:var(--stone-text); }
 .site-header.scrolled .lang-toggle:hover, .site-header.solid .lang-toggle:hover { border-color:var(--wine);color:var(--wine);background:rgba(var(--wine-rgb),0.05); }
 
 .btn-book-nav { background:var(--gold);color:var(--dark-wine);font-family:var(--ff-body);font-size:var(--text-sm);font-weight:var(--weight-semibold);padding:0 var(--space-md);height:44px;border-radius:var(--radius-sm);border:none;cursor:pointer;transition:background var(--transition),transform var(--transition),box-shadow var(--transition);min-height:var(--touch-min);white-space:nowrap; }

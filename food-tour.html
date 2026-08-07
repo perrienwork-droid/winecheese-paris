@@ -31,7 +31,7 @@
 .route-map { background:var(--light-gold); border-radius:var(--radius-xl); padding:var(--space-2xl); margin:var(--space-2xl) 0; }
 .route-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-lg); }
 .route-title { font-family:var(--ff-display);font-size:var(--text-xl);font-weight:var(--weight-semibold);color:var(--charcoal); }
-.route-distance { font-size:var(--text-sm);color:var(--stone);display:flex;align-items:center;gap:6px; }
+.route-distance { font-size:var(--text-sm);color:var(--stone-text);display:flex;align-items:center;gap:6px; }
 .route-line { display:flex;flex-direction:column;gap:0; }
 .route-stop { display:flex;gap:var(--space-xs);position:relative; }
 .route-stop:not(:last-child)::after { content:'';position:absolute;left:11px;top:var(--space-lg);bottom:-var(--space-3xs);width:2px;background:linear-gradient(180deg,var(--wine),rgba(114,47,55,0.15)); }
@@ -65,7 +65,7 @@
 .booking-card { background:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);box-shadow:var(--shadow-hover);border:1px solid rgba(114,47,55,0.08);position:sticky;top:88px; }
 .booking-price-line { display:flex;align-items:baseline;gap:var(--space-3xs);margin-bottom:6px; }
 .booking-price { font-family:var(--ff-accent);font-size:42px;font-weight:var(--weight-semibold);color:var(--wine);line-height:var(--leading-none); }
-.booking-per { font-size:var(--text-sm);color:var(--stone); }
+.booking-per { font-size:var(--text-sm);color:var(--stone-text); }
 .booking-tagline { font-size:var(--text-sm);color:var(--slate);margin-bottom:var(--space-md);line-height:var(--leading-normal); }
 .booking-divider { height:1px;background:rgba(114,47,55,0.08);margin:var(--space-sm) 0; }
 .booking-includes { list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:var(--space-lg); }
@@ -73,7 +73,7 @@
 .check-icon { color:var(--gold-text);flex-shrink:0;margin-top:1px; }
 .btn-book-full { display:block;width:100%;text-align:center;background:var(--gold);color:var(--dark-wine);font-family:var(--ff-body);font-size:var(--text-md);font-weight:var(--weight-bold);padding:var(--space-xs);border-radius:var(--radius-sm);border:none;cursor:pointer;transition:background var(--transition),transform var(--transition);min-height:var(--touch-min);margin-bottom:var(--space-2xs); }
 .btn-book-full:hover { background:var(--gold-hover);transform:translateY(-1px); }
-.booking-note { text-align:center;font-size:var(--text-xs);color:var(--stone); }
+.booking-note { text-align:center;font-size:var(--text-xs);color:var(--stone-text); }
 
 /* FAQ */
 .faq-list { display:flex;flex-direction:column;gap:2px; }
@@ -81,7 +81,7 @@
 .faq-question { width:100%;display:flex;align-items:center;justify-content:space-between;padding:var(--space-sm) var(--space-md);background:var(--white);border:none;cursor:pointer;font-family:var(--ff-body);font-size:var(--text-base);font-weight:var(--weight-semibold);color:var(--charcoal);text-align:left;transition:background var(--transition);min-height:var(--touch-min); }
 .faq-question:hover { background:var(--light-gold); }
 .faq-question[aria-expanded="true"] { background:var(--light-gold);color:var(--wine); }
-.faq-chevron { color:var(--stone);flex-shrink:0;transition:transform var(--transition); }
+.faq-chevron { color:var(--stone-text);flex-shrink:0;transition:transform var(--transition); }
 .faq-question[aria-expanded="true"] .faq-chevron { transform:rotate(180deg);color:var(--wine); }
 .faq-answer { max-height:0;overflow:hidden;transition:max-height 0.3s ease;background:var(--white); }
 .faq-answer.open { max-height:300px; }
@@ -95,7 +95,7 @@
 .related-card:hover .related-img img { transform:scale(1.05); }
 .related-body { padding:var(--space-sm);flex:1; }
 .related-name { font-family:var(--ff-display);font-size:var(--text-lg);font-weight:var(--weight-semibold);color:var(--charcoal);margin-bottom:6px; }
-.related-meta { font-size:var(--text-sm);color:var(--stone);margin-bottom:var(--space-2xs); }
+.related-meta { font-size:var(--text-sm);color:var(--stone-text);margin-bottom:var(--space-2xs); }
 .related-link { display:inline-flex;align-items:center;gap:6px;font-size:var(--text-sm);font-weight:var(--weight-semibold);color:var(--wine); }
 .related-card:hover .related-link svg { transform:translateX(3px);transition:transform var(--transition); }
 
