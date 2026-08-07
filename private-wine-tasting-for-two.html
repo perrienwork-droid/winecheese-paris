@@ -11,7 +11,7 @@
 <title>Private Wine & Cheese Tasting for Two in Montmartre | €390</title>
 <meta name="description" content="Two hours in a Montmartre cellar, just the two of you. Five wines, five pairings, hosted in English by a WSET-certified Parisian. €390 for the two of you.">
 <link rel="canonical" href="https://winecheese.paris/private-wine-tasting-for-two.html">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="shared.css">
 <script type="application/ld+json">
@@ -872,10 +872,18 @@
 /* ─── ÉCHELLE TYPO:de 11 à 150 ────────────────────────────── */
 .priv-h2    { font-family:var(--ff-display); font-weight:var(--weight-medium); font-size:var(--text-page-title); line-height:1.12; letter-spacing:var(--tracking-tight); color:var(--charcoal); }
 .priv-h2-sm { font-family:var(--ff-display); font-weight:var(--weight-semibold); font-size:var(--text-card); line-height:var(--leading-snug); color:var(--charcoal); margin-bottom:var(--space-sm); }
-.priv-lede  { font-family:var(--ff-accent); font-style:italic; font-size:var(--text-card); line-height:var(--leading-normal); color:var(--wine); }
-.priv-prose p { font-size:var(--text-lg); line-height:var(--leading-loose); color:var(--slate); }
-.priv-prose p + p { margin-top:var(--space-xs); }
+
+/* Le recit : cinq paragraphes, pas cinq egaux. .priv-lede ouvre la scene, deux paragraphes
+   la developpent, deux "priv-beat" la ferment en phrase courte. La famille porte l'ecart
+   (Lora, serif de texte, vs Cormorant Garamond reserve au display et a l'accent italique) ;
+   la couleur et l'interligne portent la hierarchie interne, pas une taille supplementaire. */
+.priv-prose p        { font-family:var(--ff-serif); font-size:var(--text-lg); line-height:var(--leading-relaxed); color:var(--slate); }
+.priv-prose p.priv-lede { font-family:var(--ff-accent); font-style:italic; font-size:var(--text-card); line-height:var(--leading-normal); color:var(--wine); }
+.priv-prose p.priv-beat { font-weight:var(--weight-medium); line-height:var(--leading-snug); color:var(--charcoal); }
+.priv-prose p + p        { margin-top:var(--space-sm); }
 .priv-prose .priv-lede + p { margin-top:var(--space-md); }
+.priv-prose p + .priv-beat { margin-top:var(--space-lg); }
+.priv-prose .priv-beat + .priv-beat { margin-top:var(--space-2xs); }
 
 /* ─── INFO BAR (4 items, le prix n'y est plus) ──────────────── */
 .priv-info-bar { background:var(--dark-wine); }
@@ -933,7 +941,15 @@
 .priv-host-grid { display:grid; grid-template-columns:minmax(0,420px) minmax(0,440px); gap:var(--space-block); align-items:center; }
 .priv-host-portrait { aspect-ratio:3/4; border-radius:0 var(--radius-xl) var(--radius-xl) 0; overflow:hidden; box-shadow:var(--shadow-card); }
 .priv-host-portrait img { width:100%; height:100%; object-fit:cover; object-position:center 16%; }
-.priv-host-text p { font-size:var(--text-lg); line-height:var(--leading-loose); color:var(--slate); }
+/* La bio est ecrite dans la meme voix a la premiere personne que le recit, deux sections plus
+   haut : elle prend donc exactement le meme reglage de corps (Lora, --text-lg, --leading-relaxed,
+   --slate). Ce qui distingue les deux blocs est la mise en page (grille portrait contre rail
+   centre) et la signature, pas la famille. Un serif different ici se lirait comme un oubli.
+   La colonne fait 440px et non 560px : 43 a 55 signes par ligne, moyenne 51, plus court que le
+   recit (64) parce que la grille du portrait fixe cette largeur. Sur six lignes, c'est un
+   reglage de bloc court, pas de lecture suivie. L'interligne descend de 1.75 a 1.6 : il suit la
+   mesure, et une mesure plus etroite en demande moins. */
+.priv-host-text p { font-family:var(--ff-serif); font-size:var(--text-lg); line-height:var(--leading-relaxed); color:var(--slate); }
 .priv-host-text p.priv-host-sign { margin-top:var(--space-md); font-family:var(--ff-accent); font-style:italic; font-size:32px; line-height:var(--leading-none); color:var(--wine); }
 
 /* ─── LE PRIX (bande pleine largeur, point focal n°1) ───────── */
@@ -1092,8 +1108,8 @@ plausible.init()
       <p class="priv-lede">I live five minutes from here, in Pigalle.</p>
       <p>Rue Tardieu is the last flat street before the hill starts. The funicular, the crowd walking up to Sacré-Cœur, the noise of all of it. You come into the shop, you go down about twenty steps, and the noise stops.</p>
       <p>A cellar holds the same temperature all year, so in August it is cold down there and in January it is not. Stone walls, a low vault, one table, glasses lined up on a sheet of white paper so you can actually see the colour of what you are drinking.</p>
-      <p>Nobody else comes down. It is you two, me, and whoever brings the plates.</p>
-      <p>I pour, we taste, you tell me what you smell.</p>
+      <p class="priv-beat">Nobody else comes down. It is you two, me, and whoever brings the plates.</p>
+      <p class="priv-beat">I pour, we taste, you tell me what you smell.</p>
     </div>
   </div>
 </section>
