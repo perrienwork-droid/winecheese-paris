@@ -273,3 +273,58 @@ remboursement partiel sur le paiement d'origine.
 Si le créneau redevient disponible après un remboursement, il faut le
 **remettre** dans le fichier, aux deux endroits : la carte dans le bloc de
 créneaux et son événement dans le JSON-LD.
+
+## 5. Quand un prix change
+
+Le prix de la page couple n'est pas écrit à un endroit, il est écrit à sept, et
+**une des sept est sur une autre page**. C'est le piège de cette section : un
+prix changé sur la page couple et oublié sur `contact.html` ne casse rien, ne
+lève aucune erreur, et laisse une phrase mensongère en ligne.
+
+### 5a. Les 390 EUR de la dégustation pour deux
+
+Dans `private-wine-tasting-for-two.html` :
+
+1. le montant dans chaque `<a class="btn-book-slot">` du bloc de créneaux
+   (« Book this slot, &euro;390 »), une fois par créneau ;
+2. le champ `"price": "390"` de chaque objet `Event` du JSON-LD, dans le
+   `<head>`, une fois par créneau ;
+3. le bouton du récapitulatif du calendrier, construit en JavaScript dans la
+   fonction `recap()` (« Continue to payment, &euro;390 ») ;
+4. la légende au-dessus du calendrier (« Either day, same wines, same
+   &euro;390 ») ;
+5. la phrase du panneau de la paire (« Same five wines both days, same
+   &euro;390. »), construite dans `panel()` ;
+6. le montant du lien de paiement Stripe lui-même, qui se change dans le
+   Dashboard Stripe et pas dans le fichier. Un prix changé dans la page mais
+   pas sur le lien fait payer l'ancien montant.
+
+### 5b. Le couplage avec contact.html, à ne pas oublier
+
+Dans `contact.html`, le module de demande affiche pour deux convives :
+« &euro;195 each. The same price as the dates on the calendar. » (et sa version
+FR). Cette phrase **affirme que les deux pages disent le même prix**. Elle est
+la seule chaîne du site qui lie les deux tarifs.
+
+Si le prix de la page couple bouge sans que la grille de `contact.html` bouge
+avec, cette phrase devient fausse en silence. Les deux ne sont d'accord que
+tant que 200 + 95 × 2 = 390.
+
+Ce qu'il faut toucher dans `contact.html` quand la grille change :
+
+1. les deux constantes en tête du script du module, `PRICE_BASE` (200) et
+   `PRICE_PER_GUEST` (95). Elles fixent tous les totaux calculés ;
+2. les quatre lignes du tableau `.price-table` (2, 4, 8, 12 convives), écrites
+   en dur exprès : c'est ce tableau qui reste lisible quand le JavaScript ne
+   s'exécute pas, donc il ne se recalcule pas tout seul ;
+3. la formule en clair, « &euro;200 to reserve the cellar, plus &euro;95 per
+   guest » et sa version FR, présente à deux endroits dans le module ;
+4. la ligne du convive seul, « On your own? &euro;295 » et sa version FR ;
+5. la ligne de déflexion en tête du module, « Book it directly, &euro;390 » et
+   sa version FR, qui reprend le prix de la page couple ;
+6. la phrase de couplage du point ci-dessus, si les deux prix cessent d'être
+   égaux : dans ce cas il faut la retirer, pas la corriger.
+
+Vérification en trente secondes : ouvre `contact.html?enquiry=private-couples`,
+le module doit afficher le même total que le bouton de paiement de la page
+couple. Si les deux nombres diffèrent, l'un des deux est faux.

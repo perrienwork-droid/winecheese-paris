@@ -8,14 +8,13 @@
 <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact & Private Tastings, Wine & Cheese Paris</title>
-<meta name="description" content="Get in touch with Thomas for private group tastings, corporate events, or any questions about our Montmartre wine & cheese tours.">
+<title>Contact &amp; Private Tastings, Wine &amp; Cheese Paris</title>
+<meta name="description" content="Ask Thomas about a private wine and cheese tasting in Paris: another date, a bigger group, your apartment or your hotel. 200 EUR to reserve the cellar plus 95 EUR per guest.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="shared.css">
 <style>
 .contact-hero-img { background-image:url('images/private-table-eiffel.jpg'); background-position:center 50%; }
-/* card-rooftop stays for rooftop private events, fits perfectly */
 
 /* Private offer cards */
 .private-offers { display:flex; flex-direction:column; gap:var(--space-md); margin-bottom:var(--space-4xl); }
@@ -30,28 +29,93 @@
 .offer-desc { font-size:var(--text-sm); line-height:var(--leading-loose); color:var(--slate); }
 .offer-meta { display:flex; gap:var(--space-xs); margin-top:var(--space-2xs); flex-wrap:wrap; }
 .offer-meta-item { display:flex; align-items:center; gap:5px; font-size:var(--text-xs); font-weight:var(--weight-semibold); color:var(--gold-text); }
+.offers-price-note { font-family:var(--ff-accent); font-style:italic; font-size:var(--text-lead-sm); line-height:var(--leading-normal); color:var(--stone-text); margin-top:calc(var(--space-4xl) * -1 + var(--space-md)); margin-bottom:var(--space-4xl); }
 
-/* Encoche:le module de demande mord le bas du hero (desktop uniquement) */
-.page-hero { min-height:580px; }
-.notch-holder { position:relative; z-index:40; display:flex; justify-content:flex-end; max-width:1160px; margin:-260px auto 0; padding:0 var(--gutter); }
+/* Encoche : le module de demande mord le bas du hero (desktop uniquement).
+   Geometrie rouverte au tour 2 : la carte passe de 420 a 880px pour tenir
+   deux colonnes, donc elle ne peut plus degager la colonne de texte du hero
+   horizontalement. Le hero gagne 80px de hauteur et le debord passe de 260 a
+   150px : la carte ne mord plus que la bande vide sous le texte. */
+.page-hero { min-height:660px; }
+.notch-holder { position:relative; z-index:40; display:flex; justify-content:flex-end; max-width:1160px; margin:-150px auto 0; padding:0 var(--gutter); }
 .after-notch { padding-top:var(--space-2xl); }
+
+/* Deflexion vers le calendrier de la page couple. Elle est dans la carte, en
+   tete du module, et pas dans le hero : a 880px la carte de l'encoche mord la
+   zone ou vivrait ce bloc et le recouvrirait sur desktop. En tete du module,
+   elle est aussi lue au moment exact ou le visiteur decide de remplir. */
+.deflect { background:var(--light-gold); border-left:3px solid var(--gold); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:var(--space-2xs) var(--space-xs); margin-bottom:var(--space-sm); }
+.deflect p { font-size:var(--text-sm); line-height:var(--leading-relaxed); color:var(--slate); }
+.deflect a { color:var(--wine); font-weight:var(--weight-semibold); text-decoration:underline; text-underline-offset:2px; }
+.deflect a:hover { color:var(--dark-wine); }
 
 /* Contact form */
 .form-card { background:var(--white); border-radius:var(--radius-xl); padding:var(--space-2xl); box-shadow:var(--shadow-hover); border:1px solid rgba(114,47,55,0.08); }
-.notch-holder > .fade-in { width:420px; max-width:100%; }
-.form-title { font-family:var(--ff-display); font-size:var(--text-2xl); font-weight:var(--weight-semibold); color:var(--charcoal); margin-bottom:6px; }
+.notch-holder > .fade-in { width:880px; max-width:100%; }
+.form-title { font-family:var(--ff-display); font-size:var(--text-2xl); font-weight:var(--weight-semibold); line-height:var(--leading-snug); color:var(--charcoal); margin-bottom:6px; }
 .form-subtitle { font-size:var(--text-sm); color:var(--slate); margin-bottom:var(--space-lg); line-height:var(--leading-normal); }
+.form-cols { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-2xl); align-items:start; }
 .form-group { margin-bottom:var(--space-sm); }
 .form-label { display:block; font-size:var(--text-sm); font-weight:var(--weight-semibold); color:var(--charcoal); margin-bottom:6px; letter-spacing:var(--tracking-wide); }
 .form-label .required { color:var(--wine); margin-left:2px; }
-.form-input, .form-select, .form-textarea { width:100%; border:1.5px solid rgba(114,47,55,0.18); border-radius:var(--radius-sm); background:var(--cream); color:var(--charcoal); font-family:var(--ff-body); font-size:var(--text-base); padding:var(--space-2xs) var(--space-xs); transition:border-color var(--transition), box-shadow var(--transition); min-height:var(--touch-min); }
+.form-label .optional { float:right; font-size:var(--text-xs); font-weight:var(--weight-normal); letter-spacing:0; color:var(--stone-text); }
+.form-input, .form-select, .form-textarea { width:100%; box-sizing:border-box; border:1.5px solid rgba(114,47,55,0.18); border-radius:var(--radius-sm); background:var(--cream); color:var(--charcoal); font-family:var(--ff-body); font-size:var(--text-base); padding:var(--space-2xs) var(--space-xs); transition:border-color var(--transition), box-shadow var(--transition); min-height:var(--touch-min); }
 .form-input:focus, .form-select:focus, .form-textarea:focus { outline:none; border-color:var(--wine); box-shadow:0 0 0 3px rgba(114,47,55,0.08); }
 .form-textarea { min-height:120px; resize:vertical; }
 .form-select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A4A4A' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:var(--space-2xl); cursor:pointer; }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-xs); }
-.btn-submit { display:block; width:100%; background:var(--wine); color:var(--cream); font-family:var(--ff-body); font-size:var(--text-md); font-weight:var(--weight-bold); padding:var(--space-xs); border-radius:var(--radius-sm); border:none; cursor:pointer; transition:background var(--transition), transform var(--transition); min-height:var(--touch-min); margin-top:6px; }
+.btn-submit { display:block; width:100%; background:var(--wine); color:var(--cream); font-family:var(--ff-body); font-size:var(--text-md); font-weight:var(--weight-bold); padding:var(--space-xs); border-radius:var(--radius-sm); border:none; cursor:pointer; transition:background var(--transition), transform var(--transition); min-height:var(--touch-min); margin-top:var(--space-md); }
 .btn-submit:hover { background:var(--dark-wine); transform:translateY(-1px); }
-.form-note { text-align:center; font-size:var(--text-xs); color:var(--stone-text); margin-top:10px; }
+.form-note { text-align:center; font-size:var(--text-xs); line-height:var(--leading-relaxed); color:var(--stone-text); margin-top:10px; }
+
+/* Le motif, replie quand il arrive par ?enquiry= */
+.motif-picked { display:flex; align-items:center; justify-content:space-between; gap:var(--space-2xs); box-sizing:border-box; min-height:var(--touch-min); background:var(--cream); border:1px solid rgba(114,47,55,0.14); border-radius:var(--radius-sm); padding:11px var(--space-xs); }
+/* Une declaration display d'auteur bat la regle [hidden]{display:none} du
+   navigateur : sans cette ligne le resume s'affiche vide au-dessus du menu a
+   l'arrivee a froid, et les deux restent visibles apres un clic sur Change. */
+.motif-picked[hidden] { display:none; }
+.motif-picked-label { font-size:var(--text-2xs); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-caps); text-transform:uppercase; color:var(--stone-text); margin-bottom:2px; }
+.motif-picked-value { font-size:var(--text-base); font-weight:var(--weight-semibold); line-height:1.35; color:var(--charcoal); }
+.motif-change { background:none; border:none; padding:0; cursor:pointer; font-family:var(--ff-body); font-size:var(--text-sm); font-weight:var(--weight-semibold); color:var(--wine); text-decoration:underline; text-underline-offset:2px; white-space:nowrap; }
+.motif-change:hover { color:var(--dark-wine); }
+
+/* Taille du groupe : le nombre exact au doigt */
+.size-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:var(--space-3xs); }
+.size-chip { min-height:var(--touch-min); border-radius:var(--radius-sm); background:var(--light-gold); border:1px solid rgba(201,169,110,0.7); color:var(--wine); font-family:var(--ff-body); font-size:16px; font-weight:var(--weight-semibold); cursor:pointer; transition:background var(--transition), border-color var(--transition); }
+.size-chip:hover { background:#EFE1C2; border-color:var(--gold); }
+.size-chip:focus-visible { outline:2px solid var(--wine); outline-offset:2px; }
+.size-chip[aria-pressed="true"] { background:var(--wine); border-color:var(--wine); color:var(--cream); font-weight:var(--weight-bold); }
+.size-grid.has-error { border:2px solid var(--wine); box-shadow:0 0 0 3px rgba(114,47,55,0.08); border-radius:var(--radius-md); padding:6px; margin:-8px; }
+.size-solo { font-size:var(--text-sm); line-height:var(--leading-relaxed); color:var(--stone-text); margin-top:10px; }
+
+/* Le prix. Le tableau est servi dans le HTML et lisible sans JavaScript :
+   le <details> arrive ouvert, c'est le script qui le replie au chargement. */
+.price-out { margin-top:var(--space-xs); background:var(--light-gold); border-left:3px solid var(--gold); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:var(--space-xs) var(--space-sm); }
+.price-prompt { font-family:var(--ff-accent); font-style:italic; font-size:var(--text-lead-sm); line-height:var(--leading-normal); color:var(--dark-wine); margin-bottom:6px; }
+.price-eyebrow { font-size:var(--text-2xs); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-caps); text-transform:uppercase; color:var(--gold-text); margin-bottom:4px; }
+.price-total { font-family:var(--ff-display); font-size:34px; font-weight:var(--weight-semibold); line-height:var(--leading-tight); color:var(--charcoal); margin-bottom:4px; }
+.price-total span { font-family:var(--ff-body); font-size:var(--text-base); font-weight:var(--weight-normal); color:var(--slate); }
+.price-each { font-size:var(--text-sm); line-height:var(--leading-relaxed); color:var(--slate); margin-bottom:var(--space-3xs); }
+/* --stone-text est calibre AA sur --cream (4,52), pas sur --light-gold, ou il
+   tombe a 4,14. Dans ce bloc, tout le texte secondaire passe donc a --slate
+   (7,54), y compris les chiffres du tableau, qui sont le repli sans
+   JavaScript et doivent rester lisibles. */
+.price-formula { font-size:var(--text-xs); line-height:var(--leading-relaxed); color:var(--slate); }
+.price-fold { margin-top:var(--space-2xs); }
+.price-fold > summary { list-style:none; cursor:pointer; display:flex; align-items:center; min-height:32px; font-size:var(--text-sm); font-weight:var(--weight-semibold); color:var(--wine); text-decoration:underline; text-underline-offset:2px; }
+.price-fold > summary::-webkit-details-marker { display:none; }
+.price-fold > summary:hover { color:var(--dark-wine); }
+.price-table { width:100%; border-collapse:collapse; margin-top:var(--space-3xs); font-size:var(--text-sm); }
+.price-table th { font-size:var(--text-2xs); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-caps); text-transform:uppercase; color:var(--slate); text-align:right; padding-bottom:6px; }
+.price-table th:first-child { text-align:left; }
+.price-table td { padding:7px 0; border-top:1px solid rgba(114,47,55,0.14); text-align:right; color:var(--slate); }
+.price-table td:first-child { text-align:left; color:var(--charcoal); }
+.price-table tr.is-on td { background:rgba(114,47,55,0.06); color:var(--charcoal); font-weight:var(--weight-semibold); }
+.price-note { font-size:var(--text-xs); line-height:var(--leading-relaxed); color:var(--slate); margin-top:var(--space-3xs); }
+
+/* Identite, en dernier, sous un intertitre qui dit pourquoi on la demande */
+.who-block { margin-top:var(--space-lg); padding-top:var(--space-sm); border-top:1px solid rgba(114,47,55,0.1); }
+.who-label { font-size:var(--text-2xs); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-caps); text-transform:uppercase; color:var(--stone-text); margin-bottom:var(--space-2xs); }
 
 /* Contact methods */
 .contact-methods { display:flex; flex-direction:column; gap:var(--space-xs); margin-bottom:var(--space-3xl); }
@@ -84,25 +148,48 @@
 .form-input.has-error, .form-select.has-error, .form-textarea.has-error { border-color:var(--wine); box-shadow:0 0 0 3px rgba(114,47,55,0.08); }
 .field-error { display:none; font-size:var(--text-xs); color:var(--wine); margin-top:6px; line-height:var(--leading-normal); }
 .field-error.visible { display:block; }
-.form-error-banner { display:none; background:var(--light-gold); border:1px solid rgba(114,47,55,0.18); border-radius:var(--radius-sm); padding:var(--space-xs) var(--space-xs); font-size:var(--text-sm); color:var(--dark-wine); margin-bottom:var(--space-sm); line-height:var(--leading-normal); }
+.form-error-banner { display:none; background:var(--light-gold); border:1px solid rgba(114,47,55,0.18); border-radius:var(--radius-sm); padding:var(--space-xs); font-size:var(--text-sm); color:var(--dark-wine); margin-bottom:var(--space-sm); line-height:var(--leading-normal); }
 .form-error-banner.visible { display:block; }
+.form-error-banner a { color:var(--wine); font-weight:var(--weight-semibold); }
 
 /* Success message */
 .form-success { display:none; text-align:center; padding:var(--space-xl) 0; }
 .form-success.visible { display:block; }
 .form-success-icon { color:var(--gold-text); margin:0 auto var(--space-xs); }
 .form-success-title { font-family:var(--ff-display); font-size:var(--text-2xl); font-weight:var(--weight-semibold); color:var(--charcoal); margin-bottom:var(--space-3xs); }
-.form-success-desc { font-size:var(--text-base); color:var(--slate); }
+.form-success-desc { font-size:var(--text-base); line-height:var(--leading-relaxed); color:var(--slate); }
+.success-recap { text-align:left; max-width:420px; margin:var(--space-sm) auto 0; background:var(--cream); border:1px solid rgba(114,47,55,0.14); border-radius:var(--radius-md); padding:var(--space-xs) var(--space-sm); }
+.success-recap-label { font-size:var(--text-2xs); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-caps); text-transform:uppercase; color:var(--gold-text); margin-bottom:10px; }
+.success-recap-list { display:grid; grid-template-columns:auto 1fr; gap:6px var(--space-xs); font-size:var(--text-sm); line-height:var(--leading-normal); }
+.success-recap-list b { color:var(--charcoal); font-weight:var(--weight-semibold); }
+.success-recap-list span { color:var(--slate); }
+.success-foot { font-size:var(--text-sm); line-height:var(--leading-relaxed); color:var(--stone-text); max-width:420px; margin:var(--space-xs) auto 0; }
 
-/* Sous 900px:aucune superposition, hero reduit (deja regle par shared.css a
-   768px), module en flux normal pleine largeur sous le hero. */
+@media (min-width: 901px) {
+  .form-cols .form-textarea { min-height:184px; }
+  /* Le hero de shared.css ancre son contenu en bas (align-items:flex-end plus
+     48px de padding). A 880px, la carte de l'encoche ne peut pas degager la
+     colonne de texte horizontalement, donc on degage verticalement : le
+     padding bas pousse le texte au-dessus de la bande que la carte mord. */
+  .page-hero { padding-bottom:210px; }
+}
+
+/* Sous 900px : aucune superposition, module en flux normal pleine largeur
+   sous le hero, une seule colonne. */
 @media (max-width: 900px) {
   .page-hero { min-height:auto; }
   .notch-holder { display:block; margin-top:0; }
   .notch-holder > .fade-in { width:100%; }
   .after-notch { padding-top:0; }
+  .deflect { max-width:none; }
+  .form-cols { display:block; }
 }
-@media (max-width:480px) { .form-row { grid-template-columns:1fr; } .form-card { padding:var(--space-lg) var(--space-sm); } }
+/* Quatre colonnes de pastilles a 375px : six ne donneraient que 42px de large,
+   sous le minimum tactile de 48px du systeme. */
+@media (max-width:480px) {
+  .form-card { padding:var(--space-lg) var(--space-sm); }
+  .size-grid { grid-template-columns:repeat(4,1fr); }
+}
 </style>
 <script async src="https://analytics.winecheese.paris/js/pa-krMVZUVywC4sob83U_ji3.js"></script>
 <script>
@@ -115,7 +202,7 @@ plausible.init()
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header class="site-header solid" role="banner" id="site-header">
-  <a href="/" class="logo" aria-label="Wine & Cheese Paris, Home"><span class="logo-main">Wine & Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span></a>
+  <a href="/" class="logo" aria-label="Wine &amp; Cheese Paris, Home"><span class="logo-main">Wine &amp; Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span></a>
   <nav class="main-nav" aria-label="Main navigation">
     <a href="/#tours" class="nav-link">Our Tours</a>
     <a href="about.html" class="nav-link">About</a>
@@ -132,192 +219,270 @@ plausible.init()
 <main id="main-content">
 
 <div class="page-hero">
-  <div class="page-hero-image contact-hero-img" role="img" aria-label="Elegant group toasting wine glasses on a Paris rooftop with the Eiffel Tower at sunset"></div>
+  <div class="page-hero-image contact-hero-img" role="img" aria-label="Private dinner table set with wine and cheese, Eiffel Tower at sunset through open French windows"></div>
   <div class="page-hero-overlay" aria-hidden="true"></div>
   <div class="page-hero-content">
-    <p class="page-hero-eyebrow" data-en="Private events & enquiries" data-fr="Événements privés & renseignements">Private events & enquiries</p>
-    <h1 class="page-hero-title" data-en="Let's plan your <em>perfect tasting</em>" data-fr="Organisons votre <em>dégustation idéale</em>">Let's plan your <em>perfect tasting</em></h1>
-    <p class="page-hero-sub" data-en="From intimate couples' tastings to full corporate events: Thomas can tailor an experience for any occasion, group size, or budget." data-fr="Des dégustations en tête-à-tête aux événements corporate: Thomas peut adapter une expérience à toute occasion, taille de groupe ou budget.">From intimate couples' tastings to full corporate events: Thomas can tailor an experience for any occasion, group size, or budget.</p>
+    <p class="page-hero-eyebrow" data-en="Beyond the calendar" data-fr="Au-delà du calendrier">Beyond the calendar</p>
+    <h1 class="page-hero-title" data-en="Your date, your group, <em>your place</em>" data-fr="Votre date, votre groupe, <em>votre lieu</em>">Your date, your group, <em>your place</em></h1>
+    <p class="page-hero-sub" data-en="The listed dates seat two in my cellar. Everything else is arranged by message: another date, a bigger group, your apartment, your hotel, a boat on the Seine." data-fr="Les dates affichées accueillent deux personnes dans ma cave. Tout le reste s'organise par message : une autre date, un groupe plus grand, votre appartement, votre hôtel, un bateau sur la Seine.">The listed dates seat two in my cellar. Everything else is arranged by message: another date, a bigger group, your apartment, your hotel, a boat on the Seine.</p>
   </div>
 </div>
 
 <div class="notch-holder">
-      <!-- RIGHT: Contact form -->
-      <div class="fade-in">
-        <div class="form-card">
-          <!-- Form -->
-          <div id="contactFormWrap">
-            <h2 class="form-title" data-en="Send a message" data-fr="Envoyer un message">Send a message</h2>
-            <p class="form-subtitle" data-en="For private bookings, group enquiries, or any questions, fill in this form and Thomas will typically get back to you within 4 hours." data-fr="Pour les réservations privées, les demandes de groupe, ou toute question, remplissez ce formulaire et Thomas vous répondra généralement sous 4 heures.">For private bookings, group enquiries, or any questions: fill in this form and Thomas will typically get back to you within 4 hours.</p>
+  <div class="fade-in">
+    <div class="form-card">
 
-            <div class="form-error-banner" id="formErrorBanner" role="alert" data-en="Something went wrong. Email hello@winecheese.paris directly." data-fr="Un problème est survenu. Écrivez directement à hello@winecheese.paris.">Something went wrong. Email hello@winecheese.paris directly.</div>
+      <div id="contactFormWrap">
+        <div class="deflect">
+          <p data-en="Two of you, and a listed date works? <a href=&quot;private-wine-tasting-for-two.html#booking&quot; data-deflect>Book it directly, &euro;390</a>, no waiting for me." data-fr="Vous êtes deux et une date affichée vous convient ? <a href=&quot;private-wine-tasting-for-two.html#booking&quot; data-deflect>Réservez-la directement, 390 €</a>, sans m'attendre.">Two of you, and a listed date works? <a href="private-wine-tasting-for-two.html#booking" data-deflect>Book it directly, &euro;390</a>, no waiting for me.</p>
+        </div>
+        <h2 class="form-title" id="formTitle" data-en="Tell me the shape of it" data-fr="Dites-moi la forme de votre demande">Tell me the shape of it</h2>
+        <p class="form-subtitle" data-en="Three answers and I can price it. Everything else is optional." data-fr="Trois réponses et je peux le chiffrer. Le reste est facultatif.">Three answers and I can price it. Everything else is optional.</p>
 
-            <form id="contactForm" novalidate aria-label="Contact form">
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label" for="firstName">First name <span class="required" aria-hidden="true">*</span></label>
-                  <input type="text" id="firstName" name="firstName" class="form-input" autocomplete="given-name" required aria-required="true">
-                  <p class="field-error" id="firstNameError" data-en="Please enter your first name." data-fr="Merci d'indiquer votre prénom.">Please enter your first name.</p>
+        <div class="form-error-banner" id="formErrorBanner" role="alert" data-en="Something went wrong on my side. Nothing was sent. Email <a href=&quot;mailto:hello@winecheese.paris&quot;>hello@winecheese.paris</a> directly and I will pick it up there." data-fr="Un problème est survenu de mon côté. Rien n'a été envoyé. Écrivez directement à <a href=&quot;mailto:hello@winecheese.paris&quot;>hello@winecheese.paris</a>, je le prends là.">Something went wrong on my side. Nothing was sent. Email <a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a> directly and I will pick it up there.</div>
+
+        <form id="contactForm" novalidate aria-label="Enquiry form">
+          <div class="form-cols">
+
+            <div>
+              <!-- 1. Le motif. Le <select> garde son id et ses six valeurs :
+                   booking.js continue de lire ?enquiry= et d'ecrire dedans. -->
+              <div class="form-group">
+                <div class="motif-picked" id="motifPicked" hidden>
+                  <div>
+                    <p class="motif-picked-label" data-en="What you are asking about" data-fr="Ce que vous demandez">What you are asking about</p>
+                    <p class="motif-picked-value" id="motifPickedValue"></p>
+                  </div>
+                  <button type="button" class="motif-change" id="motifChange" data-en="Change" data-fr="Changer">Change</button>
                 </div>
-                <div class="form-group">
-                  <label class="form-label" for="lastName">Last name <span class="required" aria-hidden="true">*</span></label>
-                  <input type="text" id="lastName" name="lastName" class="form-input" autocomplete="family-name" required aria-required="true">
-                  <p class="field-error" id="lastNameError" data-en="Please enter your last name." data-fr="Merci d'indiquer votre nom.">Please enter your last name.</p>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="email">Email <span class="required" aria-hidden="true">*</span></label>
-                <input type="email" id="email" name="email" class="form-input" autocomplete="email" required aria-required="true">
-                <p class="field-error" id="emailError" data-en="Please enter a valid email address." data-fr="Merci d'indiquer une adresse email valide.">Please enter a valid email address.</p>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="phone" data-en="Phone (with country code)" data-fr="Téléphone (avec indicatif pays)">Phone (with country code)</label>
-                <input type="tel" id="phone" name="phone" class="form-input" autocomplete="tel" placeholder="+33 6 12 34 56 78" pattern="^\+[0-9 ]{6,20}$">
-                <p class="field-error" id="phoneError" data-en="Phone number must start with + and include the country code." data-fr="Le numéro de téléphone doit commencer par + et inclure l'indicatif du pays.">Phone number must start with + and include the country code.</p>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="enquiryType" data-en="Type of enquiry" data-fr="Type de demande">Type of enquiry <span class="required" aria-hidden="true">*</span></label>
-                <select id="enquiryType" name="enquiryType" class="form-select" required aria-required="true">
-                  <option value="" data-en="Select…" data-fr="Choisir…">Select…</option>
-                  <option value="private-couples" data-en="Private tasting, couple / friends" data-fr="Dégustation privée, couple / amis">Private tasting, couple / friends</option>
-                  <option value="private-celebration" data-en="Private tasting, celebration / anniversary" data-fr="Dégustation privée, anniversaire / célébration">Private tasting, celebration / anniversary</option>
-                  <option value="corporate" data-en="Corporate / team building" data-fr="Corporate / team building">Corporate / team building</option>
-                  <option value="hotel" data-en="Hotel concierge partnership" data-fr="Partenariat conciergerie hôtelière">Hotel concierge partnership</option>
-                  <option value="public-tour" data-en="Question about a public tour" data-fr="Question sur une visite publique">Question about a public tour</option>
-                  <option value="other" data-en="Other" data-fr="Autre">Other</option>
-                </select>
-                <p class="field-error" id="enquiryTypeError" data-en="Please select a type of enquiry." data-fr="Merci de sélectionner un type de demande.">Please select a type of enquiry.</p>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label" for="groupSize" data-en="Group size" data-fr="Taille du groupe">Group size</label>
-                  <select id="groupSize" name="groupSize" class="form-select">
-                    <option value="1-2">1–2</option>
-                    <option value="3-4">3–4</option>
-                    <option value="5-8">5–8</option>
-                    <option value="9-12">9–12</option>
-                    <option value="13+">13+</option>
+                <div id="motifField">
+                  <label class="form-label" for="enquiryType" data-en="What you are asking about <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>" data-fr="Ce que vous demandez <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>">What you are asking about <span class="required" aria-hidden="true">*</span></label>
+                  <select id="enquiryType" name="enquiryType" class="form-select" required aria-required="true">
+                    <option value="" data-en="Select…" data-fr="Choisir…">Select…</option>
+                    <option value="private-couples" data-en="Private tasting, couple / friends" data-fr="Dégustation privée, couple / amis">Private tasting, couple / friends</option>
+                    <option value="private-celebration" data-en="Private tasting, celebration / anniversary" data-fr="Dégustation privée, anniversaire / célébration">Private tasting, celebration / anniversary</option>
+                    <option value="corporate" data-en="Corporate / team building" data-fr="Corporate / team building">Corporate / team building</option>
+                    <option value="hotel" data-en="Hotel concierge partnership" data-fr="Partenariat conciergerie hôtelière">Hotel concierge partnership</option>
+                    <option value="public-tour" data-en="Question about a public tour" data-fr="Question sur une visite publique">Question about a public tour</option>
+                    <option value="other" data-en="Other" data-fr="Autre">Other</option>
                   </select>
+                  <p class="field-error" id="enquiryTypeError" data-en="Please select what your enquiry is about." data-fr="Merci de sélectionner l'objet de votre demande.">Please select what your enquiry is about.</p>
+                </div>
+              </div>
+
+              <!-- 2. Le nombre de convives. C'est lui qui fixe le prix, donc il
+                   est obligatoire et il est haut. Input cache : les pastilles
+                   ecrivent dedans, la cle groupSize part inchangee. -->
+              <div class="form-group">
+                <p class="form-label" id="groupSizeLabel" data-en="How many of you <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>" data-fr="Combien vous êtes <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>">How many of you <span class="required" aria-hidden="true">*</span></p>
+                <div class="size-grid" id="sizeGrid" role="group" aria-labelledby="groupSizeLabel">
+                  <button type="button" class="size-chip" id="size-2" data-size="2" aria-pressed="false">2</button>
+                  <button type="button" class="size-chip" id="size-3" data-size="3" aria-pressed="false">3</button>
+                  <button type="button" class="size-chip" id="size-4" data-size="4" aria-pressed="false">4</button>
+                  <button type="button" class="size-chip" id="size-5" data-size="5" aria-pressed="false">5</button>
+                  <button type="button" class="size-chip" id="size-6" data-size="6" aria-pressed="false">6</button>
+                  <button type="button" class="size-chip" id="size-7" data-size="7" aria-pressed="false">7</button>
+                  <button type="button" class="size-chip" id="size-8" data-size="8" aria-pressed="false">8</button>
+                  <button type="button" class="size-chip" id="size-9" data-size="9" aria-pressed="false">9</button>
+                  <button type="button" class="size-chip" id="size-10" data-size="10" aria-pressed="false">10</button>
+                  <button type="button" class="size-chip" id="size-11" data-size="11" aria-pressed="false">11</button>
+                  <button type="button" class="size-chip" id="size-12" data-size="12" aria-pressed="false">12</button>
+                  <button type="button" class="size-chip" id="size-13plus" data-size="13+" aria-pressed="false">13+</button>
+                </div>
+                <input type="hidden" id="groupSize" name="groupSize" value="">
+                <p class="field-error" id="groupSizeError" data-en="Tell me how many of you there are. It is what sets the price." data-fr="Dites-moi combien vous êtes. C'est ce qui fixe le prix.">Tell me how many of you there are. It is what sets the price.</p>
+                <p class="size-solo" data-en="On your own? &euro;295, the same grid. Tell me below." data-fr="Vous êtes seul ? 295 €, la même grille. Dites-le plus bas.">On your own? &euro;295, the same grid. Tell me below.</p>
+              </div>
+
+              <!-- 3. Le prix. Le tableau est dans le HTML servi et le <details>
+                   arrive ouvert : sans JavaScript, la grille reste lisible. -->
+              <div class="price-out">
+                <div id="priceEmpty">
+                  <p class="price-prompt" id="pricePrompt" hidden data-en="Pick a number and I will show you the price." data-fr="Choisissez un nombre et je vous montre le prix.">Pick a number and I will show you the price.</p>
+                  <p class="price-formula" data-en="&euro;200 to reserve the cellar, plus &euro;95 per guest." data-fr="200 € de privatisation, plus 95 € par convive.">&euro;200 to reserve the cellar, plus &euro;95 per guest.</p>
+                </div>
+                <div id="priceFilled" hidden>
+                  <p class="price-eyebrow" id="priceCount"></p>
+                  <p class="price-total" id="priceTotal"></p>
+                  <p class="price-each" id="priceEach"></p>
+                  <p class="price-formula" data-en="&euro;200 to reserve the cellar, plus &euro;95 per guest." data-fr="200 € de privatisation, plus 95 € par convive.">&euro;200 to reserve the cellar, plus &euro;95 per guest.</p>
+                </div>
+                <details class="price-fold" id="priceFold" open>
+                  <summary data-en="See the full grid" data-fr="Voir toute la grille">See the full grid</summary>
+                  <table class="price-table">
+                    <thead>
+                      <tr>
+                        <th scope="col" data-en="Guests" data-fr="Convives">Guests</th>
+                        <th scope="col" data-en="Total" data-fr="Total">Total</th>
+                        <th scope="col" data-en="Each" data-fr="Par pers.">Each</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-row="2"><td>2</td><td data-en="&euro;390" data-fr="390 €">&euro;390</td><td data-en="&euro;195" data-fr="195 €">&euro;195</td></tr>
+                      <tr data-row="4"><td>4</td><td data-en="&euro;580" data-fr="580 €">&euro;580</td><td data-en="&euro;145" data-fr="145 €">&euro;145</td></tr>
+                      <tr data-row="8"><td>8</td><td data-en="&euro;960" data-fr="960 €">&euro;960</td><td data-en="&euro;120" data-fr="120 €">&euro;120</td></tr>
+                      <tr data-row="12"><td>12</td><td data-en="&euro;1,340" data-fr="1 340 €">&euro;1,340</td><td data-en="&euro;112" data-fr="112 €">&euro;112</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="price-note" data-en="Every size in between follows the same line. Over twelve, tell me the number and I will price it the same way." data-fr="Toutes les tailles intermédiaires suivent la même droite. Au-delà de douze, dites-moi le nombre et je le chiffre pareil.">Every size in between follows the same line. Over twelve, tell me the number and I will price it the same way.</p>
+                </details>
+              </div>
+
+              <!-- 4. La date -->
+              <div class="form-group" style="margin-top:var(--space-sm);">
+                <label class="form-label" for="preferredDate" data-en="Your date <span class=&quot;optional&quot;>optional</span>" data-fr="Votre date <span class=&quot;optional&quot;>facultatif</span>">Your date <span class="optional">optional</span></label>
+                <input type="date" id="preferredDate" name="preferredDate" class="form-input">
+              </div>
+            </div>
+
+            <div>
+              <!-- 5. Le message -->
+              <div class="form-group">
+                <label class="form-label" for="message" data-en="What you have in mind <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>" data-fr="Ce que vous imaginez <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>">What you have in mind <span class="required" aria-hidden="true">*</span></label>
+                <textarea id="message" name="message" class="form-textarea" required aria-required="true" data-ph-en="The occasion, where you would like it, my cellar or your apartment, a hotel, a boat, and anything I should know about allergies." data-ph-fr="L'occasion, le lieu souhaité, ma cave ou votre appartement, un hôtel, un bateau, et ce que je dois savoir sur les allergies." placeholder="The occasion, where you would like it, my cellar or your apartment, a hotel, a boat, and anything I should know about allergies."></textarea>
+                <p class="field-error" id="messageError" data-en="Please tell me what you have in mind." data-fr="Merci de me dire ce que vous imaginez.">Please tell me what you have in mind.</p>
+              </div>
+
+              <!-- 6. L'identite, en dernier -->
+              <div class="who-block">
+                <p class="who-label" data-en="And who I am replying to" data-fr="Et à qui je réponds">And who I am replying to</p>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="firstName" data-en="First name <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>" data-fr="Prénom <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>">First name <span class="required" aria-hidden="true">*</span></label>
+                    <input type="text" id="firstName" name="firstName" class="form-input" autocomplete="given-name" required aria-required="true">
+                    <p class="field-error" id="firstNameError" data-en="Please enter your first name." data-fr="Merci d'indiquer votre prénom.">Please enter your first name.</p>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="lastName" data-en="Last name <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>" data-fr="Nom <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>">Last name <span class="required" aria-hidden="true">*</span></label>
+                    <input type="text" id="lastName" name="lastName" class="form-input" autocomplete="family-name" required aria-required="true">
+                    <p class="field-error" id="lastNameError" data-en="Please enter your last name." data-fr="Merci d'indiquer votre nom.">Please enter your last name.</p>
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="preferredDate" data-en="Preferred date" data-fr="Date souhaitée">Preferred date</label>
-                  <input type="date" id="preferredDate" name="preferredDate" class="form-input">
+                  <label class="form-label" for="email" data-en="Email <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>" data-fr="Email <span class=&quot;required&quot; aria-hidden=&quot;true&quot;>*</span>">Email <span class="required" aria-hidden="true">*</span></label>
+                  <input type="email" id="email" name="email" class="form-input" autocomplete="email" required aria-required="true">
+                  <p class="field-error" id="emailError" data-en="Please enter a valid email address." data-fr="Merci d'indiquer une adresse email valide.">Please enter a valid email address.</p>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="phone" data-en="Phone, with country code <span class=&quot;optional&quot;>optional</span>" data-fr="Téléphone, avec indicatif <span class=&quot;optional&quot;>facultatif</span>">Phone, with country code <span class="optional">optional</span></label>
+                  <input type="tel" id="phone" name="phone" class="form-input" autocomplete="tel" placeholder="+33 6 12 34 56 78" pattern="^\+[0-9 ]{6,20}$">
+                  <p class="field-error" id="phoneError" data-en="Phone number must start with + and include the country code." data-fr="Le numéro de téléphone doit commencer par + et inclure l'indicatif du pays.">Phone number must start with + and include the country code.</p>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label class="form-label" for="message" data-en="Your message" data-fr="Votre message">Your message <span class="required" aria-hidden="true">*</span></label>
-                <textarea id="message" name="message" class="form-textarea" required aria-required="true" placeholder="Tell Thomas about the occasion, any dietary requirements, or what you're looking for…"></textarea>
-                <p class="field-error" id="messageError" data-en="Please tell us about your enquiry." data-fr="Merci de nous parler de votre demande.">Please tell us about your enquiry.</p>
-              </div>
-
-              <button type="submit" class="btn-submit" id="submitBtn" data-en="Send message" data-fr="Envoyer le message">Send message</button>
-              <p class="form-note" data-en="Thomas typically replies personally within 4 hours · hello@winecheese.paris" data-fr="Thomas répond personnellement, généralement sous 4 heures · hello@winecheese.paris">Thomas typically replies personally within 4 hours · hello@winecheese.paris</p>
-            </form>
+              <button type="submit" class="btn-submit" id="submitBtn" data-en="Send it to Thomas" data-fr="Envoyer à Thomas">Send it to Thomas</button>
+              <p class="form-note" data-en="Thomas replies personally, usually within 4 hours · hello@winecheese.paris" data-fr="Thomas répond personnellement, généralement sous 4 heures · hello@winecheese.paris">Thomas replies personally, usually within 4 hours · hello@winecheese.paris</p>
+            </div>
           </div>
+        </form>
+      </div>
 
-          <!-- Success state -->
-          <div class="form-success" id="formSuccess" aria-live="polite">
-            <svg class="form-success-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <h3 class="form-success-title" data-en="Message sent!" data-fr="Message envoyé !">Message sent!</h3>
-            <p class="form-success-desc" data-en="Thomas will typically reply within 4 hours. In the meantime, feel free to explore the tours." data-fr="Thomas répondra généralement sous 4 heures. En attendant, n'hésitez pas à explorer les visites.">Thomas will typically reply within 4 hours. In the meantime, feel free to explore the tours.</p>
-            <a href="wine-cheese-walk.html" class="btn-secondary" style="display:inline-block;margin-top:20px;text-align:center;" data-en="Explore the tours" data-fr="Explorer les visites">Explore the tours</a>
+      <!-- Success state -->
+      <div class="form-success" id="formSuccess" aria-live="polite">
+        <svg class="form-success-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h3 class="form-success-title" data-en="Sent. I have it." data-fr="Envoyé. Je l'ai.">Sent. I have it.</h3>
+        <p class="form-success-desc" data-en="I reply personally, usually within 4 hours. If it is urgent, write to <a href=&quot;mailto:hello@winecheese.paris&quot;>hello@winecheese.paris</a>." data-fr="Je réponds personnellement, généralement sous 4 heures. Si c'est urgent, écrivez à <a href=&quot;mailto:hello@winecheese.paris&quot;>hello@winecheese.paris</a>.">I reply personally, usually within 4 hours. If it is urgent, write to <a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a>.</p>
+        <div class="success-recap">
+          <p class="success-recap-label" data-en="What you sent me" data-fr="Ce que vous m'avez envoyé">What you sent me</p>
+          <div class="success-recap-list">
+            <b id="recapSizeLabel"></b><span id="recapPrice"></span>
+            <b id="recapTypeLabel" data-en="Enquiry" data-fr="Demande">Enquiry</b><span id="recapType"></span>
+            <b id="recapDateLabel" data-en="Date" data-fr="Date" hidden>Date</b><span id="recapDate" hidden></span>
           </div>
         </div>
+        <p class="success-foot" data-en="Nothing is booked and nothing is charged until we have agreed on it by email." data-fr="Rien n'est réservé et rien n'est débité avant que nous soyons d'accord par email.">Nothing is booked and nothing is charged until we have agreed on it by email.</p>
+        <a href="private-wine-tasting-for-two.html#booking" class="btn-secondary" data-deflect style="display:inline-block;margin-top:20px;text-align:center;" data-en="Meanwhile, see the open dates" data-fr="En attendant, voir les dates ouvertes">Meanwhile, see the open dates</a>
       </div>
+    </div>
+  </div>
 </div>
 
 <section class="section after-notch">
   <div class="section-inner">
 
-        <!-- Private offers -->
-        <div class="fade-in" style="margin-bottom:48px;">
-          <p class="section-eyebrow" data-en="Private experiences" data-fr="Expériences privées">Private experiences</p>
-          <h2 class="section-title" style="text-align:left;margin-bottom:12px;" data-en="Beyond the public tours" data-fr="Au-delà des visites publiques">Beyond the public tours</h2>
-          <p style="font-size:15px;line-height:1.7;color:var(--slate);margin-bottom:28px;" data-en="Thomas brings the tasting to you, anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office." data-fr="Thomas vous apporte la dégustation partout à Paris : votre appartement, un bateau privatisé sur la Seine, une suite d'hôtel, ou vos bureaux.">Thomas brings the tasting to you, anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office.</p>
-          <div class="private-offers">
-            <div class="offer-card">
-              <div class="offer-image"><img src="images/evjf-rooftop.jpg" alt="Group of women celebrating on a Paris rooftop with wine, Eiffel Tower at sunset" loading="lazy"></div>
-              <div class="offer-row">
-                <div class="offer-icon-wrap">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                </div>
-                <div class="offer-body">
-                  <h3 class="offer-title" data-en="Anniversary & Celebrations" data-fr="Anniversaires & Célébrations">Anniversary & Celebrations</h3>
-                  <p class="offer-desc" data-en="A private Wine & Cheese Walk or rooftop tasting for two (or more). Thomas selects wines around the occasion, prepares the board personally, and designs the experience around your evening. Popular for birthdays, proposals, and wedding anniversaries." data-fr="Une balade privée Vin & Fromage ou une dégustation sur le rooftop pour deux, ou plus. Thomas sélectionne les vins en fonction de l'occasion, prépare la planche personnellement, et conçoit l'expérience autour de votre soirée.">A private Wine & Cheese Walk or rooftop tasting for two (or more). Thomas selects wines around the occasion and designs the experience around your evening. Popular for birthdays, proposals, and anniversaries.</p>
-                  <div class="offer-meta">
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> <span data-en="2–8 guests" data-fr="2–8 personnes">2–8 guests</span></span>
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> <span data-en="From €120/person" data-fr="À partir de 120 €/pers.">From €120/person</span></span>
-                  </div>
-                </div>
-              </div>
+    <!-- Private offers -->
+    <div class="fade-in" style="margin-bottom:48px;">
+      <p class="section-eyebrow" data-en="Private experiences" data-fr="Expériences privées">Private experiences</p>
+      <h2 class="section-title" style="text-align:left;margin-bottom:12px;" data-en="What people usually ask for" data-fr="Ce qu'on me demande le plus">What people usually ask for</h2>
+      <p style="font-size:var(--text-base);line-height:var(--leading-loose);color:var(--slate);margin-bottom:28px;" data-en="Three shapes, the same grid. Thomas brings the tasting to you anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office." data-fr="Trois formes, la même grille. Thomas vous apporte la dégustation partout à Paris : votre appartement, un bateau privatisé sur la Seine, une suite d'hôtel, ou vos bureaux.">Three shapes, the same grid. Thomas brings the tasting to you anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office.</p>
+      <div class="private-offers">
+        <div class="offer-card">
+          <div class="offer-image"><img src="images/evjf-rooftop.jpg" alt="Group of women celebrating on a Paris rooftop with wine, Eiffel Tower at sunset" loading="lazy"></div>
+          <div class="offer-row">
+            <div class="offer-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </div>
-            <div class="offer-card">
-              <div class="offer-image"><img src="images/private-table-eiffel.jpg" alt="Private dinner table set with wine and cheese, Eiffel Tower at sunset through open French windows" loading="lazy"></div>
-              <div class="offer-row">
-                <div class="offer-icon-wrap">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                </div>
-                <div class="offer-body">
-                  <h3 class="offer-title" data-en="Corporate & Team Events" data-fr="Événements Corporate & Team Building">Corporate & Team Events</h3>
-                  <p class="offer-desc" data-en="A wine & cheese masterclass for your team, in a cave, on a rooftop, or at your office. Thomas facilitates the tasting as a group activity: structured, informative, and genuinely fun. Available weekday evenings (18:30). Pro invoice provided." data-fr="Une masterclass vin & fromage pour votre équipe, dans une cave, sur un rooftop, ou dans vos locaux. Thomas anime la dégustation comme une activité de groupe : structurée, informative, et vraiment fun. Disponible en soirée en semaine.">A wine & cheese masterclass for your team: in a cave, on a rooftop, or at your office. Weekday evenings available. Pro invoice provided.</p>
-                  <div class="offer-meta">
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> <span data-en="8–20 guests" data-fr="8–20 personnes">8–20 guests</span></span>
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> <span data-en="Tue–Thu evenings" data-fr="Mar–Jeu soirées">Tue–Thu evenings</span></span>
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> <span data-en="From €95/person" data-fr="À partir de 95 €/pers.">From €95/person</span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="offer-card">
-              <div class="offer-image"><img src="images/hotel-concierge.jpg" alt="Hotel concierge handing a tasting itinerary card to two guests at a marble counter, wine bottles and a Montmartre map behind" loading="lazy"></div>
-              <div class="offer-row">
-                <div class="offer-icon-wrap">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                </div>
-                <div class="offer-body">
-                  <h3 class="offer-title" data-en="Hotel Concierge & Groups" data-fr="Conciergerie Hôtelière & Groupes">Hotel Concierge & Groups</h3>
-                  <p class="offer-desc" data-en="Thomas works with hotel concierges across Montmartre and the 9th to provide premium experiences for their guests. If you're a hotel looking to expand your experiences offer, or a concierge wanting to refer guests, get in touch." data-fr="Thomas travaille avec les conciergeries des hôtels de Montmartre et du 9e pour proposer des expériences premium à leurs clients. Si vous êtes un hôtel ou une conciergerie souhaitant recommander nos visites, contactez-nous.">Thomas works with hotel concierges to provide premium experiences for their guests. If you're a hotel or concierge wanting to refer guests, get in touch.</p>
-                  <div class="offer-meta">
-                    <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> <span data-en="Commission-based" data-fr="Sur commission">Commission-based</span></span>
-                  </div>
-                </div>
+            <div class="offer-body">
+              <h3 class="offer-title" data-en="Anniversary &amp; Celebrations" data-fr="Anniversaires &amp; Célébrations">Anniversary &amp; Celebrations</h3>
+              <p class="offer-desc" data-en="A private Wine &amp; Cheese Walk or rooftop tasting for two (or more). Thomas selects wines around the occasion, prepares the board personally, and designs the experience around your evening. Popular for birthdays, proposals, and wedding anniversaries." data-fr="Une balade privée Vin &amp; Fromage ou une dégustation sur le rooftop pour deux, ou plus. Thomas sélectionne les vins en fonction de l'occasion, prépare la planche personnellement, et conçoit l'expérience autour de votre soirée.">A private Wine &amp; Cheese Walk or rooftop tasting for two (or more). Thomas selects wines around the occasion and designs the experience around your evening. Popular for birthdays, proposals, and anniversaries.</p>
+              <div class="offer-meta">
+                <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> <span data-en="2–8 guests" data-fr="2–8 personnes">2–8 guests</span></span>
               </div>
             </div>
           </div>
         </div>
+        <div class="offer-card">
+          <div class="offer-image"><img src="images/private-table-eiffel.jpg" alt="Private dinner table set with wine and cheese, Eiffel Tower at sunset through open French windows" loading="lazy"></div>
+          <div class="offer-row">
+            <div class="offer-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <div class="offer-body">
+              <h3 class="offer-title" data-en="Corporate &amp; Team Events" data-fr="Événements Corporate &amp; Team Building">Corporate &amp; Team Events</h3>
+              <p class="offer-desc" data-en="A wine &amp; cheese masterclass for your team, in a cave, on a rooftop, or at your office. Thomas facilitates the tasting as a group activity: structured, informative, and genuinely fun. Available weekday evenings (18:30). Pro invoice provided." data-fr="Une masterclass vin &amp; fromage pour votre équipe, dans une cave, sur un rooftop, ou dans vos locaux. Thomas anime la dégustation comme une activité de groupe : structurée, informative, et vraiment fun. Disponible en soirée en semaine.">A wine &amp; cheese masterclass for your team: in a cave, on a rooftop, or at your office. Weekday evenings available. Pro invoice provided.</p>
+              <div class="offer-meta">
+                <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> <span data-en="8–20 guests" data-fr="8–20 personnes">8–20 guests</span></span>
+                <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> <span data-en="Tue–Thu evenings" data-fr="Mar–Jeu soirées">Tue–Thu evenings</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="offer-card">
+          <div class="offer-image"><img src="images/hotel-concierge.jpg" alt="Hotel concierge handing a tasting itinerary card to two guests at a marble counter, wine bottles and a Montmartre map behind" loading="lazy"></div>
+          <div class="offer-row">
+            <div class="offer-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="offer-body">
+              <h3 class="offer-title" data-en="Hotel Concierge &amp; Groups" data-fr="Conciergerie Hôtelière &amp; Groupes">Hotel Concierge &amp; Groups</h3>
+              <p class="offer-desc" data-en="Thomas works with hotel concierges across Montmartre and the 9th to provide premium experiences for their guests. If you're a hotel looking to expand your experiences offer, or a concierge wanting to refer guests, get in touch." data-fr="Thomas travaille avec les conciergeries des hôtels de Montmartre et du 9e pour proposer des expériences premium à leurs clients. Si vous êtes un hôtel ou une conciergerie souhaitant recommander nos visites, contactez-nous.">Thomas works with hotel concierges to provide premium experiences for their guests. If you're a hotel or concierge wanting to refer guests, get in touch.</p>
+              <div class="offer-meta">
+                <span class="offer-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> <span data-en="Commission-based" data-fr="Sur commission">Commission-based</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="offers-price-note" data-en="The price is stated once, in the form above, and nowhere else on this page." data-fr="Le prix est dit une fois, dans le formulaire ci-dessus, et nulle part ailleurs sur cette page.">The price is stated once, in the form above, and nowhere else on this page.</p>
+    </div>
 
-        <!-- Response time -->
-        <div class="response-badge fade-in">
-          <svg class="response-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <div class="response-badge-text">
-            <h4 data-en="Thomas typically replies within 4 hours" data-fr="Thomas répond généralement sous 4 heures">Thomas typically replies within 4 hours</h4>
-            <p data-en="All enquiries are personal, you'll hear from Thomas directly, not from a booking assistant." data-fr="Toutes les demandes sont personnelles, vous recevrez une réponse de Thomas directement, pas d'un assistant de réservation.">All enquiries are personal: you'll hear from Thomas directly, not from a booking assistant.</p>
-          </div>
-        </div>
+    <!-- Response time -->
+    <div class="response-badge fade-in">
+      <svg class="response-badge-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <div class="response-badge-text">
+        <h4 data-en="Thomas typically replies within 4 hours" data-fr="Thomas répond généralement sous 4 heures">Thomas typically replies within 4 hours</h4>
+        <p data-en="All enquiries are personal, you'll hear from Thomas directly, not from a booking assistant." data-fr="Toutes les demandes sont personnelles, vous recevrez une réponse de Thomas directement, pas d'un assistant de réservation.">All enquiries are personal: you'll hear from Thomas directly, not from a booking assistant.</p>
+      </div>
+    </div>
 
-        <!-- Contact methods -->
-        <div class="fade-in">
-          <h3 style="font-family:var(--ff-display);font-size:20px;font-weight:600;color:var(--charcoal);margin-bottom:20px;" data-en="Other ways to reach us" data-fr="D'autres façons de nous contacter">Other ways to reach us</h3>
-          <div class="contact-methods">
-            <div class="contact-method">
-              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-              <div><span class="contact-method-label" data-en="Email" data-fr="Email">Email</span><p class="contact-method-value"><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></p></div>
-            </div>
-            <div class="contact-method">
-              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-              <div><span class="contact-method-label">Instagram</span><p class="contact-method-value"><a href="https://instagram.com/winecheeseparis" rel="noopener noreferrer" target="_blank">@winecheeseparis</a></p></div>
-            </div>
-            <div class="contact-method">
-              <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-              <div><span class="contact-method-label" data-en="Meeting point" data-fr="Point de RDV">Meeting point</span><p class="contact-method-value" data-en="Métro Notre-Dame-de-Lorette, 9e arr." data-fr="Métro Notre-Dame-de-Lorette, 9e arr.">Métro Notre-Dame-de-Lorette, 9e arr.</p></div>
-            </div>
-          </div>
+    <!-- Contact methods -->
+    <div class="fade-in">
+      <h3 style="font-family:var(--ff-display);font-size:var(--text-xl);font-weight:var(--weight-semibold);color:var(--charcoal);margin-bottom:20px;" data-en="Other ways to reach us" data-fr="D'autres façons de nous contacter">Other ways to reach us</h3>
+      <div class="contact-methods">
+        <div class="contact-method">
+          <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><span class="contact-method-label" data-en="Email" data-fr="Email">Email</span><p class="contact-method-value"><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></p></div>
         </div>
+        <div class="contact-method">
+          <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+          <div><span class="contact-method-label">Instagram</span><p class="contact-method-value"><a href="https://instagram.com/winecheeseparis" rel="noopener noreferrer" target="_blank">@winecheeseparis</a></p></div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><span class="contact-method-label" data-en="Meeting point" data-fr="Point de RDV">Meeting point</span><p class="contact-method-value" data-en="Métro Notre-Dame-de-Lorette, 9e arr." data-fr="Métro Notre-Dame-de-Lorette, 9e arr.">Métro Notre-Dame-de-Lorette, 9e arr.</p></div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </section>
@@ -389,9 +554,300 @@ function safeTrack(name, props, opts) {
   } catch (e) {}
 }
 
-// Entonnoir de la demande (Enquiry: ...)
+/* ==========================================================================
+   MODULE DE DEMANDE
+   --------------------------------------------------------------------------
+   Contrat a ne jamais casser : le POST /api/contact part avec exactement huit
+   cles, firstName, lastName, email, phone, enquiryType, groupSize,
+   preferredDate, message. Le serveur refuse en 400 sans les quatre premieres
+   plus message. Rien n'est fusionne, rien n'est supprime.
+
+   Le <select id="enquiryType"> garde son id et ses six valeurs : booking.js,
+   non modifie, continue de lire ?enquiry= et d'ecrire dedans. Le module se
+   contente de replier le champ derriere un resume quand la valeur vient de
+   l'URL.
+
+   groupSize est un input cache alimente par des pastilles. Consequence sur le
+   tracking, et c'est le piege de ce chantier : une ecriture programmatique ne
+   declenche pas l'evenement "change", donc l'ecoute est deleguee sur le
+   formulaire et l'evenement Plausible est emis au clic. Chaque pastille porte
+   un id, sinon "Enquiry: Form Started" (qui sort si la cible n'a pas d'id) ne
+   partirait jamais, le premier geste du parcours etant justement une pastille.
+   ========================================================================== */
+
+var PRICE_BASE = 200;
+var PRICE_PER_GUEST = 95;
+
+var MOTIF_TITLES = {
+  'private-couples':     ['A private tasting for two, then.', 'Une dégustation privée pour deux, donc.'],
+  'private-celebration': ['A celebration, then.', 'Une célébration, donc.'],
+  'corporate':           ['A tasting for your team, then.', 'Une dégustation pour votre équipe, donc.'],
+  'hotel':               ['A concierge partnership, then.', 'Un partenariat conciergerie, donc.'],
+  'public-tour':         ['A question about a public tour.', 'Une question sur une visite publique.'],
+  'other':               ['Tell me the shape of it', 'Dites-moi la forme de votre demande']
+};
+
+function isFr() { return document.documentElement.lang === 'fr'; }
+
+// Ecrit les deux langues sur l'element et affiche celle en cours. La bascule FR
+// de nav.js reecrit ensuite innerHTML depuis data-en / data-fr : une chaine
+// generee ici suit donc la bascule sans code supplementaire.
+function setBilingual(el, en, fr) {
+  if (!el) return;
+  el.setAttribute('data-en', en);
+  el.setAttribute('data-fr', fr);
+  el.innerHTML = isFr() ? fr : en;
+}
+
+function groupEn(n) { return n + (n === 1 ? ' guest' : ' guests'); }
+function groupFr(n) { return n + (n === 1 ? ' convive' : ' convives'); }
+function amountEn(v) { return '&euro;' + String(v).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+function amountFr(v) { return String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0') + '\u00A0€'; }
+
+function highlightPriceRow(n) {
+  var rows = document.querySelectorAll('.price-table tbody tr');
+  Array.prototype.forEach.call(rows, function (tr) {
+    tr.classList.toggle('is-on', String(n) === tr.getAttribute('data-row'));
+  });
+}
+
+function renderPrice(size) {
+  var empty = document.getElementById('priceEmpty');
+  var filled = document.getElementById('priceFilled');
+  if (!size) {
+    empty.hidden = false;
+    filled.hidden = true;
+    highlightPriceRow(null);
+    return;
+  }
+  empty.hidden = true;
+  filled.hidden = false;
+
+  var countEl = document.getElementById('priceCount');
+  var totalEl = document.getElementById('priceTotal');
+  var eachEl  = document.getElementById('priceEach');
+
+  if (size === '13+') {
+    setBilingual(countEl, 'More than twelve guests', 'Plus de douze convives');
+    setBilingual(totalEl,
+      amountEn(PRICE_BASE) + ' + ' + amountEn(PRICE_PER_GUEST) + ' <span>per guest</span>',
+      amountFr(PRICE_BASE) + ' + ' + amountFr(PRICE_PER_GUEST) + ' <span>par convive</span>');
+    setBilingual(eachEl,
+      'Tell me the exact number below and I will do the sum.',
+      'Dites-moi le nombre exact plus bas et je fais l\'addition.');
+    highlightPriceRow(null);
+    return;
+  }
+
+  var n = parseInt(size, 10);
+  var total = PRICE_BASE + PRICE_PER_GUEST * n;
+  var each = Math.round(total / n);
+  var exact = (total % n === 0);
+
+  setBilingual(countEl, groupEn(n), groupFr(n));
+  setBilingual(totalEl,
+    amountEn(total) + ' <span>in total</span>',
+    amountFr(total) + ' <span>au total</span>');
+
+  var en = (exact ? '' : 'About ') + amountEn(each) + ' each.';
+  var fr = (exact ? '' : 'Environ ') + amountFr(each) + ' par personne.';
+  if (n === 2) {
+    en += ' The same price as the dates on the calendar.';
+    fr += ' Le prix des dates affichées au calendrier.';
+  }
+  setBilingual(eachEl, en, fr);
+  highlightPriceRow(n);
+}
+
+function selectSize(value, fromUser) {
+  var grid = document.getElementById('sizeGrid');
+  Array.prototype.forEach.call(grid.querySelectorAll('.size-chip'), function (chip) {
+    chip.setAttribute('aria-pressed', chip.getAttribute('data-size') === value ? 'true' : 'false');
+  });
+  document.getElementById('groupSize').value = value;
+  renderPrice(value);
+  clearFieldError('groupSize');
+  if (fromUser) safeTrack('Enquiry: Group Size Selected', { size: value });
+}
+
+function motifLabel(value) {
+  var select = document.getElementById('enquiryType');
+  var opt = select.querySelector('option[value="' + value + '"]');
+  if (!opt) return null;
+  return [opt.getAttribute('data-en') || opt.textContent, opt.getAttribute('data-fr') || opt.textContent];
+}
+
+function collapseMotif(value) {
+  var pair = motifLabel(value);
+  if (!pair) return;
+  setBilingual(document.getElementById('motifPickedValue'), pair[0], pair[1]);
+  document.getElementById('motifPicked').hidden = false;
+  document.getElementById('motifField').hidden = true;
+  var title = MOTIF_TITLES[value];
+  if (title) setBilingual(document.getElementById('formTitle'), title[0], title[1]);
+}
+
+function expandMotif() {
+  document.getElementById('motifPicked').hidden = true;
+  document.getElementById('motifField').hidden = false;
+}
+
+/* ---- Validation ---- */
+
+var REQUIRED_FIELD_ORDER = ['enquiryType', 'groupSize', 'message', 'firstName', 'lastName', 'email', 'phone'];
+
+function isValidEmail(v) {
+  var at = v.indexOf('@');
+  if (at < 1) return false;
+  var dot = v.indexOf('.', at + 1);
+  return dot > at + 1 && dot < v.length - 1;
+}
+
+function trimmed(id) {
+  var el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+function clearFieldError(id) {
+  var error = document.getElementById(id + 'Error');
+  if (error) error.classList.remove('visible');
+  if (id === 'groupSize') {
+    var grid = document.getElementById('sizeGrid');
+    grid.classList.remove('has-error');
+    grid.removeAttribute('aria-describedby');
+    return;
+  }
+  var input = document.getElementById(id);
+  if (input) {
+    input.classList.remove('has-error');
+    input.removeAttribute('aria-invalid');
+    input.removeAttribute('aria-describedby');
+  }
+}
+
+function showFieldError(id) {
+  var error = document.getElementById(id + 'Error');
+  if (error) error.classList.add('visible');
+
+  // groupSize est un input cache : un input cache n'est pas focalisable, donc
+  // le focus va sur la premiere pastille et l'etat d'erreur sur la grille.
+  if (id === 'groupSize') {
+    var grid = document.getElementById('sizeGrid');
+    grid.classList.add('has-error');
+    grid.setAttribute('aria-describedby', 'groupSizeError');
+    var first = grid.querySelector('.size-chip');
+    if (first) first.focus();
+    return;
+  }
+
+  // Si le motif est replie, on le rouvre avant de pouvoir y mettre le focus.
+  if (id === 'enquiryType' && document.getElementById('motifField').hidden) expandMotif();
+
+  var input = document.getElementById(id);
+  if (input) {
+    input.classList.add('has-error');
+    input.setAttribute('aria-invalid', 'true');
+    input.setAttribute('aria-describedby', id + 'Error');
+    input.focus();
+  }
+}
+
+function clearAllErrors() {
+  REQUIRED_FIELD_ORDER.forEach(clearFieldError);
+  document.getElementById('formErrorBanner').classList.remove('visible');
+}
+
+// Retourne l'id du premier champ en faute, ou null si le formulaire est valide.
+// L'ordre suit l'ordre a l'ecran : ce qui fixe le prix d'abord, l'identite en
+// dernier.
+function validateForm() {
+  if (!document.getElementById('enquiryType').value) return 'enquiryType';
+  if (!document.getElementById('groupSize').value) return 'groupSize';
+  if (!trimmed('message')) return 'message';
+  if (!trimmed('firstName')) return 'firstName';
+  if (!trimmed('lastName')) return 'lastName';
+  var email = trimmed('email');
+  if (!email || !isValidEmail(email)) return 'email';
+  var phone = trimmed('phone');
+  if (phone && phone.charAt(0) !== '+') return 'phone';
+  return null;
+}
+
+/* ---- Branchements ---- */
+
 (function () {
   var form = document.getElementById('contactForm');
+
+  // Toutes les ecoutes du module sont deleguees sur le formulaire : les
+  // pastilles peuvent etre reconstruites ou deplacees sans perdre le tracking.
+  form.addEventListener('click', function (e) {
+    var chip = e.target.closest ? e.target.closest('.size-chip') : null;
+    // markStarted() est appele ici en plus de focusin : Safari, y compris sur
+    // iPhone, ne donne pas le focus a un <button> au tap, donc un visiteur dont
+    // le premier geste est une pastille ne declencherait jamais
+    // "Enquiry: Form Started". C'est la majorite de l'audience.
+    if (chip) { markStarted(chip.id); selectSize(chip.getAttribute('data-size'), true); return; }
+    if (e.target.closest && e.target.closest('#motifChange')) {
+      expandMotif();
+      document.getElementById('enquiryType').focus();
+    }
+  });
+
+  form.addEventListener('change', function (e) {
+    if (!e.target || e.target.id !== 'enquiryType') return;
+    if (e.target.value) safeTrack('Enquiry: Type Selected', { type: e.target.value });
+    clearFieldError('enquiryType');
+  });
+
+  // Repli du champ + titre contextuel, uniquement quand le motif arrive par
+  // l'URL. Un choix fait a la main laisse le menu en place : replier sous le
+  // doigt du visiteur serait desagreable et sans benefice.
+  var fromUrl = /[?&]enquiry=([a-z-]+)/i.exec(window.location.search);
+  if (fromUrl) {
+    // booking.js pose la valeur sur DOMContentLoaded ; ce script est charge
+    // apres lui, donc cet ecouteur passe en second et lit une valeur deja ecrite.
+    window.addEventListener('DOMContentLoaded', function () {
+      var value = fromUrl[1];
+      if (document.getElementById('enquiryType').value !== value) return;
+      collapseMotif(value);
+      if (value === 'private-couples' && !document.getElementById('groupSize').value) {
+        selectSize('2', false);
+      }
+    });
+  }
+
+  // Deflexion vers le calendrier. A mesurer : envoyer les couples vers la page
+  // couple fait BAISSER le nombre de demandes ici, ce qui ressemble a une
+  // regression si on ne compte que les demandes.
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest ? e.target.closest('[data-deflect]') : null;
+    if (link) safeTrack('Enquiry: Deflected to Calendar', { from: 'contact' });
+  });
+
+  // Les placeholders passent par data-ph-en / data-ph-fr, jamais par
+  // data-en / data-fr : la bascule de nav.js reecrit innerHTML, et sur un
+  // <textarea> cela ecrit dans la VALEUR du champ. Un data-en sur le message
+  // remplirait donc le champ avec le texte d'exemple, qui partirait dans la
+  // demande. Cet ecouteur est pose apres celui de nav.js, donc il lit un
+  // document.documentElement.lang deja a jour.
+  var langToggle = document.getElementById('langToggle');
+  if (langToggle) {
+    langToggle.addEventListener('click', function () {
+      Array.prototype.forEach.call(document.querySelectorAll('[data-ph-en]'), function (el) {
+        var v = isFr() ? el.getAttribute('data-ph-fr') : el.getAttribute('data-ph-en');
+        if (v) el.setAttribute('placeholder', v);
+      });
+    });
+  }
+
+  // Sans JavaScript, la grille de prix est servie dans le HTML avec le
+  // <details> ouvert : le prix ne depend jamais du script. Avec JavaScript, on
+  // la replie et on affiche l'invitation a choisir un nombre.
+  document.getElementById('priceFold').open = false;
+  document.getElementById('pricePrompt').hidden = false;
+
+  /* ---- Entonnoir (Enquiry: ...) ---- */
+
   var started = false;
   var submitted = false;
   var lastField = null;
@@ -408,21 +864,16 @@ function safeTrack(name, props, opts) {
     viewObserver.observe(form);
   }
 
+  function markStarted(fieldId) {
+    if (fieldId) lastField = fieldId;
+    if (started) return;
+    started = true;
+    safeTrack('Enquiry: Form Started', null, { once: true });
+  }
+
   form.addEventListener('focusin', function (e) {
     if (!e.target || !e.target.id) return;
-    lastField = e.target.id;
-    if (!started) {
-      started = true;
-      safeTrack('Enquiry: Form Started', null, { once: true });
-    }
-  });
-
-  document.getElementById('enquiryType').addEventListener('change', function () {
-    if (this.value) safeTrack('Enquiry: Type Selected', { type: this.value });
-  });
-
-  document.getElementById('groupSize').addEventListener('change', function () {
-    safeTrack('Enquiry: Group Size Selected', { size: this.value || '1-2' });
+    markStarted(e.target.id);
   });
 
   // Abandon : survit au dechargement de la page (pagehide couvre aussi le
@@ -437,133 +888,103 @@ function safeTrack(name, props, opts) {
   });
   window.addEventListener('pagehide', maybeTrackAbandon);
 
-  // Ne marque "submitted" que lorsque la validation a laisse passer l'envoi
-  // (evenement custom declenche juste avant le fetch), pas sur chaque clic
-  // "Send message" : sinon une tentative bloquee par la validation masquerait
-  // un abandon reel qui suit.
+  // Ne marque "submitted" que lorsque la validation a laisse passer l'envoi,
+  // pas sur chaque clic : sinon une tentative bloquee par la validation
+  // masquerait un abandon reel qui suit.
   form.addEventListener('wc:submitted', function () { submitted = true; });
-})();
 
-// Validation
-var REQUIRED_FIELD_ORDER = ['firstName', 'lastName', 'email', 'phone', 'enquiryType', 'message'];
+  /* ---- Envoi ---- */
 
-function isValidEmail(v) {
-  var at = v.indexOf('@');
-  if (at < 1) return false;
-  var dot = v.indexOf('.', at + 1);
-  return dot > at + 1 && dot < v.length - 1;
-}
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearAllErrors();
 
-function clearFieldError(id) {
-  var input = document.getElementById(id);
-  var error = document.getElementById(id + 'Error');
-  if (input) {
-    input.classList.remove('has-error');
-    input.removeAttribute('aria-invalid');
-    input.removeAttribute('aria-describedby');
-  }
-  if (error) error.classList.remove('visible');
-}
-
-function showFieldError(id) {
-  var input = document.getElementById(id);
-  var error = document.getElementById(id + 'Error');
-  if (input) {
-    input.classList.add('has-error');
-    input.setAttribute('aria-invalid', 'true');
-    input.setAttribute('aria-describedby', id + 'Error');
-    input.focus();
-  }
-  if (error) error.classList.add('visible');
-}
-
-function clearAllErrors() {
-  REQUIRED_FIELD_ORDER.forEach(clearFieldError);
-  document.getElementById('formErrorBanner').classList.remove('visible');
-}
-
-// Retourne l'id du premier champ en faute, ou null si le formulaire est valide.
-function validateForm() {
-  var firstName = document.getElementById('firstName').value.trim();
-  var lastName = document.getElementById('lastName').value.trim();
-  var email = document.getElementById('email').value.trim();
-  var phone = document.getElementById('phone').value.trim();
-  var enquiryType = document.getElementById('enquiryType').value;
-  var message = document.getElementById('message').value.trim();
-
-  if (!firstName) return 'firstName';
-  if (!lastName) return 'lastName';
-  if (!email || !isValidEmail(email)) return 'email';
-  if (phone && phone.charAt(0) !== '+') return 'phone';
-  if (!enquiryType) return 'enquiryType';
-  if (!message) return 'message';
-  return null;
-}
-
-// Form
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  clearAllErrors();
-
-  var invalidField = validateForm();
-  if (invalidField) {
-    showFieldError(invalidField);
-    safeTrack('Enquiry: Blocked', { field: invalidField });
-    return;
-  }
-
-  e.target.dispatchEvent(new Event('wc:submitted'));
-
-  var btn = document.getElementById('submitBtn');
-  btn.textContent = '…';
-  btn.disabled = true;
-
-  var enquiryType = document.getElementById('enquiryType').value;
-  var groupSize = document.getElementById('groupSize').value || '1-2';
-
-  safeTrack('Enquiry: Submit Attempted');
-
-  var payload = {
-    firstName:     document.getElementById('firstName').value.trim(),
-    lastName:      document.getElementById('lastName').value.trim(),
-    email:         document.getElementById('email').value.trim(),
-    phone:         document.getElementById('phone').value.trim(),
-    enquiryType:   enquiryType,
-    groupSize:     groupSize,
-    preferredDate: document.getElementById('preferredDate').value,
-    message:       document.getElementById('message').value.trim()
-  };
-
-  function resetSubmitButton() {
-    btn.textContent = 'Send message';
-    btn.disabled = false;
-  }
-
-  fetch('/api/contact', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    // Le succes s'affiche des que le serveur confirme, independamment du
-    // tracking : un echec de plausible() ici ne doit jamais empecher ce bloc.
-    if (data && data.success) {
-      document.getElementById('contactFormWrap').style.display = 'none';
-      document.getElementById('formSuccess').classList.add('visible');
-      safeTrack('Enquiry: Submitted', { type: enquiryType, size: groupSize });
-    } else {
-      resetSubmitButton();
-      safeTrack('Enquiry: Failed', { reason: (data && data.error === 'validation') ? 'validation' : 'server' });
-      document.getElementById('formErrorBanner').classList.add('visible');
+    var invalidField = validateForm();
+    if (invalidField) {
+      showFieldError(invalidField);
+      safeTrack('Enquiry: Blocked', { field: invalidField });
+      return;
     }
-  })
-  .catch(function() {
-    resetSubmitButton();
-    safeTrack('Enquiry: Failed', { reason: 'network' });
-    document.getElementById('formErrorBanner').classList.add('visible');
+
+    form.dispatchEvent(new Event('wc:submitted'));
+
+    var btn = document.getElementById('submitBtn');
+    btn.textContent = '…';
+    btn.disabled = true;
+
+    var enquiryType = document.getElementById('enquiryType').value;
+    var groupSize = document.getElementById('groupSize').value;
+
+    safeTrack('Enquiry: Submit Attempted');
+
+    var payload = {
+      firstName:     trimmed('firstName'),
+      lastName:      trimmed('lastName'),
+      email:         trimmed('email'),
+      phone:         trimmed('phone'),
+      enquiryType:   enquiryType,
+      groupSize:     groupSize,
+      preferredDate: document.getElementById('preferredDate').value,
+      message:       trimmed('message')
+    };
+
+    function resetSubmitButton() {
+      btn.innerHTML = isFr() ? btn.getAttribute('data-fr') : btn.getAttribute('data-en');
+      btn.disabled = false;
+    }
+
+    function fillRecap() {
+      var size = groupSize;
+      if (size === '13+') {
+        setBilingual(document.getElementById('recapSizeLabel'), 'More than twelve', 'Plus de douze');
+        setBilingual(document.getElementById('recapPrice'),
+          amountEn(PRICE_BASE) + ' + ' + amountEn(PRICE_PER_GUEST) + ' per guest',
+          amountFr(PRICE_BASE) + ' + ' + amountFr(PRICE_PER_GUEST) + ' par convive');
+      } else {
+        var n = parseInt(size, 10);
+        var total = PRICE_BASE + PRICE_PER_GUEST * n;
+        setBilingual(document.getElementById('recapSizeLabel'), groupEn(n), groupFr(n));
+        setBilingual(document.getElementById('recapPrice'),
+          amountEn(total) + ' in total', amountFr(total) + ' au total');
+      }
+      var pair = motifLabel(enquiryType);
+      if (pair) setBilingual(document.getElementById('recapType'), pair[0], pair[1]);
+      var date = document.getElementById('preferredDate').value;
+      if (date) {
+        document.getElementById('recapDateLabel').hidden = false;
+        var el = document.getElementById('recapDate');
+        el.hidden = false;
+        el.textContent = date;
+      }
+    }
+
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      // Le succes s'affiche des que le serveur confirme, independamment du
+      // tracking : un echec de plausible() ici ne doit jamais empecher ce bloc.
+      if (data && data.success) {
+        fillRecap();
+        document.getElementById('contactFormWrap').style.display = 'none';
+        document.getElementById('formSuccess').classList.add('visible');
+        safeTrack('Enquiry: Submitted', { type: enquiryType, size: groupSize });
+      } else {
+        resetSubmitButton();
+        safeTrack('Enquiry: Failed', { reason: (data && data.error === 'validation') ? 'validation' : 'server' });
+        document.getElementById('formErrorBanner').classList.add('visible');
+      }
+    })
+    .catch(function () {
+      resetSubmitButton();
+      safeTrack('Enquiry: Failed', { reason: 'network' });
+      document.getElementById('formErrorBanner').classList.add('visible');
+    });
   });
-});
+})();
 </script>
 </body>
 </html>
