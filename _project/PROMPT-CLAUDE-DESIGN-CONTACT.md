@@ -196,6 +196,131 @@ Ce qu'il ne faut pas faire.
 
 ---
 
+## Le prompt du tour 2, le code d'intégration
+
+Écrit après revue du canvas du tour 1 (`Refonte-page-demande.dc.html`). Le tour 1 est validé
+sur le fond, y compris ses trois pièges de tracking, vérifiés ligne à ligne dans
+`contact.html` et tous exacts. Ce tour tranche la direction et ajoute quatre points.
+
+```
+Tour 2. Le code d'intégration.
+
+Ton canvas du tour 1 est validé, et la note est juste. Relis-la avant de coder : tout ce qui
+n'est pas mentionné ci-dessous est validé tel quel et doit être implémenté comme tu l'as
+décrit.
+
+Sont notamment validés sans réserve : le rôle que tu donnes à la page, l'ordre motif,
+convives, prix, date, message, identité, l'intertitre qui dit pourquoi on demande le nom, le
+retrait de "or budget" du titre, la disparition des mentions "From €120/person" et
+"From €95/person" des trois cartes, le par-personne passé en secondaire sous le total, la
+carte en deux colonnes sur desktop et en une seule sur mobile, la géométrie de l'encoche
+rouverte (héros 660 px, débord 150 px), et la ligne de déflexion vers le calendrier.
+
+La direction retenue : 1b, avec 1a comme plancher.
+
+Ton argument est le bon : 1b se justifie parce qu'il contient 1a, pas contre elle. Le tableau
+de quatre lignes reste dans le HTML servi, replié, et c'est lui qui dit la vérité sur le prix
+quand le JavaScript ne s'exécute pas.
+
+La réponse à ta question sur le convive seul.
+
+Garde ta proposition : une ligne discrète sous les pastilles, pas de pastille "1". Elle
+n'affiche pas une offre solo mais ne refuse pas une demande solo, ce qui est exactement le
+bon compromis. Ne change rien.
+
+La réponse à ta question sur la propriété size de Plausible.
+
+Envoie le nombre exact, "4", et pas la tranche. La comparaison historique ne vaut rien ici :
+il y a trois demandes en tout dans l'historique. Le nombre exact dans l'email de notification
+vaut beaucoup plus.
+
+Quatre ajouts.
+
+1. INSTRUMENTE LA DÉFLEXION. C'est la meilleure idée de ton canvas et c'est celle qui va
+   passer pour une régression si on ne la mesure pas. Envoyer les couples vers le calendrier
+   va faire BAISSER le nombre de demandes sur cette page. Jugée au compteur de demandes, la
+   refonte aura l'air d'un échec alors qu'elle aura converti mieux et plus vite.
+   Ajoute un événement dédié sur ce lien, par exemple "Enquiry: Deflected to Calendar", et
+   écris dans ta note comment lire le succès de la refonte : demandes qualifiées plus ventes
+   du calendrier, jamais demandes seules.
+
+2. NE TOUCHE PAS À "8 to 20 guests", ni pour le changer ni pour le retirer. C'est le texte
+   déjà en ligne, donc ce n'est pas ton invention, mais il est peut-être faux : la petite cave
+   plafonne à 8 convives et la capacité réelle de la grande salle est annoncée à 16 sans avoir
+   jamais été confirmée. Je dois la vérifier auprès de la cave avant qu'on y touche. Laisse la
+   chaîne exactement telle quelle et signale-le dans ta note comme une vérification qui
+   m'appartient.
+
+3. MESURE LA POSITION DU BOUTON D'ENVOI SUR MOBILE, ne l'estime pas. Douze pastilles prennent
+   environ 170 px là où le menu déroulant en prenait 48, et le bouton passe désormais après
+   six blocs. Le chiffre à ne pas perdre est 1,8 écran, c'est le gain que le module en encoche
+   avait acheté. Donne-moi la mesure réelle en 375 px de large. Si tu dépasses, dis-le et
+   propose ce que tu retirerais.
+
+4. NOTE LE COUPLAGE DES DEUX PAGES. La ligne "€195 each. The same price as the dates on the
+   calendar" lie cette page au prix du calendrier. Si le prix du calendrier bouge un jour,
+   cette phrase ment en silence. Ajoute-le au runbook des créneaux, dans la section qui liste
+   ce qu'il faut toucher quand un prix change.
+
+Ce que "sans JavaScript" veut dire ici, précisément.
+
+Cette page n'a pas la même contrainte que la page couple, et je ne veux pas que tu te
+trompes de cible. Le formulaire est <form id="contactForm" novalidate> SANS attribut action,
+et l'envoi passe entièrement par fetch. Sans JavaScript, il ne fonctionne donc déjà pas
+aujourd'hui : soumettre recharge la page et perd la saisie.
+
+Ce n'est pas ton problème et je ne te demande pas de le régler, ça demanderait de toucher au
+service, qui est hors chantier. Ce que j'exige est plus étroit : LE PRIX doit rester lisible
+sans JavaScript, par le tableau de 1a servi dans le HTML. Ne rends pas le prix dépendant du
+script, c'est tout.
+
+Les contraintes du tour 1 restent valables, rappelées en une ligne chacune.
+
+Les huit clés partent inchangées : firstName, lastName, email, phone, enquiryType, groupSize,
+preferredDate, message. Le serveur refuse en 400 sans firstName, lastName, email ou message,
+donc rien n'est fusionné ni supprimé. Le menu enquiryType garde son id et ses six valeurs
+pour que booking.js continue de lire ?enquiry=. Les neuf événements Plausible survivent, y
+compris tes trois pièges. Chaque chaîne porte data-en et data-fr. Aucune librairie. Aucune
+fausse rareté. Pas de tiret cadratin.
+
+Ce que je veux recevoir.
+
+Le code, sur une branche, jamais sur main : pousser sur main déclenche le déploiement.
+Nomme-la feat/parcours-demande. Si tu ne peux pas pousser, rends-moi les fichiers modifiés.
+
+Fichiers concernés : contact.html, et _project/RUNBOOK-CRENEAUX.md pour le point 4. Si tu as
+besoin de toucher tokens.css ou shared.css, dis-le et justifie-le, ne le fais pas en silence.
+Ne touche pas au service /api/contact.
+
+Le pré-vol, à faire avant de me rendre la main, et à me rapporter point par point.
+
+1. LE CONTRAT DU FORMULAIRE, et c'est le contrôle le plus important. Intercepte fetch dans le
+   navigateur, remplis le formulaire, soumets, et montre-moi le corps JSON exact qui serait
+   parti : les huit clés, avec ces noms, et des valeurs cohérentes avec ce qui a été saisi.
+   N'envoie rien pour de vrai, une demande de test atterrirait dans ma boîte.
+2. Les six valeurs de ?enquiry= présélectionnent bien le motif, testées une par une.
+3. Les neuf événements Plausible partent, et en particulier les trois que tu avais repérés :
+   un clic sur une pastille émet Group Size Selected, le premier geste sur une pastille émet
+   Form Started, et une erreur de validation sur les convives met le focus sur une pastille et
+   non sur un input caché.
+4. La bascule FR ne laisse aucune chaîne en anglais, y compris la ligne de prix générée.
+5. JavaScript coupé : le tableau de prix est lisible dans le HTML servi.
+6. La position du bouton d'envoi en 375 px, mesurée, comparée aux 1,8 écran actuels.
+7. Les six pages du site répondent en 200 et la console est vide, en 1440 et en 375.
+
+Dis-moi aussi franchement ce que tu n'as pas pu vérifier.
+
+Ce qu'il ne faut pas faire.
+
+- Ne casse pas le formulaire, c'est la seule erreur de ce chantier qui ne se voit pas.
+- N'envoie aucune demande de test sur /api/contact.
+- Ne touche pas au service, ni à "8 to 20 guests".
+- N'invente aucun prix. La grille est 200 EUR plus 95 EUR par convive.
+- Jamais de tiret cadratin, ni dans l'interface, ni dans le runbook, ni dans les commits.
+```
+
+---
+
 ## Ce qui reste hors de ce prompt
 
 **Le service `/api/contact`.** Sa copie dans le dépôt a divergé de la version déployée par le
