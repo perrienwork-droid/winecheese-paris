@@ -26,6 +26,7 @@
   --gold-hover:  #B8924D;   /* etat survol de --gold. Etait en dur 8 fois */
   --gold-text:   #7A6340;   /* --gold assombri pour atteindre AA sur --cream */
   --light-gold:  #F5ECD7;
+  --light-gold-hover: #EFE1C2;  /* etat survol de --light-gold. Etait en dur 1 fois */
   --cream:       #FAF6F1;
   --charcoal:    #2C2C2C;
   --slate:       #4A4A4A;
