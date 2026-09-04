@@ -16,13 +16,19 @@
 <style>
 .contact-hero-img { background-image:url('images/private-table-eiffel.jpg'); background-position:center 50%; }
 
-/* Private offer cards */
-.private-offers { display:flex; flex-direction:column; gap:var(--space-md); margin-bottom:var(--space-4xl); }
-.offer-card { background:var(--white); border-radius:var(--radius-lg); padding:var(--space-lg); border:1px solid rgba(114,47,55,0.08); transition:box-shadow var(--transition), transform var(--transition); overflow:hidden; }
-.offer-card:hover { box-shadow:var(--shadow-hover); transform:translateY(-2px); }
-.offer-image { margin:-var(--space-lg) -var(--space-lg) var(--space-sm); aspect-ratio:21/9; overflow:hidden; background:var(--light-gold); }
-.offer-image img { width:100%; height:100%; object-fit:cover; }
+/* Private offers : une photo et son texte par ligne, cote a cote au-dessus
+   de 900px, alternes gauche puis droite. En dessous, la photo passe au-dessus
+   de son texte et l'ordre de lecture reste celui du HTML. */
+.private-offers { display:flex; flex-direction:column; gap:var(--space-block); margin-bottom:var(--space-4xl); }
+.offer-alt { display:grid; grid-template-columns:1fr; gap:var(--space-md); align-items:center; }
+.offer-photo { border-radius:var(--radius-lg); overflow:hidden; background:var(--light-gold); aspect-ratio:3/2; box-shadow:var(--shadow-card); }
+.offer-photo img { width:100%; height:100%; object-fit:cover; display:block; }
 .offer-row { display:flex; gap:var(--space-sm); align-items:flex-start; }
+@media (min-width:900px) {
+  .offer-alt { grid-template-columns:1fr 1fr; gap:var(--space-xl); }
+  .offer-alt:nth-child(even) .offer-photo { order:2; }
+  .offer-photo { aspect-ratio:4/3; }
+}
 .offer-icon-wrap { width:52px; height:52px; border-radius:var(--radius-md); background:var(--light-gold); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--gold-text); }
 .offer-body { flex:1; }
 .offer-title { font-family:var(--ff-display); font-size:var(--text-lg); font-weight:var(--weight-semibold); color:var(--charcoal); margin-bottom:6px; }
@@ -82,7 +88,7 @@
 /* Taille du groupe : le nombre exact au doigt */
 .size-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:var(--space-3xs); }
 .size-chip { min-height:var(--touch-min); border-radius:var(--radius-sm); background:var(--light-gold); border:1px solid rgba(201,169,110,0.7); color:var(--wine); font-family:var(--ff-body); font-size:16px; font-weight:var(--weight-semibold); cursor:pointer; transition:background var(--transition), border-color var(--transition); }
-.size-chip:hover { background:#EFE1C2; border-color:var(--gold); }
+.size-chip:hover { background:var(--light-gold-hover); border-color:var(--gold); }
 .size-chip:focus-visible { outline:2px solid var(--wine); outline-offset:2px; }
 .size-chip[aria-pressed="true"] { background:var(--wine); border-color:var(--wine); color:var(--cream); font-weight:var(--weight-bold); }
 .size-grid.has-error { border:2px solid var(--wine); box-shadow:0 0 0 3px rgba(114,47,55,0.08); border-radius:var(--radius-md); padding:6px; margin:-8px; }
@@ -406,8 +412,8 @@ plausible.init()
       <h2 class="section-title" style="text-align:left;margin-bottom:12px;" data-en="What people usually ask for" data-fr="Ce qu'on me demande le plus">What people usually ask for</h2>
       <p style="font-size:var(--text-base);line-height:var(--leading-loose);color:var(--slate);margin-bottom:28px;" data-en="Three shapes, the same grid. Thomas brings the tasting to you anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office." data-fr="Trois formes, la même grille. Thomas vous apporte la dégustation partout à Paris : votre appartement, un bateau privatisé sur la Seine, une suite d'hôtel, ou vos bureaux.">Three shapes, the same grid. Thomas brings the tasting to you anywhere in Paris: your apartment, a private boat on the Seine, a hotel suite, or your office.</p>
       <div class="private-offers">
-        <div class="offer-card">
-          <div class="offer-image"><img src="images/evjf-rooftop.jpg" alt="Group of women celebrating on a Paris rooftop with wine, Eiffel Tower at sunset" loading="lazy"></div>
+        <article class="offer-alt">
+          <div class="offer-photo"><img src="images/evjf-rooftop.jpg" alt="Group of women celebrating on a Paris rooftop with wine, Eiffel Tower at sunset" loading="lazy"></div>
           <div class="offer-row">
             <div class="offer-icon-wrap">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -420,9 +426,9 @@ plausible.init()
               </div>
             </div>
           </div>
-        </div>
-        <div class="offer-card">
-          <div class="offer-image"><img src="images/private-table-eiffel.jpg" alt="Private dinner table set with wine and cheese, Eiffel Tower at sunset through open French windows" loading="lazy"></div>
+        </article>
+        <article class="offer-alt">
+          <div class="offer-photo"><img src="images/private-table-eiffel.jpg" alt="Private dinner table set with wine and cheese, Eiffel Tower at sunset through open French windows" loading="lazy"></div>
           <div class="offer-row">
             <div class="offer-icon-wrap">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
@@ -436,9 +442,9 @@ plausible.init()
               </div>
             </div>
           </div>
-        </div>
-        <div class="offer-card">
-          <div class="offer-image"><img src="images/hotel-concierge.jpg" alt="Hotel concierge handing a tasting itinerary card to two guests at a marble counter, wine bottles and a Montmartre map behind" loading="lazy"></div>
+        </article>
+        <article class="offer-alt">
+          <div class="offer-photo"><img src="images/hotel-concierge.jpg" alt="Hotel concierge handing a tasting itinerary card to two guests at a marble counter, wine bottles and a Montmartre map behind" loading="lazy"></div>
           <div class="offer-row">
             <div class="offer-icon-wrap">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -451,7 +457,7 @@ plausible.init()
               </div>
             </div>
           </div>
-        </div>
+        </article>
       </div>
       <p class="offers-price-note" data-en="The price is stated once, in the form above, and nowhere else on this page." data-fr="Le prix est dit une fois, dans le formulaire ci-dessus, et nulle part ailleurs sur cette page.">The price is stated once, in the form above, and nowhere else on this page.</p>
     </div>
