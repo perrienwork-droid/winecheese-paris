@@ -14,6 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="shared.css">
+<script>document.documentElement.className += ' js-cal';</script>
 <script type="application/ld+json">
 [
   {
@@ -1246,6 +1247,117 @@
 .faq-answer.open { max-height:700px; }
 .faq-answer-inner { padding:0 2px var(--space-sm); font-size:var(--text-base); line-height:var(--leading-loose); color:var(--slate); }
 
+
+/* ─── CALENDRIER DE RÉSERVATION ─────────────────────────────
+   Presente les creneaux ecrits en dur plus bas dans la page.
+   Sans JavaScript, rien de ce bloc n'est utilise : le details
+   #slotsList reste ouvert et la liste se lit telle quelle.     */
+.priv-hero-cta { display:inline-flex; align-items:center; justify-content:center; margin-top:var(--space-sm); min-height:var(--touch-min); padding:0 var(--space-lg); border-radius:var(--radius-sm); background:var(--gold); color:var(--dark-wine); font-family:var(--ff-body); font-size:var(--text-base); font-weight:var(--weight-bold); letter-spacing:var(--tracking-wide); }
+.priv-hero-cta:hover { background:var(--gold-hover); }
+
+.cal-legend { display:flex; align-items:flex-start; gap:var(--space-2xs); font-size:var(--text-sm); line-height:var(--leading-relaxed); color:var(--slate); background:rgba(196,152,90,0.09); border-left:3px solid var(--gold); border-radius:0 var(--radius-sm) var(--radius-sm) 0; padding:var(--space-xs) var(--space-sm); margin-bottom:var(--space-sm); }
+.cal-legend-mark { display:flex; align-items:center; flex-shrink:0; margin-top:5px; }
+.cal-legend-mark i { width:12px; height:12px; border-radius:3px; background:var(--light-gold); border:1px solid var(--gold); }
+.cal-legend-mark s { width:8px; height:3px; background:var(--gold); }
+.cal-card { background:var(--white); border:1px solid rgba(114,47,55,0.14); border-radius:var(--radius-lg); padding:var(--space-lg); }
+.cal-shell { display:grid; grid-template-columns:320px minmax(0,1fr); gap:var(--space-2xl); align-items:start; }
+.cal-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-3xs); }
+.cal-month { font-family:var(--ff-display); font-size:var(--text-xl); font-weight:var(--weight-semibold); color:var(--charcoal); }
+.cal-nav { display:flex; gap:6px; }
+.cal-nav button { width:44px; height:44px; border-radius:var(--radius-sm); border:1px solid rgba(114,47,55,0.3); background:transparent; color:var(--wine); font-family:var(--ff-body); font-size:var(--text-lg); cursor:pointer; }
+.cal-nav button:hover { border-color:var(--wine); background:var(--cream); }
+.cal-nav button[disabled] { border-color:rgba(114,47,55,0.1); color:rgba(124,111,100,0.35); cursor:default; background:transparent; }
+.cal-dow { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+.cal-dow p { text-align:center; font-size:var(--text-2xs); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-caps); text-transform:uppercase; color:var(--stone-text); padding-bottom:var(--space-4xs); }
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+.cal-cell { position:relative; height:48px; display:flex; align-items:center; justify-content:center; font-family:var(--ff-body); font-size:var(--text-sm); color:rgba(124,111,100,0.45); background:transparent; border:none; padding:0; }
+button.cal-cell { cursor:pointer; }
+.cal-open, .cal-sel, .cal-twin { border-radius:var(--radius-sm); font-size:var(--text-base); font-weight:var(--weight-semibold); }
+.cal-open { background:var(--light-gold); border:1px solid rgba(201,169,110,0.7); color:var(--wine); }
+.cal-open:hover { background:#EFE1C2; border-color:var(--gold); }
+.cal-sel { background:var(--wine); border:1px solid var(--wine); color:var(--cream); font-weight:var(--weight-bold); }
+.cal-twin { background:var(--light-gold); border:1px solid var(--wine); color:var(--wine); }
+.cal-join-r::after { content:''; position:absolute; right:-5px; top:50%; margin-top:-1px; width:6px; height:3px; background:var(--gold); }
+.cal-wrap-r::after, .cal-wrap-l::before { content:'\203A'; position:absolute; top:50%; margin-top:-11px; font-size:12px; font-weight:var(--weight-bold); color:var(--gold); }
+.cal-wrap-r::after { right:-7px; }
+.cal-wrap-l::before { left:-7px; }
+.cal-legend-row { display:flex; flex-wrap:wrap; gap:var(--space-xs); margin-top:var(--space-2xs); padding-top:var(--space-3xs); border-top:1px solid rgba(114,47,55,0.1); }
+.cal-key { display:flex; align-items:center; gap:var(--space-3xs); font-size:var(--text-xs); color:var(--stone-text); }
+.cal-key i { width:16px; height:16px; border-radius:3px; flex-shrink:0; }
+.cal-hint { font-family:var(--ff-accent); font-style:italic; font-size:var(--text-lead-sm); color:var(--dark-wine); }
+.cal-tz { font-size:var(--text-xs); line-height:var(--leading-relaxed); color:var(--stone-text); margin-top:var(--space-4xs); }
+.cal-panel-h { font-family:var(--ff-display); font-size:var(--text-xl); font-weight:var(--weight-semibold); line-height:var(--leading-snug); color:var(--charcoal); }
+.cal-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-xs); margin-top:var(--space-2xs); }
+.cal-pair-day { display:flex; flex-direction:column; gap:10px; }
+.cal-day-name { font-family:var(--ff-display); font-size:var(--text-md); font-weight:var(--weight-semibold); color:var(--charcoal); }
+.cal-day-role { font-size:var(--text-2xs); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-caps); text-transform:uppercase; color:var(--gold-text); padding-bottom:var(--space-3xs); border-bottom:1px solid rgba(114,47,55,0.2); }
+.cal-pair-day.is-chosen .cal-day-role { color:var(--wine); border-bottom:2px solid var(--wine); }
+.cal-times { display:flex; flex-direction:column; gap:10px; }
+.cal-time { min-height:var(--touch-min); display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:1px; text-align:left; padding:var(--space-3xs) var(--space-xs); border-radius:var(--radius-md); background:var(--cream); border:1px solid rgba(114,47,55,0.14); cursor:pointer; transition:border-color var(--transition), background var(--transition); }
+.cal-time:hover { border-color:var(--wine); }
+.cal-time-a { font-family:var(--ff-display); font-size:var(--text-md); font-weight:var(--weight-semibold); color:var(--charcoal); }
+.cal-time-b { font-family:var(--ff-body); font-size:var(--text-xs); color:var(--stone-text); }
+.cal-time.is-on { background:var(--wine); border-color:var(--wine); }
+.cal-time.is-on .cal-time-a { color:var(--cream); }
+.cal-time.is-on .cal-time-b { color:rgba(250,246,241,0.72); }
+.cal-pair-note { font-family:var(--ff-serif); font-size:var(--text-sm); line-height:var(--leading-relaxed); color:var(--dark-wine); background:var(--light-gold); border-radius:var(--radius-md); padding:var(--space-2xs) var(--space-xs); margin-top:var(--space-2xs); }
+.cal-recap { margin-top:var(--space-xs); background:var(--white); border:1px solid var(--wine); border-radius:var(--radius-md); overflow:hidden; }
+.cal-recap-head { background:var(--dark-wine); padding:var(--space-xs) var(--space-sm); }
+.cal-recap-eyebrow { font-size:var(--text-2xs); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-caps-lg); text-transform:uppercase; color:var(--gold); }
+.cal-recap-date { font-family:var(--ff-display); font-size:var(--text-xl); line-height:var(--leading-tight); color:var(--cream); margin-top:var(--space-4xs); }
+.cal-recap-time { font-family:var(--ff-display); font-size:var(--text-xl); line-height:var(--leading-tight); color:var(--gold); }
+.cal-recap-tz { font-size:var(--text-xs); color:rgba(250,246,241,0.7); margin-top:6px; }
+.cal-recap-list { list-style:none; display:flex; flex-direction:column; gap:var(--space-3xs); padding:var(--space-xs) var(--space-sm) 0; }
+.cal-recap-list li { display:flex; justify-content:space-between; gap:var(--space-xs); font-size:var(--text-sm); border-bottom:1px solid rgba(114,47,55,0.1); padding-bottom:var(--space-3xs); }
+.cal-recap-list li:last-child { border-bottom:none; }
+.cal-recap-list b { font-weight:var(--weight-normal); color:var(--stone-text); flex-shrink:0; }
+.cal-recap-list span { text-align:right; font-weight:var(--weight-medium); color:var(--charcoal); }
+.cal-pay { display:flex; align-items:center; justify-content:center; height:56px; margin:var(--space-xs) var(--space-sm) 0; border-radius:var(--radius-sm); background:var(--gold); color:var(--dark-wine); font-family:var(--ff-body); font-size:var(--text-md); font-weight:var(--weight-bold); letter-spacing:var(--tracking-wide); }
+.cal-pay:hover { background:var(--gold-hover); color:var(--dark-wine); }
+.cal-recap-foot { padding:var(--space-3xs) var(--space-sm) var(--space-xs); font-size:var(--text-xs); line-height:var(--leading-relaxed); color:var(--stone-text); }
+.cal-empty { border:1px dashed rgba(114,47,55,0.25); border-radius:var(--radius-md); padding:var(--space-sm); display:flex; flex-direction:column; gap:var(--space-3xs); align-items:flex-start; }
+.cal-empty-h { font-family:var(--ff-display); font-size:var(--text-md); font-weight:var(--weight-semibold); color:var(--charcoal); }
+.cal-empty-b { font-family:var(--ff-serif); font-size:var(--text-sm); line-height:var(--leading-loose); color:var(--slate); }
+.cal-empty-link { font-size:var(--text-sm); font-weight:var(--weight-semibold); color:var(--wine); border-bottom:1px solid rgba(114,47,55,0.3); padding-bottom:2px; }
+.cal-empty-link:hover { color:var(--dark-wine); border-color:var(--dark-wine); }
+
+#slotsList { margin-top:var(--space-xl); border-top:1px solid rgba(114,47,55,0.14); padding-top:var(--space-3xs); }
+#slotsList > summary { min-height:var(--touch-min); display:flex; align-items:center; font-size:var(--text-sm); font-weight:var(--weight-semibold); color:var(--wine); cursor:pointer; }
+.slots-fold { padding-top:var(--space-xs); }
+html.js-cal #slotsList { display:none; }
+html.js-cal #slotsList.is-ready { display:block; }
+
+.cal-overlay { position:fixed; inset:0; z-index:2000; display:none; align-items:flex-start; justify-content:center; padding:var(--space-xs); background:rgba(44,26,32,0.55); overflow:auto; }
+.cal-overlay.is-on { display:flex; }
+.cal-overlay-box { position:relative; width:100%; max-width:880px; margin:auto; background:var(--cream); border-radius:var(--radius-lg); box-shadow:var(--shadow-hover); padding:var(--space-2xl) var(--space-sm) var(--space-sm); }
+.cal-overlay-title { font-family:var(--ff-display); font-size:var(--text-2xl); font-weight:var(--weight-semibold); color:var(--charcoal); margin-bottom:var(--space-2xs); }
+.cal-overlay-close { position:absolute; top:8px; right:8px; width:var(--touch-min); height:var(--touch-min); border:none; background:transparent; color:var(--wine); font-size:24px; line-height:1; cursor:pointer; }
+body.cal-locked { overflow:hidden; }
+
+.cal-sticky { position:fixed; left:0; right:0; bottom:0; z-index:1500; display:none; align-items:center; justify-content:space-between; gap:var(--space-2xs); padding:var(--space-2xs) var(--space-xs); background:var(--dark-wine); box-shadow:0 -4px 24px rgba(44,28,20,0.18); }
+.cal-sticky-price { font-family:var(--ff-display); font-size:var(--text-md); font-weight:var(--weight-semibold); color:var(--gold); }
+.cal-sticky-next { font-size:var(--text-xs); color:rgba(250,246,241,0.72); margin-top:2px; }
+.cal-sticky-btn { min-height:var(--touch-min); padding:0 var(--space-sm); border:none; border-radius:var(--radius-sm); background:var(--gold); color:var(--dark-wine); font-family:var(--ff-body); font-size:var(--text-base); font-weight:var(--weight-bold); cursor:pointer; }
+
+@media (max-width:900px) {
+  .cal-shell { grid-template-columns:1fr; gap:var(--space-sm); }
+}
+@media (max-width:640px) {
+  .cal-card { padding:var(--space-xs) 0; border:none; background:transparent; }
+  .cal-grid-wrap { margin-left:calc(var(--gutter) * -1); margin-right:calc(var(--gutter) * -1); }
+  .cal-grid { gap:1px; }
+  .cal-cell { height:53px; font-size:var(--text-md); }
+  .cal-open, .cal-sel, .cal-twin { border-radius:0; border-left:none; border-right:none; }
+  .cal-join-r::after { right:-1px; top:0; bottom:0; margin-top:0; width:3px; height:auto; }
+  .cal-wrap-r::after { right:1px; }
+  .cal-wrap-l::before { left:1px; }
+  .cal-pair { display:flex; flex-direction:column; gap:var(--space-sm); }
+  .cal-pair-day.is-chosen { order:-1; }
+  .cal-overlay .cal-grid-wrap { margin-left:calc(var(--space-xs) * -1); margin-right:calc(var(--space-xs) * -1); }
+  .cal-overlay-box { padding:var(--space-2xl) var(--space-xs) var(--space-xs); }
+  .cal-sticky.is-on { display:flex; }
+}
+
 /* ─── RESPONSIVE ────────────────────────────────────────────── */
 @media (max-width:900px) {
   .priv-gestures { grid-template-columns:1fr; gap:var(--space-2xl); }
@@ -1309,6 +1421,7 @@ plausible.init()
     <p class="page-hero-eyebrow">Private &middot; Two Guests Only</p>
     <h1 class="page-hero-title">A Private Wine and Cheese Tasting for Two, in a Montmartre Cellar</h1>
     <p class="page-hero-sub">Five wines, five pairings, two hours underground at the foot of Montmartre. Just the two of you and me. <span class="hero-price">&euro;390</span> for the two of you, everything included.</p>
+    <p class="page-hero-cta"><a class="priv-hero-cta" href="#booking" data-open-calendar>See open dates</a></p>
   </div>
 </div>
 
@@ -1490,222 +1603,237 @@ plausible.init()
 </div>
 
 <!-- 10. CRÉNEAUX -->
-<section class="priv-sec">
+<section class="priv-sec" id="booking">
   <div class="rail-mid fade-in">
     <h2 class="priv-h2-sm">Next available</h2>
     <p class="priv-slots-intro">Cave Les Piqueurs, 6 rue Tardieu, 75018 Paris. Two hours. Two guests. In English.</p>
-    <p class="priv-slots-chain-note">Each Saturday and Sunday below is a pair: one run of five bottles, opened Saturday and kept under vacuum overnight rather than resealed with a cork. Book either day of a pair for the same five wines, the same five pairings, the same €390. Sunday's pour is not a leftover, it is the same wine a day further into the air, and that is usually the more interesting glass, not the lesser one.</p>
 
-    <!-- SLOTS:START -->
-    <div class="slots-day-group">
-      <p class="slots-day-label">Saturday 5 September 2026</p>
-      <div class="slots-grid">
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">11:00am to 1:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+    <div id="slotsCalendar"></div>
+
+    <details id="slotsList" open>
+      <summary>All open dates</summary>
+      <div class="slots-fold">
+        <p class="priv-slots-chain-note">Each Saturday and Sunday below is a pair: one run of five bottles, opened Saturday and kept under vacuum overnight rather than resealed with a cork. Book either day of a pair for the same five wines, the same five pairings, the same €390. Sunday's pour is not a leftover, it is the same wine a day further into the air, and that is usually the more interesting glass, not the lesser one.</p>
+      <!-- SLOTS:START -->
+      <div class="slots-pair">
+      <div class="slots-day-group">
+        <p class="slots-day-label">Saturday 5 September 2026</p>
+        <div class="slots-grid">
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">11:00am to 1:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-05-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-05-1100">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-05-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-05-1100">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">4:00pm to 6:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">4:00pm to 6:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-05-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-05-1600">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-05-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-05-1600">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">7:00pm to 9:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">7:00pm to 9:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-05-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-05-1900">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-05-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-05-1900">Book this slot, &euro;390</a>
-        </div>
-      </div>
-    </div>
-    <div class="slots-day-group">
-      <p class="slots-day-label">Sunday 6 September 2026</p>
-      <div class="slots-grid">
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">11:00am to 1:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-06-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-06-1100">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">4:00pm to 6:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-06-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-06-1600">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">7:00pm to 9:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-06-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-06-1900">Book this slot, &euro;390</a>
         </div>
       </div>
-    </div>
-    <div class="slots-day-group">
-      <p class="slots-day-label">Saturday 12 September 2026</p>
-      <div class="slots-grid">
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">11:00am to 1:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+      <div class="slots-day-group">
+        <p class="slots-day-label">Sunday 6 September 2026</p>
+        <div class="slots-grid">
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">11:00am to 1:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-06-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-06-1100">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-12-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-12-1100">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">4:00pm to 6:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">4:00pm to 6:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-06-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-06-1600">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-12-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-12-1600">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">7:00pm to 9:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">7:00pm to 9:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-06-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-06-1900">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-12-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-12-1900">Book this slot, &euro;390</a>
-        </div>
-      </div>
-    </div>
-    <div class="slots-day-group">
-      <p class="slots-day-label">Sunday 13 September 2026</p>
-      <div class="slots-grid">
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">11:00am to 1:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-13-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-13-1100">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">4:00pm to 6:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-13-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-13-1600">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">7:00pm to 9:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-13-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-13-1900">Book this slot, &euro;390</a>
         </div>
       </div>
-    </div>
-    <div class="slots-day-group">
-      <p class="slots-day-label">Saturday 19 September 2026</p>
-      <div class="slots-grid">
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">11:00am to 1:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+      </div>
+      <div class="slots-pair">
+      <div class="slots-day-group">
+        <p class="slots-day-label">Saturday 12 September 2026</p>
+        <div class="slots-grid">
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">11:00am to 1:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-12-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-12-1100">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-19-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-19-1100">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">4:00pm to 6:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">4:00pm to 6:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-12-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-12-1600">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-19-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-19-1600">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">7:00pm to 9:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">7:00pm to 9:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-12-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-12-1900">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-19-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-19-1900">Book this slot, &euro;390</a>
         </div>
       </div>
-    </div>
-    <div class="slots-day-group">
-      <p class="slots-day-label">Sunday 20 September 2026</p>
-      <div class="slots-grid">
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">11:00am to 1:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+      <div class="slots-day-group">
+        <p class="slots-day-label">Sunday 13 September 2026</p>
+        <div class="slots-grid">
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">11:00am to 1:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-13-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-13-1100">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-20-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-20-1100">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">4:00pm to 6:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">4:00pm to 6:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-13-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-13-1600">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-20-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-20-1600">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">7:00pm to 9:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">7:00pm to 9:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-13-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-13-1900">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-20-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-20-1900">Book this slot, &euro;390</a>
-        </div>
-      </div>
-    </div>
-    <div class="slots-day-group">
-      <p class="slots-day-label">Saturday 26 September 2026</p>
-      <div class="slots-grid">
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">11:00am to 1:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-26-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-26-1100">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">4:00pm to 6:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-26-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-26-1600">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">7:00pm to 9:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
-          </div>
-          <a class="btn-book-slot" data-slot="sat-2026-09-26-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-26-1900">Book this slot, &euro;390</a>
         </div>
       </div>
-    </div>
-    <div class="slots-day-group">
-      <p class="slots-day-label">Sunday 27 September 2026</p>
-      <div class="slots-grid">
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">11:00am to 1:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+      </div>
+      <div class="slots-pair">
+      <div class="slots-day-group">
+        <p class="slots-day-label">Saturday 19 September 2026</p>
+        <div class="slots-grid">
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">11:00am to 1:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-19-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-19-1100">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-27-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-27-1100">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">4:00pm to 6:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">4:00pm to 6:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-19-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-19-1600">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-27-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-27-1600">Book this slot, &euro;390</a>
-        </div>
-        <div class="slot-card">
-          <div>
-            <p class="slot-label">7:00pm to 9:00pm</p>
-            <p class="slot-sub">Private, just the two of you</p>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">7:00pm to 9:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-19-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-19-1900">Book this slot, &euro;390</a>
           </div>
-          <a class="btn-book-slot" data-slot="sun-2026-09-27-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-27-1900">Book this slot, &euro;390</a>
         </div>
       </div>
-    </div>
-    <!-- SLOTS:END -->
+      <div class="slots-day-group">
+        <p class="slots-day-label">Sunday 20 September 2026</p>
+        <div class="slots-grid">
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">11:00am to 1:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-20-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-20-1100">Book this slot, &euro;390</a>
+          </div>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">4:00pm to 6:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-20-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-20-1600">Book this slot, &euro;390</a>
+          </div>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">7:00pm to 9:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-20-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-20-1900">Book this slot, &euro;390</a>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="slots-pair">
+      <div class="slots-day-group">
+        <p class="slots-day-label">Saturday 26 September 2026</p>
+        <div class="slots-grid">
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">11:00am to 1:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-26-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-26-1100">Book this slot, &euro;390</a>
+          </div>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">4:00pm to 6:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-26-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-26-1600">Book this slot, &euro;390</a>
+          </div>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">7:00pm to 9:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sat-2026-09-26-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-09-26-1900">Book this slot, &euro;390</a>
+          </div>
+        </div>
+      </div>
+      <div class="slots-day-group">
+        <p class="slots-day-label">Sunday 27 September 2026</p>
+        <div class="slots-grid">
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">11:00am to 1:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-27-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-27-1100">Book this slot, &euro;390</a>
+          </div>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">4:00pm to 6:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-27-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-27-1600">Book this slot, &euro;390</a>
+          </div>
+          <div class="slot-card">
+            <div>
+              <p class="slot-label">7:00pm to 9:00pm</p>
+              <p class="slot-sub">Private, just the two of you</p>
+            </div>
+            <a class="btn-book-slot" data-slot="sun-2026-09-27-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-09-27-1900">Book this slot, &euro;390</a>
+          </div>
+        </div>
+      </div>
+      </div>
+      <!-- SLOTS:END -->
+      </div>
+    </details>
 
     <p class="priv-slots-footnote">You pay now, by card. You get the exact address and my phone number straight away. Booking closes at midday on the day itself, and yes, people book this the night before.</p>
     <p class="priv-slots-more">Another date, or a weekday?<br>
@@ -1819,25 +1947,19 @@ function safeTrack(name, props, opts) {
   } catch (e) {}
 }
 
-document.querySelectorAll('[data-slot]').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    safeTrack('CTA: Book Slot', { slot: this.getAttribute('data-slot') });
-  });
-});
-
-var askThomasLink = document.getElementById('askThomasLink');
-if (askThomasLink) {
-  askThomasLink.addEventListener('click', function() {
+// Ecouteur delegue sur document : le calendrier cree et deplace les liens de
+// creneau apres le chargement, une attache unique cesserait d'envoyer l'evenement.
+document.addEventListener('click', function (e) {
+  if (!e.target || !e.target.closest) return;
+  var slot = e.target.closest('[data-slot]');
+  if (slot) {
+    safeTrack('CTA: Book Slot', { slot: slot.getAttribute('data-slot') });
+    return;
+  }
+  if (e.target.closest('#askThomasLink, #laterDateLink, [data-enquiry]')) {
     safeTrack('Enquiry: Custom Quote');
-  });
-}
-
-var laterDateLink = document.getElementById('laterDateLink');
-if (laterDateLink) {
-  laterDateLink.addEventListener('click', function() {
-    safeTrack('Enquiry: Custom Quote');
-  });
-}
+  }
+}, true);
 
 // FAQ accordion
 document.querySelectorAll('.faq-question').forEach(function(btn) {
@@ -1854,6 +1976,275 @@ document.querySelectorAll('.faq-question').forEach(function(btn) {
     }
   });
 });
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   Calendrier de reservation. Lit les creneaux ecrits en dur dans
+   #slotsList, les presente en grille de mois. Aucune dependance, aucune
+   donnee dupliquee : la source reste le HTML servi.
+   ══════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var list = document.getElementById('slotsList');
+  var inline = document.getElementById('slotsCalendar');
+  if (!list || !inline) return;
+
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MSHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var DSHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var DOW    = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  /* Heure de Paris, pas celle du navigateur : la coupure de midi est locale. */
+  function parisNow() {
+    try {
+      var p = {};
+      new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hourCycle: 'h23' })
+        .formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+      return { ymd: +(p.year + p.month + p.day), hour: +p.hour };
+    } catch (e) {
+      var n = new Date();
+      return { ymd: n.getFullYear() * 10000 + (n.getMonth() + 1) * 100 + n.getDate(), hour: n.getHours() };
+    }
+  }
+  var now = parisNow();
+
+  function tz(y, mo, d) {
+    try {
+      var parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Paris', timeZoneName: 'shortOffset' })
+        .formatToParts(new Date(Date.UTC(y, mo - 1, d, 10)));
+      for (var i = 0; i < parts.length; i++) if (parts[i].type === 'timeZoneName') return parts[i].value;
+    } catch (e) {}
+    return '';
+  }
+
+  /* ---- lecture du HTML servi ---- */
+  var pairs = [];
+  Array.prototype.forEach.call(list.querySelectorAll('.slots-pair'), function (pEl) {
+    var days = [];
+    Array.prototype.forEach.call(pEl.querySelectorAll('.slots-day-group'), function (g) {
+      var slots = [], y = 0, mo = 0, dd = 0, ymd = 0;
+      Array.prototype.forEach.call(g.querySelectorAll('.slot-card'), function (card) {
+        var a = card.querySelector('[data-slot]'), lab = card.querySelector('.slot-label');
+        if (!a || !lab) return;
+        var m = /-(\d{4})-(\d{2})-(\d{2})-(\d{2})(\d{2})$/.exec(a.getAttribute('data-slot'));
+        if (!m) return;
+        y = +m[1]; mo = +m[2]; dd = +m[3];
+        ymd = y * 10000 + mo * 100 + dd;
+        slots.push({ id: a.getAttribute('data-slot'), href: a.getAttribute('href'), label: lab.textContent.replace(/\s+/g, ' ').trim() });
+      });
+      if (!slots.length) return;
+      if (ymd < now.ymd || (ymd === now.ymd && now.hour >= 12)) return;
+      var lb = g.querySelector('.slots-day-label');
+      days.push({ ymd: ymd, y: y, mo: mo, d: dd, label: lb ? lb.textContent.trim() : '', slots: slots });
+    });
+    if (days.length) pairs.push(days);
+  });
+
+  var byYmd = {}, all = [];
+  pairs.forEach(function (p) {
+    p.forEach(function (day, i) { day.pair = p; day.idx = i; byYmd[day.ymd] = day; all.push(day); });
+  });
+  all.sort(function (a, b) { return a.ymd - b.ymd; });
+
+  var months = [];
+  all.forEach(function (d) { var k = d.y * 12 + d.mo - 1; if (months.indexOf(k) < 0) months.push(k); });
+  months.sort(function (a, b) { return a - b; });
+  var firstM = months.length ? months[0] : null;
+  var lastM  = months.length ? months[months.length - 1] + 1 : null;
+
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function head(l) { var i = l.indexOf(' to '); return i < 0 ? l : l.slice(0, i); }
+  function tail(l) { var i = l.indexOf(' to '); return i < 0 ? '' : l.slice(i + 1); }
+  function wd(d) { return new Date(Date.UTC(d.y, d.mo - 1, d.d)).getUTCDay(); }
+  function longDate(d) { return DAYS[wd(d)] + ' ' + d.d + ' ' + MONTHS[d.mo - 1]; }
+  function tinyDate(d) { return DSHORT[wd(d)] + ' ' + d.d + ' ' + MSHORT[d.mo - 1]; }
+  function pairTitle(p) {
+    if (p.length < 2) return longDate(p[0]);
+    if (p[0].mo === p[1].mo) return p[0].d + ' and ' + p[1].d + ' ' + MONTHS[p[1].mo - 1] + ', one run of bottles';
+    return p[0].d + ' ' + MSHORT[p[0].mo - 1] + ' and ' + p[1].d + ' ' + MSHORT[p[1].mo - 1] + ', one run of bottles';
+  }
+  function minus48(d, label) {
+    var x = new Date(Date.UTC(d.y, d.mo - 1, d.d));
+    x.setUTCDate(x.getUTCDate() - 2);
+    return DAYS[x.getUTCDay()] + ' ' + x.getUTCDate() + ' ' + MONTHS[x.getUTCMonth()] + ', ' + head(label);
+  }
+
+  /* ---- grille du mois, lundi en premiere colonne ---- */
+  function grid(view, sel) {
+    var y = Math.floor(view / 12), mo = view % 12 + 1;
+    var off = (new Date(Date.UTC(y, mo - 1, 1)).getUTCDay() + 6) % 7;
+    var n = new Date(Date.UTC(y, mo, 0)).getUTCDate();
+    var selDay = sel ? byYmd[sel] : null;
+    var h = '', i, d;
+    for (i = 0; i < off; i++) h += '<span class="cal-cell"></span>';
+    for (d = 1; d <= n; d++) {
+      var ymd = y * 10000 + mo * 100 + d, day = byYmd[ymd], col = (off + d - 1) % 7;
+      if (!day) { h += '<span class="cal-cell">' + d + '</span>'; continue; }
+      var p = day.pair, c = 'cal-cell cal-open';
+      if (selDay && selDay.ymd === ymd) c = 'cal-cell cal-sel';
+      else if (selDay && selDay.pair === p) c = 'cal-cell cal-twin';
+      if (day.idx === 0 && p.length > 1) {
+        var joined = p[1].y === y && p[1].mo === mo && p[1].d === d + 1 && col < 6;
+        c += joined ? ' cal-join-r' : ' cal-wrap-r';
+      }
+      if (day.idx === 1) {
+        var linked = p[0].y === y && p[0].mo === mo && p[0].d === d - 1 && col > 0;
+        if (!linked) c += ' cal-wrap-l';
+      }
+      h += '<button type="button" class="' + c + '" data-pick="' + ymd + '" aria-label="' + esc(day.label) + '">' + d + '</button>';
+    }
+    return h;
+  }
+
+  function emptyMonth(name) {
+    return '<div class="cal-empty"><p class="cal-empty-h">Nothing open' + (name ? ' in ' + name : '') + ' yet</p>' +
+      '<p class="cal-empty-b">I open dates a few weeks ahead. If you already have a date in mind, ask me and I will tell you straight away.</p>' +
+      '<a class="cal-empty-link" href="contact.html" data-enquiry>Ask about a date that is not listed</a></div>';
+  }
+
+  function recap(day, s) {
+    var t = tz(day.y, day.mo, day.d);
+    return '<div class="cal-recap">' +
+      '<div class="cal-recap-head">' +
+      '<p class="cal-recap-eyebrow">Your slot</p>' +
+      '<p class="cal-recap-date">' + esc(day.label) + '</p>' +
+      '<p class="cal-recap-time">' + esc(s.label) + '</p>' +
+      '<p class="cal-recap-tz">Paris time' + (t ? ', ' + t : '') + '</p>' +
+      '</div>' +
+      '<ul class="cal-recap-list">' +
+      '<li><b>Where</b><span>Cave Les Piqueurs, 6 rue Tardieu, Paris 18e</span></li>' +
+      '<li><b>Who</b><span>Two guests, private cellar, two hours</span></li>' +
+      '<li><b>Total</b><span>&euro;390, everything included</span></li>' +
+      '<li><b>Cancellation</b><span>Free until ' + esc(minus48(day, s.label)) + '</span></li>' +
+      '</ul>' +
+      '<a class="cal-pay" data-slot="' + esc(s.id) + '" href="' + esc(s.href) + '">Continue to payment, &euro;390</a>' +
+      '<p class="cal-recap-foot">The card page does not repeat the date and time, so this is the last place you can check them.</p>' +
+      '</div>';
+  }
+
+  /* ---- panneau de la paire : les deux jours, cote a cote ---- */
+  function panel(sel, slotId) {
+    if (!sel) return '<p class="cal-hint">Pick a date to see its times.</p><p class="cal-tz">All times Paris time.</p>';
+    var day = byYmd[sel], p = day.pair, t = tz(day.y, day.mo, day.d);
+    var h = '<p class="cal-panel-h">' + esc(pairTitle(p)) + '</p>';
+    h += '<p class="cal-tz">' + (p.length > 1 ? 'Same five wines both days, same &euro;390. ' : '') +
+         'All times Paris time' + (t ? ', ' + t : '') + '.</p>';
+    h += '<div class="cal-pair">';
+    p.forEach(function (dd, i) {
+      h += '<div class="cal-pair-day' + (dd.ymd === day.ymd ? ' is-chosen' : '') + '">' +
+        '<p class="cal-day-name">' + esc(longDate(dd)) + '</p>' +
+        (p.length > 1 ? '<p class="cal-day-role">' + (i === 0 ? 'Bottles opened' : 'Same bottles, day two') + '</p>' : '');
+      h += '<div class="cal-times">';
+      dd.slots.forEach(function (s) {
+        h += '<button type="button" class="cal-time' + (s.id === slotId ? ' is-on' : '') + '" data-time="' + esc(s.id) + '">' +
+          '<span class="cal-time-a">' + esc(head(s.label)) + '</span>' +
+          '<span class="cal-time-b">' + esc(tail(s.label)) + '</span></button>';
+      });
+      h += '</div></div>';
+    });
+    h += '</div>';
+    if (p.length > 1) h += '<p class="cal-pair-note">Day two is the same wine a day further into the air, and that is usually the more interesting glass, not the lesser one.</p>';
+    if (slotId) {
+      var found = null, foundDay = null;
+      p.forEach(function (dd) { dd.slots.forEach(function (x) { if (x.id === slotId) { found = x; foundDay = dd; } }); });
+      if (found) h += recap(foundDay, found);
+    }
+    return h;
+  }
+
+  function mount(root) {
+    var view = firstM, sel = null, slot = null;
+    function paint() {
+      if (view === null) { root.innerHTML = emptyMonth(''); return; }
+      var y = Math.floor(view / 12), mo = view % 12 + 1;
+      var has = false;
+      all.forEach(function (d) { if (d.y === y && d.mo === mo) has = true; });
+      var h = '<div class="cal-legend"><span class="cal-legend-mark"><i></i><s></s><i></i></span>' +
+        '<span>Dates open in joined pairs: one run of five bottles, opened on the first day and kept under vacuum for the second. Either day, same wines, same &euro;390.</span></div>' +
+        '<div class="cal-card"><div class="cal-shell"><div>' +
+        '<div class="cal-head"><p class="cal-month">' + MONTHS[mo - 1] + ' ' + y + '</p><div class="cal-nav">' +
+        '<button type="button" data-step="-1" aria-label="Previous month"' + (view <= firstM ? ' disabled' : '') + '>&lsaquo;</button>' +
+        '<button type="button" data-step="1" aria-label="Next month"' + (view >= lastM ? ' disabled' : '') + '>&rsaquo;</button>' +
+        '</div></div><div class="cal-dow">';
+      DOW.forEach(function (d) { h += '<p>' + d + '</p>'; });
+      h += '</div><div class="cal-grid-wrap"><div class="cal-grid">' + grid(view, sel) + '</div></div>' +
+        '<div class="cal-legend-row">' +
+        '<span class="cal-key"><i style="background:var(--light-gold);border:1px solid rgba(201,169,110,0.7)"></i>Open</span>' +
+        '<span class="cal-key"><i style="background:var(--wine)"></i>Chosen</span>' +
+        '<span class="cal-key"><i style="background:var(--light-gold);border:1px solid var(--wine)"></i>Its pair day</span>' +
+        '</div></div><div class="cal-panel">' + (has ? panel(sel, slot) : emptyMonth(MONTHS[mo - 1])) + '</div>' +
+        '</div></div>';
+      root.innerHTML = h;
+    }
+    root.addEventListener('click', function (e) {
+      var t = e.target.closest ? e.target.closest('[data-step],[data-pick],[data-time]') : null;
+      if (!t || !root.contains(t)) return;
+      if (t.hasAttribute('data-step')) { view += +t.getAttribute('data-step'); sel = null; slot = null; paint(); return; }
+      if (t.hasAttribute('data-pick')) { sel = +t.getAttribute('data-pick'); slot = null; paint(); return; }
+      if (t.hasAttribute('data-time')) { slot = t.getAttribute('data-time'); paint(); }
+    });
+    paint();
+  }
+
+  mount(inline);
+
+  /* la liste reste dans la page, repliee, une fois la grille montee */
+  list.removeAttribute('open');
+  list.className = list.className ? list.className + ' is-ready' : 'is-ready';
+
+  /* ---- surcouche, meme composant monte une seconde fois ---- */
+  var ov = document.createElement('div');
+  ov.className = 'cal-overlay';
+  ov.setAttribute('role', 'dialog');
+  ov.setAttribute('aria-modal', 'true');
+  ov.setAttribute('aria-label', 'Open dates');
+  ov.innerHTML = '<div class="cal-overlay-box">' +
+    '<button type="button" class="cal-overlay-close" aria-label="Close">&times;</button>' +
+    '<p class="cal-overlay-title">Open dates</p><div class="cal-mount"></div></div>';
+  document.body.appendChild(ov);
+  mount(ov.querySelector('.cal-mount'));
+
+  function openOv() {
+    ov.classList.add('is-on');
+    document.body.classList.add('cal-locked');
+    var c = ov.querySelector('.cal-overlay-close');
+    if (c) c.focus();
+  }
+  function closeOv() {
+    ov.classList.remove('is-on');
+    document.body.classList.remove('cal-locked');
+  }
+  ov.querySelector('.cal-overlay-close').addEventListener('click', closeOv);
+  ov.addEventListener('mousedown', function (e) { if (e.target === ov) closeOv(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeOv(); });
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('[data-open-calendar]') : null;
+    if (!t) return;
+    e.preventDefault();
+    openOv();
+  });
+
+  /* ---- barre collante mobile, une fois le hero sorti de l'ecran ---- */
+  if (all.length) {
+    var bar = document.createElement('div');
+    bar.className = 'cal-sticky';
+    bar.innerHTML = '<div><p class="cal-sticky-price">&euro;390 for two</p>' +
+      '<p class="cal-sticky-next">Next open: ' + esc(tinyDate(all[0])) + '</p></div>' +
+      '<button type="button" class="cal-sticky-btn" data-open-calendar>See dates</button>';
+    document.body.appendChild(bar);
+    var hero = document.querySelector('.page-hero');
+    var sync = function () {
+      var gone = hero ? hero.getBoundingClientRect().bottom <= 0 : window.pageYOffset > 400;
+      if (gone) bar.classList.add('is-on');
+      else bar.classList.remove('is-on');
+    };
+    window.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  }
+})();
 </script>
 </body>
 </html>

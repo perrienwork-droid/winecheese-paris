@@ -3,6 +3,31 @@
 Page concernée : `private-wine-tasting-for-two.html`. Lien Stripe unique pour
 toute la page : `https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01`.
 
+## 0. Chaque date est écrite deux fois
+
+Une date ouverte vit à **deux endroits** dans le fichier, et les deux doivent
+toujours dire la même chose :
+
+1. le bloc de créneaux entre `<!-- SLOTS:START -->` et `<!-- SLOTS:END -->`,
+   c'est ce que le visiteur lit et clique ;
+2. le bloc `<script type="application/ld+json">` en haut du fichier, dans le
+   `<head>`, qui contient **un événement schema.org par créneau**, c'est ce que
+   Google et les assistants lisent.
+
+C'est une duplication assumée pour l'instant, pas un oubli : la page est en HTML
+statique, sans étape de build, donc rien ne génère le JSON-LD à partir du HTML.
+La conséquence est simple et il faut la connaître : **si tu ne fais le geste que
+d'un côté, la page et les données structurées se contredisent**. Un créneau
+vendu retiré du HTML mais laissé dans le JSON-LD reste annoncé comme disponible
+à l'extérieur du site.
+
+Règle : à chaque fois que tu touches un créneau, tu le touches aux deux
+endroits. Chaque geste ci-dessous est écrit en deux temps pour ça.
+
+Le calendrier affiché sur la page ne compte pas comme un troisième endroit : il
+est construit par le JavaScript à partir du bloc de créneaux, il n'a aucune
+donnée propre. Tu n'as jamais à l'éditer.
+
 ## 1. Faire tourner les dates chaque semaine
 
 **Depuis le chaînage (6 août 2026), les créneaux s'ouvrent par bloc de deux
@@ -12,64 +37,75 @@ propose systématiquement une paire de jours qui se suivent sur le calendrier
 (samedi + dimanche, ou n'importe quelle autre paire consécutive) sur la même
 série de vins.
 
-Dans le fichier, cherche le commentaire `<!-- SLOTS:START -->` et remplace
-tout le bloc jusqu'à `<!-- SLOTS:END -->` par un bloc à jour : deux
-`<div class="slots-day-group">`, chacun avec son `<p class="slots-day-label">`
+### 1a. Le bloc de créneaux
+
+Dans le fichier, cherche le commentaire `<!-- SLOTS:START -->` et remplace tout
+le bloc jusqu'à `<!-- SLOTS:END -->` par un bloc à jour. Une paire de jours,
+c'est **un `<div class="slots-pair">` qui contient les deux
+`<div class="slots-day-group">`**, chacun avec son `<p class="slots-day-label">`
 (le jour, sans l'horaire) et sa `<div class="slots-grid">` de créneaux.
+
+Le `slots-pair` est la seule chose que le calendrier exige de toi. C'est lui qui
+dit "ces deux jours sont la même série de bouteilles". Sans lui, les deux jours
+s'affichent comme deux dates indépendantes et la promesse du chaînage disparaît
+de l'interface.
+
 Copie-colle cet exemple et change les deux dates, les horaires et les six
 identifiants :
 
 ```html
 <!-- SLOTS:START -->
-<div class="slots-day-group">
-  <p class="slots-day-label">Saturday 15 August 2026</p>
-  <div class="slots-grid">
-    <div class="slot-card">
-      <div>
-        <p class="slot-label">11:00am to 1:00pm</p>
-        <p class="slot-sub">Private, just the two of you</p>
+<div class="slots-pair">
+  <div class="slots-day-group">
+    <p class="slots-day-label">Saturday 15 August 2026</p>
+    <div class="slots-grid">
+      <div class="slot-card">
+        <div>
+          <p class="slot-label">11:00am to 1:00pm</p>
+          <p class="slot-sub">Private, just the two of you</p>
+        </div>
+        <a class="btn-book-slot" data-slot="sat-2026-08-15-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1100">Book this slot, &euro;390</a>
       </div>
-      <a class="btn-book-slot" data-slot="sat-2026-08-15-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1100">Book this slot, €390</a>
-    </div>
-    <div class="slot-card">
-      <div>
-        <p class="slot-label">4:00pm to 6:00pm</p>
-        <p class="slot-sub">Private, just the two of you</p>
+      <div class="slot-card">
+        <div>
+          <p class="slot-label">4:00pm to 6:00pm</p>
+          <p class="slot-sub">Private, just the two of you</p>
+        </div>
+        <a class="btn-book-slot" data-slot="sat-2026-08-15-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1600">Book this slot, &euro;390</a>
       </div>
-      <a class="btn-book-slot" data-slot="sat-2026-08-15-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1600">Book this slot, €390</a>
-    </div>
-    <div class="slot-card">
-      <div>
-        <p class="slot-label">7:00pm to 9:00pm</p>
-        <p class="slot-sub">Private, just the two of you</p>
+      <div class="slot-card">
+        <div>
+          <p class="slot-label">7:00pm to 9:00pm</p>
+          <p class="slot-sub">Private, just the two of you</p>
+        </div>
+        <a class="btn-book-slot" data-slot="sat-2026-08-15-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1900">Book this slot, &euro;390</a>
       </div>
-      <a class="btn-book-slot" data-slot="sat-2026-08-15-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sat-2026-08-15-1900">Book this slot, €390</a>
     </div>
   </div>
-</div>
-<div class="slots-day-group">
-  <p class="slots-day-label">Sunday 16 August 2026</p>
-  <div class="slots-grid">
-    <div class="slot-card">
-      <div>
-        <p class="slot-label">11:00am to 1:00pm</p>
-        <p class="slot-sub">Private, just the two of you</p>
+  <div class="slots-day-group">
+    <p class="slots-day-label">Sunday 16 August 2026</p>
+    <div class="slots-grid">
+      <div class="slot-card">
+        <div>
+          <p class="slot-label">11:00am to 1:00pm</p>
+          <p class="slot-sub">Private, just the two of you</p>
+        </div>
+        <a class="btn-book-slot" data-slot="sun-2026-08-16-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-08-16-1100">Book this slot, &euro;390</a>
       </div>
-      <a class="btn-book-slot" data-slot="sun-2026-08-16-1100" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-08-16-1100">Book this slot, €390</a>
-    </div>
-    <div class="slot-card">
-      <div>
-        <p class="slot-label">4:00pm to 6:00pm</p>
-        <p class="slot-sub">Private, just the two of you</p>
+      <div class="slot-card">
+        <div>
+          <p class="slot-label">4:00pm to 6:00pm</p>
+          <p class="slot-sub">Private, just the two of you</p>
+        </div>
+        <a class="btn-book-slot" data-slot="sun-2026-08-16-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-08-16-1600">Book this slot, &euro;390</a>
       </div>
-      <a class="btn-book-slot" data-slot="sun-2026-08-16-1600" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-08-16-1600">Book this slot, €390</a>
-    </div>
-    <div class="slot-card">
-      <div>
-        <p class="slot-label">7:00pm to 9:00pm</p>
-        <p class="slot-sub">Private, just the two of you</p>
+      <div class="slot-card">
+        <div>
+          <p class="slot-label">7:00pm to 9:00pm</p>
+          <p class="slot-sub">Private, just the two of you</p>
+        </div>
+        <a class="btn-book-slot" data-slot="sun-2026-08-16-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-08-16-1900">Book this slot, &euro;390</a>
       </div>
-      <a class="btn-book-slot" data-slot="sun-2026-08-16-1900" href="https://buy.stripe.com/00weVf6Gx0BTaWE4DZb3q01?client_reference_id=sun-2026-08-16-1900">Book this slot, €390</a>
     </div>
   </div>
 </div>
@@ -80,8 +116,83 @@ Format de l'identifiant (`data-slot` et `client_reference_id`, toujours les
 mêmes) : `jour-annee-mois-jour-heure`, en minuscules, sans accent. Exemple
 `sun-2026-08-16-1100` pour dimanche 16 août 2026 à 11h. Ne touche à rien
 d'autre dans le fichier, ni au prix, ni au texte au-dessus ou en dessous du
-bloc, ni à `.priv-slots-chain-note` juste au-dessus (le paragraphe qui
-explique le chaînage au visiteur).
+bloc, ni à `.priv-slots-chain-note` juste au-dessus (le paragraphe qui explique
+le chaînage au visiteur).
+
+Le calendrier lit la date dans le `data-slot` de la première carte du jour et
+l'horaire dans le texte de `<p class="slot-label">`. Il n'y a donc aucun
+attribut supplémentaire à tenir à jour : ce que tu tapes ici est la seule
+source.
+
+### 1b. Le JSON-LD, dans le même passage
+
+Remonte dans le `<head>`, dans le bloc `<script type="application/ld+json">`.
+Après les deux premiers objets (`Organization` et `Person`, à ne pas toucher)
+vient **une liste d'objets `Event`, un par créneau**. Avec deux jours à trois
+créneaux, il en faut six, dans le même ordre que les cartes.
+
+Remplace les anciens événements par autant de copies de ce bloc que tu as de
+créneaux, en changeant à chaque fois l'identifiant, `startDate` et `endDate` :
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "@id": "https://winecheese.paris/private-wine-tasting-for-two#2026-08-15-1100",
+  "name": "Private Wine and Cheese Tasting for Two, Montmartre Cellar",
+  "description": "A two-hour private wine and cheese tasting for two guests in an underground cellar at the foot of Montmartre. Five wines, five pairings, hosted in English by a WSET-certified Parisian.",
+  "url": "https://winecheese.paris/private-wine-tasting-for-two.html",
+  "startDate": "2026-08-15T11:00:00+02:00",
+  "endDate": "2026-08-15T13:00:00+02:00",
+  "duration": "PT2H",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "inLanguage": "en",
+  "maximumAttendeeCapacity": 2,
+  "isAccessibleForFree": false,
+  "typicalAgeRange": "18-",
+  "location": {
+    "@type": "Place",
+    "name": "Cave Les Piqueurs",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "6 rue Tardieu",
+      "addressLocality": "Paris",
+      "postalCode": "75018",
+      "addressCountry": "FR"
+    },
+    "publicAccess": false
+  },
+  "organizer": { "@id": "https://winecheese.paris/#organization" },
+  "performer": { "@id": "https://winecheese.paris/#thomas" },
+  "offers": {
+    "@type": "Offer",
+    "name": "Private tasting for two, all inclusive",
+    "price": "390",
+    "priceCurrency": "EUR",
+    "description": "Total price for the two guests. Five wines, cheese board, bread, walnuts, raisins, water and private use of the cellar included.",
+    "availability": "https://schema.org/InStock",
+    "validFrom": "2026-09-03T00:00:00+02:00",
+    "url": "https://winecheese.paris/private-wine-tasting-for-two.html"
+  }
+}
+```
+
+Trois choses à ne jamais laisser filer dans ce bloc :
+
+- **Le fuseau.** `+02:00` en heure d'été, `+01:00` en heure d'hiver (du dernier
+  dimanche d'octobre au dernier dimanche de mars). Une date d'hiver écrite en
+  `+02:00` annonce un créneau une heure trop tôt.
+- **La fin de créneau.** `endDate` est toujours `startDate` plus deux heures :
+  11h donne 13h, 16h donne 18h, 19h donne 21h.
+- **Les virgules.** Les objets sont séparés par une virgule, et le dernier de la
+  liste n'en prend pas. Une virgule en trop et le bloc entier devient
+  invalide, donc invisible pour Google, sans que rien ne se voie sur la page.
+
+Vérification en trente secondes avant de pousser : ouvre la page dans le
+navigateur, console, `JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent).length`.
+Si ça répond un nombre (2 plus le nombre de créneaux), le bloc est valide. Si ça
+répond une erreur, tu as une virgule ou une accolade de travers.
 
 **Contrainte de la cave à respecter à chaque rotation, jour par jour à
 l'intérieur de la paire** : du jeudi au dimanche, le premier créneau peut être
@@ -89,7 +200,8 @@ l'intérieur de la paire** : du jeudi au dimanche, le premier créneau peut êtr
 que deux créneaux possibles ce jour-là (16h et 19h) au lieu de trois. Une
 paire qui chevauche la frontière dimanche/lundi (par exemple dimanche +
 lundi) a donc trois créneaux le dimanche et deux seulement le lundi, c'est
-normal, ne pas essayer d'aligner les deux jours.
+normal, ne pas essayer d'aligner les deux jours. Le calendrier affiche les deux
+jours côte à côte avec leurs horaires réels, l'écart se voit et c'est voulu.
 
 **Les deux jours doivent être réellement consécutifs sur le calendrier.**
 C'est ce qui rend la phrase du `.priv-slots-chain-note` vraie : la même série
@@ -101,12 +213,36 @@ Dokploy se fait automatiquement.
 
 ## 2. Quand un créneau est vendu
 
-Retire sa carte (le bloc `<div class="slot-card">...</div>` correspondant) du
-fichier, puis commit et push. Si un `slots-day-group` se retrouve sans aucune
-carte à l'intérieur, retire le groupe entier (son `<p class="slots-day-label">`
-compris), ne laisse jamais un jour vide affiché. Il n'y a pas de système de
-réservation automatique, donc la seule protection contre le double-booking est
-de retirer le créneau vendu de la page dès que le paiement est confirmé.
+Deux gestes, toujours les deux.
+
+**2a. La carte.** Retire le bloc `<div class="slot-card">...</div>`
+correspondant, dans le bloc de créneaux.
+
+- Si un `slots-day-group` se retrouve sans aucune carte, retire le groupe entier
+  (son `<p class="slots-day-label">` compris). Le jour qui reste dans la paire
+  s'affichera seul dans le calendrier, sans ligature, ce qui est juste : il n'y
+  a plus deux jours à proposer.
+- Si les **deux** jours d'une paire sont vendus, retire le
+  `<div class="slots-pair">` entier, ouverture et fermeture comprises. Ne laisse
+  jamais un `slots-pair` vide dans le fichier.
+
+**2b. L'événement JSON-LD.** Remonte dans le `<head>` et retire l'objet `Event`
+dont le `@id` finit par l'identifiant du créneau vendu. Pour
+`sat-2026-08-15-1600`, c'est l'événement
+`...private-wine-tasting-for-two#2026-08-15-1600`. Attention à la virgule
+laissée derrière : si tu retires le dernier objet de la liste, l'avant-dernier
+ne doit plus avoir de virgule à la fin.
+
+Puis commit et push. Il n'y a pas de système de réservation automatique, donc la
+seule protection contre le double-booking est de retirer le créneau vendu de la
+page dès que le paiement est confirmé.
+
+Ce que tu n'as **pas** à faire : retirer un créneau simplement parce que son
+heure est passée. La réservation ferme à midi le jour même, et le calendrier
+masque tout seul les créneaux d'un jour dont midi est passé, en heure de Paris.
+La liste complète, elle, les montre encore : c'est ce que lisent les visiteurs
+sans JavaScript et les crawlers, et c'est accepté tel quel. Les vieilles dates
+partent à la rotation suivante.
 
 ## 3. Retrouver quel créneau a été acheté
 
@@ -133,3 +269,7 @@ Chemin de clics dans le Dashboard Stripe :
 
 Un remboursement partiel n'annule pas le paiement, il apparaît juste comme
 remboursement partiel sur le paiement d'origine.
+
+Si le créneau redevient disponible après un remboursement, il faut le
+**remettre** dans le fichier, aux deux endroits : la carte dans le bloc de
+créneaux et son événement dans le JSON-LD.
