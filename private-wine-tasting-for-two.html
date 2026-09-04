@@ -1169,6 +1169,10 @@
 .priv-details { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-group) var(--space-group); }
 .priv-detail-k { font-family:var(--ff-display); font-size:var(--text-base); font-weight:var(--weight-semibold); line-height:var(--leading-snug); color:var(--charcoal); margin-bottom:var(--space-3xs); }
 .priv-detail-t { font-size:var(--text-sm); line-height:var(--leading-relaxed); color:var(--slate); }
+.priv-detail-num { display:block; font-size:var(--text-2xs); font-weight:var(--weight-bold); letter-spacing:0.08em; color:var(--gold-text); margin-bottom:var(--space-3xs); }
+.priv-details-title { margin-bottom:var(--space-block); }
+.priv-detail-photo { align-self:stretch; min-height:220px; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-card); }
+.priv-detail-photo img { width:100%; height:100%; object-fit:cover; object-position:center 58%; }
 
 /* ─── LA CARTE DES 5 VINS (chevauchement) ───────────────────── */
 .priv-menu-wrap { position:relative; display:flex; align-items:center; }
@@ -1519,26 +1523,37 @@ plausible.init()
 
 <!-- 6. L'INTENDANCE : grille dense, 14px, poids visuel bas -->
 <section class="priv-sec">
-  <div class="rail-wide priv-details fade-in">
-    <div class="priv-detail">
-      <p class="priv-detail-k">Two ages of the same cheese, side by side.</p>
-      <p class="priv-detail-t">Comté at 18 months and at 36 months, in front of you at the same time. It is the point in the evening where the two of you usually disagree, and that is the useful part.</p>
-    </div>
-    <div class="priv-detail">
-      <p class="priv-detail-k">The last pairing is sweet against salt.</p>
-      <p class="priv-detail-t">A fortified Muscat on a blue cheese. The one people arrive certain they will not like.</p>
-    </div>
-    <div class="priv-detail">
-      <p class="priv-detail-k">Questions, whenever they turn up.</p>
-      <p class="priv-detail-t">How a cheese is actually made, why a grape tastes of one place and not another, how to serve wine at home, what to buy when you get back. This is a conversation with a structure, not a lecture. I start wherever you are, including from zero.</p>
-    </div>
-    <div class="priv-detail">
-      <p class="priv-detail-k">On the table throughout:</p>
-      <p class="priv-detail-t">bread, walnuts, raisins, and a carafe of water, still and sparkling.</p>
-    </div>
-    <div class="priv-detail">
-      <p class="priv-detail-k">The next morning,</p>
-      <p class="priv-detail-t">a tasting card lands in your inbox as a PDF. Every wine and every cheese in the order it was poured, with the producer, the grape, the appellation and the village, so you can find these bottles again at home.</p>
+  <div class="rail-wide">
+    <h2 class="priv-h2-sm priv-details-title fade-in">A few things worth knowing</h2>
+    <div class="priv-details fade-in">
+      <div class="priv-detail">
+        <span class="priv-detail-num" aria-hidden="true">01</span>
+        <p class="priv-detail-k">Two ages of the same cheese, side by side.</p>
+        <p class="priv-detail-t">Comté at 18 months and at 36 months, in front of you at the same time. It is the point in the evening where the two of you usually disagree, and that is the useful part.</p>
+      </div>
+      <div class="priv-detail">
+        <span class="priv-detail-num" aria-hidden="true">02</span>
+        <p class="priv-detail-k">The last pairing is sweet against salt.</p>
+        <p class="priv-detail-t">A fortified Muscat on a blue cheese. The one people arrive certain they will not like.</p>
+      </div>
+      <div class="priv-detail">
+        <span class="priv-detail-num" aria-hidden="true">03</span>
+        <p class="priv-detail-k">Questions, whenever they turn up.</p>
+        <p class="priv-detail-t">How a cheese is actually made, why a grape tastes of one place and not another, how to serve wine at home, what to buy when you get back. This is a conversation with a structure, not a lecture. I start wherever you are, including from zero.</p>
+      </div>
+      <div class="priv-detail">
+        <span class="priv-detail-num" aria-hidden="true">04</span>
+        <p class="priv-detail-k">On the table throughout:</p>
+        <p class="priv-detail-t">bread, walnuts, raisins, and a carafe of water, still and sparkling.</p>
+      </div>
+      <div class="priv-detail">
+        <span class="priv-detail-num" aria-hidden="true">05</span>
+        <p class="priv-detail-k">The next morning,</p>
+        <p class="priv-detail-t">a tasting card lands in your inbox as a PDF. Every wine and every cheese in the order it was poured, with the producer, the grape, the appellation and the village, so you can find these bottles again at home.</p>
+      </div>
+      <div class="priv-detail-photo">
+        <img src="images/roquefort-sauternes.jpg" alt="A wedge of blue cheese with honey running down its side, next to a glass of golden fortified wine on a slate board" loading="lazy">
+      </div>
     </div>
   </div>
 </section>
