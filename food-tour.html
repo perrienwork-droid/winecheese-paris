@@ -296,11 +296,7 @@ plausible.init()
 <section class="section" style="background:var(--light-gold);">
   <div class="section-inner">
     <header class="section-header"><p class="section-eyebrow">You might also like</p><h2 class="section-title">More ways to <em>taste Paris</em></h2><div class="divider"></div></header>
-    <div class="related-grid">
-      <a href="wine-cheese-walk.html" class="related-card fade-in">
-        <div class="related-img"><img src="images/groupe-cave.jpg" alt="Wine & Cheese Walk group in cave" loading="lazy"></div>
-        <div class="related-body"><h3 class="related-name">Wine &amp; Cheese Walk</h3><p class="related-meta">2h30 · Max 8 · From €75</p><span class="related-link">Discover the tour <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
-      </a>
+    <div class="related-grid" style="grid-template-columns:minmax(0,420px);justify-content:center;">
       <a href="contact.html" class="related-card fade-in">
         <div class="related-img"><img src="images/card-rooftop.jpg" alt="Private rooftop tasting" loading="lazy"></div>
         <div class="related-body"><h3 class="related-name">Private Rooftop Tasting</h3><p class="related-meta">2h · 2–12 guests · From €120</p><span class="related-link">Request a quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
@@ -314,7 +310,7 @@ plausible.init()
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand"><a href="/" class="logo"><span class="logo-main">Wine &amp; Cheese Paris</span><span class="logo-sub">Montmartre · SoPi</span></a><p class="footer-tagline">Authentic wine &amp; food experiences in Paris's most beloved neighbourhood.</p><div class="footer-social"><a href="https://instagram.com" class="social-link" aria-label="Instagram" rel="noopener noreferrer"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div></div>
-      <div><p class="footer-col-title">Our Tours</p><ul class="footer-links"><li><a href="wine-cheese-walk.html">Wine &amp; Cheese Walk</a></li><li><a href="food-tour.html">Montmartre Food Tour</a></li><li><a href="private-wine-tasting-for-two.html">Private Tasting for Two</a></li><li><a href="contact.html">Private Tastings</a></li></ul></div>
+      <div><p class="footer-col-title">Our Tours</p><ul class="footer-links"><li><a href="food-tour.html">Montmartre Food Tour</a></li><li><a href="private-wine-tasting-for-two.html">Private Tasting for Two</a></li><li><a href="contact.html">Private Tastings</a></li></ul></div>
       <div><p class="footer-col-title">Information</p><ul class="footer-links"><li><a href="about.html">About Thomas</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div><p class="footer-col-title">Contact</p><ul class="footer-links"><li><a href="mailto:hello@winecheese.paris">hello@winecheese.paris</a></li></ul></div>
     </div>
@@ -324,7 +320,6 @@ plausible.init()
 
 <script src="nav.js"></script>
 <script src="booking.js"></script>
-<script src="https://widget.ticketinghub.com/embedding/latest.js"></script>
 <script>document.querySelectorAll('.faq-question').forEach(function(btn){btn.addEventListener('click',function(){var a=this.nextElementSibling,e=this.getAttribute('aria-expanded')==='true';document.querySelectorAll('.faq-question').forEach(function(b){b.setAttribute('aria-expanded','false');b.nextElementSibling.classList.remove('open');});if(!e){this.setAttribute('aria-expanded','true');a.classList.add('open');}});});</script>
 </body>
 </html>
