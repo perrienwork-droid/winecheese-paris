@@ -134,9 +134,9 @@
 .tours { background:var(--cream); }
 .tours-grid {
   display:grid;
-  grid-template-columns:repeat(3, 1fr);
+  grid-template-columns:repeat(2, 1fr);
   gap:var(--space-lg);
-  max-width:1120px;
+  max-width:780px;
   margin:0 auto;
 }
 .tour-card {
@@ -404,9 +404,6 @@
 
 /* ─── RESPONSIVE, propre a l'accueil ─────────────────────────────── */
 /* Le pied de page et la bascule du menu sont gouvernes par shared.css. */
-@media (max-width:768px) {
-  .tours-grid { grid-template-columns:repeat(2, 1fr); max-width:780px; }
-}
 @media (max-width:640px) {
   .tours-grid { grid-template-columns:1fr; max-width:420px; }
   .expertise-grid, .neighbourhood-grid, .about-grid { grid-template-columns:1fr; }
