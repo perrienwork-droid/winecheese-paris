@@ -92,7 +92,6 @@
 .size-chip:focus-visible { outline:2px solid var(--wine); outline-offset:2px; }
 .size-chip[aria-pressed="true"] { background:var(--wine); border-color:var(--wine); color:var(--cream); font-weight:var(--weight-bold); }
 .size-grid.has-error { border:2px solid var(--wine); box-shadow:0 0 0 3px rgba(114,47,55,0.08); border-radius:var(--radius-md); padding:6px; margin:-8px; }
-.size-solo { font-size:var(--text-sm); line-height:var(--leading-relaxed); color:var(--stone-text); margin-top:10px; }
 
 /* Le prix. Le tableau est servi dans le HTML et lisible sans JavaScript :
    le <details> arrive ouvert, c'est le script qui le replie au chargement. */
@@ -269,7 +268,6 @@ plausible.init()
                     <option value="private-celebration" data-en="Private tasting, celebration / anniversary" data-fr="Dégustation privée, anniversaire / célébration">Private tasting, celebration / anniversary</option>
                     <option value="corporate" data-en="Corporate / team building" data-fr="Corporate / team building">Corporate / team building</option>
                     <option value="hotel" data-en="Hotel concierge partnership" data-fr="Partenariat conciergerie hôtelière">Hotel concierge partnership</option>
-                    <option value="public-tour" data-en="Question about a public tour" data-fr="Question sur une visite publique">Question about a public tour</option>
                     <option value="other" data-en="Other" data-fr="Autre">Other</option>
                   </select>
                   <p class="field-error" id="enquiryTypeError" data-en="Please select what your enquiry is about." data-fr="Merci de sélectionner l'objet de votre demande.">Please select what your enquiry is about.</p>
@@ -297,7 +295,6 @@ plausible.init()
                 </div>
                 <input type="hidden" id="groupSize" name="groupSize" value="">
                 <p class="field-error" id="groupSizeError" data-en="Tell me how many of you there are. It is what sets the price." data-fr="Dites-moi combien vous êtes. C'est ce qui fixe le prix.">Tell me how many of you there are. It is what sets the price.</p>
-                <p class="size-solo" data-en="On your own? &euro;295, the same grid. Tell me below." data-fr="Vous êtes seul ? 295 €, la même grille. Dites-le plus bas.">On your own? &euro;295, the same grid. Tell me below.</p>
               </div>
 
               <!-- 3. Le prix. Le tableau est dans le HTML servi et le <details>
@@ -320,14 +317,13 @@ plausible.init()
                       <tr>
                         <th scope="col" data-en="Guests" data-fr="Convives">Guests</th>
                         <th scope="col" data-en="Total" data-fr="Total">Total</th>
-                        <th scope="col" data-en="Each" data-fr="Par pers.">Each</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr data-row="2"><td>2</td><td data-en="&euro;390" data-fr="390 €">&euro;390</td><td data-en="&euro;195" data-fr="195 €">&euro;195</td></tr>
-                      <tr data-row="4"><td>4</td><td data-en="&euro;580" data-fr="580 €">&euro;580</td><td data-en="&euro;145" data-fr="145 €">&euro;145</td></tr>
-                      <tr data-row="8"><td>8</td><td data-en="&euro;960" data-fr="960 €">&euro;960</td><td data-en="&euro;120" data-fr="120 €">&euro;120</td></tr>
-                      <tr data-row="12"><td>12</td><td data-en="&euro;1,340" data-fr="1 340 €">&euro;1,340</td><td data-en="&euro;112" data-fr="112 €">&euro;112</td></tr>
+                      <tr data-row="2"><td>2</td><td data-en="&euro;390" data-fr="390 €">&euro;390</td></tr>
+                      <tr data-row="4"><td>4</td><td data-en="&euro;580" data-fr="580 €">&euro;580</td></tr>
+                      <tr data-row="8"><td>8</td><td data-en="&euro;960" data-fr="960 €">&euro;960</td></tr>
+                      <tr data-row="12"><td>12</td><td data-en="&euro;1,340" data-fr="1 340 €">&euro;1,340</td></tr>
                     </tbody>
                   </table>
                   <p class="price-note" data-en="Every size in between follows the same line. Over twelve, tell me the number and I will price it the same way." data-fr="Toutes les tailles intermédiaires suivent la même droite. Au-delà de douze, dites-moi le nombre et je le chiffre pareil.">Every size in between follows the same line. Over twelve, tell me the number and I will price it the same way.</p>
@@ -485,7 +481,7 @@ plausible.init()
         </div>
         <div class="contact-method">
           <div class="contact-method-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div><span class="contact-method-label" data-en="Meeting point" data-fr="Point de RDV">Meeting point</span><p class="contact-method-value" data-en="Métro Notre-Dame-de-Lorette, 9e arr." data-fr="Métro Notre-Dame-de-Lorette, 9e arr.">Métro Notre-Dame-de-Lorette, 9e arr.</p></div>
+          <div><span class="contact-method-label" data-en="Where we taste" data-fr="Où l'on déguste">Where we taste</span><p class="contact-method-value" data-en="Cave Les Piqueurs, 6 rue Tardieu, 18e arr." data-fr="Cave Les Piqueurs, 6 rue Tardieu, 18e arr.">Cave Les Piqueurs, 6 rue Tardieu, 18e arr.</p></div>
         </div>
       </div>
     </div>
@@ -503,8 +499,8 @@ plausible.init()
     </header>
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-question" aria-expanded="false"><span data-en="Can I book a public tour as a private group?" data-fr="Puis-je réserver une visite publique en groupe privé ?">Can I book a public tour as a private group?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="faq-answer"><div class="faq-answer-inner"><p data-en="Yes. Private group sessions can accommodate up to 12 people. Thomas will design the experience exclusively for your party, at your pace. Use the contact form above to discuss your group size and preferred dates." data-fr="Oui. Les sessions de groupe privé peuvent accueillir jusqu'à 12 personnes. Thomas concevra l'expérience exclusivement pour votre groupe, à votre rythme. Utilisez le formulaire ci-dessus pour discuter de la taille du groupe et des dates souhaitées.">Yes. Private group sessions can accommodate up to 12 people. Thomas will design the experience exclusively for your party, at your pace. Use the contact form above to discuss your group size and preferred dates.</p></div></div>
+        <button class="faq-question" aria-expanded="false"><span data-en="How many people can join a private tasting?" data-fr="Combien de personnes pour une dégustation privée ?">How many people can join a private tasting?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p data-en="From 2 to 12 guests. Every tasting is private: Thomas designs it for your party only, at your pace. Use the form above to tell me your group size and preferred dates." data-fr="De 2 à 12 convives. Chaque dégustation est privée : Thomas la conçoit pour votre groupe seulement, à votre rythme. Utilisez le formulaire ci-dessus pour indiquer la taille du groupe et vos dates.">From 2 to 12 guests. Every tasting is private: Thomas designs it for your party only, at your pace. Use the form above to tell me your group size and preferred dates.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false"><span data-en="Do you offer tours in French?" data-fr="Proposez-vous des visites en français ?">Do you offer tours in French?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -515,8 +511,8 @@ plausible.init()
         <div class="faq-answer"><div class="faq-answer-inner"><p data-en="Free cancellation up to 48 hours before the tour start time. Within 48 hours, the full booking is charged. In the event of severe weather or Thomas being unable to lead the tour, a full refund or free rescheduling is offered." data-fr="Annulation gratuite jusqu'à 48 heures avant le début de la visite. Dans les 48 heures, la réservation complète est facturée. En cas de mauvais temps sévère ou d'indisponibilité de Thomas, un remboursement complet ou un report gratuit est proposé.">Free cancellation up to 48 hours before the tour. Within 48 hours, the full booking is charged. In the event of severe weather or guide unavailability, a full refund or free rescheduling is offered.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-question" aria-expanded="false"><span data-en="Where exactly do tours meet?" data-fr="Où exactement se retrouve-t-on pour les visites ?">Where exactly do tours meet?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="faq-answer"><div class="faq-answer-inner"><p data-en="All public tours depart from the exit of Métro Notre-Dame-de-Lorette (Line 12), at the corner of Rue des Martyrs. Thomas will be there 10 minutes early with the carnet de route. Exact meeting details are sent in the booking confirmation email." data-fr="Toutes les visites publiques partent de la sortie du Métro Notre-Dame-de-Lorette (Ligne 12), au coin de la Rue des Martyrs. Thomas sera là 10 minutes avant avec le carnet de route.">All public tours depart from Métro Notre-Dame-de-Lorette (Line 12), corner of Rue des Martyrs. Thomas will be there 10 minutes early. Exact details in the booking confirmation email.</p></div></div>
+        <button class="faq-question" aria-expanded="false"><span data-en="Where does the tasting take place?" data-fr="Où a lieu la dégustation ?">Where does the tasting take place?</span><svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p data-en="At Cave Les Piqueurs, 6 rue Tardieu, 75018 Paris, at the foot of Montmartre. Métro Anvers (line 2) is two minutes away, Abbesses (line 12) about five. If your group chose a rooftop or your own venue, the address is in your confirmation email." data-fr="À la Cave Les Piqueurs, 6 rue Tardieu, 75018 Paris, au pied de Montmartre. Le métro Anvers (ligne 2) est à deux minutes, Abbesses (ligne 12) à cinq environ. Si votre groupe a choisi un rooftop ou votre propre lieu, l'adresse figure dans l'email de confirmation.">At Cave Les Piqueurs, 6 rue Tardieu, 75018 Paris, at the foot of Montmartre. Métro Anvers (line 2) is two minutes away, Abbesses (line 12) about five. If your group chose a rooftop or your own venue, the address is in your confirmation email.</p></div></div>
       </div>
     </div>
   </div>
@@ -582,13 +578,16 @@ function safeTrack(name, props, opts) {
 
 var PRICE_BASE = 200;
 var PRICE_PER_GUEST = 95;
+// Plancher d'affichage : le prix public annonce "From €120 / person".
+// Au-delà de 8 convives la grille D1 descend sous 120 € par personne :
+// on affiche alors le total seul, jamais un montant par personne plus bas.
+var PER_PERSON_DISPLAY_FLOOR = 120;
 
 var MOTIF_TITLES = {
   'private-couples':     ['A private tasting for two, then.', 'Une dégustation privée pour deux, donc.'],
   'private-celebration': ['A celebration, then.', 'Une célébration, donc.'],
   'corporate':           ['A tasting for your team, then.', 'Une dégustation pour votre équipe, donc.'],
   'hotel':               ['A concierge partnership, then.', 'Un partenariat conciergerie, donc.'],
-  'public-tour':         ['A question about a public tour.', 'Une question sur une visite publique.'],
   'other':               ['Tell me the shape of it', 'Dites-moi la forme de votre demande']
 };
 
@@ -637,6 +636,7 @@ function renderPrice(size) {
     setBilingual(totalEl,
       amountEn(PRICE_BASE) + ' + ' + amountEn(PRICE_PER_GUEST) + ' <span>per guest</span>',
       amountFr(PRICE_BASE) + ' + ' + amountFr(PRICE_PER_GUEST) + ' <span>par convive</span>');
+    eachEl.hidden = false;
     setBilingual(eachEl,
       'Tell me the exact number below and I will do the sum.',
       'Dites-moi le nombre exact plus bas et je fais l\'addition.');
@@ -654,13 +654,19 @@ function renderPrice(size) {
     amountEn(total) + ' <span>in total</span>',
     amountFr(total) + ' <span>au total</span>');
 
-  var en = (exact ? '' : 'About ') + amountEn(each) + ' each.';
-  var fr = (exact ? '' : 'Environ ') + amountFr(each) + ' par personne.';
-  if (n === 2) {
-    en += ' The same price as the dates on the calendar.';
-    fr += ' Le prix des dates affichées au calendrier.';
+  if (each < PER_PERSON_DISPLAY_FLOOR) {
+    setBilingual(eachEl, '', '');
+    eachEl.hidden = true;
+  } else {
+    var en = (exact ? '' : 'About ') + amountEn(each) + ' each.';
+    var fr = (exact ? '' : 'Environ ') + amountFr(each) + ' par personne.';
+    if (n === 2) {
+      en += ' The same price as the dates on the calendar.';
+      fr += ' Le prix des dates affichées au calendrier.';
+    }
+    setBilingual(eachEl, en, fr);
+    eachEl.hidden = false;
   }
-  setBilingual(eachEl, en, fr);
   highlightPriceRow(n);
 }
 
