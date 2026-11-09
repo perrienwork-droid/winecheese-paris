@@ -1,0 +1,10 @@
+{
+  "_lisez-moi": "Source unique des creneaux de la page couple. Une entree par jour ouvert, groupes par paire de jours consecutifs (meme serie de bouteilles). Horaires HH:00, debut du creneau de deux heures, heure de Paris. Rien avant 16:00 du lundi au mercredi. Apres toute modification : python3 _project/build-slots.py, puis commit. Les jours clos (midi passe le jour meme) sont ecartes a la generation. Mode d'emploi complet : _project/RUNBOOK-CRENEAUX.md.",
+  "_exemple": [
+    [
+      { "date": "2026-11-28", "times": ["11:00", "16:00", "19:00"] },
+      { "date": "2026-11-29", "times": ["11:00", "16:00", "19:00"] }
+    ]
+  ],
+  "pairs": []
+}
