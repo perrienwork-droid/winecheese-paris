@@ -372,6 +372,20 @@ plausible.init()
                 </div>
               </div>
 
+              <!-- 7. La source, facultative : seul moyen de relier une demande a un assistant IA -->
+              <div class="form-group" style="margin-top:var(--space-sm);">
+                <label class="form-label" for="heardFrom" data-en="How did you hear about us? <span class=&quot;optional&quot;>optional</span>" data-fr="Comment nous avez-vous connus ? <span class=&quot;optional&quot;>facultatif</span>">How did you hear about us? <span class="optional">optional</span></label>
+                <select id="heardFrom" name="heardFrom" class="form-select">
+                  <option value="" data-en="Select…" data-fr="Choisir…">Select…</option>
+                  <option value="ai-assistant" data-en="ChatGPT or another AI assistant" data-fr="ChatGPT ou un autre assistant IA">ChatGPT or another AI assistant</option>
+                  <option value="search-engine" data-en="Google or another search engine" data-fr="Google ou un autre moteur de recherche">Google or another search engine</option>
+                  <option value="instagram" data-en="Instagram" data-fr="Instagram">Instagram</option>
+                  <option value="hotel-agency" data-en="My hotel or a travel agency" data-fr="Mon hôtel ou une agence de voyage">My hotel or a travel agency</option>
+                  <option value="word-of-mouth" data-en="A friend or a past guest" data-fr="Un ami ou un ancien client">A friend or a past guest</option>
+                  <option value="other" data-en="Something else" data-fr="Autre chose">Something else</option>
+                </select>
+              </div>
+
               <button type="submit" class="btn-submit" id="submitBtn" data-en="Send it to Thomas" data-fr="Envoyer à Thomas">Send it to Thomas</button>
               <p class="form-note" data-en="Thomas replies personally, usually within 4 hours · hello@winecheese.paris" data-fr="Thomas répond personnellement, généralement sous 4 heures · hello@winecheese.paris">Thomas replies personally, usually within 4 hours · hello@winecheese.paris</p>
             </div>
@@ -558,10 +572,17 @@ function safeTrack(name, props, opts) {
 /* ==========================================================================
    MODULE DE DEMANDE
    --------------------------------------------------------------------------
-   Contrat a ne jamais casser : le POST /api/contact part avec exactement huit
-   cles, firstName, lastName, email, phone, enquiryType, groupSize,
+   Contrat a ne jamais casser : le POST /api/contact part avec huit cles
+   historiques, firstName, lastName, email, phone, enquiryType, groupSize,
    preferredDate, message. Le serveur refuse en 400 sans les quatre premieres
    plus message. Rien n'est fusionne, rien n'est supprime.
+   Depuis le 9 novembre 2026, trois cles facultatives s'y ajoutent pour la
+   mesure GEO de niveau 2 : heardFrom (valeur du <select id="heardFrom">,
+   vide si non repondu), landingPage (premiere page vue dans l'onglet, avec
+   sa query, donc un eventuel utm_source=chatgpt.com) et referrer (origine et
+   chemin du site qui a envoye le visiteur, sans query). Les deux dernieres
+   sont posees par analytics.js en sessionStorage. Le serveur les accepte
+   absentes, elles n'ont aucune validation bloquante.
 
    Le <select id="enquiryType"> garde son id et ses six valeurs : booking.js,
    non modifie, continue de lire ?enquiry= et d'ecrire dedans. Le module se
@@ -712,6 +733,11 @@ function isValidEmail(v) {
   if (at < 1) return false;
   var dot = v.indexOf('.', at + 1);
   return dot > at + 1 && dot < v.length - 1;
+}
+
+// Lecture defensive : sessionStorage peut lever (navigation privee, cookies bloques).
+function sessionValue(key) {
+  try { return (window.sessionStorage.getItem(key) || '').slice(0, 300); } catch (e) { return ''; }
 }
 
 function trimmed(id) {
@@ -936,7 +962,10 @@ function validateForm() {
       enquiryType:   enquiryType,
       groupSize:     groupSize,
       preferredDate: document.getElementById('preferredDate').value,
-      message:       trimmed('message')
+      message:       trimmed('message'),
+      heardFrom:     document.getElementById('heardFrom').value,
+      landingPage:   sessionValue('wc_landing'),
+      referrer:      sessionValue('wc_ref')
     };
 
     function resetSubmitButton() {
@@ -982,7 +1011,7 @@ function validateForm() {
         fillRecap();
         document.getElementById('contactFormWrap').style.display = 'none';
         document.getElementById('formSuccess').classList.add('visible');
-        safeTrack('Enquiry: Submitted', { type: enquiryType, size: groupSize });
+        safeTrack('Enquiry: Submitted', { type: enquiryType, size: groupSize, source: payload.heardFrom || 'none' });
       } else {
         resetSubmitButton();
         safeTrack('Enquiry: Failed', { reason: (data && data.error === 'validation') ? 'validation' : 'server' });
