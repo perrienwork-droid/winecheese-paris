@@ -30,6 +30,10 @@ Ce que le script fait seul, à chaque passage :
 - il **écarte tout jour clos** : la réservation ferme à midi, heure de Paris,
   le jour même, et un jour dont midi est passé n'est plus écrit nulle part, ni
   en carte ni en JSON-LD ;
+- il ne met dans le JSON-LD que les créneaux des 28 prochains jours
+  (`LD_HORIZON_DAYS`) : le serveur ne compresse pas la page, et deux cents
+  `Event` pesaient 340 Ko. Les cartes gardent toutes les dates ouvertes. Ce
+  sous-ensemble ne contredit rien, chaque `Event` annoncé reste réservable ;
 - il pose sur chaque `Offer` un `validThrough` à cette même coupure, si bien
   qu'une page qu'on aurait oublié de régénérer reste lisible comme expirée ;
 - il calcule le fuseau (`+01:00` l'hiver, `+02:00` l'été), la fin de créneau

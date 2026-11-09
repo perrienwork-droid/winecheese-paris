@@ -38,6 +38,11 @@ PRICE = "390"
 BOOKING_CUTOFF_HOUR = 12        # la reservation ferme a midi le jour meme
 EARLIEST_MON_TO_WED = 16        # contrainte de la cave, lundi a mercredi
 DURATION_H = 2
+# Le JSON-LD ne porte que les creneaux des prochaines semaines : la page n'est pas
+# compressee par le serveur, et 200 Event pesaient 340 Ko. Les cartes, elles, gardent
+# toutes les dates ouvertes (le calendrier en a besoin). Un sous-ensemble ne contredit
+# rien : chaque Event annonce reste reservable.
+LD_HORIZON_DAYS = 28
 
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 MONTHS = ["January", "February", "March", "April", "May", "June", "July",
@@ -143,23 +148,14 @@ def render_cards(pairs):
         lines.append('      <div class="slots-pair">')
         for d, hours in p:
             label = f"{DAYS[d.weekday()]} {d.day} {MONTHS[d.month - 1]} {d.year}"
-            lines += [
-                '      <div class="slots-day-group">',
-                f'        <p class="slots-day-label">{label}</p>',
-                '        <div class="slots-grid">',
-            ]
+            lines.append(f'<div class="slots-day-group"><p class="slots-day-label">{label}</p><div class="slots-grid">')
             for h in hours:
                 sid = slot_id(d, h)
-                lines += [
-                    '          <div class="slot-card">',
-                    '            <div>',
-                    f'              <p class="slot-label">{hour_label(h)} to {hour_label(h + DURATION_H)}</p>',
-                    '              <p class="slot-sub">Private, just the two of you</p>',
-                    '            </div>',
-                    f'            <a class="btn-book-slot" data-slot="{sid}" href="{STRIPE}?client_reference_id={sid}">Book this slot, &euro;{PRICE}</a>',
-                    '          </div>',
-                ]
-            lines += ['        </div>', '      </div>']
+                lines.append(
+                    f'<div class="slot-card"><div><p class="slot-label">{hour_label(h)} to {hour_label(h + DURATION_H)}</p>'
+                    '<p class="slot-sub">Private, just the two of you</p></div>'
+                    f'<a class="btn-book-slot" data-slot="{sid}" href="{STRIPE}?client_reference_id={sid}">Book this slot, &euro;{PRICE}</a></div>')
+            lines.append('</div></div>')
         lines.append('      </div>')
     return "\n".join(lines)
 
@@ -170,8 +166,11 @@ def iso(dt):
 
 def render_events(pairs, valid_from):
     events = []
+    horizon = valid_from.date() + timedelta(days=LD_HORIZON_DAYS)
     for p in pairs:
         for d, hours in p:
+            if d > horizon:
+                continue
             for h in hours:
                 start = datetime(d.year, d.month, d.day, h, tzinfo=PARIS)
                 end = start + timedelta(hours=DURATION_H)
@@ -246,8 +245,7 @@ def rebuild_ld(ld_text, events):
     pos = next((k for k, (o, _) in enumerate(kept) if o.get("@type") == "FAQPage"), len(kept))
     fresh = []
     for e in events:
-        block = json.dumps(e, indent=2, ensure_ascii=False)
-        fresh.append("\n".join("  " + line for line in block.split("\n")).lstrip())
+        fresh.append(json.dumps(e, ensure_ascii=False, separators=(",", ":")))
     blocks = [src for _, src in kept[:pos]] + fresh + [src for _, src in kept[pos:]]
     out = "[\n" + ",\n".join("  " + b for b in blocks) + "\n]"
     out = out.replace("</", "<\\/")
@@ -297,6 +295,7 @@ def main():
 
     stale = [d for d in served_dates(current) if not is_open(date.fromisoformat(d), now)]
     n_slots = sum(len(h) for p in future for _, h in p)
+    n_events = len(render_events(future, datetime(now.year, now.month, now.day, tzinfo=PARIS)))
     n_days = sum(len(p) for p in future)
 
     if args.check:
@@ -314,7 +313,7 @@ def main():
 
     if new != current:
         PAGE.write_text(new, encoding="utf-8")
-    msg = f"Page ecrite : {n_slots} creneaux sur {n_days} jours ouverts"
+    msg = f"Page ecrite : {n_slots} creneaux sur {n_days} jours ouverts, {n_events} Event dans le JSON-LD ({LD_HORIZON_DAYS} jours)"
     if stale:
         msg += f", {len(stale)} jour(s) clos retire(s) ({', '.join(stale)})"
     print(msg + ".")
