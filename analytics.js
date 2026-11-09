@@ -50,6 +50,32 @@
   window.WCAnalytics = { track: track };
 
   /* ------------------------------------------------------------------
+     Source de la visite, pour le formulaire de contact (mesure GEO de
+     niveau 2). Posee une seule fois par onglet, a la premiere page vue :
+     - wc_landing : chemin et query de la page d'entree. ChatGPT ajoute
+       utm_source=chatgpt.com a ses liens, c'est le signal le plus fiable ;
+     - wc_ref : origine et chemin du site referent, sans query, vide si
+       la visite vient du site lui-meme ou d'un acces direct.
+     Rien de personnel, rien n'est envoye ici : contact.html relit ces deux
+     valeurs et les joint a la demande, et seulement a la demande.
+     ------------------------------------------------------------------ */
+
+  try {
+    var store = window.sessionStorage;
+    if (store && store.getItem('wc_landing') === null) {
+      store.setItem('wc_landing', (window.location.pathname + window.location.search).slice(0, 300));
+      var ref = '';
+      if (document.referrer) {
+        var u = new URL(document.referrer);
+        if (u.origin !== window.location.origin) ref = u.origin + u.pathname;
+      }
+      store.setItem('wc_ref', ref.slice(0, 300));
+    }
+  } catch (e) {
+    /* stockage indisponible : la demande part sans ces deux champs */
+  }
+
+  /* ------------------------------------------------------------------
      Intentions site-wide : CTA, liens sortants, FAQ.
      Delegation sur document : fonctionne quel que soit l'ordre de
      chargement, et couvre les elements ajoutes dynamiquement.
