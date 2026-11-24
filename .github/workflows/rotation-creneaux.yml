@@ -1,0 +1,67 @@
+# Rotation quotidienne des creneaux de la page couple (S6).
+#
+# Chaque jour, juste apres la coupure de reservation (midi, heure de Paris),
+# relance _project/build-slots.py : le jour qui vient de fermer disparait des
+# cartes et du JSON-LD, et la fenetre du JSON-LD avance d'un jour. Si la page
+# change, un commit est pousse sur main, ce qui redeploie le site via Dokploy.
+#
+# Garde-fous : le commit n'est pousse que si --check est vert ET si le seul
+# fichier modifie est la page couple. Toute autre modification fait echouer
+# le job sans rien pousser (GitHub previent alors par email).
+#
+# Ouvrir ou retirer des dates reste un geste humain : _project/slots.json,
+# puis le circuit habituel (branche, PR, fusion). Decide le 24 novembre 2026
+# sur delegation de Thomas, voir la DECISION du pole site du meme jour.
+
+name: Rotation des creneaux
+
+on:
+  schedule:
+    - cron: "5 11 * * *"   # 11 h 05 UTC : 12 h 05 a Paris en hiver, 13 h 05 en ete
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rotation-creneaux
+  cancel-in-progress: false
+
+jobs:
+  rotation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerer la page
+        run: python3 _project/build-slots.py
+
+      - name: Garde-fous
+        id: garde
+        run: |
+          python3 _project/build-slots.py --check
+          changed="$(git status --porcelain)"
+          if [ -z "$changed" ]; then
+            echo "Rien a changer aujourd'hui."
+            echo "push=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "$changed" != " M private-wine-tasting-for-two.html" ]; then
+            echo "Modification inattendue, rien n'est pousse :"
+            echo "$changed"
+            exit 1
+          fi
+          echo "push=true" >> "$GITHUB_OUTPUT"
+
+      - name: Publier
+        if: steps.garde.outputs.push == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore(site): rotation quotidienne des creneaux du $(date -u +%Y-%m-%d)"
+          git push
