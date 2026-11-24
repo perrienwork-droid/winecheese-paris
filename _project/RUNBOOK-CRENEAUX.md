@@ -73,10 +73,16 @@ python3 _project/build-slots.py --check  # doit répondre OK
 si elle n'est pas à jour avec `slots.json`. C'est le contrôle à passer avant
 chaque pré-vol.
 
-**La rotation reste hebdomadaire, et elle devient un passage du script.**
-Même sans ouvrir de nouvelle date, relance-le au moins une fois par semaine :
-c'est ce qui retire de la page servie les jours passés. Puis commit, et le
-circuit habituel (branche, PR, fusion) : la fusion dans `main` déploie.
+**La rotation est automatique depuis le 24 novembre 2026.** L'action GitHub
+`.github/workflows/rotation-creneaux.yml` relance le script chaque jour à
+11 h 05 UTC (juste après la coupure de midi en hiver) et pousse sur `main` si
+la page a changé, ce qui redéploie le site. Elle ne pousse rien si `--check`
+échoue ou si un autre fichier que la page couple a bougé ; GitHub prévient
+alors par email. On peut la lancer à la main depuis l'onglet Actions du dépôt
+(« Rotation des creneaux », bouton Run workflow).
+
+Ce qu'elle ne fait pas : ouvrir des dates. Quand la dernière date ouverte
+approche, il faut en ajouter dans `slots.json` (branche, PR, fusion).
 
 Contrainte de la cave, vérifiée par le script : du jeudi au dimanche, le
 premier créneau peut être à 11h ; du lundi au mercredi, rien avant 16h, donc
