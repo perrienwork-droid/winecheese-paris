@@ -1,6 +1,6 @@
 {
   "_lisez-moi": "Source unique des creneaux de la page couple. Une entree par jour ouvert, groupes par paire de jours consecutifs (meme serie de bouteilles). Horaires HH:00, debut du creneau de deux heures, heure de Paris. Rien avant 16:00 du lundi au mercredi. Apres toute modification : python3 _project/build-slots.py, puis commit. Les jours clos (midi passe le jour meme) sont ecartes a la generation. Mode d'emploi complet : _project/RUNBOOK-CRENEAUX.md.",
-  "_ouverture": "9 novembre 2026, consigne de Thomas : tous les jours jusqu'au 31 janvier 2027. Paires lundi+mardi, jeudi+vendredi, samedi+dimanche, le mercredi seul. Retires : vendredi 13 novembre 11h et 16h (Gloria et Ben, a table aux Piqueurs a 12h30 ou 13h30), mercredi 20 janvier en entier (piste Megan Baker vers 17h30, non confirmee, a rouvrir si elle ne se fait pas). Le 24 novembre, sur delegation de Thomas (\"fais au mieux\") : 25 decembre et 1er janvier retires, soirees de 19h des 24 et 31 decembre retirees (reveillons, ouverture de la cave non confirmee). A rouvrir si la cave confirme. Le 26 novembre, consigne de Thomas : indisponible du 26 au 30 novembre, du 1er au 4 decembre, et les 27 et 28 decembre. Ces jours sont retires ; le 26 et le 29 decembre restent ouverts, chacun seul.",
+  "_ouverture": "9 novembre 2026, consigne de Thomas : tous les jours jusqu'au 31 janvier 2027. Paires lundi+mardi, jeudi+vendredi, samedi+dimanche, le mercredi seul. Retires : vendredi 13 novembre 11h et 16h (Gloria et Ben, a table aux Piqueurs a 12h30 ou 13h30), mercredi 20 janvier en entier (piste Megan Baker vers 17h30, non confirmee, a rouvrir si elle ne se fait pas). Le 24 novembre, sur delegation de Thomas (\"fais au mieux\") : 25 decembre et 1er janvier retires, soirees de 19h des 24 et 31 decembre retirees (reveillons, ouverture de la cave non confirmee). A rouvrir si la cave confirme. Le 26 novembre, consigne de Thomas : indisponible du 26 au 30 novembre, du 1er au 4 decembre, et les 27 et 28 decembre. Ces jours sont retires ; le 26 et le 29 decembre restent ouverts, chacun seul. Le 26 novembre, consigne de Thomas : fevrier et mars 2027 ouverts, tous les jours jusqu'au 31 mars, memes paires et memes horaires qu'en janvier.",
   "_exemple": [
     [
       {
@@ -626,6 +626,519 @@
         "date": "2027-01-31",
         "times": [
           "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-01",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-02",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-03",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-04",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-05",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-06",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-07",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-08",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-09",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-10",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-11",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-12",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-13",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-14",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-15",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-16",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-17",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-18",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-19",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-20",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-21",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-22",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-23",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-24",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-25",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-26",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-02-27",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-02-28",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-01",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-02",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-03",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-04",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-05",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-06",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-07",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-08",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-09",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-10",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-11",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-12",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-13",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-14",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-15",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-16",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-17",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-18",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-19",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-20",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-21",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-22",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-23",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-24",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-25",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-26",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-27",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-28",
+        "times": [
+          "11:00",
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-29",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      },
+      {
+        "date": "2027-03-30",
+        "times": [
+          "16:00",
+          "19:00"
+        ]
+      }
+    ],
+    [
+      {
+        "date": "2027-03-31",
+        "times": [
           "16:00",
           "19:00"
         ]
